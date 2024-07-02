@@ -45,6 +45,9 @@ ENV TZ UTC
 RUN ln -s /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone
 
+# yarn 换淘宝源
+RUN yarn config set registry https://registry.npmmirror.com
+
 # global runtime packages
 RUN yarn global add pm2 \
     && yarn cache clean
