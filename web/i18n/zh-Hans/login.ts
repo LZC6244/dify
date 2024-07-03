@@ -1,6 +1,6 @@
 const translation = {
-  pageTitle: '嗨，近来可好 👋',
-  welcome: '欢迎来到 Dify, 登录以继续',
+  pageTitle: '新时代，新平台，新体验',
+  welcome: '欢迎来到璇玑玉衡，请先登录',
   email: '邮箱',
   emailPlaceholder: '输入邮箱地址',
   password: '密码',
