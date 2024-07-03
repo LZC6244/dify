@@ -34,12 +34,10 @@ class KnowledgeFilterNode(BaseNode):
 
         # extract variables
         query = variable_pool.get_variable_value(variable_selector=node_data.query_variable_selector)
-        print("query: ", query)
+
         variables = {
             'query': query
         }
-
-        print("self.node_data:",self.node_data)
     
         thresholds = [cla.threshold  for cla in node_data.classes]
 
@@ -52,7 +50,6 @@ class KnowledgeFilterNode(BaseNode):
         mid_score_results = []
         high_score_results = []
 
-        print("遍历result中的每个条目....")
         # 遍历result中的每个条目
         for item in query:
             score = item["metadata"]["score"]
@@ -64,7 +61,6 @@ class KnowledgeFilterNode(BaseNode):
             else:
                 low_score_results.append(item)
 
-        print("处理完成")
         result =  {
             "high_score_results":high_score_results,
             "mid_score_results":mid_score_results,
@@ -78,11 +74,6 @@ class KnowledgeFilterNode(BaseNode):
         else:
             category_id = "3"
         
-        print("*"*100)
-        print("variables:", variables)
-        print("node_data.classes : ",node_data.classes)
-        print("category_id: ", category_id)
-        print("*"*100)
         try:
 
             outputs = result
@@ -104,7 +95,6 @@ class KnowledgeFilterNode(BaseNode):
 
     @classmethod
     def _extract_variable_selector_to_variable_mapping(cls, node_data: BaseNodeData) -> dict[str, list[str]]:
-        print("9999999999999999999")
         node_data = node_data
         node_data = cast(cls._node_data_cls, node_data)
         variable_mapping = {'query': node_data.query_variable_selector}

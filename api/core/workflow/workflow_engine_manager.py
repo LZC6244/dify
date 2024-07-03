@@ -47,6 +47,7 @@ node_classes = {
     NodeType.CODE: CodeNode,
     NodeType.TEMPLATE_TRANSFORM: TemplateTransformNode,
     NodeType.QUESTION_CLASSIFIER: QuestionClassifierNode,
+    NodeType.KNOWLEDGE_FILTER: KnowledgeFilterNode,
     NodeType.HTTP_REQUEST: HttpRequestNode,
     NodeType.TOOL: ToolNode,
     NodeType.VARIABLE_AGGREGATOR: VariableAggregatorNode,
