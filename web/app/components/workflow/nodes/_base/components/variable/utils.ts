@@ -8,6 +8,7 @@ import type { KnowledgeRetrievalNodeType } from '../../../knowledge-retrieval/ty
 import type { IfElseNodeType } from '../../../if-else/types'
 import type { TemplateTransformNodeType } from '../../../template-transform/types'
 import type { QuestionClassifierNodeType } from '../../../question-classifier/types'
+import type { KnowledgeFilterNodeType } from '../../../knowledge-filter/types'
 import type { HttpNodeType } from '../../../http/types'
 import { VarType as ToolVarType } from '../../../tool/types'
 import type { ToolNodeType } from '../../../tool/types'
@@ -23,6 +24,7 @@ import {
   LLM_OUTPUT_STRUCT,
   PARAMETER_EXTRACTOR_COMMON_STRUCT,
   QUESTION_CLASSIFIER_OUTPUT_STRUCT,
+  KNOWLEDGE_FILTER_OUTPUT_STRUCT,
   SUPPORT_OUTPUT_VARS_NODE,
   TEMPLATE_TRANSFORM_OUTPUT_STRUCT,
   TOOL_OUTPUT_STRUCT,
@@ -133,6 +135,11 @@ const formatItem = (item: any, isChatMode: boolean, filterVar: (payload: Var, se
 
     case BlockEnum.QuestionClassifier: {
       res.vars = QUESTION_CLASSIFIER_OUTPUT_STRUCT
+      break
+    }
+
+    case BlockEnum.KnowledgeFilter: {
+      res.vars = KNOWLEDGE_FILTER_OUTPUT_STRUCT
       break
     }
 
@@ -514,6 +521,11 @@ export const getNodeUsedVars = (node: Node): ValueSelector[] => {
       res = [(data as QuestionClassifierNodeType).query_variable_selector]
       break
     }
+    case BlockEnum.KnowledgeFilter: {
+      const payload = (data as KnowledgeFilterNodeType)
+      res = [payload.query_variable_selector]
+      break
+    }
     case BlockEnum.HttpRequest: {
       const payload = (data as HttpNodeType)
       res = matchNotSystemVars([payload.url, payload.headers, payload.params, payload.body.data])
@@ -590,6 +602,10 @@ export const getNodeUsedVarPassToServerKey = (node: Node, valueSelector: ValueSe
       break
     }
     case BlockEnum.QuestionClassifier: {
+      res = 'query'
+      break
+    }
+    case BlockEnum.KnowledgeFilter: {
       res = 'query'
       break
     }
@@ -726,6 +742,13 @@ export const updateNodeVars = (oldNode: Node, oldVarSelector: ValueSelector, new
         const payload = data as QuestionClassifierNodeType
         if (payload.query_variable_selector.join('.') === oldVarSelector.join('.'))
           payload.query_variable_selector = newVarSelector
+        break
+      }
+      case BlockEnum.KnowledgeFilter: {
+        const payload = data as KnowledgeFilterNodeType
+        if (payload.query_variable_selector.join('.') === oldVarSelector.join('.'))
+          payload.query_variable_selector = newVarSelector
+        // payload.instruction = replaceOldVarInText(payload.instruction, oldVarSelector, newVarSelector)
         break
       }
       case BlockEnum.HttpRequest: {
@@ -870,6 +893,11 @@ export const getNodeOutputVars = (node: Node, isChatMode: boolean): ValueSelecto
 
     case BlockEnum.QuestionClassifier: {
       varsToValueSelectorList(QUESTION_CLASSIFIER_OUTPUT_STRUCT, [id], res)
+      break
+    }
+
+    case BlockEnum.KnowledgeFilter: {
+      varsToValueSelectorList(KNOWLEDGE_FILTER_OUTPUT_STRUCT, [id], res)
       break
     }
 

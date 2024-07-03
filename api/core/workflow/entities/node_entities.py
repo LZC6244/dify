@@ -19,6 +19,7 @@ class NodeType(Enum):
     CODE = 'code'
     TEMPLATE_TRANSFORM = 'template-transform'
     QUESTION_CLASSIFIER = 'question-classifier'
+    KNOWLEDGE_FILTER = 'knowledge-filter'
     HTTP_REQUEST = 'http-request'
     TOOL = 'tool'
     VARIABLE_AGGREGATOR = 'variable-aggregator'

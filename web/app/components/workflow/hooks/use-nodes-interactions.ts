@@ -174,7 +174,7 @@ export const useNodesInteractions = () => {
               if (!node.data.advanced_settings?.group_enabled)
                 n.data._isEntering = true
             }
-            if (n.id === node.id && fromType === 'target' && (connectingNode.data.type === BlockEnum.VariableAssigner || connectingNode.data.type === BlockEnum.VariableAggregator) && node.data.type !== BlockEnum.IfElse && node.data.type !== BlockEnum.QuestionClassifier)
+            if (n.id === node.id && fromType === 'target' && (connectingNode.data.type === BlockEnum.VariableAssigner || connectingNode.data.type === BlockEnum.VariableAggregator) && node.data.type !== BlockEnum.IfElse && node.data.type !== BlockEnum.QuestionClassifier && node.data.type !== BlockEnum.KnowledgeFilter)
               n.data._isEntering = true
           })
         })
@@ -659,7 +659,7 @@ export const useNodesInteractions = () => {
     if (!prevNodeId && nextNodeId) {
       const nextNodeIndex = nodes.findIndex(node => node.id === nextNodeId)
       const nextNode = nodes[nextNodeIndex]!
-      if ((nodeType !== BlockEnum.IfElse) && (nodeType !== BlockEnum.QuestionClassifier))
+      if ((nodeType !== BlockEnum.IfElse) && (nodeType !== BlockEnum.QuestionClassifier) && (nodeType !== BlockEnum.KnowledgeFilter))
         newNode.data._connectedSourceHandleIds = [sourceHandle]
       newNode.data._connectedTargetHandleIds = []
       newNode.position = {
@@ -678,7 +678,7 @@ export const useNodesInteractions = () => {
 
       let newEdge
 
-      if ((nodeType !== BlockEnum.IfElse) && (nodeType !== BlockEnum.QuestionClassifier)) {
+      if ((nodeType !== BlockEnum.IfElse) && (nodeType !== BlockEnum.QuestionClassifier) && (nodeType !== BlockEnum.KnowledgeFilter)) {
         newEdge = {
           id: `${newNode.id}-${sourceHandle}-${nextNodeId}-${nextNodeTargetHandle}`,
           type: 'custom',
@@ -786,7 +786,7 @@ export const useNodesInteractions = () => {
         zIndex: prevNode.parentId ? ITERATION_CHILDREN_Z_INDEX : 0,
       }
       let newNextEdge: Edge | null = null
-      if (nodeType !== BlockEnum.IfElse && nodeType !== BlockEnum.QuestionClassifier) {
+      if (nodeType !== BlockEnum.IfElse && nodeType !== BlockEnum.QuestionClassifier && nodeType !== BlockEnum.KnowledgeFilter) {
         newNextEdge = {
           id: `${newNode.id}-${sourceHandle}-${nextNodeId}-${nextNodeTargetHandle}`,
           type: 'custom',

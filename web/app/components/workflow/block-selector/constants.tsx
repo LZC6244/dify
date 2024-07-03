@@ -35,6 +35,11 @@ export const BLOCKS: Block[] = [
     title: 'Question Classifier',
   },
   {
+    classification: BlockClassificationEnum.Default,
+    type: BlockEnum.KnowledgeFilter,
+    title: 'Knowledge Filter',
+  },
+  {
     classification: BlockClassificationEnum.Logic,
     type: BlockEnum.IfElse,
     title: 'IF/ELSE',
