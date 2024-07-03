@@ -1,7 +1,7 @@
 ![cover-v5-optimized](https://github.com/langgenius/dify/assets/13230914/f9e19af5-61ba-4119-b926-d10c4c06ebab)
 
 <p align="center">
-  <a href="https://cloud.dify.ai">Dify 클라우드</a> ·
+  <a href="http://127.0.0.1">Dify 클라우드</a> ·
   <a href="https://docs.dify.ai/getting-started/install-self-hosted">셀프-호스팅</a> ·
   <a href="https://docs.dify.ai">문서</a> ·
   <a href="https://cal.com/guchenhe/60-min-meeting">기업 문의</a>
@@ -184,11 +184,11 @@ docker compose up -d
 구성 커스터마이징이 필요한 경우, [docker-compose.yml](docker/docker-compose.yaml) 파일의 코멘트를 참조하여 환경 구성을 수동으로 설정하십시오. 변경 후 `docker-compose up -d` 를 다시 실행하십시오. 환경 변수의 전체 목록은 [여기](https://docs.dify.ai/getting-started/install-self-hosted/environments)에서 확인할 수 있습니다.
 
 
-고가용성 설정을 구성하려면 Dify를 Kubernetes에 배포할 수 있는 커뮤니티 제공 [Helm Charts](https://helm.sh/)가 있습니다.
+Dify를 Kubernetes에 배포하고 프리미엄 스케일링 설정을 구성했다는 커뮤니티가 제공하는 [Helm Charts](https://helm.sh/)와 YAML 파일이 존재합니다.
 
 - [Helm Chart by @LeoQuote](https://github.com/douban/charts/tree/master/charts/dify)
 - [Helm Chart by @BorisPolonsky](https://github.com/BorisPolonsky/dify-helm)
-
+- [YAML file by @Winson-030](https://github.com/Winson-030/dify-kubernetes)
 
 ## 기여
 

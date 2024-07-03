@@ -12,14 +12,14 @@ import { useModalContext } from '@/context/modal-context'
 const APIKeyInfoPanel: FC = () => {
   const isCloud = !IS_CE_EDITION
 
-  const { hasSettedApiKey } = useProviderContext()
+  const { isAPIKeySet } = useProviderContext()
   const { setShowAccountSettingModal } = useModalContext()
 
   const { t } = useTranslation()
 
   const [isShow, setIsShow] = useState(true)
 
-  if (hasSettedApiKey)
+  if (isAPIKeySet)
     return null
 
   if (!(isShow))
@@ -54,7 +54,7 @@ const APIKeyInfoPanel: FC = () => {
       {!isCloud && (
         <a
           className='mt-2 flex items-center h-[26px] text-xs  font-medium text-[#155EEF] p-1 space-x-1'
-          href='https://cloud.dify.ai/apps'
+          href='http://127.0.0.1/apps'
           target='_blank' rel='noopener noreferrer'
         >
           <div>{t('appOverview.apiKeyInfo.tryCloud')}</div>

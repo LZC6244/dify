@@ -569,7 +569,10 @@ class OpenAILargeLanguageModel(_CommonOpenAI, LargeLanguageModel):
             extra_model_kwargs['user'] = user
 
         if stream:
-            extra_model_kwargs['stream_options'] = {
+            if 'gpt-4o' in model:
+                logger.info(f'gpt-4o 不支持流式，取消流式参数配置')
+            else:
+                extra_model_kwargs['stream_options'] = {
                 'include_usage': True
             }
 

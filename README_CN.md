@@ -1,7 +1,7 @@
 ![cover-v5-optimized](https://github.com/langgenius/dify/assets/13230914/f9e19af5-61ba-4119-b926-d10c4c06ebab)
 
 <div align="center">
-  <a href="https://cloud.dify.ai">Dify 云服务</a> ·
+  <a href="http://127.0.0.1">Dify 云服务</a> ·
   <a href="https://docs.dify.ai/getting-started/install-self-hosted">自托管</a> ·
   <a href="https://docs.dify.ai">文档</a> ·
   <a href="https://cal.com/guchenhe/dify-demo">预约演示</a>
@@ -186,10 +186,11 @@ docker compose up -d
 
 #### 使用 Helm Chart 部署
 
-使用 [Helm Chart](https://helm.sh/) 版本，可以在 Kubernetes 上部署 Dify。
+使用 [Helm Chart](https://helm.sh/) 版本或者 YAML 文件，可以在 Kubernetes 上部署 Dify。
 
 - [Helm Chart by @LeoQuote](https://github.com/douban/charts/tree/master/charts/dify)
 - [Helm Chart by @BorisPolonsky](https://github.com/BorisPolonsky/dify-helm)
+- [YAML 文件 by @Winson-030](https://github.com/Winson-030/dify-kubernetes)
 
 ### 配置
 

@@ -105,13 +105,13 @@ export default function AppSelector({ isMobile }: IAppSelecotr) {
                       </div>
                     </Menu.Item>
                     <Menu.Item>
-                      <Link
+                      {/* <Link
                         className={classNames(itemClassName, 'group justify-between')}
                         href='https://github.com/langgenius/dify/discussions/categories/feedbacks'
                         target='_blank' rel='noopener noreferrer'>
                         <div>{t('common.userProfile.roadmapAndFeedback')}</div>
                         <ArrowUpRight className='hidden w-[14px] h-[14px] text-gray-500 group-hover:flex' />
-                      </Link>
+                      </Link> */}
                     </Menu.Item>
                     <Menu.Item>
                       <Link

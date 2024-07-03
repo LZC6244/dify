@@ -1,3 +1,4 @@
+import os
 from datetime import timedelta
 
 from celery import Celery, Task
@@ -17,6 +18,11 @@ def init_app(app: Flask) -> Celery:
         backend=app.config["CELERY_BACKEND"],
         task_ignore_result=True,
     )
+
+    # 更改任务队列名称，避免队列混乱，默认队列名称为：celery
+    celery_app.conf.update(
+        task_default_queue=os.environ.get('CELERY_TASK_DEFAULT_QUEUE', 'dify'),
+    )
     
     # Add SSL options to the Celery configuration
     ssl_options = {
@@ -35,7 +41,7 @@ def init_app(app: Flask) -> Celery:
         celery_app.conf.update(
             broker_use_ssl=ssl_options,  # Add the SSL options to the broker configuration
         )
-        
+
     celery_app.set_default()
     app.extensions["celery"] = celery_app
 
