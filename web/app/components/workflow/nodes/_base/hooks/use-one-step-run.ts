@@ -21,6 +21,7 @@ import IfElseDefault from '@/app/components/workflow/nodes/if-else/default'
 import CodeDefault from '@/app/components/workflow/nodes/code/default'
 import TemplateTransformDefault from '@/app/components/workflow/nodes/template-transform/default'
 import QuestionClassifyDefault from '@/app/components/workflow/nodes/question-classifier/default'
+import QuestionTransformationDefault from '@/app/components/workflow/nodes/question-transformation/default'
 import HTTPDefault from '@/app/components/workflow/nodes/http/default'
 import ToolDefault from '@/app/components/workflow/nodes/tool/default'
 import VariableAssigner from '@/app/components/workflow/nodes/variable-assigner/default'
@@ -37,6 +38,8 @@ const { checkValid: checkIfElseValid } = IfElseDefault
 const { checkValid: checkCodeValid } = CodeDefault
 const { checkValid: checkTemplateTransformValid } = TemplateTransformDefault
 const { checkValid: checkQuestionClassifyValid } = QuestionClassifyDefault
+const { checkValid: checkQuestionTransformationValid } = QuestionTransformationDefault
+
 const { checkValid: checkHttpValid } = HTTPDefault
 const { checkValid: checkToolValid } = ToolDefault
 const { checkValid: checkVariableAssignerValid } = VariableAssigner
@@ -51,6 +54,7 @@ const checkValidFns: Record<BlockEnum, Function> = {
   [BlockEnum.Code]: checkCodeValid,
   [BlockEnum.TemplateTransform]: checkTemplateTransformValid,
   [BlockEnum.QuestionClassifier]: checkQuestionClassifyValid,
+  [BlockEnum.QuestionTransformation]: checkQuestionTransformationValid,
   [BlockEnum.HttpRequest]: checkHttpValid,
   [BlockEnum.Tool]: checkToolValid,
   [BlockEnum.VariableAssigner]: checkVariableAssignerValid,

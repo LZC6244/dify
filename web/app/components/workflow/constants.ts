@@ -5,6 +5,7 @@ import AnswerDefault from './nodes/answer/default'
 import LLMDefault from './nodes/llm/default'
 import KnowledgeRetrievalDefault from './nodes/knowledge-retrieval/default'
 import QuestionClassifierDefault from './nodes/question-classifier/default'
+import QuestionTransformationDefault from './nodes/question-transformation/default'
 import KnowledgeFilterDefault from './nodes/knowledge-filter/default'
 import IfElseDefault from './nodes/if-else/default'
 import CodeDefault from './nodes/code/default'
@@ -115,6 +116,15 @@ export const NODES_EXTRA_DATA: Record<BlockEnum, NodesExtraData> = {
     getAvailablePrevNodes: QuestionClassifierDefault.getAvailablePrevNodes,
     getAvailableNextNodes: QuestionClassifierDefault.getAvailableNextNodes,
     checkValid: QuestionClassifierDefault.checkValid,
+  },
+  [BlockEnum.QuestionTransformation]: {
+    author: 'Dify',
+    about: '',
+    availablePrevNodes: [],
+    availableNextNodes: [],
+    getAvailablePrevNodes: QuestionTransformationDefault.getAvailablePrevNodes,
+    getAvailableNextNodes: QuestionTransformationDefault.getAvailableNextNodes,
+    checkValid: QuestionTransformationDefault.checkValid,
   },
   [BlockEnum.KnowledgeFilter]: {
     author: 'Dify',
@@ -248,6 +258,14 @@ export const NODES_INITIAL_DATA = {
     topics: [],
     ...QuestionClassifierDefault.defaultValue,
   },
+  [BlockEnum.QuestionTransformation]: {
+    type: BlockEnum.QuestionTransformation,
+    title: '',
+    desc: '',
+    query_variable_selector: [],
+    topics: [],
+    ...QuestionTransformationDefault.defaultValue,
+  },
   [BlockEnum.KnowledgeFilter]: {
     type: BlockEnum.KnowledgeFilter,
     title: '',
@@ -335,7 +353,7 @@ export const RETRIEVAL_OUTPUT_STRUCT = `{
 
 export const SUPPORT_OUTPUT_VARS_NODE = [
   BlockEnum.Start, BlockEnum.LLM, BlockEnum.KnowledgeRetrieval, BlockEnum.Code, BlockEnum.TemplateTransform,
-  BlockEnum.HttpRequest, BlockEnum.Tool, BlockEnum.VariableAssigner, BlockEnum.VariableAggregator, BlockEnum.QuestionClassifier, BlockEnum.KnowledgeFilter,
+  BlockEnum.HttpRequest, BlockEnum.Tool, BlockEnum.VariableAssigner, BlockEnum.VariableAggregator, BlockEnum.QuestionClassifier, BlockEnum.KnowledgeFilter, BlockEnum.QuestionTransformation,
   BlockEnum.ParameterExtractor, BlockEnum.Iteration,
 ]
 
@@ -363,6 +381,13 @@ export const TEMPLATE_TRANSFORM_OUTPUT_STRUCT: Var[] = [
 export const QUESTION_CLASSIFIER_OUTPUT_STRUCT = [
   {
     variable: 'class_name',
+    type: VarType.string,
+  },
+]
+
+export const QUESTION_TRANSFORMATION_OUTPUT_STRUCT = [
+  {
+    variable: 'new_query',
     type: VarType.string,
   },
 ]

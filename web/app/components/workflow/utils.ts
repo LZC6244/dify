@@ -23,6 +23,7 @@ import {
   START_INITIAL_POSITION,
 } from './constants'
 import type { QuestionClassifierNodeType } from './nodes/question-classifier/types'
+import type { QuestionTransformationNodeType } from './nodes/question-transformation/types'
 import type { KnowledgeFilterNodeType } from './nodes/knowledge-filter/types'
 import type { ToolNodeType } from './nodes/tool/types'
 import { CollectionType } from '@/app/components/tools/types'
@@ -242,6 +243,7 @@ export const canRunBySingle = (nodeType: BlockEnum) => {
     || nodeType === BlockEnum.Code
     || nodeType === BlockEnum.TemplateTransform
     || nodeType === BlockEnum.QuestionClassifier
+    || nodeType === BlockEnum.QuestionTransformation
     || nodeType === BlockEnum.KnowledgeFilter
     || nodeType === BlockEnum.HttpRequest
     || nodeType === BlockEnum.Tool

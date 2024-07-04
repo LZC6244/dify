@@ -35,6 +35,11 @@ export const BLOCKS: Block[] = [
     title: 'Question Classifier',
   },
   {
+    classification: BlockClassificationEnum.QuestionUnderstand,
+    type: BlockEnum.QuestionTransformation,
+    title: 'Question Transformation',
+  },
+  {
     classification: BlockClassificationEnum.Default,
     type: BlockEnum.KnowledgeFilter,
     title: 'Knowledge Filter',
