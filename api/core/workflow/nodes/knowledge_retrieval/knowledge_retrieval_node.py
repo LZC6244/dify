@@ -77,6 +77,8 @@ class KnowledgeRetrievalNode(BaseNode):
         dict[str, Any]]:
         available_datasets = []
         dataset_ids = node_data.dataset_ids
+        dataset_retrieval_configs = node_data.dataset_retrieval_configs
+        dataset_retrieval_configs_map = dict(zip(dataset_ids, dataset_retrieval_configs))
 
         # Subquery: Count the number of available documents for each dataset
         subquery = db.session.query(
@@ -133,7 +135,8 @@ class KnowledgeRetrievalNode(BaseNode):
                     query=query,
                     model_config=model_config,
                     model_instance=model_instance,
-                    planning_strategy=planning_strategy
+                    planning_strategy=planning_strategy,
+                    dataset_retrieval_configs_map=dataset_retrieval_configs_map
                 )
         elif node_data.retrieval_mode == DatasetRetrieveConfigEntity.RetrieveStrategy.MULTIPLE.value:
             all_documents = dataset_retrieval.multiple_retrieve(self.app_id, self.tenant_id, self.user_id,

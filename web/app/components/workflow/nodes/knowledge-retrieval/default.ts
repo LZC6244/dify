@@ -3,7 +3,7 @@ import type { NodeDefault } from '../../types'
 import type { KnowledgeRetrievalNodeType } from './types'
 import { ALL_CHAT_AVAILABLE_BLOCKS, ALL_COMPLETION_AVAILABLE_BLOCKS } from '@/app/components/workflow/constants'
 
-import { RETRIEVE_TYPE } from '@/types/app'
+import { RETRIEVE_TYPE, RETRIEVE_METHOD } from '@/types/app'
 const i18nPrefix = 'workflow'
 
 const nodeDefault: NodeDefault<KnowledgeRetrievalNodeType> = {
@@ -11,6 +11,17 @@ const nodeDefault: NodeDefault<KnowledgeRetrievalNodeType> = {
     query_variable_selector: [],
     dataset_ids: [],
     retrieval_mode: RETRIEVE_TYPE.oneWay,
+    dataset_retrieval_configs: [{
+      search_method: RETRIEVE_METHOD.hybrid,
+      reranking_enable: false,
+      reranking_model: {
+        reranking_provider_name: '',
+        reranking_model_name: '',
+      },
+      top_k: 6,
+      score_threshold_enabled: true,
+      score_threshold: 0.3
+    }]
   },
   getAvailablePrevNodes(isChatMode: boolean) {
     const nodes = isChatMode
