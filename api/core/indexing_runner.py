@@ -44,8 +44,10 @@ class IndexingRunner:
     def __init__(self):
         self.storage = storage
         self.model_manager = ModelManager()
+        self.beta_parser_config = None
 
     def run(self, dataset_documents: list[DatasetDocument], beta_parser_config: dict):
+        self.beta_parser_config = self.beta_parser_config
         """Run the indexing process."""
         for dataset_document in dataset_documents:
             try:
@@ -64,11 +66,12 @@ class IndexingRunner:
                 index_type = dataset_document.doc_form
                 index_processor = IndexProcessorFactory(index_type).init_index_processor()
                 # extract
-                text_docs = self._extract(index_processor, dataset_document, processing_rule.to_dict(), beta_parser_config)
+                print("beta_parser_config:", beta_parser_config)
+                text_docs = self._extract(index_processor, dataset_document, processing_rule.to_dict())
 
                 # transform
                 documents = self._transform(index_processor, dataset, text_docs, dataset_document.doc_language,
-                                            processing_rule.to_dict(), beta_parser_config)
+                                            processing_rule.to_dict())
                 # save segment
                 self._load_segments(dataset, dataset_document, documents)
 
@@ -336,7 +339,7 @@ class IndexingRunner:
             "preview": preview_texts
         }
 
-    def _extract(self, index_processor: BaseIndexProcessor, dataset_document: DatasetDocument, process_rule: dict, beta_parser_config: dict) \
+    def _extract(self, index_processor: BaseIndexProcessor, dataset_document: DatasetDocument, process_rule: dict) \
             -> list[Document]:
         # load file
         if dataset_document.data_source_type not in ["upload_file", "notion_import", "website_crawl"]:
@@ -357,7 +360,7 @@ class IndexingRunner:
                     datasource_type="upload_file",
                     upload_file=file_detail,
                     document_model=dataset_document.doc_form,
-                    beta_parser_config=beta_parser_config
+                    beta_parser_config=self.beta_parser_config
                 )
                 text_docs = index_processor.extract(extract_setting, process_rule_mode=process_rule['mode'])
         elif dataset_document.data_source_type == 'notion_import':
@@ -740,7 +743,10 @@ class IndexingRunner:
                 )
 
             # load index
-            index_processor.load(dataset, chunk_documents, with_keywords=False)
+            if self.beta_parser_config:
+                index_processor.load(dataset, chunk_documents, with_keywords=False, embedding_q_only=self.beta_parser_config['embedding_q_only'])
+            else:
+                index_processor.load(dataset, chunk_documents, with_keywords=False)
 
             document_ids = [document.metadata['doc_id'] for document in chunk_documents]
             db.session.query(DocumentSegment).filter(
@@ -814,7 +820,7 @@ class IndexingRunner:
         index_processor.load(dataset, documents)
 
     def _transform(self, index_processor: BaseIndexProcessor, dataset: Dataset,
-                   text_docs: list[Document], doc_language: str, process_rule: dict, beta_parser_config: Optional[dict] = None) -> list[Document]:
+                   text_docs: list[Document], doc_language: str, process_rule: dict) -> list[Document]:
         # get embedding model instance
         embedding_model_instance = None
         if dataset.indexing_technique == 'high_quality':
@@ -833,7 +839,7 @@ class IndexingRunner:
 
         documents = index_processor.transform(text_docs, embedding_model_instance=embedding_model_instance,
                                               process_rule=process_rule, tenant_id=dataset.tenant_id,
-                                              doc_language=doc_language, beta_parser_type=beta_parser_config['beta_parser_type'])
+                                              doc_language=doc_language, beta_parser_type=self.beta_parser_config['beta_parser_type'])
 
         return documents
 

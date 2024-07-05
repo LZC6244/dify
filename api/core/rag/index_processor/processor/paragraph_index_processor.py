@@ -63,10 +63,16 @@ class ParagraphIndexProcessor(BaseIndexProcessor):
         print("all_documents: ", all_documents)
         return all_documents
 
-    def load(self, dataset: Dataset, documents: list[Document], with_keywords: bool = True):
+    def load(self, dataset: Dataset, documents: list[Document], with_keywords: bool = True, **kwargs):
         if dataset.indexing_technique == 'high_quality':
             vector = Vector(dataset)
-            vector.create(documents)
+
+            embedding_q_only = kwargs.get("embedding_q_only", False)
+            if embedding_q_only:
+                pass
+            else:
+                vector.create(documents, embedding_q_only=embedding_q_only)
+                
         if with_keywords:
             keyword = Keyword(dataset)
             keyword.create(documents)

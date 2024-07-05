@@ -776,7 +776,10 @@ class DocumentService:
                 'beta_parser_type': document_data.get('beta_parser_type', "qa"),
                 'embedding_q_only': document_data.get('embedding_q_only', False)
             }
+            # for qa test
             beta_parser_config['beta_parser_type'] = 'qa'
+            beta_parser_config['embedding_q_only'] = True
+            
             # trigger async task
             if document_ids:
                 print("document_ids:", document_ids)

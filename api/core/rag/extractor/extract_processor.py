@@ -101,12 +101,15 @@ class ExtractProcessor:
                 if extract_setting.beta_parser_config:
                     beta_parser_type = extract_setting.beta_parser_config['beta_parser_type']
                 else:
-                    beta_parser_type = ""
+                    beta_parser_type = "qa"
+                print("+++++++++++++++++")
+                print("beta_parser_type:",beta_parser_type)
                 # beta parser
                 if beta_parser_type != '':
                     if file_extension == '.csv' and beta_parser_type == "qa":
+                        print("9999999999")
                         extractor = CSVExtractor(file_path, autodetect_encoding=True, qa_mode=True)
-                if etl_type == 'Unstructured':
+                elif etl_type == 'Unstructured':
                     if file_extension == '.xlsx' or file_extension == '.xls':
                         extractor = ExcelExtractor(file_path)
                     elif file_extension == '.pdf':
