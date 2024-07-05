@@ -220,7 +220,7 @@ class DatasetDocumentListApi(Resource):
     @cloud_edition_billing_resource_check('vector_space')
     def post(self, dataset_id):
         dataset_id = str(dataset_id)
-
+        print("dataset_id:", dataset_id)
         dataset = DatasetService.get_dataset(dataset_id)
 
         if not dataset:
@@ -247,6 +247,8 @@ class DatasetDocumentListApi(Resource):
                             location='json')
         parser.add_argument('retrieval_model', type=dict, required=False, nullable=False,
                             location='json')
+        parser.add_argument('beta_parser_type', type=str, default='', required=False, nullable=False, location='json')
+        parser.add_argument('embedding_q_only', type=bool, default=False, required=False, nullable=False, location='json')
         args = parser.parse_args()
 
         if not dataset.indexing_technique and not args['indexing_technique']:
@@ -256,6 +258,8 @@ class DatasetDocumentListApi(Resource):
         DocumentService.document_create_args_validate(args)
 
         try:
+            print("args:", args)
+            print("*"*10)
             documents, batch = DocumentService.save_document_with_dataset_id(dataset, args, current_user)
         except ProviderTokenNotInitError as ex:
             raise ProviderNotInitializeError(ex.description)

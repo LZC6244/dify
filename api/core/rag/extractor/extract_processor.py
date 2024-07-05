@@ -97,6 +97,15 @@ class ExtractProcessor:
                 etl_type = current_app.config['ETL_TYPE']
                 unstructured_api_url = current_app.config['UNSTRUCTURED_API_URL']
                 unstructured_api_key = current_app.config['UNSTRUCTURED_API_KEY']
+
+                if extract_setting.beta_parser_config:
+                    beta_parser_type = extract_setting.beta_parser_config['beta_parser_type']
+                else:
+                    beta_parser_type = ""
+                # beta parser
+                if beta_parser_type != '':
+                    if file_extension == '.csv' and beta_parser_type == "qa":
+                        extractor = CSVExtractor(file_path, autodetect_encoding=True, qa_mode=True)
                 if etl_type == 'Unstructured':
                     if file_extension == '.xlsx' or file_extension == '.xls':
                         extractor = ExcelExtractor(file_path)

@@ -577,10 +577,12 @@ class DocumentService:
 
                 DocumentService.check_documents_upload_quota(count, features)
 
+        print("dataset.data_source_type:",dataset.data_source_type)
         # if dataset is empty, update dataset data_source_type
         if not dataset.data_source_type:
             dataset.data_source_type = document_data["data_source"]["type"]
 
+        print("dataset.indexing_technique:",dataset.indexing_technique)
         if not dataset.indexing_technique:
             if 'indexing_technique' not in document_data \
                     or document_data['indexing_technique'] not in Dataset.INDEXING_TECHNIQUE_LIST:
@@ -617,6 +619,7 @@ class DocumentService:
 
         documents = []
         batch = time.strftime('%Y%m%d%H%M%S') + str(random.randint(100000, 999999))
+        print("original_document_id: ", document_data.get("original_document_id"))
         if document_data.get("original_document_id"):
             document = DocumentService.update_document_with_dataset_id(dataset, document_data, account)
             documents.append(document)
@@ -661,6 +664,7 @@ class DocumentService:
                     }
                     # check duplicate
                     if document_data.get('duplicate', False):
+                        print("duplicate true")
                         document = Document.query.filter_by(
                             dataset_id=dataset.id,
                             tenant_id=current_user.current_tenant_id,
@@ -668,6 +672,7 @@ class DocumentService:
                             enabled=True,
                             name=file_name
                         ).first()
+                        print("document:",document) #None
                         if document:
                             document.dataset_process_rule_id = dataset_process_rule.id
                             document.updated_at = datetime.datetime.utcnow()
@@ -767,10 +772,17 @@ class DocumentService:
                     position += 1
             db.session.commit()
 
+            beta_parser_config = {
+                'beta_parser_type': document_data.get('beta_parser_type', "qa"),
+                'embedding_q_only': document_data.get('embedding_q_only', False)
+            }
+            beta_parser_config['beta_parser_type'] = 'qa'
             # trigger async task
             if document_ids:
-                document_indexing_task.delay(dataset.id, document_ids)
+                print("document_ids:", document_ids)
+                document_indexing_task.delay(dataset.id, document_ids, beta_parser_config)
             if duplicate_document_ids:
+                print("duplicate_document_ids:", duplicate_document_ids)
                 duplicate_document_indexing_task.delay(dataset.id, duplicate_document_ids)
 
         return documents, batch

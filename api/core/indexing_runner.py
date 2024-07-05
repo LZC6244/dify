@@ -45,7 +45,7 @@ class IndexingRunner:
         self.storage = storage
         self.model_manager = ModelManager()
 
-    def run(self, dataset_documents: list[DatasetDocument]):
+    def run(self, dataset_documents: list[DatasetDocument], beta_parser_config: dict):
         """Run the indexing process."""
         for dataset_document in dataset_documents:
             try:
@@ -64,11 +64,11 @@ class IndexingRunner:
                 index_type = dataset_document.doc_form
                 index_processor = IndexProcessorFactory(index_type).init_index_processor()
                 # extract
-                text_docs = self._extract(index_processor, dataset_document, processing_rule.to_dict())
+                text_docs = self._extract(index_processor, dataset_document, processing_rule.to_dict(), beta_parser_config)
 
                 # transform
                 documents = self._transform(index_processor, dataset, text_docs, dataset_document.doc_language,
-                                            processing_rule.to_dict())
+                                            processing_rule.to_dict(), beta_parser_config)
                 # save segment
                 self._load_segments(dataset, dataset_document, documents)
 
@@ -336,7 +336,7 @@ class IndexingRunner:
             "preview": preview_texts
         }
 
-    def _extract(self, index_processor: BaseIndexProcessor, dataset_document: DatasetDocument, process_rule: dict) \
+    def _extract(self, index_processor: BaseIndexProcessor, dataset_document: DatasetDocument, process_rule: dict, beta_parser_config: dict) \
             -> list[Document]:
         # load file
         if dataset_document.data_source_type not in ["upload_file", "notion_import", "website_crawl"]:
@@ -356,7 +356,8 @@ class IndexingRunner:
                 extract_setting = ExtractSetting(
                     datasource_type="upload_file",
                     upload_file=file_detail,
-                    document_model=dataset_document.doc_form
+                    document_model=dataset_document.doc_form,
+                    beta_parser_config=beta_parser_config
                 )
                 text_docs = index_processor.extract(extract_setting, process_rule_mode=process_rule['mode'])
         elif dataset_document.data_source_type == 'notion_import':
@@ -813,7 +814,7 @@ class IndexingRunner:
         index_processor.load(dataset, documents)
 
     def _transform(self, index_processor: BaseIndexProcessor, dataset: Dataset,
-                   text_docs: list[Document], doc_language: str, process_rule: dict) -> list[Document]:
+                   text_docs: list[Document], doc_language: str, process_rule: dict, beta_parser_config: Optional[dict] = None) -> list[Document]:
         # get embedding model instance
         embedding_model_instance = None
         if dataset.indexing_technique == 'high_quality':
@@ -832,7 +833,7 @@ class IndexingRunner:
 
         documents = index_processor.transform(text_docs, embedding_model_instance=embedding_model_instance,
                                               process_rule=process_rule, tenant_id=dataset.tenant_id,
-                                              doc_language=doc_language)
+                                              doc_language=doc_language, beta_parser_type=beta_parser_config['beta_parser_type'])
 
         return documents
 
