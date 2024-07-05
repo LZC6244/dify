@@ -2,24 +2,26 @@
 
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
-import { usePathname, useSelectedLayoutSegment } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import classNames from 'classnames'
 import { Explore, ExploreActive } from '../../base/icons/src/public/header-nav/explore'
 type ExploreNavProps = {
   className?: string
 }
 
-const ExploreNav = ({
+const ExploreChatNav = ({
   className,
 }: ExploreNavProps) => {
   const { t } = useTranslation()
-  const selectedSegment = useSelectedLayoutSegment()
-  // const actived = selectedSegment === 'explore'
+  // const selectedSegment = useSelectedLayoutSegment()
   const pathname = usePathname()
-  const actived = pathname === '/explore/apps'
+  // console.log('pathname', pathname);
+
+  // const actived = selectedSegment === 'explore'
+  const actived = pathname === '/explore/chat' || pathname.includes('/explore/installed')
 
   return (
-    <Link href="/explore/apps" className={classNames(
+    <Link href="/explore/chat" className={classNames(
       className, 'group',
       actived && 'bg-white shadow-md',
       actived ? 'text-primary-600' : 'text-gray-500 hover:bg-gray-200',
@@ -30,9 +32,9 @@ const ExploreNav = ({
           : <Explore className='mr-2 w-4 h-4' />
       }
       {/* {t('common.menus.explore')} */}
-      发现
+      对话
     </Link>
   )
 }
 
-export default ExploreNav
+export default ExploreChatNav
