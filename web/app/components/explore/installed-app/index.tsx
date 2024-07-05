@@ -14,11 +14,7 @@ export type IInstalledAppProps = {
 const InstalledApp: FC<IInstalledAppProps> = ({
   id,
 }) => {
-  console.log('id', id)
-
   const { installedApps } = useContext(ExploreContext)
-  console.log('installedApps', installedApps)
-
   const installedApp = installedApps.find(item => item.id === id)
 
   if (!installedApp) {
