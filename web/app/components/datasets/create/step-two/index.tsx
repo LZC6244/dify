@@ -71,6 +71,10 @@ enum SegmentType {
   AUTO = 'automatic',
   CUSTOM = 'custom',
 }
+enum ParserType {
+  GENERAL = 'general',
+  PAPER = 'paper',
+}
 enum IndexingType {
   QUALIFIED = 'high_quality',
   ECONOMICAL = 'economy',
@@ -108,6 +112,7 @@ const StepTwo = ({
   const previewScrollRef = useRef<HTMLDivElement>(null)
   const [previewScrolled, setPreviewScrolled] = useState(false)
   const [segmentationType, setSegmentationType] = useState<SegmentType>(SegmentType.AUTO)
+  const [parserType, setParserType] = useState<ParserType>(ParserType.GENERAL)
   const [segmentIdentifier, setSegmentIdentifier] = useState('\\n')
   const [max, setMax] = useState(500)
   const [overlap, setOverlap] = useState(50)
@@ -563,6 +568,50 @@ const StepTwo = ({
           )}
         </div>
         <div className={cn(s.form, isMobile && '!px-4')}>
+          <div className={s.label}>{t('datasetCreation.stepTwo.parser')}</div>
+          <div className='max-w-[640px]'>
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                parserType === ParserType.GENERAL && s.active,
+              )}
+              onClick={() => setParserType(ParserType.GENERAL)}
+            >
+              <span className={cn(s.typeIcon, s.auto)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.general')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.generalDescription')}</div>
+              </div>
+            </div>
+
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                parserType === ParserType.PAPER && s.active,
+              )}
+              onClick={() => setParserType(ParserType.PAPER)}
+            >
+              <span className={cn(s.typeIcon, s.customize)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.paper')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.paperDescription')}</div>
+              </div>
+              {parserType === ParserType.PAPER && (
+                <div className={s.typeFormBody}>
+                  <div className={s.formRow}>
+                    <div className='w-full'>
+                      <div className={s.label}>{t('datasetCreation.stepTwo.paper')}</div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
           <div className={s.label}>{t('datasetCreation.stepTwo.segmentation')}</div>
           <div className='max-w-[640px]'>
             <div

@@ -82,6 +82,12 @@ const translation = {
     },
   },
   stepTwo: {
+    parser: '解析方法',
+    general: '常规解析',
+    generalDescription: '使用系统默认的常规解析工具进行解析。',
+    paper: '论文解析',
+    paperDescription: '按照章节拆解论文，仅支持PDF文件。',
+    manual: '手册解析',
     segmentation: '分段设置',
     auto: '自动分段与清洗',
     autoDescription: '自动设置分段规则与预处理规则，如果不了解这些参数建议选择此项',
