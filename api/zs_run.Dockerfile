@@ -1,5 +1,5 @@
 # base image
-FROM langgenius/dify-api:0.6.11
+FROM 111.19.168.169:8389/zskj/backend/official-dify-api:0.6.11
 
 # LABEL maintainer="takatost@gmail.com"
 
