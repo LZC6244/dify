@@ -99,14 +99,14 @@ class ExtractProcessor:
                 unstructured_api_key = current_app.config['UNSTRUCTURED_API_KEY']
 
                 if extract_setting.beta_parser_config:
-                    beta_parser_type = extract_setting.beta_parser_config['beta_parser_type']
+                    parser_type = extract_setting.beta_parser_config['parser_type']
                 else:
-                    beta_parser_type = "qa"
+                    parser_type = 'general'
                 print("+++++++++++++++++")
-                print("beta_parser_type:",beta_parser_type)
+                print("parser_type:",parser_type)
                 # beta parser
-                if beta_parser_type != '':
-                    if file_extension == '.csv' and beta_parser_type == "qa":
+                if parser_type != 'general':
+                    if file_extension == '.csv' and parser_type == "qa":
                         print("9999999999")
                         extractor = CSVExtractor(file_path, autodetect_encoding=True, qa_mode=True)
                 elif etl_type == 'Unstructured':

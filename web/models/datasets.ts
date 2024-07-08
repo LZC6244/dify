@@ -223,10 +223,13 @@ export type DocumentReq = {
 export type CreateDocumentReq = DocumentReq & {
   data_source: DataSource
   retrieval_model: RetrievalConfig
+  parser_type: string
+  embedding_q_only: true | false
 }
 
 export type IndexingEstimateParams = DocumentReq & Partial<DataSource> & {
   dataset_id: string
+  parser_type: string
 }
 
 export type DataSource = {

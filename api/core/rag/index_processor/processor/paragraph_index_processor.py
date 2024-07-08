@@ -19,7 +19,7 @@ class ParagraphIndexProcessor(BaseIndexProcessor):
     def extract(self, extract_setting: ExtractSetting, **kwargs) -> list[Document]:
         text_docs = ExtractProcessor.extract(extract_setting=extract_setting,
                                              is_automatic=kwargs.get('process_rule_mode') == "automatic")
-        print("extract_setting:",extract_setting.beta_parser_config)
+        print("extract_setting:", extract_setting.beta_parser_config)
         return text_docs
 
     def transform(self, documents: list[Document], **kwargs) -> list[Document]:
@@ -27,7 +27,7 @@ class ParagraphIndexProcessor(BaseIndexProcessor):
         splitter = self._get_splitter(processing_rule=kwargs.get('process_rule'),
                                       embedding_model_instance=kwargs.get('embedding_model_instance'))
 
-        beta_parser_type = kwargs.get('beta_parser_type', '')
+        parser_type = kwargs.get('parser_type', '')
 
         all_documents = []
         for document in documents:
@@ -36,7 +36,7 @@ class ParagraphIndexProcessor(BaseIndexProcessor):
             document.page_content = document_text
 
             print("document:",document)
-            if beta_parser_type == 'qa':
+            if parser_type == 'qa':
                 # qa模式不走切片
                 document_nodes = [document]
             else:
@@ -69,9 +69,9 @@ class ParagraphIndexProcessor(BaseIndexProcessor):
 
             embedding_q_only = kwargs.get("embedding_q_only", False)
             if embedding_q_only:
-                pass
-            else:
-                vector.create(documents, embedding_q_only=embedding_q_only)
+                for document in documents:
+                    document.page_content = document.page_content.split("\nanswer:\n")[0].replace("question:\n", "")
+            vector.create(documents)
                 
         if with_keywords:
             keyword = Keyword(dataset)

@@ -47,7 +47,8 @@ class IndexingRunner:
         self.beta_parser_config = None
 
     def run(self, dataset_documents: list[DatasetDocument], beta_parser_config: dict):
-        self.beta_parser_config = self.beta_parser_config
+        self.beta_parser_config = beta_parser_config
+        print("run beta_parser_config:", beta_parser_config)
         """Run the indexing process."""
         for dataset_document in dataset_documents:
             try:
@@ -66,7 +67,6 @@ class IndexingRunner:
                 index_type = dataset_document.doc_form
                 index_processor = IndexProcessorFactory(index_type).init_index_processor()
                 # extract
-                print("beta_parser_config:", beta_parser_config)
                 text_docs = self._extract(index_processor, dataset_document, processing_rule.to_dict())
 
                 # transform
@@ -126,6 +126,7 @@ class IndexingRunner:
             index_type = dataset_document.doc_form
             index_processor = IndexProcessorFactory(index_type).init_index_processor()
             # extract
+            print("run_in_splitting_status")
             text_docs = self._extract(index_processor, dataset_document, processing_rule.to_dict())
 
             # transform
@@ -356,6 +357,8 @@ class IndexingRunner:
                 one_or_none()
 
             if file_detail:
+                print("file detail")
+                print("self.beta_parser_config:", self.beta_parser_config)
                 extract_setting = ExtractSetting(
                     datasource_type="upload_file",
                     upload_file=file_detail,
@@ -687,7 +690,7 @@ class IndexingRunner:
                     chunk_documents = documents[i:i + chunk_size]
                     futures.append(executor.submit(self._process_chunk, current_app._get_current_object(), index_processor,
                                                    chunk_documents, dataset,
-                                                   dataset_document, embedding_model_instance))
+                                                   dataset_document, embedding_model_instance, self.beta_parser_config))
 
                 for future in futures:
                     tokens += future.result()
@@ -728,7 +731,7 @@ class IndexingRunner:
                 db.session.commit()
 
     def _process_chunk(self, flask_app, index_processor, chunk_documents, dataset, dataset_document,
-                       embedding_model_instance):
+                       embedding_model_instance, beta_parser_config):
         with flask_app.app_context():
             # check document is paused
             self._check_document_paused_status(dataset_document.id)
@@ -743,8 +746,9 @@ class IndexingRunner:
                 )
 
             # load index
-            if self.beta_parser_config:
-                index_processor.load(dataset, chunk_documents, with_keywords=False, embedding_q_only=self.beta_parser_config['embedding_q_only'])
+            print("_process_chunk beta_parser_config:", beta_parser_config)
+            if beta_parser_config:
+                index_processor.load(dataset, chunk_documents, with_keywords=False, embedding_q_only=beta_parser_config['embedding_q_only'])
             else:
                 index_processor.load(dataset, chunk_documents, with_keywords=False)
 
@@ -839,7 +843,7 @@ class IndexingRunner:
 
         documents = index_processor.transform(text_docs, embedding_model_instance=embedding_model_instance,
                                               process_rule=process_rule, tenant_id=dataset.tenant_id,
-                                              doc_language=doc_language, beta_parser_type=self.beta_parser_config['beta_parser_type'])
+                                              doc_language=doc_language, parser_type=self.beta_parser_config['parser_type'])
 
         return documents
 

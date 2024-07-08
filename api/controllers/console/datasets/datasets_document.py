@@ -247,7 +247,7 @@ class DatasetDocumentListApi(Resource):
                             location='json')
         parser.add_argument('retrieval_model', type=dict, required=False, nullable=False,
                             location='json')
-        parser.add_argument('beta_parser_type', type=str, default='', required=False, nullable=False, location='json')
+        parser.add_argument('parser_type', type=str, default='', required=False, nullable=False, location='json')
         parser.add_argument('embedding_q_only', type=bool, default=False, required=False, nullable=False, location='json')
         args = parser.parse_args()
 
@@ -296,6 +296,8 @@ class DatasetInitApi(Resource):
                             location='json')
         parser.add_argument('retrieval_model', type=dict, required=False, nullable=False,
                             location='json')
+        parser.add_argument('parser_type', type=str, default='', required=False, nullable=False, location='json')
+        parser.add_argument('embedding_q_only', type=bool, default=False, required=False, nullable=False, location='json')
         args = parser.parse_args()
         if args['indexing_technique'] == 'high_quality':
             try:

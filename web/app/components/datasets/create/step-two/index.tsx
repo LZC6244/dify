@@ -74,6 +74,8 @@ enum SegmentType {
 enum ParserType {
   GENERAL = 'general',
   PAPER = 'paper',
+  QA = 'qa',
+  NULL = '',
 }
 enum IndexingType {
   QUALIFIED = 'high_quality',
@@ -113,6 +115,7 @@ const StepTwo = ({
   const [previewScrolled, setPreviewScrolled] = useState(false)
   const [segmentationType, setSegmentationType] = useState<SegmentType>(SegmentType.AUTO)
   const [parserType, setParserType] = useState<ParserType>(ParserType.GENERAL)
+  const [embeddingQOnly, setEmbeddingQOnly] = useState(true)
   const [segmentIdentifier, setSegmentIdentifier] = useState('\\n')
   const [max, setMax] = useState(500)
   const [overlap, setOverlap] = useState(50)
@@ -279,6 +282,7 @@ const StepTwo = ({
         doc_form: docForm,
         doc_language: docLanguage,
         dataset_id: datasetId as string,
+        parser_type: parserType
       }
     }
     if (dataSourceType === DataSourceType.NOTION) {
@@ -292,6 +296,7 @@ const StepTwo = ({
         doc_form: docForm,
         doc_language: docLanguage,
         dataset_id: datasetId as string,
+        parser_type: parserType
       }
     }
     if (dataSourceType === DataSourceType.WEB) {
@@ -305,6 +310,7 @@ const StepTwo = ({
         doc_form: docForm,
         doc_language: docLanguage,
         dataset_id: datasetId as string,
+        parser_type: parserType
       }
     }
   }
@@ -327,6 +333,8 @@ const StepTwo = ({
         process_rule: getProcessRule(),
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         retrieval_model: retrievalConfig, // Readonly. If want to changed, just go to settings page.
+        parser_type: parserType,
+        embedding_q_only: embeddingQOnly,
       } as CreateDocumentReq
     }
     else { // create
@@ -363,6 +371,8 @@ const StepTwo = ({
         doc_language: docLanguage,
 
         retrieval_model: postRetrievalConfig,
+        parser_type: parserType,
+        embedding_q_only: embeddingQOnly,
       } as CreateDocumentReq
       if (dataSourceType === DataSourceType.FILE) {
         params.data_source.info_list.file_info_list = {
@@ -529,10 +539,11 @@ const StepTwo = ({
   }, [isAPIKeySet, indexingType, datasetId])
 
   useEffect(() => {
-    if (segmentationType === SegmentType.AUTO) {
+    if (segmentationType === SegmentType.AUTO || parserType === ParserType.QA || parserType === ParserType.GENERAL) {
       setAutomaticFileIndexingEstimate(null)
       !isMobile && setShowPreview()
       fetchFileIndexingEstimate()
+      console.log('789')
       setPreviewSwitched(false)
     }
     else {
@@ -540,7 +551,7 @@ const StepTwo = ({
       setCustomFileIndexingEstimate(null)
       setPreviewSwitched(false)
     }
-  }, [segmentationType, indexType])
+  }, [segmentationType, indexType, parserType])
 
   const [retrievalConfig, setRetrievalConfig] = useState(currentDataset?.retrieval_model_dict || {
     search_method: RETRIEVE_METHOD.semantic,
@@ -606,16 +617,33 @@ const StepTwo = ({
                 <div className={s.title}>{t('datasetCreation.stepTwo.paper')}</div>
                 <div className={s.tip}>{t('datasetCreation.stepTwo.paperDescription')}</div>
               </div>
-              {parserType === ParserType.PAPER && (
+            </div>
+
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                parserType === ParserType.QA && s.active,
+              )}
+              onClick={() => setParserType(ParserType.QA)}
+            >
+              <span className={cn(s.typeIcon, s.customize)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.qa')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.qaDescription')}</div>
+              </div>
+              {parserType === ParserType.QA && (
                 <div className={s.typeFormBody}>
                   <div className={s.formRow}>
                     <div className='w-full'>
-                      <div className={s.label}>{t('datasetCreation.stepTwo.paper')}</div>
+                      <div className={s.label}>{t('datasetCreation.stepTwo.qaEmbedding')}</div>
                     </div>
                   </div>
                 </div>
               )}
             </div>
+
           </div>
 
           <div className={s.label}>{t('datasetCreation.stepTwo.segmentation')}</div>

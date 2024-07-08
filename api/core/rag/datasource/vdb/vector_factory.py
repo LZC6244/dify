@@ -83,11 +83,7 @@ class Vector:
 
     def create(self, texts: list = None, **kwargs):
         if texts:
-            embeddings_q = kwargs.get("embedding_q_only", False)
-            if embeddings_q:
-                embeddings = self._embeddings.embed_documents([document.page_content.split("\nanswer:\n")[0].replace("question:\n", "") for document in texts])
-            else:
-                embeddings = self._embeddings.embed_documents([document.page_content for document in texts])
+            embeddings = self._embeddings.embed_documents([document.page_content for document in texts])
             self._vector_processor.create(
                 texts=texts,
                 embeddings=embeddings,
