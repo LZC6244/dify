@@ -77,7 +77,7 @@ export default function AppSelector({ isMobile }: IAppSelecotr) {
               >
                 <Menu.Items
                   className="
-                    absolute left-full bottom-0 mt-1.5 w-60 max-w-80
+                    absolute left-full bottom-0 mt-1.5 w-60 max-w-80 z-10
                     divide-y divide-gray-100 origin-top-right rounded-lg bg-white
                     shadow-lg
                   "
