@@ -1,10 +1,10 @@
-name: dify-0_6_11-dev
+name: dify-0_6_11-debug
 version: '3'
 services:
   # API service
   api:
-    container_name: dify-dev-api-0_6_11
-    image: 111.19.168.169:8389/zskj/official-dify-api:0.6.11
+    container_name: dify-debug-api-0_6_11
+    image: 111.19.168.169:8389/zskj/backend/official-dify-api:0.6.11
     restart: always
     environment:
       # Startup mode, 'api' starts the API server.
@@ -18,14 +18,14 @@ services:
       # The base URL of console application web frontend, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_WEB_URL: 'http://61.241.103.72:5181'
+      CONSOLE_WEB_URL: 'http://61.241.103.72:5281'
       # Password for admin user initialization.
       # If left unset, admin user will not be prompted for a password when creating the initial admin account.
       INIT_PASSWORD: ''
       # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_API_URL: 'http://61.241.103.72:5181'
+      CONSOLE_API_URL: 'http://61.241.103.72:5281'
       # The URL prefix for Service API endpoints, refers to the base URL of the current API service if api domain is
       # different from console domain.
       # example: http://api.dify.ai
@@ -33,7 +33,7 @@ services:
       # The URL prefix for Web APP frontend, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app
-      APP_WEB_URL: 'http://61.241.103.72:5181'
+      APP_WEB_URL: 'http://61.241.103.72:5281'
       # File preview or download Url prefix.
       # used to display File preview or download Url to the front-end or as Multi-model inputs;
       # Url is signed and has expiration time.
@@ -206,14 +206,14 @@ services:
   # worker service
   # The Celery worker for processing the queue.
   worker:
-    container_name: dify-dev-worker-0_6_11
-    image: 111.19.168.169:8389/zskj/official-dify-api:0.6.11
+    container_name: dify-debug-worker-0_6_11
+    image: 111.19.168.169:8389/zskj/backend/official-dify-api:0.6.11
     restart: always
     environment:
       # celery 任务队列名称，请在['dify-dev', 'dify-prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
       CELERY_TASK_DEFAULT_QUEUE: 'dify-demo'
-      CONSOLE_WEB_URL: 'http://61.241.103.72:5181'
+      CONSOLE_WEB_URL: 'http://61.241.103.72:5281'
       # Startup mode, 'worker' starts the Celery worker for processing the queue.
       MODE: worker
 
@@ -352,15 +352,15 @@ services:
 
   # Frontend web application.
   web:
-    container_name: dify-dev-web-0_6_11
-    image: 111.19.168.169:8389/zskj/zs-dify-web:0.6.11
+    container_name: dify-debug-web-0_6_11
+    image: 111.19.168.169:8389/zskj/zs-dify-web:0.6.11.1
     # image: langgenius/dify-web:0.6.11
     restart: always
     environment:
       # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_API_URL: 'http://61.241.103.72:5181'
+      CONSOLE_API_URL: 'http://61.241.103.72:5281'
       # The URL for Web APP api server, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app
@@ -437,7 +437,7 @@ services:
 
   # The DifySandbox
   sandbox:
-    container_name: dify-dev-sandbox-0_6_11
+    container_name: dify-debug-sandbox-0_6_11
     image: langgenius/dify-sandbox:0.2.1
     restart: always
     environment:
@@ -460,7 +460,7 @@ services:
   # for more information, please refer to
   # https://docs.dify.ai/getting-started/install-self-hosted/install-faq#id-16.-why-is-ssrf_proxy-needed
   ssrf_proxy:
-    container_name: dify-dev-ssrf_proxy-0_6_11
+    container_name: dify-debug-ssrf_proxy-0_6_11
     # image: ubuntu/squid:latest
     image: 111.19.168.169:8389/zskj/dify/ubuntu/squid:v1.0
     restart: always
@@ -527,18 +527,18 @@ services:
       - api
       - web
     ports:
-      - "5181:80"
+      - "5281:80"
       #- "443:443"
 networks:
   default:
     ipam:
       config:
-        - subnet: 172.70.2.0/28
+        - subnet: 172.70.10.0/28
   # create a network between sandbox, api and ssrf_proxy, and can not access outside.
   ssrf_proxy_network-0_6_11:
     ipam:
       config:
-        - subnet: 172.70.2.16/28
+        - subnet: 172.70.10.16/28
     driver: bridge
     internal: true
-    name: ssrf_proxy_network-dev-0_6_11
+    name: ssrf_proxy_network-debug-0_6_11
