@@ -1,8 +1,9 @@
-name: dify-0_6_11-dev
+name: dify-0_6_11-prd
 version: '3'
 services:
   # API service
   api:
+    container_name: dify-prd-api-0_6_11
     image: 111.19.168.169:8389/zskj/official-dify-api:0.6.11
     restart: always
     environment:
@@ -193,8 +194,8 @@ services:
     #   - redis
     volumes:
       # Mount the storage directory to the container, for storing user files.
-      - ./volumes/app/storage:/app/api/storage
-      - ../api:/app/api
+      - ../docker/volumes/app/storage:/app/api/storage
+      - ../../api:/app/api
     # uncomment to expose dify-api port to host
     # ports:
     #   - "5022:5001"
@@ -205,10 +206,11 @@ services:
   # worker service
   # The Celery worker for processing the queue.
   worker:
+    container_name: dify-prd-worker-0_6_11
     image: 111.19.168.169:8389/zskj/official-dify-api:0.6.11
     restart: always
     environment:
-      # celery 任务队列名称，请在['dify-dev', 'dify-prd'] 中选择一个
+      # celery 任务队列名称，请在['dify-prd', 'dify-prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
       CELERY_TASK_DEFAULT_QUEUE: 'dify-demo'
       CONSOLE_WEB_URL: 'http://61.241.103.72:5182'
@@ -342,14 +344,15 @@ services:
     #   - redis
     volumes:
       # Mount the storage directory to the container, for storing user files.
-      - ./volumes/app/storage:/app/api/storage
-      - ../api:/app/api
+      - ../docker/volumes/app/storage:/app/api/storage
+      - ../../api:/app/api
     networks:
       - ssrf_proxy_network-0_6_11
       - default
 
   # Frontend web application.
   web:
+    container_name: dify-prd-web-0_6_11
     image: 111.19.168.169:8389/zskj/zs-dify-web:0.6.11
     # image: langgenius/dify-web:0.6.11
     restart: always
@@ -434,6 +437,7 @@ services:
 
   # The DifySandbox
   sandbox:
+    container_name: dify-prd-sandbox-0_6_11
     image: langgenius/dify-sandbox:0.2.1
     restart: always
     environment:
@@ -456,7 +460,7 @@ services:
   # for more information, please refer to
   # https://docs.dify.ai/getting-started/install-self-hosted/install-faq#id-16.-why-is-ssrf_proxy-needed
   ssrf_proxy:
-    # container_name: dify-official-ssrf_proxy
+    container_name: dify-prd-ssrf_proxy-0_6_11
     # image: ubuntu/squid:latest
     image: 111.19.168.169:8389/zskj/dify/ubuntu/squid:v1.0
     restart: always
@@ -529,12 +533,12 @@ networks:
   default:
     ipam:
       config:
-        - subnet: 172.70.2.0/28
+        - subnet: 172.70.3.0/28
   # create a network between sandbox, api and ssrf_proxy, and can not access outside.
   ssrf_proxy_network-0_6_11:
     ipam:
       config:
-        - subnet: 172.70.2.16/28
+        - subnet: 172.70.3.16/28
     driver: bridge
     internal: true
-    name: ssrf_proxy_network-dev-0_6_11
+    name: ssrf_proxy_network-prd-0_6_11
