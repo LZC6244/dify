@@ -4,8 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useContext } from 'use-context-selector'
 import { useSelectedLayoutSegments } from 'next/navigation'
+import classNames from 'classnames'
 import Toast from '../../base/toast'
 import Item from './app-nav-item'
+import s from './style.module.css'
 import { fetchInstalledAppList as doFetchInstalledAppList, uninstallApp, updatePinStatus } from '@/service/explore'
 import ExploreContext from '@/context/explore-context'
 import Confirm from '@/app/components/base/confirm'
@@ -103,7 +105,7 @@ const SideBar: FC<IExploreSideBarProps> = ({
         // <div className='mt-10'>
         <div className='mt-0'>
           <p className='pl-2 mobile:px-0 text-[18px] text-[#000] break-all font-medium uppercase'>{t('explore.sidebar.workspace')}</p>
-          <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'
+          <div className={classNames('mt-3 space-y-1 overflow-y-auto overflow-x-hidden', s.hideScroll)}
             style={{
               height: 'calc(100vh - 100px)',
             }}
