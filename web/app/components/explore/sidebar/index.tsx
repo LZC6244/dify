@@ -88,7 +88,7 @@ const SideBar: FC<IExploreSideBarProps> = ({
   }, [controlUpdateInstalledApps])
 
   return (
-    <div className='w-fit sm:w-[216px] shrink-0 pt-6 px-4 border-gray-200 cursor-pointer'>
+    <div className='w-fit sm:w-[216px] shrink-0 pt-[40px] px-[30px] border-gray-200 cursor-pointer bg-white rounded-tl-[20px]'>
       {/* <div>
         <Link
           href='/explore/apps'
@@ -102,10 +102,10 @@ const SideBar: FC<IExploreSideBarProps> = ({
       {installedApps.length > 0 && (
         // <div className='mt-10'>
         <div className='mt-0'>
-          <p className='pl-2 mobile:px-0 text-xs text-gray-500 break-all font-medium uppercase'>{t('explore.sidebar.workspace')}</p>
+          <p className='pl-2 mobile:px-0 text-[18px] text-[#000] break-all font-medium uppercase'>{t('explore.sidebar.workspace')}</p>
           <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'
             style={{
-              height: 'calc(100vh - 250px)',
+              height: 'calc(100vh - 100px)',
             }}
           >
             {installedApps.map(({ id, is_pinned, uninstallable, app: { name, icon, icon_background } }) => {
