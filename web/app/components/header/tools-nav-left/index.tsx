@@ -30,7 +30,7 @@ const ToolsNavLeft = ({
           : <Image src={Explore} className='mr-3 w-5 h-5' alt="" />
       }
       <span className={classNames('text-[16px]')}>
-        发现
+        插件
       </span>
     </Link>
   )
