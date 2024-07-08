@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useSelectedLayoutSegment } from 'next/navigation'
 import classNames from 'classnames'
 // import { Explore, ExploreActive } from '../../base/icons/src/public/header-nav/explore'
 import Image from 'next/image'
@@ -14,8 +14,9 @@ type ExploreNavProps = {
 const AppNavLeft = ({
   className,
 }: ExploreNavProps) => {
-  const pathname = usePathname()
-  const actived = pathname === '/apps' || pathname.includes('/apps')
+  // const pathname = usePathname()
+  const segment = useSelectedLayoutSegment()
+  const actived = ['apps', 'app'].includes(segment || '')
 
   return (
     <Link href="/apps" className={classNames(

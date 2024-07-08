@@ -2,15 +2,16 @@
 import classNames from 'classnames'
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import ExploreNavLeft from '../header/explore-nav-left'
 import ExploreChatNavLeft from '../header/explore-chat-nav-left'
 import AppNavLeft from '../header/app-nav-left'
 import DatasetNavLeft from '../header/dataset-nav-left'
 import ToolsNavLeft from '../header/tools-nav-left'
 import AccountDropdown from '../header/account-dropdown-left'
+import logo from './logo.png'
 import { WorkspaceProvider } from '@/context/workspace-context'
-import LogoSite from '@/app/components/base/logo/logo-site'
-
+// import LogoSite from '@/app/components/base/logo/logo-site'
 const navClassName = `
   flex items-center relative mr-0 h-[48px] rounded-lg
   font-medium text-sm
@@ -19,11 +20,12 @@ const navClassName = `
 
 const Sidebar = () => {
   return (
-    <div className={classNames('sidebar h-full flex flex-col transition-all duration-300 px-[29px]')}>
-      <Link href="/apps" className='flex items-center px-8 '>
-        <LogoSite className='mt-6' />
+    <div className={classNames('sidebar h-full flex flex-col transition-all duration-300 px-[20px]')}>
+      <Link href="/apps" className='flex items-center px-3 '>
+        {/* <LogoSite className='mt-6' /> */}
+        <Image src={logo} className='w-[166px] h-[50px] mt-6' alt=''/>
       </Link>
-      <div className='flex flex-col items-center flex-1 mt-9'>
+      <div className='flex flex-col items-center flex-1 mt-9 px-[9px]'>
         <ExploreNavLeft className={navClassName} />
         <ExploreChatNavLeft className={navClassName} />
         <div className='h-[1px] w-full bg-[#D9DFF6] mt-6 mb-[38px]'></div>

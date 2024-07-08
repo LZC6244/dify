@@ -58,7 +58,7 @@ const Container = () => {
   }
 
   return (
-    <div ref={containerRef} className='grow relative flex flex-col bg-gray-100 overflow-y-auto'>
+    <div ref={containerRef} className='grow relative flex flex-col bg-gray-100 h-full overflow-y-auto'>
       <div className='sticky top-0 flex justify-between pt-4 px-12 pb-2 leading-[56px] bg-gray-100 z-10 flex-wrap gap-y-2'>
         <TabSliderNew
           value={activeTab}

@@ -37,6 +37,7 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
     chatShouldReloadKey,
     isMobile,
     handleNewConversation,
+    currentConversationId,
   } = useChatWithHistoryContext()
 
   const chatReady = (!showConfigPanelBeforeChat || !!appPrevChatList.length)
@@ -55,7 +56,10 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
   }, [site, customConfig])
 
   const onHandleNewConversation = () => {
-    setShow(true)
+    if (currentConversationId)
+      setShow(true)
+    else
+      handleNewConversation()
   }
 
   if (appInfoLoading) {
@@ -71,7 +75,7 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
   }
 
   return (
-    <div className={`h-full flex bg-white flex-col ${className} ${isMobile && 'flex-col'}`}>
+    <div className={`h-full flex flex-col ${className} ${isMobile && 'flex-col'}`}>
       {/* {
         !isMobile && (
           <Sidebar />

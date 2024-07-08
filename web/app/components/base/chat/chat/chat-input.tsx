@@ -177,9 +177,9 @@ const ChatInput: FC<ChatInputProps> = ({
             autoSize
           />
           <div className='absolute bottom-[7px] right-2 flex items-center h-8'>
-            <div className='flex items-center px-1 h-5 rounded-md bg-gray-100 text-xs font-medium text-gray-500'>
+            {/* <div className='flex items-center px-1 h-5 rounded-md bg-gray-100 text-xs font-medium text-gray-500'>
               {query.trim().length}
-            </div>
+            </div> */}
             {
               query
                 ? (
