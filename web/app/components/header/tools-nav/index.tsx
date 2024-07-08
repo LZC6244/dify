@@ -27,8 +27,7 @@ const ToolsNav = ({
           ? <ToolsActive className='mr-2 w-4 h-4' />
           : <Tools className='mr-2 w-4 h-4' />
       }
-      {/* {t('common.menus.tools')} */}
-      插件
+      {t('common.menus.tools')}
     </Link>
   )
 }

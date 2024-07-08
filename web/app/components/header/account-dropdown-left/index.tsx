@@ -4,12 +4,12 @@ import { Fragment, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useContext } from 'use-context-selector'
 import { Menu, Transition } from '@headlessui/react'
+import Image from 'next/image'
 import AccountAbout from '../account-about'
+import UserIcon from './user.svg'
 import I18n from '@/context/i18n'
-import Avatar from '@/app/components/base/avatar'
 import { logout } from '@/service/common'
 import { useAppContext } from '@/context/app-context'
-import { ChevronDown } from '@/app/components/base/icons/src/vender/line/arrows'
 import { LogOut01 } from '@/app/components/base/icons/src/vender/line/general'
 import { useModalContext } from '@/context/modal-context'
 export type IAppSelecotr = {
@@ -43,24 +43,26 @@ export default function AppSelector({ isMobile }: IAppSelecotr) {
 
   return (
     <div>
-      <Menu as="div" className="relative inline-block text-left">
+      <Menu as="div" className="relative inline-block text-left w-full">
         {
           ({ open }) => (
             <>
               <div>
                 <Menu.Button
                   className={`
+                    w-full
                     inline-flex items-center
                     rounded-[20px] py-1 pr-2.5 pl-1 text-sm
-                  text-gray-700 hover:bg-gray-200
+                  text-[#637381] 
                     mobile:px-1
-                    ${open && 'bg-gray-200'}
+                    ${open && 'bg-[#E4EAFF]'}
                   `}
                 >
-                  <Avatar name={userProfile.name} className='sm:mr-2 mr-0' size={32} />
+                  {/* <Avatar name={userProfile.name} className='sm:mr-2 mr-0' size={32} /> */}
+                  <Image src={UserIcon} className='w-6 h-6 mr-[10px]' alt='' />
                   {!isMobile && <>
                     {userProfile.name}
-                    <ChevronDown className="w-3 h-3 ml-1 text-gray-700" />
+                    {/* <ChevronDown className="w-3 h-3 ml-1 text-gray-700" /> */}
                   </>}
                 </Menu.Button>
               </div>

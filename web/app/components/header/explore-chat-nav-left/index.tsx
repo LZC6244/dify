@@ -5,20 +5,20 @@ import { usePathname } from 'next/navigation'
 import classNames from 'classnames'
 // import { Explore, ExploreActive } from '../../base/icons/src/public/header-nav/explore'
 import Image from 'next/image'
-import Explore from './repository.svg'
-import ExploreActive from './repository_h.svg'
+import Explore from './dialogue.svg'
+import ExploreActive from './dialogue_h.svg'
 type ExploreNavProps = {
   className?: string
 }
 
-const Datasets = ({
+const ExploreChatNavLeft = ({
   className,
 }: ExploreNavProps) => {
   const pathname = usePathname()
-  const actived = pathname === '/datasets' || pathname.includes('/datasets')
+  const actived = pathname === '/explore/chat' || pathname.includes('/explore/installed')
 
   return (
-    <Link href="/datasets" className={classNames(
+    <Link href="/explore/chat" className={classNames(
       className, 'group',
       'w-full pl-[17px] hover:bg-[#E4EAFF]',
       actived ? 'text-[#5E3EFB]' : 'text-[#000000] ',
@@ -34,10 +34,10 @@ const Datasets = ({
           : <Explore className='mr-2 w-4 h-4' />
       } */}
       <span className={classNames('text-[16px]')}>
-        知识库
+        对话
       </span>
     </Link>
   )
 }
 
-export default Datasets
+export default ExploreChatNavLeft

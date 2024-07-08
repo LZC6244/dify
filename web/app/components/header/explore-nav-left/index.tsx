@@ -1,26 +1,31 @@
 'use client'
 
+// import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import classNames from 'classnames'
 // import { Explore, ExploreActive } from '../../base/icons/src/public/header-nav/explore'
 import Image from 'next/image'
-import Explore from './repository.svg'
-import ExploreActive from './repository_h.svg'
-type ExploreNavProps = {
+import Explore from './find.svg'
+import ExploreActive from './find_h.svg'
+type ExploreNavLeftProps = {
   className?: string
 }
 
-const Datasets = ({
+const ExploreNavLeft = ({
   className,
-}: ExploreNavProps) => {
+}: ExploreNavLeftProps) => {
+  // const { t } = useTranslation()
+  // const selectedSegment = useSelectedLayoutSegment()
+  // const actived = selectedSegment === 'explore'
   const pathname = usePathname()
-  const actived = pathname === '/datasets' || pathname.includes('/datasets')
+  const actived = pathname === '/explore/apps'
 
   return (
-    <Link href="/datasets" className={classNames(
+    <Link href="/explore/apps" className={classNames(
       className, 'group',
       'w-full pl-[17px] hover:bg-[#E4EAFF]',
+      // actived && 'bg-white shadow-md',
       actived ? 'text-[#5E3EFB]' : 'text-[#000000] ',
     )}>
       {
@@ -33,11 +38,12 @@ const Datasets = ({
           ? <ExploreActive className='mr-2 w-4 h-4' />
           : <Explore className='mr-2 w-4 h-4' />
       } */}
+      {/* {t('common.menus.explore')} */}
       <span className={classNames('text-[16px]')}>
-        知识库
+        发现
       </span>
     </Link>
   )
 }
 
-export default Datasets
+export default ExploreNavLeft
