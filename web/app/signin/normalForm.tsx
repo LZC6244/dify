@@ -263,7 +263,8 @@ const NormalForm = () => {
                         onClick={() => setShowPassword(!showPassword)}
                         className="text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500"
                       >
-                        {showPassword ? '👀' : '😝'}
+                        {/* {showPassword ? '👀' : '😝'} */}
+                        {showPassword ? '👁' : '🙅🏻‍♀️'}
                       </button>
                     </div>
                   </div>
@@ -298,7 +299,7 @@ const NormalForm = () => {
             >{t('login.pp')}</Link>
           </div>
 
-          {IS_CE_EDITION && <div className="w-hull text-center block mt-2 text-xs text-gray-600">
+          {IS_CE_EDITION && <div className="w-hull text-center block mt-2 text-xs text-gray-600 hidden">
             {t('login.goToInit')}
             &nbsp;
             <Link

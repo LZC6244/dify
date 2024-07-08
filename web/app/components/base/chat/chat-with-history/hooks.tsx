@@ -256,6 +256,10 @@ export const useChatWithHistory = (installedAppInfo?: InstalledApp) => {
       setShowConfigPanelBeforeChat(true)
       setShowNewConversationItemInList(true)
       handleNewConversationInputsChange({})
+      handleStartChat()
+    }
+    else {
+      handleStartChat()
     }
   }, [handleChangeConversation, currentConversationId, handleConversationIdInfoChange, setShowConfigPanelBeforeChat, setShowNewConversationItemInList, showNewConversationItemInList, handleNewConversationInputsChange])
   const handleUpdateConversationList = useCallback(() => {

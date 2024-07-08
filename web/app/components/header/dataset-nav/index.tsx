@@ -40,7 +40,8 @@ const DatasetNav = () => {
     <Nav
       icon={<Knowledge className='w-4 h-4' />}
       activeIcon={<KnowledgeActive className='w-4 h-4' />}
-      text={t('common.menus.datasets')}
+      // text={t('common.menus.datasets')}
+      text="知识库"
       activeSegment='datasets'
       link='/datasets'
       curNav={currentDataset}

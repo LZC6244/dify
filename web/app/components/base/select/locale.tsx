@@ -18,7 +18,7 @@ export default function Select({
   const item = items.filter(item => item.value === value)[0]
 
   return (
-    <div className="w-56 text-right">
+    <div className="w-56 text-right hidden">
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="inline-flex w-full h-[44px]justify-center items-center
