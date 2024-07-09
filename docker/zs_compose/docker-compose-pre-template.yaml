@@ -1,9 +1,9 @@
-name: dify-0_6_11-prd
+name: dify-0_6_11-pre
 version: '3'
 services:
   # API service
   api:
-    container_name: dify-prd-api-0_6_11
+    container_name: dify-pre-api-0_6_11
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
@@ -18,14 +18,14 @@ services:
       # The base URL of console application web frontend, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_WEB_URL: 'https://agent-x.maas.com.cn/'
+      CONSOLE_WEB_URL: 'https://agent-x-pre.maas.com.cn/'
       # Password for admin user initialization.
       # If left unset, admin user will not be prompted for a password when creating the initial admin account.
       INIT_PASSWORD: ''
       # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_API_URL: 'https://agent-x.maas.com.cn/'
+      CONSOLE_API_URL: 'https://agent-x-pre.maas.com.cn/'
       # The URL prefix for Service API endpoints, refers to the base URL of the current API service if api domain is
       # different from console domain.
       # example: http://api.dify.ai
@@ -33,7 +33,7 @@ services:
       # The URL prefix for Web APP frontend, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app
-      APP_WEB_URL: 'https://agent-x.maas.com.cn/'
+      APP_WEB_URL: 'https://agent-x-pre.maas.com.cn/'
       # File preview or download Url prefix.
       # used to display File preview or download Url to the front-end or as Multi-model inputs;
       # Url is signed and has expiration time.
@@ -49,7 +49,7 @@ services:
       DB_PASSWORD: vuqvu7-kikjes-hehtYq
       DB_HOST: 172.26.0.1
       DB_PORT: 6632
-      DB_DATABASE: dify_prd
+      DB_DATABASE: dify_pre
       # The configurations of redis connection.
       # It is consistent with the configuration in the 'redis' service below.
       REDIS_HOST: 172.26.0.1
@@ -115,7 +115,7 @@ services:
       # The Qdrant server gRPC mode PORT.
       QDRANT_GRPC_PORT: 6334
       # Milvus configuration Only available when VECTOR_STORE is `milvus`.
-      MILVUS_DATABASE: dif_prd
+      MILVUS_DATABASE: dif_pre
       # The milvus host.
       MILVUS_HOST: 172.26.0.1
       # The milvus host.
@@ -208,14 +208,14 @@ services:
   # worker service
   # The Celery worker for processing the queue.
   worker:
-    container_name: dify-prd-worker-0_6_11
+    container_name: dify-pre-worker-0_6_11
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
       # celery 任务队列名称，请在['dify_dev','dify_pre', 'dify_prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
-      CELERY_TASK_DEFAULT_QUEUE: 'dify_prd'
-      CONSOLE_WEB_URL: 'https://agent-x.maas.com.cn/'
+      CELERY_TASK_DEFAULT_QUEUE: 'dify_pre'
+      CONSOLE_WEB_URL: 'https://agent-x-pre.maas.com.cn/'
       # Startup mode, 'worker' starts the Celery worker for processing the queue.
       MODE: worker
 
@@ -232,7 +232,7 @@ services:
       DB_PASSWORD: vuqvu7-kikjes-hehtYq
       DB_HOST: 172.26.0.1
       DB_PORT: 6632
-      DB_DATABASE: dify_prd
+      DB_DATABASE: dify_pre
       # The configurations of redis cache connection.
       REDIS_HOST: 172.26.0.1
       REDIS_PORT: 6379
@@ -278,7 +278,7 @@ services:
       # The Qdrant server gRPC mode PORT.
       QDRANT_GRPC_PORT: 6334
       # Milvus configuration Only available when VECTOR_STORE is `milvus`.
-      MILVUS_DATABASE: dif_prd
+      MILVUS_DATABASE: dif_pre
       # The milvus host.
       MILVUS_HOST: 172.26.0.1
       # The milvus host.
@@ -356,7 +356,7 @@ services:
 
   # Frontend web application.
   web:
-    container_name: dify-prd-web-0_6_11
+    container_name: dify-pre-web-0_6_11
     image: 111.19.168.169:8389/zskj/frontend/zs-dify-web:{VERSION}
     # image: langgenius/dify-web:0.6.11
     restart: always
@@ -364,7 +364,7 @@ services:
       # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_API_URL: 'https://agent-x.maas.com.cn/'
+      CONSOLE_API_URL: 'https://agent-x-pre.maas.com.cn/'
       # The URL for Web APP api server, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app
@@ -441,7 +441,7 @@ services:
 
   # The DifySandbox
   sandbox:
-    container_name: dify-prd-sandbox-0_6_11
+    container_name: dify-pre-sandbox-0_6_11
     image: langgenius/dify-sandbox:0.2.1
     restart: always
     environment:
@@ -464,7 +464,7 @@ services:
   # for more information, please refer to
   # https://docs.dify.ai/getting-started/install-self-hosted/install-faq#id-16.-why-is-ssrf_proxy-needed
   ssrf_proxy:
-    container_name: dify-prd-ssrf_proxy-0_6_11
+    container_name: dify-pre-ssrf_proxy-0_6_11
     # image: ubuntu/squid:latest
     image: 111.19.168.169:8389/zskj/dify/ubuntu/squid:v1.0
     restart: always
@@ -531,18 +531,18 @@ services:
       - api
       - web
     ports:
-      - "5183:80"
+      - "5182:80"
       #- "443:443"
 networks:
   default:
     ipam:
       config:
-        - subnet: 172.70.4.0/28
+        - subnet: 172.70.3.0/28
   # create a network between sandbox, api and ssrf_proxy, and can not access outside.
   ssrf_proxy_network-0_6_11:
     ipam:
       config:
-        - subnet: 172.70.4.16/28
+        - subnet: 172.70.3.16/28
     driver: bridge
     internal: true
-    name: ssrf_proxy_network-prd-0_6_11
+    name: ssrf_proxy_network-pre-0_6_11
