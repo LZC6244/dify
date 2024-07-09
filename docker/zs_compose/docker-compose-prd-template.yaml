@@ -4,7 +4,7 @@ services:
   # API service
   api:
     container_name: dify-prd-api-0_6_11
-    image: 111.19.168.169:8389/zskj/backend/official-dify-api:{VERSION}
+    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
       # Startup mode, 'api' starts the API server.
@@ -207,7 +207,7 @@ services:
   # The Celery worker for processing the queue.
   worker:
     container_name: dify-prd-worker-0_6_11
-    image: 111.19.168.169:8389/zskj/backend/official-dify-api:{VERSION}
+    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
       # celery 任务队列名称，请在['dify-prd', 'dify-prd'] 中选择一个
