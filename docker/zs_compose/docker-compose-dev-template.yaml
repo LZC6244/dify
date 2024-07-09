@@ -278,7 +278,7 @@ services:
       # The Qdrant server gRPC mode PORT.
       QDRANT_GRPC_PORT: 6334
       # Milvus configuration Only available when VECTOR_STORE is `milvus`.
-      MILVUS_DATABASE: dify-dev
+      MILVUS_DATABASE: dify_dev
       # The milvus host.
       MILVUS_HOST: 172.26.0.1
       # The milvus host.
