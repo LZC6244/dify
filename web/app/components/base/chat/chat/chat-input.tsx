@@ -8,6 +8,8 @@ import { useContext } from 'use-context-selector'
 import Recorder from 'js-audio-recorder'
 import { useTranslation } from 'react-i18next'
 import Textarea from 'rc-textarea'
+import Image from 'next/image'
+import classNames from 'classnames'
 import type {
   EnableType,
   OnSend,
@@ -15,6 +17,8 @@ import type {
 } from '../types'
 import { TransferMethod } from '../types'
 import { useChatWithHistoryContext } from '../chat-with-history/context'
+import sendActiveImg from './send_h.svg'
+import sendImg from './send.svg'
 import TooltipPlus from '@/app/components/base/tooltip-plus'
 import { ToastContext } from '@/app/components/base/toast'
 import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
@@ -22,7 +26,6 @@ import VoiceInput from '@/app/components/base/voice-input'
 import { Microphone01 } from '@/app/components/base/icons/src/vender/line/mediaAndDevices'
 import { Microphone01 as Microphone01Solid } from '@/app/components/base/icons/src/vender/solid/mediaAndDevices'
 import { XCircle } from '@/app/components/base/icons/src/vender/solid/general'
-import { Send03 } from '@/app/components/base/icons/src/vender/solid/communication'
 import ChatImageUploader from '@/app/components/base/image-uploader/chat-image-uploader'
 import ImageList from '@/app/components/base/image-uploader/image-list'
 import {
@@ -119,12 +122,14 @@ const ChatInput: FC<ChatInputProps> = ({
       className='group flex items-center justify-center w-8 h-8 rounded-lg hover:bg-[#EBF5FF] cursor-pointer'
       onClick={handleSend}
     >
-      <Send03
+      {/* <Send03
         className={`
           w-5 h-5 text-gray-300 group-hover:text-primary-600
           ${!!query.trim() && 'text-primary-600'}
         `}
-      />
+      /> */}
+      <Image className={classNames('w-5 h-5 group-hover:hidden', query.trim() ? 'hidden' : 'inline-block')} src={sendImg} alt='' />
+      <Image className={classNames('w-5 h-5 group-hover:inline-block', query.trim() ? 'inline-block' : 'hidden')} src={sendActiveImg} alt='' />
     </div>
   )
 
