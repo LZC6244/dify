@@ -11,7 +11,7 @@ RUN cp /app/api/zs.env /app/api/.env
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-
+RUN pip install --upgrade pip
 RUN pip install debugpy
 
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
