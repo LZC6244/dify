@@ -12,6 +12,12 @@ class RerankingModelConfig(BaseModel):
     provider: str
     model: str
 
+class RerankingModelConfig2(BaseModel):
+    """
+    Reranking Model Config.
+    """
+    reranking_provider_name: Optional[str] = None
+    reranking_model_name: Optional[str] = None
 
 class MultipleRetrievalConfig(BaseModel):
     """
@@ -44,7 +50,7 @@ class RetrievalConfig(BaseModel):
     """
     search_method: str
     reranking_enable: bool
-    reranking_model: dict[str, str] = {}
+    reranking_model: RerankingModelConfig2
     top_k: int
     score_threshold_enabled: bool
     score_threshold: float

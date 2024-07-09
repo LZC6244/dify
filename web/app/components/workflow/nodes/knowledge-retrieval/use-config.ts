@@ -192,7 +192,7 @@ const useConfig = (id: string, payload: KnowledgeRetrievalNodeType) => {
           dataSetsWithDetail.forEach((item, index) => {
             item.retrieval_model_dict = dataset_retrieval_configs[index]
           });
-        }
+        } 
         setSelectedDatasets(dataSetsWithDetail)
       }
       const newInputs = produce(inputs, (draft) => {

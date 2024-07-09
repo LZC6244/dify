@@ -78,6 +78,7 @@ class KnowledgeRetrievalNode(BaseNode):
         available_datasets = []
         dataset_ids = node_data.dataset_ids
         dataset_retrieval_configs = node_data.dataset_retrieval_configs
+        print(dataset_retrieval_configs)
         dataset_retrieval_configs_map = dict(zip(dataset_ids, dataset_retrieval_configs))
 
         # Subquery: Count the number of available documents for each dataset

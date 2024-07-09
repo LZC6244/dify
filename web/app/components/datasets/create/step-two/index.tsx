@@ -429,8 +429,6 @@ const StepTwo = ({
     try {
       let res
       const params = getCreationParams()
-      console.log("params")
-      console.log(params)
       if (!params)
         return false
 
@@ -439,8 +437,6 @@ const StepTwo = ({
         res = await createFirstDocument({
           body: params as CreateDocumentReq,
         })
-        console.log("createFirstDocument res")
-        console.log(res)
         updateIndexingTypeCache && updateIndexingTypeCache(indexType as string)
         updateResultCache && updateResultCache(res)
       }
@@ -449,8 +445,6 @@ const StepTwo = ({
           datasetId,
           body: params as CreateDocumentReq,
         })
-        console.log("createDocument res")
-        console.log(res)
         updateIndexingTypeCache && updateIndexingTypeCache(indexType as string)
         updateResultCache && updateResultCache(res)
       }
@@ -543,7 +537,6 @@ const StepTwo = ({
       setAutomaticFileIndexingEstimate(null)
       !isMobile && setShowPreview()
       fetchFileIndexingEstimate()
-      console.log('789')
       setPreviewSwitched(false)
     }
     else {
@@ -557,8 +550,8 @@ const StepTwo = ({
     search_method: RETRIEVE_METHOD.semantic,
     reranking_enable: false,
     reranking_model: {
-      reranking_provider_name: rerankDefaultModel?.provider.provider,
-      reranking_model_name: rerankDefaultModel?.model,
+      reranking_provider_name: rerankDefaultModel?.provider.provider || '',
+      reranking_model_name: rerankDefaultModel?.model || '',
     },
     top_k: 3,
     score_threshold_enabled: false,
