@@ -827,6 +827,7 @@ class IndexingRunner:
                    text_docs: list[Document], doc_language: str, process_rule: dict) -> list[Document]:
         # get embedding model instance
         embedding_model_instance = None
+        print("process_rule: ", process_rule)
         if dataset.indexing_technique == 'high_quality':
             if dataset.embedding_model_provider:
                 embedding_model_instance = self.model_manager.get_model_instance(

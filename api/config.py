@@ -144,6 +144,8 @@ class Config:
         # used to display Service API Base Url to the front-end.
         self.SERVICE_API_URL = get_env('SERVICE_API_URL')
 
+        self.DEEPDOC_API_URL = get_env('DEEPDOC_API_URL')
+
         # File preview or download Url prefix.
         # used to display File preview or download Url to the front-end or as Multi-model inputs;
         # Url is signed and has expiration time.

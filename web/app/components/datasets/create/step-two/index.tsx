@@ -73,6 +73,7 @@ enum SegmentType {
 }
 enum ParserType {
   GENERAL = 'general',
+  NAIVE = 'naive',
   PAPER = 'paper',
   QA = 'qa',
   NULL = '',
@@ -532,19 +533,20 @@ const StepTwo = ({
       setIndexType(isAPIKeySet ? IndexingType.QUALIFIED : IndexingType.ECONOMICAL)
   }, [isAPIKeySet, indexingType, datasetId])
 
-  useEffect(() => {
-    if (segmentationType === SegmentType.AUTO || parserType === ParserType.QA || parserType === ParserType.GENERAL) {
-      setAutomaticFileIndexingEstimate(null)
-      !isMobile && setShowPreview()
-      fetchFileIndexingEstimate()
-      setPreviewSwitched(false)
-    }
-    else {
-      hidePreview()
-      setCustomFileIndexingEstimate(null)
-      setPreviewSwitched(false)
-    }
-  }, [segmentationType, indexType, parserType])
+  // TODO
+  // useEffect(() => {
+  //   if (segmentationType === SegmentType.CUSTOM || parserType === ParserType.QA) {
+  //     setAutomaticFileIndexingEstimate(null)
+  //     !isMobile && setShowPreview()
+  //     fetchFileIndexingEstimate()
+  //     setPreviewSwitched(false)
+  //   }
+  //   else {
+  //     hidePreview()
+  //     setCustomFileIndexingEstimate(null)
+  //     setPreviewSwitched(false)
+  //   }
+  // }, [segmentationType, indexType, parserType])
 
   const [retrievalConfig, setRetrievalConfig] = useState(currentDataset?.retrieval_model_dict || {
     search_method: RETRIEVE_METHOD.semantic,
@@ -593,6 +595,22 @@ const StepTwo = ({
               <div className={s.typeHeader}>
                 <div className={s.title}>{t('datasetCreation.stepTwo.general')}</div>
                 <div className={s.tip}>{t('datasetCreation.stepTwo.generalDescription')}</div>
+              </div>
+            </div>
+
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                parserType === ParserType.NAIVE && s.active,
+              )}
+              onClick={() => setParserType(ParserType.NAIVE)}
+            >
+              <span className={cn(s.typeIcon, s.customize)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.naive')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.naiveDescription')}</div>
               </div>
             </div>
 
