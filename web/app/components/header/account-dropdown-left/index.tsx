@@ -82,13 +82,13 @@ export default function AppSelector({ isMobile }: IAppSelecotr) {
                     shadow-lg
                   "
                 >
-                  {/* <div className="px-1 py-1">
+                  <div className="px-1 py-1">
                     <Menu.Item>
                       <div className={itemClassName} onClick={() => setShowAccountSettingModal({ payload: 'account' })}>
                         <div>{t('common.userProfile.settings')}</div>
                       </div>
                     </Menu.Item>
-                  </div> */}
+                  </div>
                   <Menu.Item>
                     <div className='p-1' onClick={() => handleLogout()}>
                       <div
