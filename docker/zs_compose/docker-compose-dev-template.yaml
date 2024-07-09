@@ -4,7 +4,7 @@ services:
   # API service
   api:
     container_name: dify-dev-api-0_6_11
-    image: 111.19.168.169:8389/zskj/backend/official-dify-api:{VERSION}
+    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
       # Startup mode, 'api' starts the API server.
@@ -115,6 +115,7 @@ services:
       # The Qdrant server gRPC mode PORT.
       QDRANT_GRPC_PORT: 6334
       # Milvus configuration Only available when VECTOR_STORE is `milvus`.
+      MILVUS_DATABASE: dify-dev
       # The milvus host.
       MILVUS_HOST: 172.26.0.1
       # The milvus host.
@@ -195,7 +196,8 @@ services:
     volumes:
       # Mount the storage directory to the container, for storing user files.
       - ../volumes/app/storage:/app/api/storage
-      - ../../api:/app/api
+      # - ../../api:/app/api
+      # - ../../api/zs.env:/app/api/.env
     # uncomment to expose dify-api port to host
     # ports:
     #   - "5022:5001"
@@ -207,7 +209,7 @@ services:
   # The Celery worker for processing the queue.
   worker:
     container_name: dify-dev-worker-0_6_11
-    image: 111.19.168.169:8389/zskj/backend/official-dify-api:{VERSION}
+    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
       # celery 任务队列名称，请在['dify-dev', 'dify-prd'] 中选择一个
@@ -276,6 +278,7 @@ services:
       # The Qdrant server gRPC mode PORT.
       QDRANT_GRPC_PORT: 6334
       # Milvus configuration Only available when VECTOR_STORE is `milvus`.
+      MILVUS_DATABASE: dify_dev
       # The milvus host.
       MILVUS_HOST: 172.26.0.1
       # The milvus host.
@@ -345,7 +348,8 @@ services:
     volumes:
       # Mount the storage directory to the container, for storing user files.
       - ../volumes/app/storage:/app/api/storage
-      - ../../api:/app/api
+      # - ../../api:/app/api
+      # - ../../api/zs.env:/app/api/.env
     networks:
       - ssrf_proxy_network-0_6_11
       - default

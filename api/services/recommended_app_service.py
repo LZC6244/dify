@@ -26,6 +26,7 @@ class RecommendedAppService:
         :return:
         """
         mode = current_app.config.get('HOSTED_FETCH_APP_TEMPLATES_MODE', 'remote')
+        logger.info(f'fetch recommended apps mode: {mode}')
         if mode == 'remote':
             try:
                 result = cls._fetch_recommended_apps_from_dify_official(language)
