@@ -357,7 +357,7 @@ services:
   # Frontend web application.
   web:
     container_name: dify-pre-web-0_6_11
-    image: 111.19.168.169:8389/zskj/zs-dify-web:{VERSION}
+    image: 111.19.168.169:8389/zskj/frontend/zs-dify-web:{VERSION}
     # image: langgenius/dify-web:0.6.11
     restart: always
     environment:
