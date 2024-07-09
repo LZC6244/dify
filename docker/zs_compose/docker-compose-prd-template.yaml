@@ -195,7 +195,8 @@ services:
     volumes:
       # Mount the storage directory to the container, for storing user files.
       - ../volumes/app/storage:/app/api/storage
-      - ../../api:/app/api
+      # - ../../api:/app/api
+      # - ../../api/zs.env:/app/api/.env
     # uncomment to expose dify-api port to host
     # ports:
     #   - "5022:5001"
@@ -345,7 +346,8 @@ services:
     volumes:
       # Mount the storage directory to the container, for storing user files.
       - ../volumes/app/storage:/app/api/storage
-      - ../../api:/app/api
+      # - ../../api:/app/api
+      # - ../../api/zs.env:/app/api/.env
     networks:
       - ssrf_proxy_network-0_6_11
       - default
