@@ -45,6 +45,7 @@ FROM 111.19.168.169:8389/zskj/backend/official-dify-api:0.6.11
 
 # COPY --from=packages /pkg /usr/local
 COPY . /app/api/
+RUN cp /app/api/.env.example /app/api/.env
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
