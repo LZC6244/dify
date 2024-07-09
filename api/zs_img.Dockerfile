@@ -12,6 +12,6 @@ COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 
-# RUN pip install debugpy
+RUN pip install debugpy
 
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
