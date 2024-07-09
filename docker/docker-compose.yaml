@@ -1,9 +1,9 @@
-name: dify-0_6_11
+name: dify-0_6_11-dev
 version: '3'
 services:
   # API service
   api:
-    image: 111.19.168.169:8389/zskj/official-dify-api:0.6.11
+    image: 111.19.168.169:8389/zskj/backend/official-dify-api:0.6.11
     restart: always
     environment:
       # Startup mode, 'api' starts the API server.
@@ -13,7 +13,7 @@ services:
       # enable DEBUG mode to output more logs
       # DEBUG : true
       # A secret key that is used for securely signing the session cookie and encrypting sensitive information on the database. You can generate a strong key using `openssl rand -base64 42`.
-      SECRET_KEY: sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U
+      SECRET_KEY: 1vk81UK+Mdq86J9xd4VAx6V1nXSOKh1fX/jUL+jCgiJeTZXN5BolPQ4p
       # The base URL of console application web frontend, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
@@ -98,7 +98,7 @@ services:
       # if you want to use Application Default Credentials, you can leave GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64 empty.
       GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64: 'your-google-service-account-json-base64-string'
       # The type of vector store to use. Supported values are `weaviate`, `qdrant`, `milvus`, `relyt`.
-      VECTOR_STORE: weaviate
+      VECTOR_STORE: milvus
       # The Weaviate endpoint URL. Only available when VECTOR_STORE is `weaviate`.
       WEAVIATE_ENDPOINT: http://weaviate:8080
       # The Weaviate API key.
@@ -115,13 +115,13 @@ services:
       QDRANT_GRPC_PORT: 6334
       # Milvus configuration Only available when VECTOR_STORE is `milvus`.
       # The milvus host.
-      MILVUS_HOST: 127.0.0.1
+      MILVUS_HOST: 172.26.0.1
       # The milvus host.
-      MILVUS_PORT: 19530
+      MILVUS_PORT: 19566
       # The milvus username.
       MILVUS_USER: root
       # The milvus password.
-      MILVUS_PASSWORD: Milvus
+      MILVUS_PASSWORD: wogtew-zehruT-1qosmo
       # The milvus tls switch.
       MILVUS_SECURE: 'false'
       # relyt configurations
@@ -205,7 +205,7 @@ services:
   # worker service
   # The Celery worker for processing the queue.
   worker:
-    image: 111.19.168.169:8389/zskj/official-dify-api:0.6.11
+    image: 111.19.168.169:8389/zskj/backend/official-dify-api:0.6.11
     restart: always
     environment:
       # celery 任务队列名称，请在['dify-dev', 'dify-prd'] 中选择一个
@@ -221,7 +221,7 @@ services:
       LOG_LEVEL: INFO
       # A secret key that is used for securely signing the session cookie and encrypting sensitive information on the database. You can generate a strong key using `openssl rand -base64 42`.
       # same as the API service
-      SECRET_KEY: sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U
+      SECRET_KEY: 1vk81UK+Mdq86J9xd4VAx6V1nXSOKh1fX/jUL+jCgiJeTZXN5BolPQ4p
       # The configurations of postgres database connection.
       # It is consistent with the configuration in the 'db' service below.
       DB_USERNAME: postgres
@@ -258,7 +258,7 @@ services:
       # if you want to use Application Default Credentials, you can leave GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64 empty.
       GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64: 'your-google-service-account-json-base64-string'
       # The type of vector store to use. Supported values are `weaviate`, `qdrant`, `milvus`, `relyt`, `pgvector`.
-      VECTOR_STORE: weaviate
+      VECTOR_STORE: milvus
       # The Weaviate endpoint URL. Only available when VECTOR_STORE is `weaviate`.
       WEAVIATE_ENDPOINT: http://weaviate:8080
       # The Weaviate API key.
@@ -275,13 +275,13 @@ services:
       QDRANT_GRPC_PORT: 6334
       # Milvus configuration Only available when VECTOR_STORE is `milvus`.
       # The milvus host.
-      MILVUS_HOST: 127.0.0.1
+      MILVUS_HOST: 172.26.0.1
       # The milvus host.
-      MILVUS_PORT: 19530
+      MILVUS_PORT: 19566
       # The milvus username.
       MILVUS_USER: root
       # The milvus password.
-      MILVUS_PASSWORD: Milvus
+      MILVUS_PASSWORD: wogtew-zehruT-1qosmo
       # The milvus tls switch.
       MILVUS_SECURE: 'false'
       # Mail configuration, support: resend
@@ -407,30 +407,30 @@ services:
   #   # ports:
   #   #   - "6379:6379"
 
-  # The Weaviate vector store.
-  weaviate:
-    # container_name: dify-official-weaviate
-    image: semitechnologies/weaviate:1.19.0
-    restart: always
-    volumes:
-      # Mount the Weaviate data directory to the container.
-      - ./volumes/weaviate:/var/lib/weaviate
-    environment:
-      # The Weaviate configurations
-      # You can refer to the [Weaviate](https://weaviate.io/developers/weaviate/config-refs/env-vars) documentation for more information.
-      QUERY_DEFAULTS_LIMIT: 25
-      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'false'
-      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
-      DEFAULT_VECTORIZER_MODULE: 'none'
-      CLUSTER_HOSTNAME: 'node1'
-      AUTHENTICATION_APIKEY_ENABLED: 'true'
-      AUTHENTICATION_APIKEY_ALLOWED_KEYS: 'WVF5YThaHlkYwhGUSmCRgsX3tD5ngdN8pkih'
-      AUTHENTICATION_APIKEY_USERS: 'hello@dify.ai'
-      AUTHORIZATION_ADMINLIST_ENABLED: 'true'
-      AUTHORIZATION_ADMINLIST_USERS: 'hello@dify.ai'
-    # uncomment to expose weaviate port to host
-    # ports:
-    #  - "8080:8080"
+  # # The Weaviate vector store.
+  # weaviate:
+  #   # container_name: dify-official-weaviate
+  #   image: semitechnologies/weaviate:1.19.0
+  #   restart: always
+  #   volumes:
+  #     # Mount the Weaviate data directory to the container.
+  #     - ./volumes/weaviate:/var/lib/weaviate
+  #   environment:
+  #     # The Weaviate configurations
+  #     # You can refer to the [Weaviate](https://weaviate.io/developers/weaviate/config-refs/env-vars) documentation for more information.
+  #     QUERY_DEFAULTS_LIMIT: 25
+  #     AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'false'
+  #     PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+  #     DEFAULT_VECTORIZER_MODULE: 'none'
+  #     CLUSTER_HOSTNAME: 'node1'
+  #     AUTHENTICATION_APIKEY_ENABLED: 'true'
+  #     AUTHENTICATION_APIKEY_ALLOWED_KEYS: 'WVF5YThaHlkYwhGUSmCRgsX3tD5ngdN8pkih'
+  #     AUTHENTICATION_APIKEY_USERS: 'hello@dify.ai'
+  #     AUTHORIZATION_ADMINLIST_ENABLED: 'true'
+  #     AUTHORIZATION_ADMINLIST_USERS: 'hello@dify.ai'
+  #   # uncomment to expose weaviate port to host
+  #   # ports:
+  #   #  - "8080:8080"
 
   # The DifySandbox
   sandbox:
@@ -457,7 +457,8 @@ services:
   # https://docs.dify.ai/getting-started/install-self-hosted/install-faq#id-16.-why-is-ssrf_proxy-needed
   ssrf_proxy:
     # container_name: dify-official-ssrf_proxy
-    image: ubuntu/squid:latest
+    # image: ubuntu/squid:latest
+    image: 111.19.168.169:8389/zskj/dify/ubuntu/squid:v1.0
     restart: always
     volumes:
       # pls clearly modify the squid.conf file to fit your network environment.
@@ -510,7 +511,8 @@ services:
   # used for reverse proxying the API service and Web service.
   nginx:
     # container_name: dify-official-nginx
-    image: nginx:latest
+    # image: nginx:latest
+    image: 111.19.168.169:8389/zskj/dify/nginx:v1.0
     restart: always
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
@@ -524,10 +526,15 @@ services:
       - "5182:80"
       #- "443:443"
 networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.70.2.0/28
   # create a network between sandbox, api and ssrf_proxy, and can not access outside.
   ssrf_proxy_network-0_6_11:
     ipam:
       config:
-        - subnet: 172.69.1.0/24
+        - subnet: 172.70.2.16/28
     driver: bridge
     internal: true
+    name: ssrf_proxy_network-dev-0_6_11

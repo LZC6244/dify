@@ -166,7 +166,7 @@ const Apps = ({
         <nav
           className={cn(
             s.appList,
-            'grid content-start shrink-0',
+            'grid content-start shrink-0 py-4',
             pageType === PageType.EXPLORE ? 'gap-4 px-6 sm:px-12' : 'gap-3 px-8  sm:!grid-cols-2 md:!grid-cols-3 lg:!grid-cols-4',
           )}>
           {filteredList.map(app => (

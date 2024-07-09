@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>template</title>
+    <g id="V1.2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g id="弹窗" transform="translate(-46.000000, -202.000000)" stroke="#484667" stroke-width="1.5">
+            <g id="编组-11" transform="translate(32.000000, 156.000000)">
+                <g id="编组-9" transform="translate(14.000000, 46.000000)">
+                    <g id="页面模版_page-template-(1)" transform="translate(0.941176, 0.941176)">
+                        <polygon id="路径" points="6.70588235 0 0 0 0 7.76470588 6.70588235 7.76470588"></polygon>
+                        <polygon id="路径" points="14.1176471 10.5882353 0 10.5882353 0 13.7647059 14.1176471 13.7647059"></polygon>
+                        <polygon id="路径" points="14.1176471 0 9.52941176 0 9.52941176 2.82352941 14.1176471 2.82352941"></polygon>
+                        <polygon id="路径" points="14.1176471 4.94117647 9.52941176 4.94117647 9.52941176 7.76470588 14.1176471 7.76470588"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

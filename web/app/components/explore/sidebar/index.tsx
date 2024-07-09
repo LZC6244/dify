@@ -4,8 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useContext } from 'use-context-selector'
 import { useSelectedLayoutSegments } from 'next/navigation'
+import classNames from 'classnames'
 import Toast from '../../base/toast'
 import Item from './app-nav-item'
+import s from './style.module.css'
 import { fetchInstalledAppList as doFetchInstalledAppList, uninstallApp, updatePinStatus } from '@/service/explore'
 import ExploreContext from '@/context/explore-context'
 import Confirm from '@/app/components/base/confirm'
@@ -88,7 +90,7 @@ const SideBar: FC<IExploreSideBarProps> = ({
   }, [controlUpdateInstalledApps])
 
   return (
-    <div className='w-fit sm:w-[216px] shrink-0 pt-6 px-4 border-gray-200 cursor-pointer'>
+    <div className='w-fit sm:w-[290px] shrink-0 pt-[40px] px-[30px] border-gray-200 cursor-pointer bg-white rounded-tl-[20px]'>
       {/* <div>
         <Link
           href='/explore/apps'
@@ -102,10 +104,10 @@ const SideBar: FC<IExploreSideBarProps> = ({
       {installedApps.length > 0 && (
         // <div className='mt-10'>
         <div className='mt-0'>
-          <p className='pl-2 mobile:px-0 text-xs text-gray-500 break-all font-medium uppercase'>{t('explore.sidebar.workspace')}</p>
-          <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'
+          <p className='pl-2 mobile:px-0 text-[18px] text-[#000] break-all font-medium uppercase'>{t('explore.sidebar.workspace')}</p>
+          <div className={classNames('mt-3 space-y-1 overflow-y-auto overflow-x-hidden', s.hideScroll)}
             style={{
-              height: 'calc(100vh - 250px)',
+              height: 'calc(100vh - 100px)',
             }}
           >
             {installedApps.map(({ id, is_pinned, uninstallable, app: { name, icon, icon_background } }) => {
