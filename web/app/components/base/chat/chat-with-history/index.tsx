@@ -37,6 +37,7 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
     chatShouldReloadKey,
     isMobile,
     handleNewConversation,
+    // handleStartChat,
     currentConversationId,
   } = useChatWithHistoryContext()
 
@@ -58,8 +59,10 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
   const onHandleNewConversation = () => {
     if (currentConversationId)
       setShow(true)
+
     else
-      handleNewConversation()
+      handleNewConversation(false)
+      //   handleStartChat()
   }
 
   if (appInfoLoading) {
@@ -125,8 +128,9 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
           setShow(false)
         }}
         onSuccess={() => {
-          handleNewConversation()
           setShow(false)
+          handleNewConversation(false)
+          // handleStartChat()
         }} />
     </div>
   )

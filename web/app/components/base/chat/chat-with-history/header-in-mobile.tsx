@@ -36,7 +36,7 @@ const HeaderInMobile = () => {
         </div>
         <div
           className='shrink-0 flex items-center justify-center w-8 h-8 rounded-lg'
-          onClick={handleNewConversation}
+          onClick={() => handleNewConversation(true)}
         >
           <Edit05 className='w-4 h-4 text-gray-700' />
         </div>
