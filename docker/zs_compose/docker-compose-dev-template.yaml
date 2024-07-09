@@ -49,7 +49,7 @@ services:
       DB_PASSWORD: vuqvu7-kikjes-hehtYq
       DB_HOST: 172.26.0.1
       DB_PORT: 6632
-      DB_DATABASE: dify
+      DB_DATABASE: dify_dev
       # The configurations of redis connection.
       # It is consistent with the configuration in the 'redis' service below.
       REDIS_HOST: 172.26.0.1
@@ -212,9 +212,9 @@ services:
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
-      # celery 任务队列名称，请在['dify-dev', 'dify-prd'] 中选择一个
+      # celery 任务队列名称，请在['dify_dev','dify_pre', 'dify_prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
-      CELERY_TASK_DEFAULT_QUEUE: 'dify-demo'
+      CELERY_TASK_DEFAULT_QUEUE: 'dify_dev'
       CONSOLE_WEB_URL: 'https://agent-x-dev.maas.com.cn/'
       # Startup mode, 'worker' starts the Celery worker for processing the queue.
       MODE: worker
@@ -232,7 +232,7 @@ services:
       DB_PASSWORD: vuqvu7-kikjes-hehtYq
       DB_HOST: 172.26.0.1
       DB_PORT: 6632
-      DB_DATABASE: dify
+      DB_DATABASE: dify_dev
       # The configurations of redis cache connection.
       REDIS_HOST: 172.26.0.1
       REDIS_PORT: 6379
