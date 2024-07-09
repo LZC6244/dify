@@ -14,18 +14,18 @@ services:
       # enable DEBUG mode to output more logs
       # DEBUG : true
       # A secret key that is used for securely signing the session cookie and encrypting sensitive information on the database. You can generate a strong key using `openssl rand -base64 42`.
-      SECRET_KEY: sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U
+      SECRET_KEY: 1vk81UK+Mdq86J9xd4VAx6V1nXSOKh1fX/jUL+jCgiJeTZXN5BolPQ4p
       # The base URL of console application web frontend, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_WEB_URL: 'http://61.241.103.72:5181'
+      CONSOLE_WEB_URL: 'https://agent-x-dev.maas.com.cn/'
       # Password for admin user initialization.
       # If left unset, admin user will not be prompted for a password when creating the initial admin account.
       INIT_PASSWORD: ''
       # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_API_URL: 'http://61.241.103.72:5181'
+      CONSOLE_API_URL: 'https://agent-x-dev.maas.com.cn/'
       # The URL prefix for Service API endpoints, refers to the base URL of the current API service if api domain is
       # different from console domain.
       # example: http://api.dify.ai
@@ -33,7 +33,7 @@ services:
       # The URL prefix for Web APP frontend, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app
-      APP_WEB_URL: 'http://61.241.103.72:5181'
+      APP_WEB_URL: 'https://agent-x-dev.maas.com.cn/'
       # File preview or download Url prefix.
       # used to display File preview or download Url to the front-end or as Multi-model inputs;
       # Url is signed and has expiration time.
@@ -58,7 +58,7 @@ services:
       REDIS_PASSWORD: MhxzKhl123
       REDIS_USE_SSL: 'false'
       # use redis db 0 for redis cache
-      REDIS_DB: 0
+      REDIS_DB: 2
       # The configurations of celery broker.
       # Use redis as the broker, and redis db 1 for celery broker.
       CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/1
@@ -213,7 +213,7 @@ services:
       # celery 任务队列名称，请在['dify-dev', 'dify-prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
       CELERY_TASK_DEFAULT_QUEUE: 'dify-demo'
-      CONSOLE_WEB_URL: 'http://61.241.103.72:5181'
+      CONSOLE_WEB_URL: 'https://agent-x-dev.maas.com.cn/'
       # Startup mode, 'worker' starts the Celery worker for processing the queue.
       MODE: worker
 
@@ -223,7 +223,7 @@ services:
       LOG_LEVEL: INFO
       # A secret key that is used for securely signing the session cookie and encrypting sensitive information on the database. You can generate a strong key using `openssl rand -base64 42`.
       # same as the API service
-      SECRET_KEY: sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U
+      SECRET_KEY: 1vk81UK+Mdq86J9xd4VAx6V1nXSOKh1fX/jUL+jCgiJeTZXN5BolPQ4p
       # The configurations of postgres database connection.
       # It is consistent with the configuration in the 'db' service below.
       DB_USERNAME: postgres
@@ -236,7 +236,7 @@ services:
       REDIS_PORT: 6379
       REDIS_USERNAME: ''
       REDIS_PASSWORD: MhxzKhl123
-      REDIS_DB: 0
+      REDIS_DB: 2
       REDIS_USE_SSL: 'false'
       # The configurations of celery broker.
       CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/1
@@ -360,7 +360,7 @@ services:
       # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_API_URL: 'http://61.241.103.72:5181'
+      CONSOLE_API_URL: 'https://agent-x-dev.maas.com.cn/'
       # The URL for Web APP api server, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app

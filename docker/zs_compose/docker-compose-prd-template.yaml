@@ -14,7 +14,7 @@ services:
       # enable DEBUG mode to output more logs
       # DEBUG : true
       # A secret key that is used for securely signing the session cookie and encrypting sensitive information on the database. You can generate a strong key using `openssl rand -base64 42`.
-      SECRET_KEY: sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U
+      SECRET_KEY: 1vk81UK+Mdq86J9xd4VAx6V1nXSOKh1fX/jUL+jCgiJeTZXN5BolPQ4p
       # The base URL of console application web frontend, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
@@ -58,7 +58,7 @@ services:
       REDIS_PASSWORD: MhxzKhl123
       REDIS_USE_SSL: 'false'
       # use redis db 0 for redis cache
-      REDIS_DB: 0
+      REDIS_DB: 4
       # The configurations of celery broker.
       # Use redis as the broker, and redis db 1 for celery broker.
       CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/1
@@ -223,7 +223,7 @@ services:
       LOG_LEVEL: INFO
       # A secret key that is used for securely signing the session cookie and encrypting sensitive information on the database. You can generate a strong key using `openssl rand -base64 42`.
       # same as the API service
-      SECRET_KEY: sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U
+      SECRET_KEY: 1vk81UK+Mdq86J9xd4VAx6V1nXSOKh1fX/jUL+jCgiJeTZXN5BolPQ4p
       # The configurations of postgres database connection.
       # It is consistent with the configuration in the 'db' service below.
       DB_USERNAME: postgres
@@ -236,7 +236,7 @@ services:
       REDIS_PORT: 6379
       REDIS_USERNAME: ''
       REDIS_PASSWORD: MhxzKhl123
-      REDIS_DB: 0
+      REDIS_DB: 4
       REDIS_USE_SSL: 'false'
       # The configurations of celery broker.
       CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/1
