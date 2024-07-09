@@ -36,7 +36,7 @@ FROM 111.19.168.169:8389/zskj/backend/official-dify-api:0.6.11
 # # set timezone
 # ENV TZ UTC
 
-# WORKDIR /app/api
+WORKDIR /app/api
 
 # RUN apt-get update \
 #     && apt-get install -y --no-install-recommends curl wget vim nodejs ffmpeg libgmp-dev libmpfr-dev libmpc-dev \
@@ -45,7 +45,7 @@ FROM 111.19.168.169:8389/zskj/backend/official-dify-api:0.6.11
 
 # COPY --from=packages /pkg /usr/local
 COPY . /app/api/
-RUN cp /app/api/.env.example /app/api/.env
+RUN cp /app/api/zs.env /app/api/.env
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
