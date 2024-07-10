@@ -23,18 +23,16 @@ export type IProps = {
 
 const CreateApp: FC<IProps> = ({ className }) => {
   const [show, setShow] = useState(false)
-  const createRef = useRef(null)
+  const createRef = useRef<HTMLDivElement>(null)
   const { onPlanInfoChanged } = useProviderContext()
 
   const [showNewAppTemplateDialog, setShowNewAppTemplateDialog] = useState(false)
   const [showNewAppModal, setShowNewAppModal] = useState(false)
   const [showCreateFromDSLModal, setShowCreateFromDSLModal] = useState(false)
 
-  const handleClickOutside = () => {
-    // if (createRef.current&&!createRef.current.contains(e.target)) {
-    //   setShow(false);
-    // }
-
+  const handleClickOutside = (e: Event) => {
+    if (createRef.current && !createRef.current.contains(e.target as Node))
+      setShow(false)
   }
 
   useEffect(() => {
