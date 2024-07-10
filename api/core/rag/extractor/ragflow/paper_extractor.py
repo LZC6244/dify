@@ -1,6 +1,5 @@
 """Abstract interface for document loader implementations."""
-import requests
-import base64
+import requests, json
 from collections.abc import Iterator
 from typing import Optional
 
@@ -71,14 +70,16 @@ class PaperExtractor(BaseExtractor):
         }
 
         with blob.as_bytes_io() as binary_data:
-            # 读取文件并编码为Base64字符串
-            # with open(file_path, 'rb') as f:
-            binary_data = binary_data.read()
-            file_data_base64 = base64.b64encode(binary_data).decode('utf-8')
-            config['fileData'] = file_data_base64
+            # 将配置数据转换为JSON字符串
+            config_json = json.dumps(config)
 
+            # 构造请求数据
+            form_data = {
+                'config': (None, config_json),  # None作为文件名表示这是一个非文件字段
+                'file': (self._file_path, binary_data)
+            }
             # 发送POST请求
-            response = requests.post(self.url, json=config)
+            response = requests.post(self.url, files=form_data)
 
             # 检查响应状态码
             if response.status_code == 200:
