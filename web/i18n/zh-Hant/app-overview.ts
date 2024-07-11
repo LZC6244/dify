@@ -80,7 +80,7 @@ const translation = {
           name: 'Fork 客戶端程式碼修改後部署到 Vercel（推薦）',
           step1: 'Fork 客戶端程式碼並修改',
           step1Tip: '點選此處 Fork 原始碼到你的 GitHub 中，然後修改程式碼',
-          step1Operation: 'Dify-WebClient',
+          step1Operation: 'Agent-WebClient',
           step2: '部署到 Vercel 中',
           step2Tip: '點選此處將倉庫匯入到 Vercel 中部署',
           step2Operation: '匯入倉庫',
