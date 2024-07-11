@@ -62,7 +62,7 @@ const translation = {
         explanation: '選擇一種方式將聊天應用嵌入到你的網站中',
         iframe: '將以下 iframe 嵌入到你的網站中的目標位置',
         scripts: '將以下程式碼嵌入到你的網站中',
-        chromePlugin: '安裝 Dify Chrome 瀏覽器擴充套件',
+        chromePlugin: '安裝 Agent Chrome 瀏覽器擴充套件',
         copied: '已複製',
         copy: '複製',
       },
