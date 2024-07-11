@@ -61,7 +61,7 @@ services:
       REDIS_DB: 2
       # The configurations of celery broker.
       # Use redis as the broker, and redis db 1 for celery broker.
-      CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/1
+      CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/12
       # Specifies the allowed origins for cross-origin requests to the Web API, e.g. https://dify.app or * for all origins.
       WEB_API_CORS_ALLOW_ORIGINS: '*'
       # Specifies the allowed origins for cross-origin requests to the console API, e.g. https://cloud.dify.ai or * for all origins.
@@ -241,7 +241,7 @@ services:
       REDIS_DB: 2
       REDIS_USE_SSL: 'false'
       # The configurations of celery broker.
-      CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/1
+      CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/12
       # The type of storage to use for storing user files. Supported values are `local` and `s3` and `azure-blob` and `google-storage`, Default: `local`
       STORAGE_TYPE: local
       STORAGE_LOCAL_PATH: storage
