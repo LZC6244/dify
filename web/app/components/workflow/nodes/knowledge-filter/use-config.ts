@@ -104,10 +104,6 @@ const useConfig = (id: string, payload: KnowledgeFilterNodeType) => {
     })
   }, [runInputData, setRunInputData])
 
-  console.log("runInputData")
-  console.log(runInputData)
-  console.log('inputs:')
-  console.log(inputs)
   const varInputs = runInputData.query //getInputVars([inputs.instruction])
   const inputVarValues = (() => {
     const vars: Record<string, any> = {

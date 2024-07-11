@@ -78,7 +78,10 @@ class KnowledgeRetrievalNode(BaseNode):
         available_datasets = []
         dataset_ids = node_data.dataset_ids
         dataset_retrieval_configs = node_data.dataset_retrieval_configs
-        print(dataset_retrieval_configs)
+        for index, item in enumerate(dataset_retrieval_configs):
+            item.reranking_model = item.reranking_model.__dict__
+            dataset_retrieval_configs[index] = item
+  
         dataset_retrieval_configs_map = dict(zip(dataset_ids, dataset_retrieval_configs))
 
         # Subquery: Count the number of available documents for each dataset

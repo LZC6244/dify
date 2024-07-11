@@ -237,8 +237,7 @@ class DatasetRetrieval:
 
                 if dataset_retrieval_configs_map:
                     retrieval_model_config = dataset_retrieval_configs_map[dataset.id].__dict__
-                print("retrieval_model_config")
-                print(retrieval_model_config)
+          
                 # get top k
                 top_k = retrieval_model_config['top_k']
                 # get retrieval method
