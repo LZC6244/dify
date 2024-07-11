@@ -2,8 +2,11 @@ import React from 'react'
 import classNames from 'classnames'
 import Header from '../signin/_header'
 import style from '../signin/page.module.css'
-import InstallForm from './installForm'
 
+/**
+ * 隐私政策
+ * @returns
+ */
 const Install = () => {
   return (
     <div className={classNames(
@@ -20,9 +23,8 @@ const Install = () => {
         )
       }>
         <Header />
-        <InstallForm />
         <div className='px-8 py-6 text-sm font-normal text-gray-500'>
-          © {new Date().getFullYear()} Zhuoshi Future(Beijing)Technology Co., Inc. All rights reserved.
+          © {new Date().getFullYear()} Zhuoshi Future(Beijing)Technology Co., All rights reserved.
         </div>
       </div>
     </div>
