@@ -30,7 +30,7 @@ const Sidebar = () => {
       <div className='flex flex-col items-center flex-1 px-[9px]'>
         <ExploreNavLeft className={navClassName} />
         <ExploreChatNavLeft className={navClassName} />
-        <div className='h-[1px] w-full bg-[#D9DFF6] mt-6 mb-[38px]'></div>
+        <div className='h-[1px] w-full bg-[#D9DFF6] my-6'></div>
         <AppNavLeft className={navClassName} />
         <DatasetNavLeft className={navClassName} />
         <ToolsNavLeft className={navClassName} />
