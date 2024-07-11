@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useContext } from 'use-context-selector'
 import { useBoolean } from 'ahooks'
@@ -102,6 +102,8 @@ const StepTwo = ({
   onSave,
   onCancel,
 }: StepTwoProps) => {
+  console.log('files', files)
+
   const { t } = useTranslation()
   const { locale } = useContext(I18n)
   const media = useBreakpoints()
@@ -283,7 +285,7 @@ const StepTwo = ({
         doc_form: docForm,
         doc_language: docLanguage,
         dataset_id: datasetId as string,
-        parser_type: parserType
+        parser_type: parserType,
       }
     }
     if (dataSourceType === DataSourceType.NOTION) {
@@ -297,7 +299,7 @@ const StepTwo = ({
         doc_form: docForm,
         doc_language: docLanguage,
         dataset_id: datasetId as string,
-        parser_type: parserType
+        parser_type: parserType,
       }
     }
     if (dataSourceType === DataSourceType.WEB) {
@@ -311,7 +313,7 @@ const StepTwo = ({
         doc_form: docForm,
         doc_language: docLanguage,
         dataset_id: datasetId as string,
-        parser_type: parserType
+        parser_type: parserType,
       }
     }
   }
@@ -560,6 +562,21 @@ const StepTwo = ({
     score_threshold: 0.5,
   } as RetrievalConfig)
 
+  // 是否有PDF文件
+  const isPDF = useMemo(() => {
+    if (files && files.find(v => v.extension === 'pdf'))
+      return true
+
+    return false
+  }, [files])
+  // 是否有PDF文件
+  const isCSV = useMemo(() => {
+    if (files && files.find(v => v.extension === 'csv'))
+      return true
+
+    return false
+  }, [files])
+
   return (
     <div className='flex w-full h-full'>
       <div ref={scrollRef} className='relative h-full w-full overflow-y-scroll'>
@@ -602,9 +619,13 @@ const StepTwo = ({
               className={cn(
                 s.radioItem,
                 s.segmentationItem,
+                !isPDF && s.radioDisabled,
                 parserType === ParserType.NAIVE && s.active,
               )}
-              onClick={() => setParserType(ParserType.NAIVE)}
+              onClick={() => {
+                if (isPDF)
+                  setParserType(ParserType.NAIVE)
+              }}
             >
               <span className={cn(s.typeIcon, s.customize)} />
               <span className={cn(s.radio)} />
@@ -618,9 +639,13 @@ const StepTwo = ({
               className={cn(
                 s.radioItem,
                 s.segmentationItem,
+                !isPDF && s.radioDisabled,
                 parserType === ParserType.PAPER && s.active,
               )}
-              onClick={() => setParserType(ParserType.PAPER)}
+              onClick={() => {
+                if (isPDF)
+                  setParserType(ParserType.PAPER)
+              }}
             >
               <span className={cn(s.typeIcon, s.customize)} />
               <span className={cn(s.radio)} />
@@ -634,9 +659,13 @@ const StepTwo = ({
               className={cn(
                 s.radioItem,
                 s.segmentationItem,
+                !isCSV && s.radioDisabled,
                 parserType === ParserType.QA && s.active,
               )}
-              onClick={() => setParserType(ParserType.QA)}
+              onClick={() => {
+                if (isCSV)
+                  setParserType(ParserType.QA)
+              }}
             >
               <span className={cn(s.typeIcon, s.customize)} />
               <span className={cn(s.radio)} />
@@ -646,9 +675,15 @@ const StepTwo = ({
               </div>
               {parserType === ParserType.QA && (
                 <div className={s.typeFormBody}>
-                  <div className={s.formRow}>
-                    <div className='w-full'>
-                      <div className={s.label}>{t('datasetCreation.stepTwo.qaEmbedding')}</div>
+                  <div className="py-4">
+                    <div className='w-full flex flex-row items-center justify-between'>
+                      <div className="text-[#344054] text-[16px]">{t('datasetCreation.stepTwo.qaEmbedding')}</div>
+                      <Switch
+                        defaultValue={false}
+                        size='md'
+                        onChange={(enabled) => {
+                          setEmbeddingQOnly(enabled)
+                        }} />
                     </div>
                   </div>
                 </div>
