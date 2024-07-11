@@ -3,8 +3,7 @@ import type { FC } from 'react'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { Topic } from '../types'
-import TextEditor from '../../_base/components/editor/text-editor'
-import { Trash03 } from '@/app/components/base/icons/src/vender/line/general'
+import NumberEditor from '../../_base/components/editor/number-editor'
 
 const i18nPrefix = 'workflow.nodes.knowledgeFilter'
 
@@ -30,7 +29,7 @@ const ClassItem: FC<Props> = ({
   }, [onChange, payload])
 
   return (
-    <TextEditor
+    <NumberEditor
       isInNode
       title={<div>
         <div className='w-[200px]'>
