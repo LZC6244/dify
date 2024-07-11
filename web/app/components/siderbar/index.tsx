@@ -11,6 +11,7 @@ import ToolsNavLeft from '../header/tools-nav-left'
 import AccountDropdown from '../header/account-dropdown-left'
 import logo from './logo.png'
 // import LogoSite from '@/app/components/base/logo/logo-site'
+import CreateApp from './create-app'
 import { WorkspaceProvider } from '@/context/workspace-context'
 const navClassName = `
   flex items-center relative mr-0 h-[48px] rounded-lg
@@ -25,11 +26,11 @@ const Sidebar = () => {
         {/* <LogoSite className='mt-6' /> */}
         <Image src={logo} className='w-[166px] h-[50px] mt-6' alt='' />
       </Link>
-      {/* <CreateApp /> */}
-      <div className='flex flex-col items-center flex-1 mt-9 px-[9px]'>
+      <CreateApp />
+      <div className='flex flex-col items-center flex-1 px-[9px]'>
         <ExploreNavLeft className={navClassName} />
         <ExploreChatNavLeft className={navClassName} />
-        <div className='h-[1px] w-full bg-[#D9DFF6] mt-6 mb-[38px]'></div>
+        <div className='h-[1px] w-full bg-[#D9DFF6] my-6'></div>
         <AppNavLeft className={navClassName} />
         <DatasetNavLeft className={navClassName} />
         <ToolsNavLeft className={navClassName} />
