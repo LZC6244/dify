@@ -7,6 +7,7 @@ services:
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
+      CELERY_TASK_DEFAULT_QUEUE: 'dify_prd'
       # Startup mode, 'api' starts the API server.
       MODE: api
       # The log level for the application. Supported values are `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`
@@ -61,7 +62,7 @@ services:
       REDIS_DB: 4
       # The configurations of celery broker.
       # Use redis as the broker, and redis db 1 for celery broker.
-      CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/1
+      CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/14
       # Specifies the allowed origins for cross-origin requests to the Web API, e.g. https://dify.app or * for all origins.
       WEB_API_CORS_ALLOW_ORIGINS: '*'
       # Specifies the allowed origins for cross-origin requests to the console API, e.g. https://cloud.dify.ai or * for all origins.
@@ -241,7 +242,7 @@ services:
       REDIS_DB: 4
       REDIS_USE_SSL: 'false'
       # The configurations of celery broker.
-      CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/1
+      CELERY_BROKER_URL: redis://:MhxzKhl123@172.26.0.1:6379/14
       # The type of storage to use for storing user files. Supported values are `local` and `s3` and `azure-blob` and `google-storage`, Default: `local`
       STORAGE_TYPE: local
       STORAGE_LOCAL_PATH: storage
