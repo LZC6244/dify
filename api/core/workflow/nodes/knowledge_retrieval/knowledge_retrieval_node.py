@@ -170,6 +170,17 @@ class KnowledgeRetrievalNode(BaseNode):
                                                                                            float('inf')))
 
                 for segment in sorted_segments:
+       
+                    # temp_segment = DocumentSegment.query.filter(
+                    #     DocumentSegment.dataset_id == segment.dataset_id,
+                    #     DocumentSegment.document_id == segment.document_id,
+                    #     DocumentSegment.completed_at.isnot(None),
+                    #     DocumentSegment.status == 'completed',
+                    #     DocumentSegment.enabled == True,
+                    #     DocumentSegment.position == segment.position+1
+                    # ).all()
+                    # print("temp segment")
+                    # print(temp_segment[0].__dict__)
                     dataset = Dataset.query.filter_by(
                         id=segment.dataset_id
                     ).first()
