@@ -35,7 +35,7 @@ const Sidebar = () => {
         <DatasetNavLeft className={navClassName} />
         <ToolsNavLeft className={navClassName} />
       </div>
-      <div className='h-auto py-5 border-t-[1px] border-[#FBFBFB] flex items-center flex-shrink-0'>
+      <div className='h-auto py-5 border-t-[1px] border-[#D9DFF6] flex items-center flex-shrink-0'>
         <WorkspaceProvider>
           <AccountDropdown isMobile={false} />
         </WorkspaceProvider>

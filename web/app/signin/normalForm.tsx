@@ -100,7 +100,7 @@ const NormalForm = () => {
       })
       if (res.result === 'success') {
         localStorage.setItem('console_token', res.data)
-        router.replace('/apps')
+        router.replace('/explore/apps')
       }
       else {
         Toast.notify({
