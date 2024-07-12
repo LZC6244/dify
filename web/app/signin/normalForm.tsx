@@ -5,8 +5,11 @@ import { useRouter } from 'next/navigation'
 import classNames from 'classnames'
 import useSWR from 'swr'
 import Link from 'next/link'
+import Image from 'next/image'
 import Toast from '../components/base/toast'
 import style from './page.module.css'
+import closeIcon from './assets/preview-close.svg'
+import showIcon from './assets/preview-open.svg'
 import { IS_CE_EDITION, SUPPORT_MAIL_LOGIN, apiPrefix } from '@/config'
 import Button from '@/app/components/base/button'
 import { login, oauth } from '@/service/common'
@@ -146,8 +149,8 @@ const NormalForm = () => {
   return (
     <>
       <div className="w-full mx-auto">
-        <h2 className="text-[32px] font-bold text-gray-900">{t('login.pageTitle')}</h2>
-        <p className='mt-1 text-sm text-gray-600'>{t('login.welcome')}</p>
+        <h2 className="text-[26px] leading-[26px] text-center font-semibold text-black">{t('login.pageTitle')}</h2>
+        <p className='mt-[17px] text-center text-[16px] text-black'>{t('login.welcome')}</p>
       </div>
 
       <div className="w-full mx-auto mt-8">
@@ -264,7 +267,8 @@ const NormalForm = () => {
                         className="text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500"
                       >
                         {/* {showPassword ? '👀' : '😝'} */}
-                        {showPassword ? '👁' : '🙅🏻‍♀️'}
+                        {/* {showPassword ? '👁' : '🙅🏻‍♀️'} */}
+                        {showPassword ? <Image src={showIcon} alt='show' className='w-5 h-5'/> : <Image src={closeIcon} alt='show' className='w-5 h-5'/>}
                       </button>
                     </div>
                   </div>
@@ -289,15 +293,13 @@ const NormalForm = () => {
             <Link
               className='text-primary-600'
               target='_blank' rel='noopener noreferrer'
-              // href='https://dify.ai/terms'
-              href='/'
+              href='https://la4jzns5ox7.feishu.cn/wiki/WfhZw0PDkiyrB4kU3DMcXgefncd?from=from_copylink'
             >{t('login.tos')}</Link>
             &nbsp;&&nbsp;
             <Link
               className='text-primary-600'
               target='_blank' rel='noopener noreferrer'
-              // href='https://dify.ai/privacy'
-              href='/'
+              href='https://la4jzns5ox7.feishu.cn/wiki/QSz4wy8BDiNhIPkvjW2cLKDgnae?from=from_copylink'
             >{t('login.pp')}</Link>
           </div>
 

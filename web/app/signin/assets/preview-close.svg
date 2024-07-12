@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>preview-close</title>
+    <g id="V1.2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="登录框" transform="translate(-1575.000000, -621.000000)" stroke="#9EADB9" stroke-width="2">
+            <g id="编组-3" transform="translate(1575.000000, 621.000000)">
+                <g id="预览-关闭_preview-close" transform="translate(1.000000, 6.000000)">
+                    <path d="M0.473537408,0 C0.774113095,0.577407258 1.22955118,1.11304685 1.81027333,1.58897098 C3.43847372,2.92340542 6.05155766,3.7884508 8.99755171,3.7884508 C11.9435458,3.7884508 14.5566297,2.92340542 16.1848112,1.58897098 C16.7655333,1.11304685 17.2209998,0.577407258 17.521566,0" id="路径"></path>
+                    <line x1="11.3546784" y1="3.7884508" x2="12.3351769" y2="7.44781014" id="路径"></line>
+                    <line x1="15.3211864" y1="2.53523128" x2="18" y2="5.21404484" id="路径"></line>
+                    <line x1="0" y1="5.21399748" x2="2.67884198" y2="2.53513657" id="路径"></line>
+                    <line x1="5.64846649" y1="7.44790486" x2="6.62896492" y2="3.78849816" id="路径"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

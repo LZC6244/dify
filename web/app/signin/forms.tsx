@@ -20,12 +20,12 @@ const Forms = () => {
   }
   return <div className={
     cn(
-      'flex flex-col items-center w-full grow justify-center',
-      'px-6',
-      'md:px-[108px]',
+      'flex flex-row items-center justify-end',
+      // 'px-6',
+      // 'md:px-[108px]',
     )
   }>
-    <div className='flex flex-col md:w-[400px]'>
+    <div className='flex flex-col px-12 pt-[60px] pb-[29px] bg-white md:w-[416px]'>
       {getForm()}
     </div>
   </div>
