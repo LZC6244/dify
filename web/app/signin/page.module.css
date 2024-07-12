@@ -21,6 +21,7 @@
   position: absolute;
   box-shadow: 0px 0px 2px 2px #535FED;
 }
+
 .glow {
   background: white;
   animation: glitter 10s linear 0s infinite normal;
@@ -36,10 +37,32 @@
   animation-delay: -2s;
 }
 
+.line {
+  position: absolute;
+  top: 4%;
+  left: 10px;
+  width: calc(19%);
+  height: 4px;
+  background: #E1E0E7;
+  transform: rotate(-12deg);
+  opacity: 0.2;
+}
+
 .two {
   top: 0%;
   left: 19%;
   animation-delay: -1.7142857143s;
+}
+
+.line2 {
+  position: absolute;
+  top: 10px;
+  left: calc(19% + 33px);
+  width: 4px;
+  height: 25%;
+  background: #E1E0E7;
+  transform: rotate(-25deg);
+  opacity: 0.2;
 }
 
 .three {
@@ -48,24 +71,63 @@
   animation-delay: -1.4285714286s;
 }
 
+.line3 {
+  position: absolute;
+  top: calc(25% + 40px);
+  left: calc(28% + 3px);
+  width: 19%;
+  height: 4px;
+  background: #E1E0E7;
+  transform: rotate(37deg);
+  opacity: 0.2;
+}
+
 .four {
   top: 40%;
   left: 44%;
   animation-delay: -1.4285714286s;
 }
-
+.line4 {
+  position: absolute;
+  top: calc(40% + 13px);
+  left: calc(44% + 24px);
+  width: 4px;
+  height: 25%;
+  background: #E1E0E7;
+  transform: rotate(-17deg);
+  opacity: 0.2;
+}
 .five {
   top: 42%;
   left: 76%;
   animation-delay: -0.8571428571s;
 }
-
+.line5 {
+  position: absolute;
+  top: calc(66% + 18px);
+  left: calc(50% + 12px);
+  width: calc(18% - 4px);
+  height: 4px;
+  background: #E1E0E7;
+  transform: rotate(10deg);
+  opacity: 0.2;
+}
 .six {
   top: 70%;
   left: 68%;
   animation-delay: -0.5714285714s;
 }
 
+.line6 {
+  position: absolute;
+  top: calc(42% + 10px);
+  left: calc(76% - 13px);
+  width: 4px;
+  height: 28%;
+  background: #E1E0E7;
+  transform: rotate(20deg);
+  opacity: 0.2;
+}
 .seven {
   top: 66%;
   left: 50%;
@@ -110,7 +172,7 @@
 
   25% {
     transform: scale(0.5);
-    opacity: 0;
+    opacity: 0.2;
   }
 
   50% {
@@ -121,7 +183,7 @@
 
   75% {
     transform: scale(0.5);
-    opacity: 0;
+    opacity: 0.2;
   }
 
   100% {

@@ -293,13 +293,13 @@ const NormalForm = () => {
             <Link
               className='text-primary-600'
               target='_blank' rel='noopener noreferrer'
-              href='https://la4jzns5ox7.feishu.cn/wiki/WfhZw0PDkiyrB4kU3DMcXgefncd?from=from_copylink'
+              href='https://mindoc.maas.com.cn/docs/agent/agent-1fob1ijue8oqe'
             >{t('login.tos')}</Link>
             &nbsp;&&nbsp;
             <Link
               className='text-primary-600'
               target='_blank' rel='noopener noreferrer'
-              href='https://la4jzns5ox7.feishu.cn/wiki/QSz4wy8BDiNhIPkvjW2cLKDgnae?from=from_copylink'
+              href='https://mindoc.maas.com.cn/docs/agent/agent-1fob1pcdpe30i'
             >{t('login.pp')}</Link>
           </div>
 

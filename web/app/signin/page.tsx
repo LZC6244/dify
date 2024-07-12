@@ -97,11 +97,17 @@ gtag('config', 'AW-11217955271"');
           <div className='flex flex-row items-center justify-center z-50'>
             <div className='relative min-w-[564px] h-[440px]'>
               <div className={cn(style.star, style.glow, style.one)}></div>
+              <div className={style.line}></div>
               <div className={cn(style.star, style.glow, style.two)}></div>
+              <div className={style.line2}></div>
               <div className={cn(style.star, style.glow, style.three)}></div>
+              <div className={style.line3}></div>
               <div className={cn(style.star, style.glow, style.four)}></div>
+              <div className={style.line4}></div>
               <div className={cn(style.star, style.glow, style.five)}></div>
+              <div className={style.line5}></div>
               <div className={cn(style.star, style.glow, style.six)}></div>
+              <div className={style.line6}></div>
               <div className={cn(style.star, style.glow, style.seven)}></div>
             </div>
             {!loading && !systemFeatures.sso_enforced_for_signin && (
