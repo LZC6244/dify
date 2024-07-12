@@ -791,9 +791,9 @@ class DocumentStatusApi(DocumentResource):
 
         elif action == "disable":
             if not document.completed_at or document.indexing_status != 'completed':
-                raise InvalidActionError('Document is not completed.')
+                raise InvalidActionError('文档解析未完成，请删除后重试')
             if not document.enabled:
-                raise InvalidActionError('Document already disabled.')
+                raise InvalidActionError('文档已不可用，请删除后重试')
 
             document.enabled = False
             document.disabled_at = datetime.now(timezone.utc).replace(tzinfo=None)
@@ -810,7 +810,7 @@ class DocumentStatusApi(DocumentResource):
 
         elif action == "archive":
             if document.archived:
-                raise InvalidActionError('Document already archived.')
+                raise InvalidActionError('文档已到达')
 
             document.archived = True
             document.archived_at = datetime.now(timezone.utc).replace(tzinfo=None)
@@ -827,7 +827,7 @@ class DocumentStatusApi(DocumentResource):
             return {'result': 'success'}, 200
         elif action == "un_archive":
             if not document.archived:
-                raise InvalidActionError('Document is not archived.')
+                raise InvalidActionError('文档未到达')
 
             document.archived = False
             document.archived_at = None
