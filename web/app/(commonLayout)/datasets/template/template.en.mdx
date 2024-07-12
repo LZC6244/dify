@@ -198,7 +198,7 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
           "upload_file_id": ""
         },
         "dataset_process_rule_id": "",
-        "name": "Dify.txt",
+        "name": "Agent.txt",
         "created_from": "api",
         "created_by": "",
         "created_at": 1695308667,
@@ -338,6 +338,43 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
       "total": 50,
       "page": 1
     }
+    ```
+    </CodeGroup>
+  </Col>
+</Row>
+
+---
+
+<Heading
+  url='/datasets/{dataset_id}'
+  method='DELETE'
+  title='Delete knowledge'
+  name='#delete_dataset'
+/>
+<Row>
+  <Col>
+    ### Params
+    <Properties>
+      <Property name='dataset_id' type='string' key='dataset_id'>
+        Knowledge ID
+      </Property>
+    </Properties>
+  </Col>
+  <Col sticky>
+    <CodeGroup
+      title="Request"
+      tag="DELETE"
+      label="/datasets/{dataset_id}"
+      targetCode={`curl --location --request DELETE '${props.apiBaseUrl}/datasets/{dataset_id}' \\\n--header 'Authorization: Bearer {api_key}'`}
+    >
+    ```bash {{ title: 'cURL' }}
+    curl --location --request DELETE '${props.apiBaseUrl}/datasets/{dataset_id}' \
+    --header 'Authorization: Bearer {api_key}'
+    ```
+    </CodeGroup>
+    <CodeGroup title="Response">
+    ```text {{ title: 'Response' }}
+    204 No Content
     ```
     </CodeGroup>
   </Col>
@@ -491,7 +528,7 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
       title="Request"
       tag="POST"
       label="/datasets/{dataset_id}/documents/{document_id}/update_by_file"
-      targetCode={`curl --location --request POST '${props.apiBaseUrl}/datasets/{dataset_id}/documents/{document_id}/update_by_file' \\\n--header 'Authorization: Bearer {api_key}' \\\n--form 'data="{"name":"Dify","indexing_technique":"high_quality","process_rule":{"rules":{"pre_processing_rules":[{"id":"remove_extra_spaces","enabled":true},{"id":"remove_urls_emails","enabled":true}],"segmentation":{"separator":"###","max_tokens":500}},"mode":"custom"}}";type=text/plain' \\\n--form 'file=@"/path/to/file"'`}
+      targetCode={`curl --location --request POST '${props.apiBaseUrl}/datasets/{dataset_id}/documents/{document_id}/update_by_file' \\\n--header 'Authorization: Bearer {api_key}' \\\n--form 'data="{"name":"Agent","indexing_technique":"high_quality","process_rule":{"rules":{"pre_processing_rules":[{"id":"remove_extra_spaces","enabled":true},{"id":"remove_urls_emails","enabled":true}],"segmentation":{"separator":"###","max_tokens":500}},"mode":"custom"}}";type=text/plain' \\\n--form 'file=@"/path/to/file"'`}
     >
     ```bash {{ title: 'cURL' }}
     curl --location --request POST '${props.apiBaseUrl}/datasets/{dataset_id}/documents/{document_id}/update_by_file' \
@@ -511,7 +548,7 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
           "upload_file_id": ""
         },
         "dataset_process_rule_id": "",
-        "name": "Dify.txt",
+        "name": "Agent.txt",
         "created_from": "api",
         "created_by": "",
         "created_at": 1695308667,
@@ -683,7 +720,7 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
           "data_source_type": "file_upload",
           "data_source_info": null,
           "dataset_process_rule_id": null,
-          "name": "dify",
+          "name": "agent",
           "created_from": "",
           "created_by": "",
           "created_at": 1681623639,

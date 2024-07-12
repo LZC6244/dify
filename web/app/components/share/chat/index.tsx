@@ -73,7 +73,7 @@ const Main: FC<IMainProps> = ({
   * app info
   */
   const [appUnavailable, setAppUnavailable] = useState<boolean>(false)
-  const [isUnknwonReason, setIsUnknwonReason] = useState<boolean>(false)
+  const [isUnknownReason, setIsUnknwonReason] = useState<boolean>(false)
   const [appId, setAppId] = useState<string>('')
   const [isPublicVersion, setIsPublicVersion] = useState<boolean>(true)
   const [siteInfo, setSiteInfo] = useState<SiteInfo | null>()
@@ -91,7 +91,7 @@ const Main: FC<IMainProps> = ({
       if (canReplaceLogo)
         document.title = `${siteInfo.title}`
       else
-        document.title = `${siteInfo.title} - Powered by Dify`
+        document.title = `${siteInfo.title} - Powered by 卓世科技`
     }
   }, [siteInfo?.title, canReplaceLogo])
 
@@ -839,7 +839,7 @@ const Main: FC<IMainProps> = ({
   }, [appId, messageTaskId, isInstalledApp, installedAppInfo?.id])
 
   if (appUnavailable)
-    return <AppUnavailable isUnknwonReason={isUnknwonReason} />
+    return <AppUnavailable isUnknownReason={isUnknownReason} />
 
   if (!appId || !siteInfo || !promptConfig) {
     return <div className='flex h-screen w-full'>

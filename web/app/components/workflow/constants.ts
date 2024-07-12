@@ -5,6 +5,8 @@ import AnswerDefault from './nodes/answer/default'
 import LLMDefault from './nodes/llm/default'
 import KnowledgeRetrievalDefault from './nodes/knowledge-retrieval/default'
 import QuestionClassifierDefault from './nodes/question-classifier/default'
+import QuestionTransformationDefault from './nodes/question-transformation/default'
+import KnowledgeFilterDefault from './nodes/knowledge-filter/default'
 import IfElseDefault from './nodes/if-else/default'
 import CodeDefault from './nodes/code/default'
 import TemplateTransformDefault from './nodes/template-transform/default'
@@ -114,6 +116,24 @@ export const NODES_EXTRA_DATA: Record<BlockEnum, NodesExtraData> = {
     getAvailablePrevNodes: QuestionClassifierDefault.getAvailablePrevNodes,
     getAvailableNextNodes: QuestionClassifierDefault.getAvailableNextNodes,
     checkValid: QuestionClassifierDefault.checkValid,
+  },
+  [BlockEnum.QuestionTransformation]: {
+    author: 'Dify',
+    about: '',
+    availablePrevNodes: [],
+    availableNextNodes: [],
+    getAvailablePrevNodes: QuestionTransformationDefault.getAvailablePrevNodes,
+    getAvailableNextNodes: QuestionTransformationDefault.getAvailableNextNodes,
+    checkValid: QuestionTransformationDefault.checkValid,
+  },
+  [BlockEnum.KnowledgeFilter]: {
+    author: 'Dify',
+    about: '',
+    availablePrevNodes: [],
+    availableNextNodes: [],
+    getAvailablePrevNodes: KnowledgeFilterDefault.getAvailablePrevNodes,
+    getAvailableNextNodes: KnowledgeFilterDefault.getAvailableNextNodes,
+    checkValid: KnowledgeFilterDefault.checkValid,
   },
   [BlockEnum.HttpRequest]: {
     author: 'Dify',
@@ -238,6 +258,22 @@ export const NODES_INITIAL_DATA = {
     topics: [],
     ...QuestionClassifierDefault.defaultValue,
   },
+  [BlockEnum.QuestionTransformation]: {
+    type: BlockEnum.QuestionTransformation,
+    title: '',
+    desc: '',
+    query_variable_selector: [],
+    topics: [],
+    ...QuestionTransformationDefault.defaultValue,
+  },
+  [BlockEnum.KnowledgeFilter]: {
+    type: BlockEnum.KnowledgeFilter,
+    title: '',
+    desc: '',
+    query_variable_selector: [],
+    topics: [],
+    ...KnowledgeFilterDefault.defaultValue,
+  },
   [BlockEnum.HttpRequest]: {
     type: BlockEnum.HttpRequest,
     title: '',
@@ -317,7 +353,7 @@ export const RETRIEVAL_OUTPUT_STRUCT = `{
 
 export const SUPPORT_OUTPUT_VARS_NODE = [
   BlockEnum.Start, BlockEnum.LLM, BlockEnum.KnowledgeRetrieval, BlockEnum.Code, BlockEnum.TemplateTransform,
-  BlockEnum.HttpRequest, BlockEnum.Tool, BlockEnum.VariableAssigner, BlockEnum.VariableAggregator, BlockEnum.QuestionClassifier,
+  BlockEnum.HttpRequest, BlockEnum.Tool, BlockEnum.VariableAssigner, BlockEnum.VariableAggregator, BlockEnum.QuestionClassifier, BlockEnum.KnowledgeFilter, BlockEnum.QuestionTransformation,
   BlockEnum.ParameterExtractor, BlockEnum.Iteration,
 ]
 
@@ -346,6 +382,28 @@ export const QUESTION_CLASSIFIER_OUTPUT_STRUCT = [
   {
     variable: 'class_name',
     type: VarType.string,
+  },
+]
+
+export const QUESTION_TRANSFORMATION_OUTPUT_STRUCT = [
+  {
+    variable: 'new_query',
+    type: VarType.string,
+  },
+]
+
+export const KNOWLEDGE_FILTER_OUTPUT_STRUCT = [
+  {
+    variable: 'high_score_results',
+    type: VarType.arrayObject,
+  },
+  {
+    variable: 'mid_score_results',
+    type: VarType.arrayObject,
+  },
+  {
+    variable: 'low_score_results',
+    type: VarType.arrayObject,
   },
 ]
 
@@ -391,3 +449,4 @@ export const PARAMETER_EXTRACTOR_COMMON_STRUCT: Var[] = [
 ]
 
 export const WORKFLOW_DATA_UPDATE = 'WORKFLOW_DATA_UPDATE'
+export const CUSTOM_NODE = 'custom'

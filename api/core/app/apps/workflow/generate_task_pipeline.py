@@ -362,7 +362,8 @@ class WorkflowAppGenerateTaskPipeline(BasedGenerateTaskPipeline, WorkflowCycleMa
 
             if node_type in [
                 NodeType.IF_ELSE.value,
-                NodeType.QUESTION_CLASSIFIER.value
+                NodeType.QUESTION_CLASSIFIER.value,
+                NodeType.KNOWLEDGE_FILTER.value
             ]:
                 start_node_id = target_node_id
                 start_node_ids.append(start_node_id)

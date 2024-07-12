@@ -5,7 +5,7 @@ import type { Tag } from '@/app/components/base/tag-management/constant'
 export enum DataSourceType {
   FILE = 'upload_file',
   NOTION = 'notion_import',
-  WEB = 'web_import',
+  WEB = 'website_crawl',
 }
 
 export type DataSet = {
@@ -37,6 +37,22 @@ export type CustomFile = File & {
   mime_type?: string
   created_by?: string
   created_at?: number
+}
+
+export type CrawlOptions = {
+  crawl_sub_pages: boolean
+  only_main_content: boolean
+  includes: string
+  excludes: string
+  limit: number | string
+  max_depth: number | string
+}
+
+export type CrawlResultItem = {
+  title: string
+  markdown: string
+  description: string
+  source_url: string
 }
 
 export type FileItem = {
@@ -149,6 +165,8 @@ export type DataSourceInfo = {
     extension: string
   }
   notion_page_icon?: string
+  job_id: string
+  url: string
 }
 
 export type InitialDocumentDetail = {
@@ -178,6 +196,12 @@ export type SimpleDocumentDetail = InitialDocumentDetail & {
   updated_at: number
   hit_count: number
   dataset_process_rule_id?: string
+  data_source_detail_dict?: {
+    upload_file: {
+      name: string
+      extension: string
+    }
+  }
 }
 
 export type DocumentListResponse = {
@@ -199,10 +223,13 @@ export type DocumentReq = {
 export type CreateDocumentReq = DocumentReq & {
   data_source: DataSource
   retrieval_model: RetrievalConfig
+  parser_type: string
+  embedding_q_only: true | false
 }
 
 export type IndexingEstimateParams = DocumentReq & Partial<DataSource> & {
   dataset_id: string
+  parser_type: string
 }
 
 export type DataSource = {
@@ -212,6 +239,11 @@ export type DataSource = {
     notion_info_list?: NotionInfo[]
     file_info_list?: {
       file_ids: string[]
+    }
+    website_info_list?: {
+      provider: string
+      job_id: string
+      urls: string[]
     }
   }
 }

@@ -16,10 +16,12 @@ import { getIterationSingleNodeRunUrl, singleNodeRun } from '@/service/workflow'
 import Toast from '@/app/components/base/toast'
 import LLMDefault from '@/app/components/workflow/nodes/llm/default'
 import KnowledgeRetrievalDefault from '@/app/components/workflow/nodes/knowledge-retrieval/default'
+import KnowledgeFilterDefault from '@/app/components/workflow/nodes/knowledge-filter/default'
 import IfElseDefault from '@/app/components/workflow/nodes/if-else/default'
 import CodeDefault from '@/app/components/workflow/nodes/code/default'
 import TemplateTransformDefault from '@/app/components/workflow/nodes/template-transform/default'
 import QuestionClassifyDefault from '@/app/components/workflow/nodes/question-classifier/default'
+import QuestionTransformationDefault from '@/app/components/workflow/nodes/question-transformation/default'
 import HTTPDefault from '@/app/components/workflow/nodes/http/default'
 import ToolDefault from '@/app/components/workflow/nodes/tool/default'
 import VariableAssigner from '@/app/components/workflow/nodes/variable-assigner/default'
@@ -31,10 +33,13 @@ import { getInputVars as doGetInputVars } from '@/app/components/base/prompt-edi
 import type { NodeTracing } from '@/types/workflow'
 const { checkValid: checkLLMValid } = LLMDefault
 const { checkValid: checkKnowledgeRetrievalValid } = KnowledgeRetrievalDefault
+const { checkValid: checkKnowledgeFilterValid } = KnowledgeFilterDefault
 const { checkValid: checkIfElseValid } = IfElseDefault
 const { checkValid: checkCodeValid } = CodeDefault
 const { checkValid: checkTemplateTransformValid } = TemplateTransformDefault
 const { checkValid: checkQuestionClassifyValid } = QuestionClassifyDefault
+const { checkValid: checkQuestionTransformationValid } = QuestionTransformationDefault
+
 const { checkValid: checkHttpValid } = HTTPDefault
 const { checkValid: checkToolValid } = ToolDefault
 const { checkValid: checkVariableAssignerValid } = VariableAssigner
@@ -44,10 +49,12 @@ const { checkValid: checkIterationValid } = IterationDefault
 const checkValidFns: Record<BlockEnum, Function> = {
   [BlockEnum.LLM]: checkLLMValid,
   [BlockEnum.KnowledgeRetrieval]: checkKnowledgeRetrievalValid,
+  [BlockEnum.KnowledgeFilter]: checkKnowledgeFilterValid,
   [BlockEnum.IfElse]: checkIfElseValid,
   [BlockEnum.Code]: checkCodeValid,
   [BlockEnum.TemplateTransform]: checkTemplateTransformValid,
   [BlockEnum.QuestionClassifier]: checkQuestionClassifyValid,
+  [BlockEnum.QuestionTransformation]: checkQuestionTransformationValid,
   [BlockEnum.HttpRequest]: checkHttpValid,
   [BlockEnum.Tool]: checkToolValid,
   [BlockEnum.VariableAssigner]: checkVariableAssignerValid,

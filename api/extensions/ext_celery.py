@@ -1,7 +1,11 @@
+import os
+import logging
 from datetime import timedelta
 
 from celery import Celery, Task
 from flask import Flask
+
+logger = logging.getLogger(__name__)
 
 
 def init_app(app: Flask) -> Celery:
@@ -17,7 +21,14 @@ def init_app(app: Flask) -> Celery:
         backend=app.config["CELERY_BACKEND"],
         task_ignore_result=True,
     )
-    
+
+    # 更改任务队列名称，避免队列混乱，默认队列名称为：celery
+    task_default_queue = os.environ.get('CELERY_TASK_DEFAULT_QUEUE', 'dify')
+    celery_app.conf.update(
+        task_default_queue=task_default_queue,
+    )
+    logger.info(f"celery task_default_queue: {task_default_queue}")
+
     # Add SSL options to the Celery configuration
     ssl_options = {
         "ssl_cert_reqs": None,
@@ -35,7 +46,7 @@ def init_app(app: Flask) -> Celery:
         celery_app.conf.update(
             broker_use_ssl=ssl_options,  # Add the SSL options to the broker configuration
         )
-        
+
     celery_app.set_default()
     app.extensions["celery"] = celery_app
 

@@ -16,6 +16,8 @@ export enum BlockEnum {
   LLM = 'llm',
   KnowledgeRetrieval = 'knowledge-retrieval',
   QuestionClassifier = 'question-classifier',
+  QuestionTransformation = 'question-transformation',
+  KnowledgeFilter = 'knowledge-filter',
   IfElse = 'if-else',
   Code = 'code',
   TemplateTransform = 'template-transform',

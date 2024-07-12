@@ -38,7 +38,7 @@ const Apps = ({
   onSuccess,
 }: AppsProps) => {
   const { t } = useTranslation()
-  const { isCurrentWorkspaceManager } = useAppContext()
+  const { isCurrentWorkspaceEditor } = useAppContext()
   const { push } = useRouter()
   const { hasEditPermission } = useContext(ExploreContext)
   const allCategoriesEn = t('explore.apps.allCategories', { lng: 'en' })
@@ -116,7 +116,7 @@ const Apps = ({
       if (onSuccess)
         onSuccess()
       localStorage.setItem(NEED_REFRESH_APP_LIST_KEY, '1')
-      getRedirection(isCurrentWorkspaceManager, app, push)
+      getRedirection(isCurrentWorkspaceEditor, app, push)
     }
     catch (e) {
       Toast.notify({ type: 'error', message: t('app.newApp.appCreateFailed') })
@@ -166,7 +166,7 @@ const Apps = ({
         <nav
           className={cn(
             s.appList,
-            'grid content-start shrink-0',
+            'grid content-start shrink-0 py-4',
             pageType === PageType.EXPLORE ? 'gap-4 px-6 sm:px-12' : 'gap-3 px-8  sm:!grid-cols-2 md:!grid-cols-3 lg:!grid-cols-4',
           )}>
           {filteredList.map(app => (

@@ -10,9 +10,11 @@ import {
   IfElse,
   Iteration,
   KnowledgeRetrieval,
+  KnowledgeFilter,
   Llm,
   ParameterExtractor,
   QuestionClassifier,
+  QuestionTransformation,
   TemplatingTransform,
   VariableX,
 } from '@/app/components/base/icons/src/vender/workflow'
@@ -39,7 +41,9 @@ const getIcon = (type: BlockEnum, className: string) => {
     [BlockEnum.HttpRequest]: <Http className={className} />,
     [BlockEnum.Answer]: <Answer className={className} />,
     [BlockEnum.KnowledgeRetrieval]: <KnowledgeRetrieval className={className} />,
+    [BlockEnum.KnowledgeFilter]: <KnowledgeFilter className={className} />, 
     [BlockEnum.QuestionClassifier]: <QuestionClassifier className={className} />,
+    [BlockEnum.QuestionTransformation]: <QuestionTransformation className={className} />,
     [BlockEnum.TemplateTransform]: <TemplatingTransform className={className} />,
     [BlockEnum.VariableAssigner]: <VariableX className={className} />,
     [BlockEnum.VariableAggregator]: <VariableX className={className} />,
@@ -59,6 +63,8 @@ const ICON_CONTAINER_BG_COLOR_MAP: Record<string, string> = {
   [BlockEnum.Answer]: 'bg-[#F79009]',
   [BlockEnum.KnowledgeRetrieval]: 'bg-[#16B364]',
   [BlockEnum.QuestionClassifier]: 'bg-[#16B364]',
+  [BlockEnum.QuestionTransformation]: 'bg-[#16B364]',
+  [BlockEnum.KnowledgeFilter]: 'bg-[#16B364]',
   [BlockEnum.TemplateTransform]: 'bg-[#2E90FA]',
   [BlockEnum.VariableAssigner]: 'bg-[#2E90FA]',
   [BlockEnum.VariableAggregator]: 'bg-[#2E90FA]',
@@ -72,8 +78,8 @@ const BlockIcon: FC<BlockIconProps> = ({
 }) => {
   return (
     <div className={`
-      flex items-center justify-center border-[0.5px] border-white/[0.02] text-white
-      ${ICON_CONTAINER_CLASSNAME_SIZE_MAP[size]} 
+      flex items-center justify-center border-[0.5px] border-white/2 text-white
+      ${ICON_CONTAINER_CLASSNAME_SIZE_MAP[size]}
       ${ICON_CONTAINER_BG_COLOR_MAP[type]}
       ${toolIcon && '!shadow-none'}
       ${className}

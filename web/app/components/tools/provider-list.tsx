@@ -66,10 +66,10 @@ const ProviderList = () => {
   }, [collectionList, currentProvider])
 
   return (
-    <div className='relative flex overflow-hidden bg-gray-100 shrink-0 h-0 grow'>
-      <div className='relative flex flex-col overflow-y-auto bg-gray-100 grow'>
+    <div className='relative h-full flex overflow-hidden bg-gray-100 shrink-0 grow'>
+      <div className='relative h-full flex flex-col overflow-y-auto bg-gray-100 grow'>
         <div className={cn(
-          'sticky top-0 flex justify-between items-center pt-4 px-12 pb-2 leading-[56px] bg-gray-100 z-10 flex-wrap gap-y-2',
+          'sticky top-0 flex justify-between items-center pt-4 px-12 pb-2 leading-[56px] bg-gray-100 z-20 flex-wrap gap-y-2',
           currentProvider && 'pr-6',
         )}>
           <TabSliderNew
@@ -87,7 +87,7 @@ const ProviderList = () => {
           </div>
         </div>
         <div className={cn(
-          'relative grid content-start grid-cols-1 gap-4 px-12 pt-2 pb-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grow shrink-0',
+          'min-h-[190px] relative grid content-start grid-cols-1 gap-4 px-12 pt-2 pb-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grow shrink-0',
           currentProvider && 'pr-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
         )}>
           {activeTab === 'builtin' && <ContributeCard />}

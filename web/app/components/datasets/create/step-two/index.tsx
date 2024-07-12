@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useContext } from 'use-context-selector'
 import { useBoolean } from 'ahooks'
@@ -12,7 +12,7 @@ import RetrievalMethodInfo from '../../common/retrieval-method-info'
 import PreviewItem, { PreviewType } from './preview-item'
 import LanguageSelect from './language-select'
 import s from './index.module.css'
-import type { CreateDocumentReq, CustomFile, FileIndexingEstimateResponse, FullDocumentDetail, IndexingEstimateParams, IndexingEstimateResponse, NotionInfo, PreProcessingRule, ProcessRule, Rules, createDocumentResponse } from '@/models/datasets'
+import type { CrawlOptions, CrawlResultItem, CreateDocumentReq, CustomFile, FileIndexingEstimateResponse, FullDocumentDetail, IndexingEstimateParams, IndexingEstimateResponse, NotionInfo, PreProcessingRule, ProcessRule, Rules, createDocumentResponse } from '@/models/datasets'
 import {
   createDocument,
   createFirstDocument,
@@ -44,18 +44,22 @@ import TooltipPlus from '@/app/components/base/tooltip-plus'
 import { useModelListAndDefaultModelAndCurrentProviderAndModel } from '@/app/components/header/account-setting/model-provider-page/hooks'
 import { LanguagesSupported } from '@/i18n/language'
 import { ModelTypeEnum } from '@/app/components/header/account-setting/model-provider-page/declarations'
+import { Globe01 } from '@/app/components/base/icons/src/vender/line/mapsAndTravel'
 
 type ValueOf<T> = T[keyof T]
 type StepTwoProps = {
   isSetting?: boolean
   documentDetail?: FullDocumentDetail
-  hasSetAPIKEY: boolean
+  isAPIKeySet: boolean
   onSetting: () => void
   datasetId?: string
   indexingType?: ValueOf<IndexingType>
   dataSourceType: DataSourceType
   files: CustomFile[]
   notionPages?: NotionPage[]
+  websitePages?: CrawlResultItem[]
+  crawlOptions?: CrawlOptions
+  fireCrawlJobId?: string
   onStepChange?: (delta: number) => void
   updateIndexingTypeCache?: (type: string) => void
   updateResultCache?: (res: createDocumentResponse) => void
@@ -67,6 +71,13 @@ enum SegmentType {
   AUTO = 'automatic',
   CUSTOM = 'custom',
 }
+enum ParserType {
+  GENERAL = 'general',
+  NAIVE = 'naive',
+  PAPER = 'paper',
+  QA = 'qa',
+  NULL = '',
+}
 enum IndexingType {
   QUALIFIED = 'high_quality',
   ECONOMICAL = 'economy',
@@ -75,30 +86,39 @@ enum IndexingType {
 const StepTwo = ({
   isSetting,
   documentDetail,
-  hasSetAPIKEY,
+  isAPIKeySet,
   onSetting,
   datasetId,
   indexingType,
-  dataSourceType,
+  dataSourceType: inCreatePageDataSourceType,
   files,
   notionPages = [],
+  websitePages = [],
+  crawlOptions,
+  fireCrawlJobId = '',
   onStepChange,
   updateIndexingTypeCache,
   updateResultCache,
   onSave,
   onCancel,
 }: StepTwoProps) => {
+  console.log('files', files)
+
   const { t } = useTranslation()
   const { locale } = useContext(I18n)
   const media = useBreakpoints()
   const isMobile = media === MediaType.mobile
 
   const { dataset: currentDataset, mutateDatasetRes } = useDatasetDetailContext()
+  const isInCreatePage = !datasetId || (datasetId && !currentDataset?.data_source_type)
+  const dataSourceType = isInCreatePage ? inCreatePageDataSourceType : currentDataset?.data_source_type
   const scrollRef = useRef<HTMLDivElement>(null)
   const [scrolled, setScrolled] = useState(false)
   const previewScrollRef = useRef<HTMLDivElement>(null)
   const [previewScrolled, setPreviewScrolled] = useState(false)
   const [segmentationType, setSegmentationType] = useState<SegmentType>(SegmentType.AUTO)
+  const [parserType, setParserType] = useState<ParserType>(ParserType.GENERAL)
+  const [embeddingQOnly, setEmbeddingQOnly] = useState(true)
   const [segmentIdentifier, setSegmentIdentifier] = useState('\\n')
   const [max, setMax] = useState(500)
   const [overlap, setOverlap] = useState(50)
@@ -107,7 +127,7 @@ const StepTwo = ({
   const hasSetIndexType = !!indexingType
   const [indexType, setIndexType] = useState<ValueOf<IndexingType>>(
     (indexingType
-      || hasSetAPIKEY)
+      || isAPIKeySet)
       ? IndexingType.QUALIFIED
       : IndexingType.ECONOMICAL,
   )
@@ -242,6 +262,15 @@ const StepTwo = ({
     }) as NotionInfo[]
   }
 
+  const getWebsiteInfo = () => {
+    return {
+      provider: 'firecrawl',
+      job_id: fireCrawlJobId,
+      urls: websitePages.map(page => page.source_url),
+      only_main_content: crawlOptions?.only_main_content,
+    }
+  }
+
   const getFileIndexingEstimateParams = (docForm: DocForm): IndexingEstimateParams | undefined => {
     if (dataSourceType === DataSourceType.FILE) {
       return {
@@ -256,6 +285,7 @@ const StepTwo = ({
         doc_form: docForm,
         doc_language: docLanguage,
         dataset_id: datasetId as string,
+        parser_type: parserType,
       }
     }
     if (dataSourceType === DataSourceType.NOTION) {
@@ -269,6 +299,21 @@ const StepTwo = ({
         doc_form: docForm,
         doc_language: docLanguage,
         dataset_id: datasetId as string,
+        parser_type: parserType,
+      }
+    }
+    if (dataSourceType === DataSourceType.WEB) {
+      return {
+        info_list: {
+          data_source_type: dataSourceType,
+          website_info_list: getWebsiteInfo(),
+        },
+        indexing_technique: getIndexing_technique() as string,
+        process_rule: getProcessRule(),
+        doc_form: docForm,
+        doc_language: docLanguage,
+        dataset_id: datasetId as string,
+        parser_type: parserType,
       }
     }
   }
@@ -291,6 +336,8 @@ const StepTwo = ({
         process_rule: getProcessRule(),
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         retrieval_model: retrievalConfig, // Readonly. If want to changed, just go to settings page.
+        parser_type: parserType,
+        embedding_q_only: embeddingQOnly,
       } as CreateDocumentReq
     }
     else { // create
@@ -327,6 +374,8 @@ const StepTwo = ({
         doc_language: docLanguage,
 
         retrieval_model: postRetrievalConfig,
+        parser_type: parserType,
+        embedding_q_only: embeddingQOnly,
       } as CreateDocumentReq
       if (dataSourceType === DataSourceType.FILE) {
         params.data_source.info_list.file_info_list = {
@@ -335,6 +384,9 @@ const StepTwo = ({
       }
       if (dataSourceType === DataSourceType.NOTION)
         params.data_source.info_list.notion_info_list = getNotionInfo()
+
+      if (dataSourceType === DataSourceType.WEB)
+        params.data_source.info_list.website_info_list = getWebsiteInfo()
     }
     return params
   }
@@ -480,34 +532,50 @@ const StepTwo = ({
       setIndexType(indexingType as IndexingType)
 
     else
-      setIndexType(hasSetAPIKEY ? IndexingType.QUALIFIED : IndexingType.ECONOMICAL)
-  }, [hasSetAPIKEY, indexingType, datasetId])
+      setIndexType(isAPIKeySet ? IndexingType.QUALIFIED : IndexingType.ECONOMICAL)
+  }, [isAPIKeySet, indexingType, datasetId])
 
-  useEffect(() => {
-    if (segmentationType === SegmentType.AUTO) {
-      setAutomaticFileIndexingEstimate(null)
-      !isMobile && setShowPreview()
-      fetchFileIndexingEstimate()
-      setPreviewSwitched(false)
-    }
-    else {
-      hidePreview()
-      setCustomFileIndexingEstimate(null)
-      setPreviewSwitched(false)
-    }
-  }, [segmentationType, indexType])
+  // TODO
+  // useEffect(() => {
+  //   if (segmentationType === SegmentType.CUSTOM || parserType === ParserType.QA) {
+  //     setAutomaticFileIndexingEstimate(null)
+  //     !isMobile && setShowPreview()
+  //     fetchFileIndexingEstimate()
+  //     setPreviewSwitched(false)
+  //   }
+  //   else {
+  //     hidePreview()
+  //     setCustomFileIndexingEstimate(null)
+  //     setPreviewSwitched(false)
+  //   }
+  // }, [segmentationType, indexType, parserType])
 
   const [retrievalConfig, setRetrievalConfig] = useState(currentDataset?.retrieval_model_dict || {
     search_method: RETRIEVE_METHOD.semantic,
     reranking_enable: false,
     reranking_model: {
-      reranking_provider_name: rerankDefaultModel?.provider.provider,
-      reranking_model_name: rerankDefaultModel?.model,
+      reranking_provider_name: rerankDefaultModel?.provider.provider || '',
+      reranking_model_name: rerankDefaultModel?.model || '',
     },
     top_k: 3,
     score_threshold_enabled: false,
     score_threshold: 0.5,
   } as RetrievalConfig)
+
+  // 是否有PDF文件
+  const isPDF = useMemo(() => {
+    if (files && files.find(v => v.extension === 'pdf'))
+      return true
+
+    return false
+  }, [files])
+  // 是否有PDF文件
+  const isCSV = useMemo(() => {
+    if (files && files.find(v => v.extension === 'csv'))
+      return true
+
+    return false
+  }, [files])
 
   return (
     <div className='flex w-full h-full'>
@@ -529,6 +597,101 @@ const StepTwo = ({
           )}
         </div>
         <div className={cn(s.form, isMobile && '!px-4')}>
+          <div className={s.label}>{t('datasetCreation.stepTwo.parser')}</div>
+          <div className='max-w-[640px]'>
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                parserType === ParserType.GENERAL && s.active,
+              )}
+              onClick={() => setParserType(ParserType.GENERAL)}
+            >
+              <span className={cn(s.typeIcon, s.auto)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.general')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.generalDescription')}</div>
+              </div>
+            </div>
+
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                !isPDF && s.radioDisabled,
+                parserType === ParserType.NAIVE && s.active,
+              )}
+              onClick={() => {
+                if (isPDF)
+                  setParserType(ParserType.NAIVE)
+              }}
+            >
+              <span className={cn(s.typeIcon, s.customize)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.naive')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.naiveDescription')}</div>
+              </div>
+            </div>
+
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                !isPDF && s.radioDisabled,
+                parserType === ParserType.PAPER && s.active,
+              )}
+              onClick={() => {
+                if (isPDF)
+                  setParserType(ParserType.PAPER)
+              }}
+            >
+              <span className={cn(s.typeIcon, s.customize)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.paper')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.paperDescription')}</div>
+              </div>
+            </div>
+
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                !isCSV && s.radioDisabled,
+                parserType === ParserType.QA && s.active,
+              )}
+              onClick={() => {
+                if (isCSV)
+                  setParserType(ParserType.QA)
+              }}
+            >
+              <span className={cn(s.typeIcon, s.customize)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.qa')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.qaDescription')}</div>
+              </div>
+              {parserType === ParserType.QA && (
+                <div className={s.typeFormBody}>
+                  <div className="py-4">
+                    <div className='w-full flex flex-row items-center justify-between'>
+                      <div className="text-[#344054] text-[16px]">{t('datasetCreation.stepTwo.qaEmbedding')}</div>
+                      <Switch
+                        defaultValue={false}
+                        size='md'
+                        onChange={(enabled) => {
+                          setEmbeddingQOnly(enabled)
+                        }} />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+          </div>
+
           <div className={s.label}>{t('datasetCreation.stepTwo.segmentation')}</div>
           <div className='max-w-[640px]'>
             <div
@@ -636,13 +799,13 @@ const StepTwo = ({
                   className={cn(
                     s.radioItem,
                     s.indexItem,
-                    !hasSetAPIKEY && s.disabled,
+                    !isAPIKeySet && s.disabled,
                     !hasSetIndexType && indexType === IndexingType.QUALIFIED && s.active,
                     hasSetIndexType && s.disabled,
                     hasSetIndexType && '!w-full',
                   )}
                   onClick={() => {
-                    if (hasSetAPIKEY)
+                    if (isAPIKeySet)
                       setIndexType(IndexingType.QUALIFIED)
                   }}
                 >
@@ -665,7 +828,7 @@ const StepTwo = ({
                         )
                     }
                   </div>
-                  {!hasSetAPIKEY && (
+                  {!isAPIKeySet && (
                     <div className={s.warningTip}>
                       <span>{t('datasetCreation.stepTwo.warning')}&nbsp;</span>
                       <span className={s.click} onClick={onSetting}>{t('datasetCreation.stepTwo.click')}</span>
@@ -814,6 +977,22 @@ const StepTwo = ({
                           <span>{t('datasetCreation.stepTwo.other')}</span>
                           <span>{notionPages.length - 1}</span>
                           <span>{t('datasetCreation.stepTwo.notionUnit')}</span>
+                        </span>
+                      )}
+                    </div>
+                  </>
+                )}
+                {dataSourceType === DataSourceType.WEB && (
+                  <>
+                    <div className='mb-2 text-xs font-medium text-gray-500'>{t('datasetCreation.stepTwo.websiteSource')}</div>
+                    <div className='flex items-center text-sm leading-6 font-medium text-gray-800'>
+                      <Globe01 className='shrink-0 mr-1' />
+                      <span className='grow w-0 truncate'>{websitePages[0].source_url}</span>
+                      {websitePages.length > 1 && (
+                        <span className={s.sourceCount}>
+                          <span>{t('datasetCreation.stepTwo.other')}</span>
+                          <span>{websitePages.length - 1}</span>
+                          <span>{t('datasetCreation.stepTwo.webpageUnit')}</span>
                         </span>
                       )}
                     </div>

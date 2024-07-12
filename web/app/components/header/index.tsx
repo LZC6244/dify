@@ -26,13 +26,14 @@ const navClassName = `
 `
 
 const Header = () => {
-  const { isCurrentWorkspaceManager } = useAppContext()
+  const { isCurrentWorkspaceEditor } = useAppContext()
 
   const selectedSegment = useSelectedLayoutSegment()
   const media = useBreakpoints()
   const isMobile = media === MediaType.mobile
   const [isShowNavMenu, { toggle, setFalse: hideNavMenu }] = useBoolean(false)
   const { enableBilling, plan } = useProviderContext()
+
   const { setShowPricingModal, setShowAccountSettingModal } = useModalContext()
   const isFreePlan = plan.type === 'sandbox'
   const handlePlanClick = useCallback(() => {
@@ -74,7 +75,7 @@ const Header = () => {
         <div className='flex items-center'>
           <ExploreNav className={navClassName} />
           <AppNav />
-          {isCurrentWorkspaceManager && <DatasetNav />}
+          {isCurrentWorkspaceEditor && <DatasetNav />}
           <ToolsNav className={navClassName} />
         </div>
       )}
@@ -93,7 +94,7 @@ const Header = () => {
         <div className='w-full flex flex-col p-2 gap-y-1'>
           <ExploreNav className={navClassName} />
           <AppNav />
-          {isCurrentWorkspaceManager && <DatasetNav />}
+          {isCurrentWorkspaceEditor && <DatasetNav />}
           <ToolsNav className={navClassName} />
         </div>
       )}

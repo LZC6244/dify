@@ -5,9 +5,12 @@ import { useRouter } from 'next/navigation'
 import classNames from 'classnames'
 import useSWR from 'swr'
 import Link from 'next/link'
+import Image from 'next/image'
 import Toast from '../components/base/toast'
 import style from './page.module.css'
-import { IS_CE_EDITION, apiPrefix } from '@/config'
+import closeIcon from './assets/preview-close.svg'
+import showIcon from './assets/preview-open.svg'
+import { IS_CE_EDITION, SUPPORT_MAIL_LOGIN, apiPrefix } from '@/config'
 import Button from '@/app/components/base/button'
 import { login, oauth } from '@/service/common'
 import { getPurifyHref } from '@/utils'
@@ -62,6 +65,8 @@ function reducer(state: IState, action: IAction) {
 
 const NormalForm = () => {
   const { t } = useTranslation()
+  const useEmailLogin = IS_CE_EDITION || SUPPORT_MAIL_LOGIN
+
   const router = useRouter()
 
   const [state, dispatch] = useReducer(reducer, {
@@ -95,7 +100,7 @@ const NormalForm = () => {
       })
       if (res.result === 'success') {
         localStorage.setItem('console_token', res.data)
-        router.replace('/apps')
+        router.replace('/explore/apps')
       }
       else {
         Toast.notify({
@@ -144,13 +149,13 @@ const NormalForm = () => {
   return (
     <>
       <div className="w-full mx-auto">
-        <h2 className="text-[32px] font-bold text-gray-900">{t('login.pageTitle')}</h2>
-        <p className='mt-1 text-sm text-gray-600'>{t('login.welcome')}</p>
+        <h2 className="text-[26px] leading-[26px] text-center font-semibold text-black">{t('login.pageTitle')}</h2>
+        <p className='mt-[17px] text-center text-[16px] text-black'>{t('login.welcome')}</p>
       </div>
 
       <div className="w-full mx-auto mt-8">
         <div className="bg-white ">
-          {!IS_CE_EDITION && (
+          {!useEmailLogin && (
             <div className="flex flex-col gap-3 mt-6">
               <div className='w-full'>
                 <a href={getPurifyHref(`${apiPrefix}/oauth/login/github`)}>
@@ -194,7 +199,7 @@ const NormalForm = () => {
           )}
 
           {
-            IS_CE_EDITION && <>
+            useEmailLogin && <>
               {/* <div className="relative mt-6">
                 <div className="absolute inset-0 flex items-center" aria-hidden="true">
                   <div className="w-full border-t border-gray-300" />
@@ -261,7 +266,9 @@ const NormalForm = () => {
                         onClick={() => setShowPassword(!showPassword)}
                         className="text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500"
                       >
-                        {showPassword ? '👀' : '😝'}
+                        {/* {showPassword ? '👀' : '😝'} */}
+                        {/* {showPassword ? '👁' : '🙅🏻‍♀️'} */}
+                        {showPassword ? <Image src={showIcon} alt='show' className='w-5 h-5'/> : <Image src={closeIcon} alt='show' className='w-5 h-5'/>}
                       </button>
                     </div>
                   </div>
@@ -286,17 +293,17 @@ const NormalForm = () => {
             <Link
               className='text-primary-600'
               target='_blank' rel='noopener noreferrer'
-              href='https://dify.ai/terms'
+              href='https://mindoc.maas.com.cn/docs/agent/agent-1fob1ijue8oqe'
             >{t('login.tos')}</Link>
             &nbsp;&&nbsp;
             <Link
               className='text-primary-600'
               target='_blank' rel='noopener noreferrer'
-              href='https://dify.ai/privacy'
+              href='https://mindoc.maas.com.cn/docs/agent/agent-1fob1pcdpe30i'
             >{t('login.pp')}</Link>
           </div>
 
-          {IS_CE_EDITION && <div className="w-hull text-center block mt-2 text-xs text-gray-600">
+          {IS_CE_EDITION && <div className="w-hull text-center block mt-2 text-xs text-gray-600 hidden">
             {t('login.goToInit')}
             &nbsp;
             <Link

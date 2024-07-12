@@ -1,5 +1,7 @@
 from typing import Any, cast
 
+from sqlalchemy import func
+
 from core.app.app_config.entities import DatasetRetrieveConfigEntity
 from core.app.entities.app_invoke_entities import ModelConfigWithCredentialsEntity
 from core.entities.agent_entities import PlanningStrategy
@@ -71,32 +73,81 @@ class KnowledgeRetrievalNode(BaseNode):
                 error=str(e)
             )
 
+    def _get_segments(self, segment: DocumentSegment, segment_position: int) -> DocumentSegment:
+        segments = DocumentSegment.query.filter(
+            DocumentSegment.dataset_id == segment.dataset_id,
+            DocumentSegment.document_id == segment.document_id,
+            DocumentSegment.completed_at.isnot(None),
+            DocumentSegment.status == 'completed',
+            DocumentSegment.enabled == True,
+            DocumentSegment.position == segment_position
+        ).all()
+        if not segments:
+            return None
+        return segments[0]
+    
+    def _windows_search(self, segments: list[DocumentSegment]) -> list[DocumentSegment]:
+        if not segments:
+            return []
+        
+        id_sets = set()  
+
+        for index, segment in enumerate(segments):
+            if segment.id in id_sets:
+                del segments[index]
+                continue
+            id_sets.add(segment.id)
+            front_page = self._get_segments(segment, segment.position - 1)
+            back_page = self._get_segments(segment, segment.position + 1)
+            context = segment.get_sign_content()
+            if front_page:
+                id_sets.update(front_page.id)
+                context += front_page.get_sign_content()
+            if back_page:
+                id_sets.update(back_page.id)
+                context += back_page.get_sign_content()
+            segment.content = context
+            segments[index] = segment
+
+        return segments
+
+
+
     def _fetch_dataset_retriever(self, node_data: KnowledgeRetrievalNodeData, query: str) -> list[
         dict[str, Any]]:
-        """
-        A dataset tool is a tool that can be used to retrieve information from a dataset
-        :param node_data: node data
-        :param query: query
-        """
-        tools = []
         available_datasets = []
         dataset_ids = node_data.dataset_ids
-        for dataset_id in dataset_ids:
-            # get dataset from dataset id
-            dataset = db.session.query(Dataset).filter(
-                Dataset.tenant_id == self.tenant_id,
-                Dataset.id == dataset_id
-            ).first()
+        dataset_retrieval_configs = node_data.dataset_retrieval_configs
+        for index, item in enumerate(dataset_retrieval_configs):
+            item.reranking_model = item.reranking_model.__dict__
+            dataset_retrieval_configs[index] = item
+  
+        dataset_retrieval_configs_map = dict(zip(dataset_ids, dataset_retrieval_configs))
 
+        # Subquery: Count the number of available documents for each dataset
+        subquery = db.session.query(
+            Document.dataset_id,
+            func.count(Document.id).label('available_document_count')
+        ).filter(
+            Document.indexing_status == 'completed',
+            Document.enabled == True,
+            Document.archived == False,
+            Document.dataset_id.in_(dataset_ids)
+        ).group_by(Document.dataset_id).having(
+            func.count(Document.id) > 0
+        ).subquery()
+
+        results = db.session.query(Dataset).join(
+            subquery, Dataset.id == subquery.c.dataset_id
+        ).filter(
+            Dataset.tenant_id == self.tenant_id,
+            Dataset.id.in_(dataset_ids)
+        ).all()
+
+        for dataset in results:
             # pass if dataset is not available
             if not dataset:
                 continue
-
-            # pass if dataset is not available
-            if (dataset and dataset.available_document_count == 0
-                    and dataset.available_document_count == 0):
-                continue
-
             available_datasets.append(dataset)
         all_documents = []
         dataset_retrieval = DatasetRetrieval()
@@ -128,7 +179,8 @@ class KnowledgeRetrievalNode(BaseNode):
                     query=query,
                     model_config=model_config,
                     model_instance=model_instance,
-                    planning_strategy=planning_strategy
+                    planning_strategy=planning_strategy,
+                    dataset_retrieval_configs_map=dataset_retrieval_configs_map
                 )
         elif node_data.retrieval_mode == DatasetRetrieveConfigEntity.RetrieveStrategy.MULTIPLE.value:
             all_documents = dataset_retrieval.multiple_retrieve(self.app_id, self.tenant_id, self.user_id,
@@ -159,6 +211,8 @@ class KnowledgeRetrievalNode(BaseNode):
                 sorted_segments = sorted(segments,
                                          key=lambda segment: index_node_id_to_position.get(segment.index_node_id,
                                                                                            float('inf')))
+                if False:
+                    sorted_segments = self._windows_search(sorted_segments)
 
                 for segment in sorted_segments:
                     dataset = Dataset.query.filter_by(

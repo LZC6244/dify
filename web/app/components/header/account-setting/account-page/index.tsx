@@ -152,8 +152,14 @@ export default function AccountPage() {
         <>
           <div className='mb-6 border-[0.5px] border-gray-100' />
           <div className='mb-8'>
-            <div className={titleClassName}>{t('common.account.langGeniusAccount')}</div>
-            <div className={descriptionClassName}>{t('common.account.langGeniusAccountTip')}</div>
+            <div className={titleClassName}>
+              {/* {t('common.account.langGeniusAccount')} */}
+              Agent 账号
+            </div>
+            <div className={descriptionClassName}>
+              {/* {t('common.account.langGeniusAccountTip')} */}
+              您的 Agent 账号和相关的用户数据。
+            </div>
             <Collapse
               title={`${t('common.account.showAppLength', { length: apps.length })}`}
               items={apps.map(app => ({ key: app.id, name: app.name }))}

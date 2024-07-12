@@ -12,7 +12,6 @@ from flask import Flask, current_app
 from flask_login import current_user
 from sqlalchemy.orm.exc import ObjectDeletedError
 
-from core.docstore.dataset_docstore import DatasetDocumentStore
 from core.errors.error import ProviderTokenNotInitError
 from core.llm_generator.llm_generator import LLMGenerator
 from core.model_manager import ModelInstance, ModelManager
@@ -20,12 +19,16 @@ from core.model_runtime.entities.model_entities import ModelType, PriceType
 from core.model_runtime.model_providers.__base.large_language_model import LargeLanguageModel
 from core.model_runtime.model_providers.__base.text_embedding_model import TextEmbeddingModel
 from core.rag.datasource.keyword.keyword_factory import Keyword
+from core.rag.docstore.dataset_docstore import DatasetDocumentStore
 from core.rag.extractor.entity.extract_setting import ExtractSetting
 from core.rag.index_processor.index_processor_base import BaseIndexProcessor
 from core.rag.index_processor.index_processor_factory import IndexProcessorFactory
 from core.rag.models.document import Document
-from core.splitter.fixed_text_splitter import EnhanceRecursiveCharacterTextSplitter, FixedRecursiveCharacterTextSplitter
-from core.splitter.text_splitter import TextSplitter
+from core.rag.splitter.fixed_text_splitter import (
+    EnhanceRecursiveCharacterTextSplitter,
+    FixedRecursiveCharacterTextSplitter,
+)
+from core.rag.splitter.text_splitter import TextSplitter
 from extensions.ext_database import db
 from extensions.ext_redis import redis_client
 from extensions.ext_storage import storage
@@ -41,8 +44,11 @@ class IndexingRunner:
     def __init__(self):
         self.storage = storage
         self.model_manager = ModelManager()
+        self.beta_parser_config = None
 
-    def run(self, dataset_documents: list[DatasetDocument]):
+    def run(self, dataset_documents: list[DatasetDocument], beta_parser_config: dict):
+        self.beta_parser_config = beta_parser_config
+        print("run beta_parser_config:", beta_parser_config)
         """Run the indexing process."""
         for dataset_document in dataset_documents:
             try:
@@ -120,6 +126,7 @@ class IndexingRunner:
             index_type = dataset_document.doc_form
             index_processor = IndexProcessorFactory(index_type).init_index_processor()
             # extract
+            print("run_in_splitting_status")
             text_docs = self._extract(index_processor, dataset_document, processing_rule.to_dict())
 
             # transform
@@ -283,11 +290,7 @@ class IndexingRunner:
                 if len(preview_texts) < 5:
                     preview_texts.append(document.page_content)
                 if indexing_technique == 'high_quality' or embedding_model_instance:
-                    embedding_model_type_instance = embedding_model_instance.model_type_instance
-                    embedding_model_type_instance = cast(TextEmbeddingModel, embedding_model_type_instance)
-                    tokens += embedding_model_type_instance.get_num_tokens(
-                        model=embedding_model_instance.model,
-                        credentials=embedding_model_instance.credentials,
+                    tokens += embedding_model_instance.get_text_embedding_num_tokens(
                         texts=[self.filter_string(document.page_content)]
                     )
 
@@ -340,7 +343,7 @@ class IndexingRunner:
     def _extract(self, index_processor: BaseIndexProcessor, dataset_document: DatasetDocument, process_rule: dict) \
             -> list[Document]:
         # load file
-        if dataset_document.data_source_type not in ["upload_file", "notion_import"]:
+        if dataset_document.data_source_type not in ["upload_file", "notion_import", "website_crawl"]:
             return []
 
         data_source_info = dataset_document.data_source_info_dict
@@ -354,10 +357,13 @@ class IndexingRunner:
                 one_or_none()
 
             if file_detail:
+                print("file detail")
+                print("self.beta_parser_config:", self.beta_parser_config)
                 extract_setting = ExtractSetting(
                     datasource_type="upload_file",
                     upload_file=file_detail,
-                    document_model=dataset_document.doc_form
+                    document_model=dataset_document.doc_form,
+                    beta_parser_config=self.beta_parser_config
                 )
                 text_docs = index_processor.extract(extract_setting, process_rule_mode=process_rule['mode'])
         elif dataset_document.data_source_type == 'notion_import':
@@ -372,6 +378,23 @@ class IndexingRunner:
                     "notion_page_type": data_source_info['type'],
                     "document": dataset_document,
                     "tenant_id": dataset_document.tenant_id
+                },
+                document_model=dataset_document.doc_form
+            )
+            text_docs = index_processor.extract(extract_setting, process_rule_mode=process_rule['mode'])
+        elif dataset_document.data_source_type == 'website_crawl':
+            if (not data_source_info or 'provider' not in data_source_info
+                    or 'url' not in data_source_info or 'job_id' not in data_source_info):
+                raise ValueError("no website import info found")
+            extract_setting = ExtractSetting(
+                datasource_type="website_crawl",
+                website_info={
+                    "provider": data_source_info['provider'],
+                    "job_id": data_source_info['job_id'],
+                    "tenant_id": dataset_document.tenant_id,
+                    "url": data_source_info['url'],
+                    "mode": data_source_info['mode'],
+                    "only_main_content": data_source_info['only_main_content']
                 },
                 document_model=dataset_document.doc_form
             )
@@ -551,7 +574,7 @@ class IndexingRunner:
                 document_qa_list = self.format_split_text(response)
                 qa_documents = []
                 for result in document_qa_list:
-                    qa_document = Document(page_content=result['question'], metadata=document_node.metadata.copy())
+                    qa_document = Document(page_content=result['question'], metadata=document_node.metadata.model_copy())
                     doc_id = str(uuid.uuid4())
                     hash = helper.generate_text_hash(result['question'])
                     qa_document.metadata['answer'] = result['answer']
@@ -655,10 +678,6 @@ class IndexingRunner:
         tokens = 0
         chunk_size = 10
 
-        embedding_model_type_instance = None
-        if embedding_model_instance:
-            embedding_model_type_instance = embedding_model_instance.model_type_instance
-            embedding_model_type_instance = cast(TextEmbeddingModel, embedding_model_type_instance)
         # create keyword index
         create_keyword_thread = threading.Thread(target=self._process_keyword_index,
                                                  args=(current_app._get_current_object(),
@@ -671,8 +690,7 @@ class IndexingRunner:
                     chunk_documents = documents[i:i + chunk_size]
                     futures.append(executor.submit(self._process_chunk, current_app._get_current_object(), index_processor,
                                                    chunk_documents, dataset,
-                                                   dataset_document, embedding_model_instance,
-                                                   embedding_model_type_instance))
+                                                   dataset_document, embedding_model_instance, self.beta_parser_config))
 
                 for future in futures:
                     tokens += future.result()
@@ -713,7 +731,7 @@ class IndexingRunner:
                 db.session.commit()
 
     def _process_chunk(self, flask_app, index_processor, chunk_documents, dataset, dataset_document,
-                       embedding_model_instance, embedding_model_type_instance):
+                       embedding_model_instance, beta_parser_config):
         with flask_app.app_context():
             # check document is paused
             self._check_document_paused_status(dataset_document.id)
@@ -721,16 +739,18 @@ class IndexingRunner:
             tokens = 0
             if dataset.indexing_technique == 'high_quality' or embedding_model_type_instance:
                 tokens += sum(
-                    embedding_model_type_instance.get_num_tokens(
-                        embedding_model_instance.model,
-                        embedding_model_instance.credentials,
+                    embedding_model_instance.get_text_embedding_num_tokens(
                         [document.page_content]
                     )
                     for document in chunk_documents
                 )
 
             # load index
-            index_processor.load(dataset, chunk_documents, with_keywords=False)
+            print("_process_chunk beta_parser_config:", beta_parser_config)
+            if beta_parser_config:
+                index_processor.load(dataset, chunk_documents, with_keywords=False, embedding_q_only=beta_parser_config['embedding_q_only'])
+            else:
+                index_processor.load(dataset, chunk_documents, with_keywords=False)
 
             document_ids = [document.metadata['doc_id'] for document in chunk_documents]
             db.session.query(DocumentSegment).filter(
@@ -807,6 +827,7 @@ class IndexingRunner:
                    text_docs: list[Document], doc_language: str, process_rule: dict) -> list[Document]:
         # get embedding model instance
         embedding_model_instance = None
+        print("process_rule: ", process_rule)
         if dataset.indexing_technique == 'high_quality':
             if dataset.embedding_model_provider:
                 embedding_model_instance = self.model_manager.get_model_instance(
@@ -823,7 +844,7 @@ class IndexingRunner:
 
         documents = index_processor.transform(text_docs, embedding_model_instance=embedding_model_instance,
                                               process_rule=process_rule, tenant_id=dataset.tenant_id,
-                                              doc_language=doc_language)
+                                              doc_language=doc_language, parser_type=self.beta_parser_config['parser_type'])
 
         return documents
 

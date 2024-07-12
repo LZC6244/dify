@@ -11,6 +11,7 @@ from core.rag.extractor.csv_extractor import CSVExtractor
 from core.rag.extractor.entity.datasource_type import DatasourceType
 from core.rag.extractor.entity.extract_setting import ExtractSetting
 from core.rag.extractor.excel_extractor import ExcelExtractor
+from core.rag.extractor.firecrawl.firecrawl_web_extractor import FirecrawlWebExtractor
 from core.rag.extractor.html_extractor import HtmlExtractor
 from core.rag.extractor.markdown_extractor import MarkdownExtractor
 from core.rag.extractor.notion_extractor import NotionExtractor
@@ -25,6 +26,8 @@ from core.rag.extractor.unstructured.unstructured_pptx_extractor import Unstruct
 from core.rag.extractor.unstructured.unstructured_text_extractor import UnstructuredTextExtractor
 from core.rag.extractor.unstructured.unstructured_xml_extractor import UnstructuredXmlExtractor
 from core.rag.extractor.word_extractor import WordExtractor
+from core.rag.extractor.ragflow.naive_extractor import NaiveExtractor
+from core.rag.extractor.ragflow.paper_extractor import PaperExtractor
 from core.rag.models.document import Document
 from extensions.ext_storage import storage
 from models.model import UploadFile
@@ -96,6 +99,27 @@ class ExtractProcessor:
                 etl_type = current_app.config['ETL_TYPE']
                 unstructured_api_url = current_app.config['UNSTRUCTURED_API_URL']
                 unstructured_api_key = current_app.config['UNSTRUCTURED_API_KEY']
+
+                if extract_setting.beta_parser_config:
+                    parser_type = extract_setting.beta_parser_config['parser_type']
+                else:
+                    parser_type = 'general'
+                print("+++++++++++++++++")
+                print("parser_type:",parser_type)
+                # beta parser
+                if parser_type != 'general':
+                    etl_type = 'ragflow'
+                    if file_extension == '.csv' and parser_type == "qa":
+                        extractor = CSVExtractor(file_path, autodetect_encoding=True, qa_mode=True)
+                    elif file_extension == '.pdf' and parser_type == "naive":
+                        url = current_app.config['DEEPDOC_API_URL'] + '/parse_pdf'
+                        extractor = NaiveExtractor(file_path, url)
+                    elif file_extension == '.pdf' and parser_type == "paper":
+                        url = current_app.config['DEEPDOC_API_URL'] + '/parse_paper'
+                        extractor = PaperExtractor(file_path, url)
+                    else:
+                        etl_type = 'dify'
+
                 if etl_type == 'Unstructured':
                     if file_extension == '.xlsx' or file_extension == '.xls':
                         extractor = ExcelExtractor(file_path)
@@ -126,7 +150,7 @@ class ExtractProcessor:
                         # txt
                         extractor = UnstructuredTextExtractor(file_path, unstructured_api_url) if is_automatic \
                             else TextExtractor(file_path, autodetect_encoding=True)
-                else:
+                elif etl_type == 'dify':
                     if file_extension == '.xlsx' or file_extension == '.xls':
                         extractor = ExcelExtractor(file_path)
                     elif file_extension == '.pdf':
@@ -154,5 +178,17 @@ class ExtractProcessor:
                 tenant_id=extract_setting.notion_info.tenant_id,
             )
             return extractor.extract()
+        elif extract_setting.datasource_type == DatasourceType.WEBSITE.value:
+            if extract_setting.website_info.provider == 'firecrawl':
+                extractor = FirecrawlWebExtractor(
+                    url=extract_setting.website_info.url,
+                    job_id=extract_setting.website_info.job_id,
+                    tenant_id=extract_setting.website_info.tenant_id,
+                    mode=extract_setting.website_info.mode,
+                    only_main_content=extract_setting.website_info.only_main_content
+                )
+                return extractor.extract()
+            else:
+                raise ValueError(f"Unsupported website provider: {extract_setting.website_info.provider}")
         else:
             raise ValueError(f"Unsupported datasource type: {extract_setting.datasource_type}")

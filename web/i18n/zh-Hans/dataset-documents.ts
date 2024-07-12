@@ -1,9 +1,10 @@
 const translation = {
   list: {
     title: '文档',
-    desc: '知识库的所有文件都在这里显示，整个知识库都可以链接到 Dify 引用或通过 Chat 插件进行索引。',
+    desc: '知识库的所有文件都在这里显示，整个知识库都可以链接到 Agent 引用或通过 Chat 插件进行索引。',
     addFile: '添加文件',
     addPages: '添加页面',
+    addUrl: '添加 URL',
     table: {
       header: {
         fileName: '文件名',
@@ -13,6 +14,8 @@ const translation = {
         status: '状态',
         action: '操作',
       },
+      rename: '重命名',
+      name: '名称',
     },
     action: {
       uploadFile: '上传新文件',
@@ -49,7 +52,7 @@ const translation = {
         tip: '您可以上传文件，从网站同步，或者从网络应用程序（如概念、GitHub 等）同步。',
       },
       sync: {
-        tip: 'Dify 会定期从您的 Notion 中下载文件并完成处理。',
+        tip: 'Agent 会定期从您的 Notion 中下载文件并完成处理。',
       },
     },
     delete: {

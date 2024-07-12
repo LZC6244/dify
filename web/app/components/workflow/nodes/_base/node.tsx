@@ -127,7 +127,7 @@ const BaseNode: FC<BaseNodeProps> = ({
           )
         }
         {
-          data.type !== BlockEnum.IfElse && data.type !== BlockEnum.QuestionClassifier && !data._isCandidate && (
+          data.type !== BlockEnum.IfElse && data.type !== BlockEnum.QuestionClassifier && data.type !== BlockEnum.KnowledgeFilter && !data._isCandidate && (
             <NodeSourceHandle
               id={id}
               data={data}

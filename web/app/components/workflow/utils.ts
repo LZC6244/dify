@@ -17,11 +17,14 @@ import type {
 } from './types'
 import { BlockEnum } from './types'
 import {
+  CUSTOM_NODE,
   ITERATION_NODE_Z_INDEX,
   NODE_WIDTH_X_OFFSET,
   START_INITIAL_POSITION,
 } from './constants'
 import type { QuestionClassifierNodeType } from './nodes/question-classifier/types'
+import type { QuestionTransformationNodeType } from './nodes/question-transformation/types'
+import type { KnowledgeFilterNodeType } from './nodes/knowledge-filter/types'
 import type { ToolNodeType } from './nodes/tool/types'
 import { CollectionType } from '@/app/components/tools/types'
 import { toolParametersToFormSchemas } from '@/app/components/tools/utils/to-form-schema'
@@ -105,7 +108,8 @@ export const initialNodes = (originNodes: Node[], originEdges: Edge[]) => {
   }, {} as Record<string, string[]>)
 
   return nodes.map((node) => {
-    node.type = 'custom'
+    if (!node.type)
+      node.type = CUSTOM_NODE
 
     const connectedEdges = getConnectedEdges([node], edges)
     node.data._connectedSourceHandleIds = connectedEdges.filter(edge => edge.source === node.id).map(edge => edge.sourceHandle || 'source')
@@ -128,6 +132,23 @@ export const initialNodes = (originNodes: Node[], originEdges: Edge[]) => {
       node.data._targetBranches = (node.data as QuestionClassifierNodeType).classes.map((topic) => {
         return topic
       })
+    }
+
+    if (node.data.type === BlockEnum.KnowledgeFilter) {
+      node.data._targetBranches = [
+        {
+          id: '1',
+          name: 'high_score_results',
+        },
+        {
+          id: '2',
+          name: 'mid_score_results',
+        },
+        {
+          id: '3',
+          name: 'low_score_results',
+        },
+      ]
     }
 
     if (node.data.type === BlockEnum.Iteration)
@@ -189,7 +210,7 @@ export const initialEdges = (originEdges: Edge[], originNodes: Node[]) => {
 export const getLayoutByDagre = (originNodes: Node[], originEdges: Edge[]) => {
   const dagreGraph = new dagre.graphlib.Graph()
   dagreGraph.setDefaultEdgeLabel(() => ({}))
-  const nodes = cloneDeep(originNodes).filter(node => !node.parentId)
+  const nodes = cloneDeep(originNodes).filter(node => !node.parentId && node.type === CUSTOM_NODE)
   const edges = cloneDeep(originEdges).filter(edge => !edge.data?.isInIteration)
   dagreGraph.setGraph({
     rankdir: 'LR',
@@ -222,6 +243,8 @@ export const canRunBySingle = (nodeType: BlockEnum) => {
     || nodeType === BlockEnum.Code
     || nodeType === BlockEnum.TemplateTransform
     || nodeType === BlockEnum.QuestionClassifier
+    || nodeType === BlockEnum.QuestionTransformation
+    || nodeType === BlockEnum.KnowledgeFilter
     || nodeType === BlockEnum.HttpRequest
     || nodeType === BlockEnum.Tool
     || nodeType === BlockEnum.ParameterExtractor
@@ -280,10 +303,10 @@ export const getNodesConnectedSourceOrTargetHandleIdsMap = (changes: ConnectedSo
   return nodesConnectedSourceOrTargetHandleIdsMap
 }
 
-export const generateNewNode = ({ data, position, id, zIndex, ...rest }: Omit<Node, 'id'> & { id?: string }) => {
+export const generateNewNode = ({ data, position, id, zIndex, type, ...rest }: Omit<Node, 'id'> & { id?: string }) => {
   return {
     id: id || `${Date.now()}`,
-    type: 'custom',
+    type: type || CUSTOM_NODE,
     data,
     position,
     targetPosition: Position.Left,

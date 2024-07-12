@@ -1,7 +1,7 @@
 ![cover-v5-optimized](https://github.com/langgenius/dify/assets/13230914/f9e19af5-61ba-4119-b926-d10c4c06ebab)
 
 <p align="center">
-  <a href="https://cloud.dify.ai">Dify Cloud</a> ·
+  <a href="http://127.0.0.1">Dify Cloud</a> ·
   <a href="https://docs.dify.ai/getting-started/install-self-hosted">Auto-alojamiento</a> ·
   <a href="https://docs.dify.ai">Documentación</a> ·
   <a href="https://cal.com/guchenhe/dify-demo">Programar demostración</a>
@@ -192,10 +192,11 @@ Si necesitas personalizar la configuración, consulta los comentarios en nuestro
 
 . Después de realizar los cambios, ejecuta `docker-compose up -d` nuevamente. Puedes ver la lista completa de variables de entorno [aquí](https://docs.dify.ai/getting-started/install-self-hosted/environments).
 
-Si deseas configurar una instalación altamente disponible, hay [Gráficos Helm](https://helm.sh/) contribuidos por la comunidad que permiten implementar Dify en Kubernetes.
+Si desea configurar una configuración de alta disponibilidad, la comunidad proporciona [Gráficos Helm](https://helm.sh/) y archivos YAML, a través de los cuales puede desplegar Dify en Kubernetes.
 
 - [Gráfico Helm por @LeoQuote](https://github.com/douban/charts/tree/master/charts/dify)
 - [Gráfico Helm por @BorisPolonsky](https://github.com/BorisPolonsky/dify-helm)
+- [Ficheros YAML por @Winson-030](https://github.com/Winson-030/dify-kubernetes)
 
 
 ## Contribuir

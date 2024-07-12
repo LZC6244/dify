@@ -26,7 +26,7 @@ const NextStep = ({
   const toolIcon = useToolIcon(data)
   const store = useStoreApi()
   const branches = data._targetBranches || []
-  const nodeWithBranches = data.type === BlockEnum.IfElse || data.type === BlockEnum.QuestionClassifier
+  const nodeWithBranches = data.type === BlockEnum.IfElse || data.type === BlockEnum.QuestionClassifier || data.type === BlockEnum.KnowledgeFilter
   const edges = useEdges()
   const outgoers = getOutgoers(selectedNode as Node, store.getState().getNodes(), edges)
   const connectedEdges = getConnectedEdges([selectedNode] as Node[], edges).filter(edge => edge.source === selectedNode!.id)
@@ -54,7 +54,7 @@ const NextStep = ({
           !nodeWithBranches && !outgoers.length && (
             <Add
               nodeId={selectedNode!.id}
-              nodeType={selectedNode!.data.type}
+              nodeData={selectedNode!.data}
               sourceHandle='source'
             />
           )
@@ -85,7 +85,7 @@ const NextStep = ({
                       <Add
                         key={branch.id}
                         nodeId={selectedNode!.id}
-                        nodeType={selectedNode!.data.type}
+                        nodeData={selectedNode!.data}
                         sourceHandle={branch.id}
                         branchName={branch.name}
                       />
