@@ -17,12 +17,35 @@ const SignIn = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const [systemFeatures, setSystemFeatures] = useState<SystemFeatures>(defaultSystemFeatures)
 
+  const newStar = () => {
+    const d = document.createElement('div')
+    d.innerHTML = `<div class="${style.start}">`
+    return d.firstChild!
+  }
+
+  const createStar = () => {
+    for (let i = 0; i <= 80; i++) {
+      const star: any = newStar()
+      star.style.top = `${Math.random() * 100}%`
+      star.style.left = `${Math.random() * 100}%`
+      star.style.width = '3px'
+      star.style.height = '3px'
+      star.style.borderRadius = '50%'
+      star.style.position = 'absolute'
+      star.style.background = '#FFFFFF'
+      star.style.boxShadow = '0px 0px 2px 2px #535FED'
+      star.animation = 'none'
+      document.getElementById('loginMain')!.appendChild(star)
+    }
+  }
+
   useEffect(() => {
     getSystemFeatures().then((res) => {
       setSystemFeatures(res)
     }).finally(() => {
       setLoading(false)
     })
+    createStar()
   }, [])
 
   return (
@@ -47,13 +70,13 @@ gtag('config', 'AW-11217955271"');
       <div className={cn(
         style.background,
         'flex w-full min-h-screen',
-        'sm:p-4 lg:p-8',
+        // 'sm:p-4 lg:p-8',
         'gap-x-20',
         'justify-center lg:justify-start',
       )}>
-        <div className={
+        <div id='loginMain' className={
           cn(
-            'flex w-full flex-col bg-white shadow rounded-2xl shrink-0',
+            'flex w-full flex-col shadow  shrink-0 relative justify-center',
             'space-between',
           )
         }>
@@ -71,14 +94,31 @@ gtag('config', 'AW-11217955271"');
             </div>
           )}
 
-          {!loading && !systemFeatures.sso_enforced_for_signin && (
-            <>
-              <Forms />
-              <div className='px-8 py-6 text-sm font-normal text-gray-500'>
-                © {new Date().getFullYear()} Zhuoshi Future(Beijing)Technology Co., Ltd. All rights reserved.
-              </div>
-            </>
-          )}
+          <div className='flex flex-row items-center justify-center z-50'>
+            <div className='relative min-w-[564px] h-[440px]'>
+              <div className={cn(style.star, style.glow, style.one)}></div>
+              <div className={style.line}></div>
+              <div className={cn(style.star, style.glow, style.two)}></div>
+              <div className={style.line2}></div>
+              <div className={cn(style.star, style.glow, style.three)}></div>
+              <div className={style.line3}></div>
+              <div className={cn(style.star, style.glow, style.four)}></div>
+              <div className={style.line4}></div>
+              <div className={cn(style.star, style.glow, style.five)}></div>
+              <div className={style.line5}></div>
+              <div className={cn(style.star, style.glow, style.six)}></div>
+              <div className={style.line6}></div>
+              <div className={cn(style.star, style.glow, style.seven)}></div>
+            </div>
+            {!loading && !systemFeatures.sso_enforced_for_signin && (
+              <>
+                <Forms />
+                {/* <div className='px-8 py-6 text-sm font-normal text-gray-500'>
+                  © {new Date().getFullYear()} Zhuoshi Future(Beijing)Technology Co., Ltd. All rights reserved.
+                </div> */}
+              </>
+            )}
+          </div>
 
           {!loading && systemFeatures.sso_enforced_for_signin && (
             <UserSSOForm protocol={systemFeatures.sso_enforced_for_signin_protocol} />
