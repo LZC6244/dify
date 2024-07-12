@@ -780,7 +780,7 @@ class DocumentService:
             if document_ids:
                 document_indexing_task.delay(dataset.id, document_ids, beta_parser_config)
             if duplicate_document_ids:
-                duplicate_document_indexing_task.delay(dataset.id, duplicate_document_ids)
+                duplicate_document_indexing_task.delay(dataset.id, duplicate_document_ids, beta_parser_config)
 
         return documents, batch
 
