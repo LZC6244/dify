@@ -7,6 +7,8 @@ services:
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
+      DEBUG: True
+      SERVER_WORKER_CLASS: sync
       CELERY_TASK_DEFAULT_QUEUE: 'dify_prd'
       # Startup mode, 'api' starts the API server.
       MODE: api
@@ -215,6 +217,8 @@ services:
     environment:
       # celery 任务队列名称，请在['dify_dev','dify_pre', 'dify_prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
+      DEBUG: True
+      SERVER_WORKER_CLASS: sync
       CELERY_TASK_DEFAULT_QUEUE: 'dify_prd'
       CONSOLE_WEB_URL: 'https://agent-x.maas.com.cn/'
       # Startup mode, 'worker' starts the Celery worker for processing the queue.
