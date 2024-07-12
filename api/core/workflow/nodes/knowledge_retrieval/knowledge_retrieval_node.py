@@ -73,6 +73,46 @@ class KnowledgeRetrievalNode(BaseNode):
                 error=str(e)
             )
 
+    def _get_segments(self, segment: DocumentSegment, segment_position: int) -> DocumentSegment:
+        segments = DocumentSegment.query.filter(
+            DocumentSegment.dataset_id == segment.dataset_id,
+            DocumentSegment.document_id == segment.document_id,
+            DocumentSegment.completed_at.isnot(None),
+            DocumentSegment.status == 'completed',
+            DocumentSegment.enabled == True,
+            DocumentSegment.position == segment_position
+        ).all()
+        if not segments:
+            return None
+        return segments[0]
+    
+    def _windows_search(self, segments: list[DocumentSegment]) -> list[DocumentSegment]:
+        if not segments:
+            return []
+        
+        id_sets = set()  
+
+        for index, segment in enumerate(segments):
+            if segment.id in id_sets:
+                del segments[index]
+                continue
+            id_sets.add(segment.id)
+            front_page = self._get_segments(segment, segment.position - 1)
+            back_page = self._get_segments(segment, segment.position + 1)
+            context = segment.get_sign_content()
+            if front_page:
+                id_sets.update(front_page.id)
+                context += front_page.get_sign_content()
+            if back_page:
+                id_sets.update(back_page.id)
+                context += back_page.get_sign_content()
+            segment.content = context
+            segments[index] = segment
+
+        return segments
+
+
+
     def _fetch_dataset_retriever(self, node_data: KnowledgeRetrievalNodeData, query: str) -> list[
         dict[str, Any]]:
         available_datasets = []
@@ -171,19 +211,10 @@ class KnowledgeRetrievalNode(BaseNode):
                 sorted_segments = sorted(segments,
                                          key=lambda segment: index_node_id_to_position.get(segment.index_node_id,
                                                                                            float('inf')))
+                if False:
+                    sorted_segments = self._windows_search(sorted_segments)
 
                 for segment in sorted_segments:
-       
-                    # temp_segment = DocumentSegment.query.filter(
-                    #     DocumentSegment.dataset_id == segment.dataset_id,
-                    #     DocumentSegment.document_id == segment.document_id,
-                    #     DocumentSegment.completed_at.isnot(None),
-                    #     DocumentSegment.status == 'completed',
-                    #     DocumentSegment.enabled == True,
-                    #     DocumentSegment.position == segment.position+1
-                    # ).all()
-                    # print("temp segment")
-                    # print(temp_segment[0].__dict__)
                     dataset = Dataset.query.filter_by(
                         id=segment.dataset_id
                     ).first()
