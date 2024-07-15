@@ -11,6 +11,8 @@ services:
     # command: bash -x -c /app/api/docker/debug.sh
     restart: always
     environment:
+      DEBUG: True
+      # GEVENT_SUPPORT
       # Startup mode, 'api' starts the API server.
       MODE: api
       # The log level for the application. Supported values are `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`
@@ -119,7 +121,7 @@ services:
       # The Qdrant server gRPC mode PORT.
       QDRANT_GRPC_PORT: 6334
       # Milvus configuration Only available when VECTOR_STORE is `milvus`.
-      MILVUS_DATABASE: dify_debug
+      MILVUS_DATABASE: dify_dev
       # The milvus host.
       MILVUS_HOST: 172.26.0.1
       # The milvus host.
@@ -202,10 +204,9 @@ services:
       - ../volumes/app/storage:/app/api/storage
       - ../../api:/app/api
       - ../../api/zs.env:/app/api/.env
-      - ../../api/docker/entrypoint.sh:/app/api/entrypoint.sh
     # uncomment to expose dify-api port to host
     ports:
-      # - "5022:5001"
+      - "5022:5001"
       - "5678:5678"
     networks:
       - ssrf_proxy_network
@@ -218,6 +219,8 @@ services:
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-34d7928fe20879799dd9e675b65968dc6633027f
     restart: always
     environment:
+      DEBUG: True
+      # GEVENT_SUPPORT
       # celery 任务队列名称，请在['dify_dev','dify_pre', 'dify_prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
       CELERY_TASK_DEFAULT_QUEUE: 'dify_debug'
@@ -284,7 +287,7 @@ services:
       # The Qdrant server gRPC mode PORT.
       QDRANT_GRPC_PORT: 6334
       # Milvus configuration Only available when VECTOR_STORE is `milvus`.
-      MILVUS_DATABASE: dify_debug
+      MILVUS_DATABASE: dify_dev
       # The milvus host.
       MILVUS_HOST: 172.26.0.1
       # The milvus host.
