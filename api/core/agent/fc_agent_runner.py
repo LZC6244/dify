@@ -341,7 +341,7 @@ class FunctionCallAgentRunner(BaseAgentRunner):
             tool_calls.append((
                 prompt_message.id,
                 prompt_message.function.name,
-                json.loads(prompt_message.function.arguments),
+                json.loads(prompt_message.function.arguments or '{}'),
             ))
 
         return tool_calls
@@ -358,7 +358,7 @@ class FunctionCallAgentRunner(BaseAgentRunner):
             tool_calls.append((
                 prompt_message.id,
                 prompt_message.function.name,
-                json.loads(prompt_message.function.arguments),
+                json.loads(prompt_message.function.arguments or '{}'),
             ))
 
         return tool_calls
