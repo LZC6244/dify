@@ -2,7 +2,7 @@
 
 set -e -x
 
-echo "[api-debug] 启动调试模式"
+echo "[api-debug] 启动部署模式"
 
 if [[ "${MIGRATION_ENABLED}" == "true" ]]; then
   echo "Running migrations"
