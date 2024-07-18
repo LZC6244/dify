@@ -3,11 +3,14 @@ version: '3'
 services:
   # API service
   api:
+    entrypoint: ["/bin/bash"]
+    command: ["-x", "-c", "/app/api/docker/zs_entrypoint.sh" ]
     container_name: dify-prd-api-0_6_11
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
-      DEBUG: True
+      DEBUG: true
+      SERVER_WORKER_AMOUNT: 5
       SERVER_WORKER_CLASS: sync
       CELERY_WORKER_CLASS: prefork
       CELERY_TASK_DEFAULT_QUEUE: 'dify_prd'
@@ -218,7 +221,7 @@ services:
     environment:
       # celery 任务队列名称，请在['dify_dev','dify_pre', 'dify_prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
-      DEBUG: True
+      DEBUG: true
       SERVER_WORKER_CLASS: sync
       CELERY_WORKER_CLASS: prefork
       CELERY_TASK_DEFAULT_QUEUE: 'dify_prd'

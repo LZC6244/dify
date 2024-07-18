@@ -10,7 +10,7 @@ services:
     # command: bash -x -c /app/api/docker/debug.sh
     restart: always
     environment:
-      DEBUG: True
+      DEBUG: true
       # GEVENT_SUPPORT
       # Startup mode, 'api' starts the API server.
       MODE: api
@@ -220,7 +220,7 @@ services:
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-306bdf6ef92af954eca72a0ddd0e53ae2aefdcb9
     restart: always
     environment:
-      DEBUG: True
+      DEBUG: true
       # GEVENT_SUPPORT
       # celery 任务队列名称，请在['dify_dev','dify_pre', 'dify_prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
