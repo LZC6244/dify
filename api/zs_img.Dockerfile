@@ -12,6 +12,6 @@ COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 RUN pip install --upgrade pip
-RUN pip install debugpy
+RUN pip install debugpy scikit-learn==1.5.1
 
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]

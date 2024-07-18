@@ -113,7 +113,7 @@ boto3 = "1.28.17"
 cachetools = "~5.3.0"
 weaviate-client = "~3.21.0"
 mailchimp-transactional = "~1.0.50"
-scikit-learn = "1.2.2"
+scikit-learn = "1.5.1"
 sentry-sdk = {version = "~1.39.2", extras = ["flask"]}
 sympy = "1.12"
 jieba = "0.42.1"
