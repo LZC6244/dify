@@ -9,6 +9,7 @@ services:
     environment:
       DEBUG: True
       SERVER_WORKER_CLASS: sync
+      CELERY_WORKER_CLASS: prefork
       CELERY_TASK_DEFAULT_QUEUE: 'dify_prd'
       # Startup mode, 'api' starts the API server.
       MODE: api
@@ -219,6 +220,7 @@ services:
       # 可以任意名称，但是不便于管理，不传默认为: dify
       DEBUG: True
       SERVER_WORKER_CLASS: sync
+      CELERY_WORKER_CLASS: prefork
       CELERY_TASK_DEFAULT_QUEUE: 'dify_prd'
       CONSOLE_WEB_URL: 'https://agent-x.maas.com.cn'
       # Startup mode, 'worker' starts the Celery worker for processing the queue.
