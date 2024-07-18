@@ -2,7 +2,7 @@
 
 set -e -x
 
-echo "启动调试模式"
+echo "[api-debug] 启动调试模式"
 
 cd /app/api
 
