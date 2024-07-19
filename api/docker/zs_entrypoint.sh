@@ -27,3 +27,4 @@ elif [[ "${MODE}" == "api" ]]; then
     --timeout ${GUNICORN_TIMEOUT:-200} \
     --preload \
     app:app
+fi
