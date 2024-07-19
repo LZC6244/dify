@@ -224,7 +224,7 @@ services:
       # celery 任务队列名称，请在['dify_dev','dify_pre', 'dify_prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
       DEBUG: true
-      SERVER_WORKER_CLASS: sync
+      CELERY_WORKER_AMOUNT: 3
       CELERY_WORKER_CLASS: prefork
       CELERY_TASK_DEFAULT_QUEUE: 'dify_prd'
       CONSOLE_WEB_URL: 'https://agent-x.maas.com.cn'
