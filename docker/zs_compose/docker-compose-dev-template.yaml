@@ -216,6 +216,8 @@ services:
   # The Celery worker for processing the queue.
   worker:
     container_name: dify-dev-worker-0_6_11
+    entrypoint: ["/bin/bash"]
+    command: ["-x", "-c", "/app/api/docker/zs_entrypoint.sh" ]
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:

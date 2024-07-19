@@ -11,6 +11,8 @@ services:
     restart: always
     environment:
       DEBUG: true
+      CELERY_TASK_DEFAULT_QUEUE: 'dify_debug'
+      CELERY_WORKER_CLASS: prefork
       # GEVENT_SUPPORT
       # Startup mode, 'api' starts the API server.
       MODE: api
@@ -225,6 +227,7 @@ services:
       # celery 任务队列名称，请在['dify_dev','dify_pre', 'dify_prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
       CELERY_TASK_DEFAULT_QUEUE: 'dify_debug'
+      CELERY_WORKER_CLASS: prefork
       CONSOLE_WEB_URL: 'http://61.241.103.72:5281'
       # Startup mode, 'worker' starts the Celery worker for processing the queue.
       MODE: worker

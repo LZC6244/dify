@@ -7,5 +7,9 @@ echo "[worker-debug] 启动调试模式"
 cd /app/api
 
 
+# python -m debugpy --wait-for-client --listen 0.0.0.0:5680 -m \
+# celery -A app.celery worker -P prefork -c 1 --loglevel INFO -Q dataset,generation,mail
+
+
 python -m debugpy --wait-for-client --listen 0.0.0.0:5680 -m \
-celery -A app.celery worker -P prefork -c 1 --loglevel INFO -Q dataset,generation,mail
+celery -A app.celery worker -P prefork -c 1 --loglevel INFO -Q ${CELERY_TASK_DEFAULT_QUEUE}:dataset,${CELERY_TASK_DEFAULT_QUEUE}:generation,${CELERY_TASK_DEFAULT_QUEUE}:mail
