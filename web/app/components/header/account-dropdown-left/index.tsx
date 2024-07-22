@@ -1,7 +1,7 @@
 'use client'
 import { useTranslation } from 'react-i18next'
 import { Fragment, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useContext } from 'use-context-selector'
 import { Menu, Transition } from '@headlessui/react'
 import Image from 'next/image'
@@ -23,6 +23,7 @@ export default function AppSelector({ isMobile }: IAppSelecotr) {
   `
   const router = useRouter()
   const [aboutVisible, setAboutVisible] = useState(false)
+  const params = useSearchParams()
 
   const { locale } = useContext(I18n)
   const { t } = useTranslation()
@@ -82,13 +83,17 @@ export default function AppSelector({ isMobile }: IAppSelecotr) {
                     shadow-lg
                   "
                 >
-                  {/* <div className="px-1 py-1">
-                    <Menu.Item>
-                      <div className={itemClassName} onClick={() => setShowAccountSettingModal({ payload: 'account' })}>
-                        <div>{t('common.userProfile.settings')}</div>
+                  {
+                    params.get('developer')
+                      ? <div className="px-1 py-1">
+                        <Menu.Item>
+                          <div className={itemClassName} onClick={() => setShowAccountSettingModal({ payload: 'account' })}>
+                            <div>{t('common.userProfile.settings')}</div>
+                          </div>
+                        </Menu.Item>
                       </div>
-                    </Menu.Item>
-                  </div> */}
+                      : null
+                  }
                   <Menu.Item>
                     <div className='p-1' onClick={() => handleLogout()}>
                       <div
