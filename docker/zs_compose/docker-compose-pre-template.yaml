@@ -36,7 +36,7 @@ services:
       # The URL prefix for Service API endpoints, refers to the base URL of the current API service if api domain is
       # different from console domain.
       # example: http://api.dify.ai
-      SERVICE_API_URL: ''
+      SERVICE_API_URL: 'https://agent-x-pre.maas.com.cn'
       # The URL prefix for Web APP frontend, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app

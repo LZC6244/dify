@@ -4,10 +4,10 @@ services:
   # API service
   api:
     container_name: dify-debug-api
+    # 不进入 debug 模式时，注释掉 entrypoint 和 command 即可
     entrypoint: ["/bin/bash"]
     command: ["-x", "-c", "/app/api/docker/debug_api.sh" ]
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-306bdf6ef92af954eca72a0ddd0e53ae2aefdcb9
-    # command: bash -x -c /app/api/docker/debug.sh
     restart: always
     environment:
       DEBUG: true
@@ -217,6 +217,7 @@ services:
   # The Celery worker for processing the queue.
   worker:
     container_name: dify-debug-worker
+    # 不进入 debug 模式时，注释掉 entrypoint 和 command 即可
     entrypoint: ["/bin/bash"]
     command: ["-x", "-c", "/app/api/docker/debug_worker.sh" ]
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-306bdf6ef92af954eca72a0ddd0e53ae2aefdcb9
