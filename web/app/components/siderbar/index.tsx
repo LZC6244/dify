@@ -21,7 +21,7 @@ const navClassName = `
 
 const Sidebar = () => {
   return (
-    <div className={classNames('sidebar h-full flex flex-col transition-all duration-300 px-[20px]')}>
+    <div className={classNames('sidebar h-auto flex flex-col transition-all duration-300 px-[20px]')}>
       <Link href="/apps" className='flex items-center px-3 '>
         {/* <LogoSite className='mt-6' /> */}
         <Image src={logo} className='w-[166px] h-[50px] mt-6' alt='' />

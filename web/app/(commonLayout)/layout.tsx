@@ -27,7 +27,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                   background: 'linear-gradient( 180deg, #EBF3FF 0%, #E8E9FF 100%)',
                 }}>
                   <Sidebar />
-                  <div className='flex-1 h-full overflow-y-auto'>
+                  <div className='flex-1 h-auto overflow-y-auto'>
                     {children}
                   </div>
                 </div>
