@@ -7,7 +7,7 @@ services:
     # 不进入 debug 模式时，注释掉 entrypoint 和 command 即可
     entrypoint: ["/bin/bash"]
     command: ["-x", "-c", "/app/api/docker/debug_api.sh" ]
-    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-306bdf6ef92af954eca72a0ddd0e53ae2aefdcb9
+    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-55f1913519c7689c371ff9b2231ea8f7143b2941
     restart: always
     environment:
       DEBUG: true
@@ -36,7 +36,7 @@ services:
       # The URL prefix for Service API endpoints, refers to the base URL of the current API service if api domain is
       # different from console domain.
       # example: http://api.dify.ai
-      SERVICE_API_URL: ''
+      SERVICE_API_URL: 'http://61.241.103.72:5281'
       # The URL prefix for Web APP frontend, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app
@@ -220,7 +220,7 @@ services:
     # 不进入 debug 模式时，注释掉 entrypoint 和 command 即可
     entrypoint: ["/bin/bash"]
     command: ["-x", "-c", "/app/api/docker/debug_worker.sh" ]
-    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-306bdf6ef92af954eca72a0ddd0e53ae2aefdcb9
+    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-55f1913519c7689c371ff9b2231ea8f7143b2941
     restart: always
     environment:
       DEBUG: true
@@ -373,7 +373,7 @@ services:
   # Frontend web application.
   web:
     container_name: dify-debug-web
-    image: 111.19.168.169:8389/zskj/frontend/zs-dify-web:feature-v2.0.0-306bdf6ef92af954eca72a0ddd0e53ae2aefdcb9
+    image: 111.19.168.169:8389/zskj/frontend/zs-dify-web:feature-v2.0.0-55f1913519c7689c371ff9b2231ea8f7143b2941
     # image: langgenius/dify-web:0.6.11
     restart: always
     environment:
