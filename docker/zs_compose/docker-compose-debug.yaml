@@ -11,7 +11,7 @@ services:
     restart: always
     environment:
       DEBUG: true
-      CELERY_TASK_DEFAULT_QUEUE: 'dify_debug_mjg'
+      CELERY_TASK_DEFAULT_QUEUE: 'dify_debug'
       CELERY_WORKER_CLASS: prefork
       # GEVENT_SUPPORT
       # Startup mode, 'api' starts the API server.
@@ -25,22 +25,22 @@ services:
       # The base URL of console application web frontend, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_WEB_URL: 'http://127.0.0.1:5281'
+      CONSOLE_WEB_URL: 'http://61.241.103.72:5281'
       # Password for admin user initialization.
       # If left unset, admin user will not be prompted for a password when creating the initial admin account.
       INIT_PASSWORD: ''
       # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_API_URL: 'http://127.0.0.1:5281'
+      CONSOLE_API_URL: 'http://61.241.103.72:5281'
       # The URL prefix for Service API endpoints, refers to the base URL of the current API service if api domain is
       # different from console domain.
       # example: http://api.dify.ai
-      SERVICE_API_URL: 'http://127.0.0.1:5281'
+      SERVICE_API_URL: 'http://61.241.103.72:5281'
       # The URL prefix for Web APP frontend, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app
-      APP_WEB_URL: 'http://127.0.0.1:5281'
+      APP_WEB_URL: 'http://61.241.103.72:5281'
       # File preview or download Url prefix.
       # used to display File preview or download Url to the front-end or as Multi-model inputs;
       # Url is signed and has expiration time.
@@ -227,9 +227,9 @@ services:
       # GEVENT_SUPPORT
       # celery 任务队列名称，请在['dify_dev','dify_pre', 'dify_prd'] 中选择一个
       # 可以任意名称，但是不便于管理，不传默认为: dify
-      CELERY_TASK_DEFAULT_QUEUE: 'dify_debug_mjg'
+      CELERY_TASK_DEFAULT_QUEUE: 'dify_debug'
       CELERY_WORKER_CLASS: prefork
-      CONSOLE_WEB_URL: 'http://127.0.0.1:5281'
+      CONSOLE_WEB_URL: 'http://61.241.103.72:5281'
       # Startup mode, 'worker' starts the Celery worker for processing the queue.
       MODE: worker
 
@@ -380,7 +380,7 @@ services:
       # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
-      CONSOLE_API_URL: 'http://127.0.0.1:5281'
+      CONSOLE_API_URL: 'http://61.241.103.72:5281'
       # The URL for Web APP api server, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app
