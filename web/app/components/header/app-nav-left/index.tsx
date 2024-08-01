@@ -35,7 +35,7 @@ const AppNavLeft = ({
           : <Explore className='mr-2 w-4 h-4' />
       } */}
       <span className={classNames('text-[16px]')}>
-        工作室
+        应用
       </span>
     </Link>
   )
