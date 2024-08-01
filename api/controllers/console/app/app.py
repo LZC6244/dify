@@ -142,14 +142,9 @@ class AppApi(Resource):
 
         # 同时更新site数据，避免发版后分享出去的名字和描述不一致
         appSite = AppSite()
-        appSite.post({
-            'app_id': app_model.id,
-            'id': app_model.id,
-            'title': app_model.name,
-            'icon': app_model.icon,
-            'icon_background': app_model.icon_background,
-            'description': app_model.description,
-        })
+        app_id = app_model.id
+        app_model['title'] = args['name']
+        appSite.post(app_id, app_model)
 
         return app_model
 
