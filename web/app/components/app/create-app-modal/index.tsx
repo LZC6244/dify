@@ -37,7 +37,7 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
 
   const [appMode, setAppMode] = useState<AppMode>('chat')
   const [showChatBotType, setShowChatBotType] = useState<boolean>(true)
-  const [emoji, setEmoji] = useState({ icon: '🤖', icon_background: '#FFEAD5' })
+  const [emoji, setEmoji] = useState({ icon: '🧭', icon_background: '#FFEAD5' })
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -281,7 +281,7 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
             setShowEmojiPicker(false)
           }}
           onClose={() => {
-            setEmoji({ icon: '🤖', icon_background: '#FFEAD5' })
+            setEmoji({ icon: '🧭', icon_background: '#FFEAD5' })
             setShowEmojiPicker(false)
           }}
         />}
