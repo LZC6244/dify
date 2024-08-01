@@ -55,8 +55,9 @@ const SideBar: FC<IExploreSideBarProps> = ({
   const isMobile = media === MediaType.mobile
 
   const fetchInstalledAppList = async () => {
-    const { installed_apps }: any = await doFetchInstalledAppList()
-    setInstalledApps(installed_apps)
+    // const { installed_apps }: any = await doFetchInstalledAppList()
+    const { published_apps }: any = await doFetchInstalledAppList()
+    setInstalledApps(published_apps)
   }
 
   const [showConfirm, setShowConfirm] = useState(false)

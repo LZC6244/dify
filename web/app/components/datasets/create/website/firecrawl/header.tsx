@@ -29,7 +29,7 @@ const Header: FC<Props> = ({
         </div>
       </div>
       <a
-        href='https://docs.firecrawl.dev/introduction'
+        href='/'
         target='_blank' rel='noopener noreferrer'
         className='flex items-center text-xs text-primary-600'
       >
