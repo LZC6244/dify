@@ -20,7 +20,7 @@ from libs.login import login_required
 from models.model import App, AppMode, AppModelConfig
 from services.app_service import AppService
 from services.tag_service import TagService
-from .site import AppSite
+# from .site import AppSite
 
 ALLOW_CREATE_APP_MODES = ['chat', 'agent-chat', 'advanced-chat', 'workflow', 'completion']
 
@@ -141,10 +141,10 @@ class AppApi(Resource):
         app_model = app_service.update_app(app_model, args)
 
         # 同时更新site数据，避免发版后分享出去的名字和描述不一致
-        appSite = AppSite()
-        app_id = app_model.id
-        app_model['title'] = args['name']
-        appSite.post(app_id, app_model)
+        # appSite = AppSite()
+        # app_id = app_model.id
+        # app_model['title'] = args['name']
+        # appSite.post(app_id, app_model)
 
         return app_model
 
