@@ -84,6 +84,8 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
         icon_background,
         description,
       })
+      console.log(1)
+
       const [err] = await asyncRunSafe<App>(
         updateAppSiteConfig({
           url: `/apps/${app.id}/site`,
