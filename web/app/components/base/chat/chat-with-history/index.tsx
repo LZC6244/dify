@@ -8,7 +8,11 @@ import { useAsyncEffect } from 'ahooks'
 import { useThemeContext } from '../embedded-chatbot/theme/theme-context'
 =======
 import Image from 'next/image'
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
 import {
   ChatWithHistoryContext,
   useChatWithHistoryContext,
@@ -46,7 +50,11 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
     handleNewConversation,
     // handleStartChat,
     currentConversationId,
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
   } = useChatWithHistoryContext()
 
   const chatReady = (!showConfigPanelBeforeChat || !!appPrevChatList.length)

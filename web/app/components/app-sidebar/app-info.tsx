@@ -34,7 +34,11 @@ import DSLExportConfirmModal from '@/app/components/workflow/dsl-export-confirm-
 import { fetchWorkflowDraft } from '@/service/workflow'
 =======
 import { asyncRunSafe } from '@/utils'
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
 
 export type IAppInfoProps = {
   expand: boolean

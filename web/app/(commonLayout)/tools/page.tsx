@@ -26,7 +26,11 @@ const Layout: FC = () => {
 =======
     document.title = `${t('tools.title')} - 卓世科技`
   }, [])
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
 
   return <ToolProviderList />
 }

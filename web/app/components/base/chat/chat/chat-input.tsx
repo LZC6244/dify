@@ -23,7 +23,11 @@ import { CssTransform } from '../embedded-chatbot/theme/utils'
 =======
 import sendActiveImg from './send_h.svg'
 import sendImg from './send.svg'
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
 import TooltipPlus from '@/app/components/base/tooltip-plus'
 import { ToastContext } from '@/app/components/base/toast'
 import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
@@ -144,7 +148,11 @@ const ChatInput: FC<ChatInputProps> = ({
         style={sendIconThemeStyle}
 =======
       {/* <Send03
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
         className={`
           w-5 h-5 text-gray-300 group-hover:text-primary-600
           ${!!query.trim() && 'text-primary-600'}

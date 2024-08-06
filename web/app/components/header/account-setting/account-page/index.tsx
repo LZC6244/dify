@@ -190,7 +190,11 @@ export default function AccountPage() {
           </div>
         </>
       )}
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
       {editNameModalVisible && (
         <Modal
           isShow

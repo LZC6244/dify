@@ -214,7 +214,11 @@ const translation = {
     intendedAudiencePlaceHolder: '例如：学生',
     solveProblem: '希望 AI 为他们解决什么问题？',
     solveProblemPlaceHolder: '例如：评估学业水平',
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
     generate: '生成',
     resTitle: '生成的提示词',
     noDataLine1: '在左侧描述您的用例，',

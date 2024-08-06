@@ -218,7 +218,11 @@ const translation = {
     overwriteTitle: '覆蓋現有配置？',
     overwriteMessage: '應用此編排將覆蓋現有配置。',
   },
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
   resetConfig: {
     title: '確認重置？',
     message: '重置將丟失當前頁面所有修改，恢復至上次釋出時的配置',

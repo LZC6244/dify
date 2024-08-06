@@ -218,14 +218,20 @@ const useConfig = (id: string, payload: KnowledgeRetrievalNodeType) => {
     const newInputs = produce(inputs, (draft) => {
       draft.dataset_ids = newDatasets.map(d => d.id)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/zd/dev/0.6.16
 
       if (payload.retrieval_mode === RETRIEVE_TYPE.multiWay && newDatasets.length > 0) {
         const multipleRetrievalConfig = draft.multiple_retrieval_config
         draft.multiple_retrieval_config = getMultipleRetrievalConfig(multipleRetrievalConfig!, newDatasets)
       }
+<<<<<<< HEAD
 =======
       draft.dataset_retrieval_configs = newDatasets.map(d => d.retrieval_model_dict)
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/zd/dev/0.6.16
     })
     setInputs(newInputs)
     setSelectedDatasets(newDatasets)

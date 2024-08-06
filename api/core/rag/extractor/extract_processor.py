@@ -95,14 +95,9 @@ class ExtractProcessor:
                     storage.download(upload_file.key, file_path)
                 input_file = Path(file_path)
                 file_extension = input_file.suffix.lower()
-<<<<<<< HEAD
                 etl_type = dify_config.ETL_TYPE
                 unstructured_api_url = dify_config.UNSTRUCTURED_API_URL
                 unstructured_api_key = dify_config.UNSTRUCTURED_API_KEY
-=======
-                etl_type = current_app.config['ETL_TYPE']
-                unstructured_api_url = current_app.config['UNSTRUCTURED_API_URL']
-                unstructured_api_key = current_app.config['UNSTRUCTURED_API_KEY']
 
                 if extract_setting.beta_parser_config:
                     parser_type = extract_setting.beta_parser_config['parser_type']
@@ -116,15 +111,14 @@ class ExtractProcessor:
                     if file_extension == '.csv' and parser_type == "qa":
                         extractor = CSVExtractor(file_path, autodetect_encoding=True, qa_mode=True)
                     elif file_extension == '.pdf' and parser_type == "naive":
-                        url = current_app.config['DEEPDOC_API_URL'] + '/parse_pdf'
+                        url = dify_config.DEEPDOC_API_URL + '/parse_pdf'
                         extractor = NaiveExtractor(file_path, url)
                     elif file_extension == '.pdf' and parser_type == "paper":
-                        url = current_app.config['DEEPDOC_API_URL'] + '/parse_paper'
+                        url = dify_config.DEEPDOC_API_URL + '/parse_paper'
                         extractor = PaperExtractor(file_path, url)
                     else:
                         etl_type = 'dify'
 
->>>>>>> feature/v2.0.0
                 if etl_type == 'Unstructured':
                     if file_extension == '.xlsx' or file_extension == '.xls':
                         extractor = ExcelExtractor(file_path)

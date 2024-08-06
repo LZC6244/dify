@@ -8,7 +8,11 @@ import s from './style.module.css'
 import cn from '@/utils/classnames'
 import ItemOperation from '@/app/components/explore/item-operation'
 =======
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
 import AppIcon from '@/app/components/base/app-icon'
 
 export type IAppNavItemProps = {

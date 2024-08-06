@@ -37,7 +37,11 @@
     "@remixicon/react": "^4.2.0",
 =======
     "@sentry/nextjs": "^8",
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
     "@sentry/react": "^7.54.0",
     "@sentry/utils": "^7.54.0",
     "@tailwindcss/line-clamp": "^0.4.4",

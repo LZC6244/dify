@@ -218,7 +218,11 @@ const translation = {
     overwriteTitle: 'Bestehende Konfiguration überschreiben?',
     overwriteMessage: 'Das Anwenden dieser Orchestrierung wird die bestehende Konfiguration überschreiben.',
   },
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
   resetConfig: {
     title: 'Zurücksetzen bestätigen?',
     message:

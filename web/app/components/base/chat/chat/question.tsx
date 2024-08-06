@@ -11,7 +11,11 @@ import type { Theme } from '../embedded-chatbot/theme/theme-context'
 import { CssTransform } from '../embedded-chatbot/theme/utils'
 import { QuestionTriangle } from '@/app/components/base/icons/src/vender/solid/general'
 =======
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
 import { User } from '@/app/components/base/icons/src/public/avatar'
 import { Markdown } from '@/app/components/base/markdown'
 import ImageGallery from '@/app/components/base/image-gallery'
@@ -47,7 +51,11 @@ const Question: FC<QuestionProps> = ({
 =======
         {/* <QuestionTriangle className='absolute -right-2 top-0 w-2 h-3 text-[#5E3EFB]' /> */}
         <div className='px-[18px] py-5 bg-[#5E3EFB] rounded-[16px] text-base '>
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
           {
             !!imgSrcs.length && (
               <ImageGallery srcs={imgSrcs} />

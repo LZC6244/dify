@@ -13,7 +13,11 @@ import { BookOpen01 } from '@/app/components/base/icons/src/vender/line/educatio
 import { ArrowUpRight } from '@/app/components/base/icons/src/vender/line/arrows'
 =======
 import { Plus } from '@/app/components/base/icons/src/vender/line/general'
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
 import EditCustomToolModal from '@/app/components/tools/edit-custom-collection-modal'
 import { createCustomCollection } from '@/service/tools'
 import Toast from '@/app/components/base/toast'

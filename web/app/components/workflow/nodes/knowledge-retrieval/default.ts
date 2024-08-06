@@ -4,12 +4,17 @@ import type { KnowledgeRetrievalNodeType } from './types'
 import { RerankingModeEnum } from '@/models/datasets'
 import { ALL_CHAT_AVAILABLE_BLOCKS, ALL_COMPLETION_AVAILABLE_BLOCKS } from '@/app/components/workflow/constants'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { DATASET_DEFAULT } from '@/config'
 import { RETRIEVE_TYPE } from '@/types/app'
 =======
 
 import { RETRIEVE_TYPE, RETRIEVE_METHOD } from '@/types/app'
 >>>>>>> feature/v2.0.0
+=======
+import { DATASET_DEFAULT } from '@/config'
+import { RETRIEVE_TYPE, RETRIEVE_METHOD } from '@/types/app'
+>>>>>>> origin/zd/dev/0.6.16
 const i18nPrefix = 'workflow'
 
 const nodeDefault: NodeDefault<KnowledgeRetrievalNodeType> = {
@@ -17,12 +22,16 @@ const nodeDefault: NodeDefault<KnowledgeRetrievalNodeType> = {
     query_variable_selector: [],
     dataset_ids: [],
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/zd/dev/0.6.16
     retrieval_mode: RETRIEVE_TYPE.multiWay,
     multiple_retrieval_config: {
       top_k: DATASET_DEFAULT.top_k,
       score_threshold: undefined,
       reranking_enable: false,
     },
+<<<<<<< HEAD
 =======
     retrieval_mode: RETRIEVE_TYPE.oneWay,
     dataset_retrieval_configs: [{
@@ -37,6 +46,8 @@ const nodeDefault: NodeDefault<KnowledgeRetrievalNodeType> = {
       score_threshold: 0.3
     }]
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/zd/dev/0.6.16
   },
   getAvailablePrevNodes(isChatMode: boolean) {
     const nodes = isChatMode

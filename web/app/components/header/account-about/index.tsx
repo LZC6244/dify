@@ -45,7 +45,11 @@ export default function AccountAbout({
 =======
             <div>© 2023 LangGenius, Inc., Contributors.</div>
             {/* <div className='text-[#1C64F2]'>
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
               {
                 IS_CE_EDITION
                   ? <Link href={'https://github.com/langgenius/dify/blob/main/LICENSE'} target='_blank' rel='noopener noreferrer'>Open Source License</Link>

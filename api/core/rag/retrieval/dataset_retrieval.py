@@ -208,7 +208,6 @@ class DatasetRetrieval:
             return str("\n".join(document_context_list))
         return ''
 
-<<<<<<< HEAD
     def single_retrieve(
             self, app_id: str,
             tenant_id: str,
@@ -220,20 +219,8 @@ class DatasetRetrieval:
             model_config: ModelConfigWithCredentialsEntity,
             planning_strategy: PlanningStrategy,
             message_id: Optional[str] = None,
+            dataset_retrieval_configs_map: Optional[dict] = None
     ):
-=======
-    def single_retrieve(self, app_id: str,
-                        tenant_id: str,
-                        user_id: str,
-                        user_from: str,
-                        available_datasets: list,
-                        query: str,
-                        model_instance: ModelInstance,
-                        model_config: ModelConfigWithCredentialsEntity,
-                        planning_strategy: PlanningStrategy,
-                        dataset_retrieval_configs_map: Optional[dict] = None
-                        ):
->>>>>>> feature/v2.0.0
         tools = []
         for dataset in available_datasets:
             description = dataset.description

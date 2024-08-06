@@ -150,7 +150,11 @@ const ChatWrapper = () => {
       themeBuilder={themeBuilder}
 =======
       questionIcon={<Image src={avatarIcon} className='w-[36px] h-[36px] mt-[10px]' alt='' />}
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
     />
   )
 }

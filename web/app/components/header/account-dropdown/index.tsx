@@ -7,7 +7,11 @@ import { useContext } from 'use-context-selector'
 import { RiArrowDownSLine } from '@remixicon/react'
 import Link from 'next/link'
 =======
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
 import { Menu, Transition } from '@headlessui/react'
 import AccountAbout from '../account-about'
 <<<<<<< HEAD
@@ -15,7 +19,11 @@ import { mailToSupport } from '../utils/util'
 import WorkplaceSelector from './workplace-selector'
 import classNames from '@/utils/classnames'
 =======
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
 import I18n from '@/context/i18n'
 import Avatar from '@/app/components/base/avatar'
 import { logout } from '@/service/common'
@@ -32,7 +40,11 @@ import { Plan } from '@/app/components/billing/type'
 import { ChevronDown } from '@/app/components/base/icons/src/vender/line/arrows'
 import { LogOut01 } from '@/app/components/base/icons/src/vender/line/general'
 import { useModalContext } from '@/context/modal-context'
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
 export type IAppSelecotr = {
   isMobile: boolean
 }
@@ -135,7 +147,11 @@ export default function AppSelector({ isMobile }: IAppSelecotr) {
                     <Menu.Item>
 =======
                     {/* <Menu.Item>
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
                       <Link
                         className={classNames(itemClassName, 'group justify-between')}
                         href='https://github.com/langgenius/dify/discussions/categories/feedbacks'

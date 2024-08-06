@@ -214,7 +214,11 @@ const translation = {
     intendedAudiencePlaceHolder: 'e.g. Student',
     solveProblem: 'What problems do they hope AI can solve for them?',
     solveProblemPlaceHolder: 'e.g. Extract insights and summarize information from long reports and articles',
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
     generate: 'Generate',
     resTitle: 'Generated Prompt',
     noDataLine1: 'Describe your use case on the left,',

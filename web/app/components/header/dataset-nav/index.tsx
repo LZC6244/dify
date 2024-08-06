@@ -51,7 +51,11 @@ const DatasetNav = () => {
       activeIcon={<KnowledgeActive className='w-4 h-4' />}
       // text={t('common.menus.datasets')}
       text="知识库"
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
       activeSegment='datasets'
       link='/datasets'
       curNav={currentDataset as Omit<NavItem, 'link'>}

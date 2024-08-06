@@ -10,7 +10,11 @@ import Header from '@/app/components/header'
 =======
 // import HeaderWrapper from '@/app/components/header/HeaderWrapper'
 // import Header from '@/app/components/header'
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
 import { EventEmitterContextProvider } from '@/context/event-emitter'
 import { ProviderContextProvider } from '@/context/provider-context'
 import { ModalContextProvider } from '@/context/modal-context'

@@ -267,7 +267,11 @@ const SettingsModal: FC<SettingsModalProps> = ({
                 <a target='_blank' rel='noopener noreferrer' href='https://docs.dify.ai/guides/knowledge-base/create-knowledge-and-upload-documents#id-6-retrieval-settings' className='text-[#155eef]'>{t('datasetSettings.form.retrievalSetting.learnMore')}</a>
 =======
                 <a target='_blank' rel='noopener noreferrer' href='/' className='text-[#155eef]'>{t('datasetSettings.form.retrievalSetting.learnMore')}</a>
+<<<<<<< HEAD
 >>>>>>> feature/v2.0.0
+=======
+>>>>>>> origin/feature/v2.0.0
+>>>>>>> origin/zd/dev/0.6.16
                 {t('datasetSettings.form.retrievalSetting.description')}
               </div>
             </div>
