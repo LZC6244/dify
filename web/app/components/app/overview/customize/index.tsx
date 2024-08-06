@@ -9,7 +9,6 @@ import I18n from '@/context/i18n'
 import Button from '@/app/components/base/button'
 import Modal from '@/app/components/base/modal'
 import Tag from '@/app/components/base/tag'
-import { LanguagesSupported } from '@/i18n/language'
 
 type IShareLinkProps = {
   isShow: boolean
@@ -100,13 +99,14 @@ const CustomizeModal: FC<IShareLinkProps> = ({
       <Button
         className='mt-2'
         onClick={() =>
-          window.open(
-            `https://docs.dify.ai/${locale !== LanguagesSupported[1]
-              ? 'user-guide/launching-dify-apps/developing-with-apis'
-              : `v/${locale.toLowerCase()}/guides/application-publishing/developing-with-apis`
-            }`,
-            '_blank',
-          )
+          window.open('/', '_blank')
+          // window.open(
+          //   `https://docs.dify.ai/${locale !== LanguagesSupported[1]
+          //     ? 'user-guide/launching-dify-apps/developing-with-apis'
+          //     : `v/${locale.toLowerCase()}/guides/application-publishing/developing-with-apis`
+          //   }`,
+          //   '_blank',
+          // )
         }
       >
         <span className='text-sm text-gray-800'>{t(`${prefixCustomize}.way2.operation`)}</span>

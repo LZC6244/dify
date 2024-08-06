@@ -6,9 +6,12 @@ import {
   memo,
 } from 'react'
 import type { ChatItem } from '../types'
+<<<<<<< HEAD
 import type { Theme } from '../embedded-chatbot/theme/theme-context'
 import { CssTransform } from '../embedded-chatbot/theme/utils'
 import { QuestionTriangle } from '@/app/components/base/icons/src/vender/solid/general'
+=======
+>>>>>>> origin/feature/v2.0.0
 import { User } from '@/app/components/base/icons/src/public/avatar'
 import { Markdown } from '@/app/components/base/markdown'
 import ImageGallery from '@/app/components/base/image-gallery'
@@ -32,6 +35,7 @@ const Question: FC<QuestionProps> = ({
   return (
     <div className='flex justify-end mb-2 last:mb-0 pl-10'>
       <div className='group relative mr-4'>
+<<<<<<< HEAD
         <QuestionTriangle
           className='absolute -right-2 top-0 w-2 h-3 text-[#D1E9FF]/50'
           style={theme ? { color: theme.chatBubbleColor } : {}}
@@ -40,12 +44,16 @@ const Question: FC<QuestionProps> = ({
           className='px-4 py-3 bg-[#D1E9FF]/50 rounded-b-2xl rounded-tl-2xl text-sm text-gray-900'
           style={theme?.chatBubbleColorStyle ? CssTransform(theme.chatBubbleColorStyle) : {}}
         >
+=======
+        {/* <QuestionTriangle className='absolute -right-2 top-0 w-2 h-3 text-[#5E3EFB]' /> */}
+        <div className='px-[18px] py-5 bg-[#5E3EFB] rounded-[16px] text-base '>
+>>>>>>> origin/feature/v2.0.0
           {
             !!imgSrcs.length && (
               <ImageGallery srcs={imgSrcs} />
             )
           }
-          <Markdown content={content} />
+          <Markdown content={content} className='!text-[#fff]' />
         </div>
         <div className='mt-1 h-[18px]' />
       </div>

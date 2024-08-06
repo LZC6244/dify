@@ -35,4 +35,5 @@ export type KnowledgeRetrievalNodeType = CommonNodeType & {
   retrieval_mode: RETRIEVE_TYPE
   multiple_retrieval_config?: MultipleRetrievalConfig
   single_retrieval_config?: SingleRetrievalConfig
+  dataset_retrieval_configs?: RetrievalConfig[]
 }

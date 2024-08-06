@@ -4,16 +4,21 @@ import {
   useState,
 } from 'react'
 import { useAsyncEffect } from 'ahooks'
+<<<<<<< HEAD
 import { useThemeContext } from '../embedded-chatbot/theme/theme-context'
+=======
+import Image from 'next/image'
+>>>>>>> origin/feature/v2.0.0
 import {
   ChatWithHistoryContext,
   useChatWithHistoryContext,
 } from './context'
 import { useChatWithHistory } from './hooks'
-import Sidebar from './sidebar'
 import HeaderInMobile from './header-in-mobile'
 import ConfigPanel from './config-panel'
 import ChatWrapper from './chat-wrapper'
+import AddIcon from './add.svg'
+import CreateNewConversationModal from './new-conversation-modal'
 import type { InstalledApp } from '@/models/explore'
 import Loading from '@/app/components/base/loading'
 import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
@@ -35,12 +40,20 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
     appChatListDataLoading,
     chatShouldReloadKey,
     isMobile,
+<<<<<<< HEAD
     themeBuilder,
+=======
+    handleNewConversation,
+    // handleStartChat,
+    currentConversationId,
+>>>>>>> origin/feature/v2.0.0
   } = useChatWithHistoryContext()
 
   const chatReady = (!showConfigPanelBeforeChat || !!appPrevChatList.length)
   const customConfig = appData?.custom_config
   const site = appData?.site
+
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     themeBuilder?.buildTheme(site?.chat_color_theme, site?.chat_color_theme_inverted)
@@ -48,9 +61,18 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
       if (customConfig)
         document.title = `${site.title}`
       else
-        document.title = `${site.title} - Powered by Dify`
+        document.title = `${site.title} - Powered by 卓世科技`
     }
   }, [site, customConfig, themeBuilder])
+
+  const onHandleNewConversation = () => {
+    if (currentConversationId)
+      setShow(true)
+
+    else
+      handleNewConversation(false)
+      //   handleStartChat()
+  }
 
   if (appInfoLoading) {
     return (
@@ -65,10 +87,24 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
   }
 
   return (
-    <div className={`h-full flex bg-white ${className} ${isMobile && 'flex-col'}`}>
-      {
+    <div className={`h-full flex flex-col ${className} ${isMobile && 'flex-col'}`}>
+      {/* {
         !isMobile && (
           <Sidebar />
+        )
+      } */}
+      {
+        !isMobile && (
+          <div className='shrink-0 px-[40px] py-[29px] flex flex-row items-center'>
+            <div className='text-[18px] text-[#000] font-medium mr-[22px]'>{site?.title}</div>
+            <div
+              className='flex flex-row items-center cursor-pointer rounded p-3 text-sm font-medium text-[#5E3EFB] bg-[#F3F2FF] hover:bg-[#EAE9F7]'
+              onClick={onHandleNewConversation}
+            >
+              <Image src={AddIcon} className='w-4 h-4 mr-[6px]' alt='' />
+              新建对话
+            </div>
+          </div>
         )
       }
       {
@@ -95,6 +131,16 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
           )
         }
       </div>
+      <CreateNewConversationModal
+        show={show}
+        onClose={() => {
+          setShow(false)
+        }}
+        onSuccess={() => {
+          setShow(false)
+          handleNewConversation(false)
+          // handleStartChat()
+        }} />
     </div>
   )
 }

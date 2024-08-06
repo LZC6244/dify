@@ -13,7 +13,8 @@ export const fetchAppDetail = (id: string): Promise<any> => {
 }
 
 export const fetchInstalledAppList = () => {
-  return get('/installed-apps')
+  // return get('/installed-apps')
+  return get('/zskj/published-apps')
 }
 
 export const installApp = (id: string) => {

@@ -26,7 +26,12 @@ class RecommendedAppService:
         :param language: language
         :return:
         """
+<<<<<<< HEAD
         mode = dify_config.HOSTED_FETCH_APP_TEMPLATES_MODE
+=======
+        mode = current_app.config.get('HOSTED_FETCH_APP_TEMPLATES_MODE', 'remote')
+        logger.info(f'fetch recommended apps mode: {mode}')
+>>>>>>> origin/feature/v2.0.0
         if mode == 'remote':
             try:
                 result = cls._fetch_recommended_apps_from_dify_official(language)

@@ -32,7 +32,7 @@ export type ChatWithHistoryContextValue = {
   newConversationInputs: Record<string, any>
   handleNewConversationInputsChange: (v: Record<string, any>) => void
   inputsForms: any[]
-  handleNewConversation: () => void
+  handleNewConversation: (showConfigPanel?: boolean) => void
   handleStartChat: () => void
   handleChangeConversation: (conversationId: string) => void
   handlePinConversation: (conversationId: string) => void

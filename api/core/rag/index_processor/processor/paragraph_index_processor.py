@@ -17,23 +17,31 @@ from models.dataset import Dataset
 class ParagraphIndexProcessor(BaseIndexProcessor):
 
     def extract(self, extract_setting: ExtractSetting, **kwargs) -> list[Document]:
-
         text_docs = ExtractProcessor.extract(extract_setting=extract_setting,
                                              is_automatic=kwargs.get('process_rule_mode') == "automatic")
-
+        print("extract_setting:", extract_setting.beta_parser_config)
         return text_docs
 
     def transform(self, documents: list[Document], **kwargs) -> list[Document]:
         # Split the text documents into nodes.
         splitter = self._get_splitter(processing_rule=kwargs.get('process_rule'),
                                       embedding_model_instance=kwargs.get('embedding_model_instance'))
+
+        parser_type = kwargs.get('parser_type', '')
+
         all_documents = []
         for document in documents:
             # document clean
             document_text = CleanProcessor.clean(document.page_content, kwargs.get('process_rule'))
             document.page_content = document_text
-            # parse document to nodes
-            document_nodes = splitter.split_documents([document])
+
+            print("document:",document)
+            if parser_type == 'qa':
+                # qa模式不走切片
+                document_nodes = [document]
+            else:
+                # parse document to nodes
+                document_nodes = splitter.split_documents([document])
             split_documents = []
             for document_node in document_nodes:
 
@@ -52,12 +60,19 @@ class ParagraphIndexProcessor(BaseIndexProcessor):
                         document_node.page_content = page_content
                         split_documents.append(document_node)
             all_documents.extend(split_documents)
+        print("all_documents: ", all_documents)
         return all_documents
 
-    def load(self, dataset: Dataset, documents: list[Document], with_keywords: bool = True):
+    def load(self, dataset: Dataset, documents: list[Document], with_keywords: bool = True, **kwargs):
         if dataset.indexing_technique == 'high_quality':
             vector = Vector(dataset)
+
+            embedding_q_only = kwargs.get("embedding_q_only", False)
+            if embedding_q_only:
+                for document in documents:
+                    document.page_content = document.page_content.split("\nanswer:\n")[0].replace("question:\n", "")
             vector.create(documents)
+                
         if with_keywords:
             keyword = Keyword(dataset)
             keyword.create(documents)

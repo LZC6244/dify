@@ -4,10 +4,14 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useContext } from 'use-context-selector'
 import { useSelectedLayoutSegments } from 'next/navigation'
-import Link from 'next/link'
+import classNames from 'classnames'
 import Toast from '../../base/toast'
 import Item from './app-nav-item'
+<<<<<<< HEAD
 import cn from '@/utils/classnames'
+=======
+import s from './style.module.css'
+>>>>>>> origin/feature/v2.0.0
 import { fetchInstalledAppList as doFetchInstalledAppList, uninstallApp, updatePinStatus } from '@/service/explore'
 import ExploreContext from '@/context/explore-context'
 import Confirm from '@/app/components/base/confirm'
@@ -55,8 +59,9 @@ const SideBar: FC<IExploreSideBarProps> = ({
   const isMobile = media === MediaType.mobile
 
   const fetchInstalledAppList = async () => {
-    const { installed_apps }: any = await doFetchInstalledAppList()
-    setInstalledApps(installed_apps)
+    // const { installed_apps }: any = await doFetchInstalledAppList()
+    const { published_apps }: any = await doFetchInstalledAppList()
+    setInstalledApps(published_apps)
   }
 
   const [showConfirm, setShowConfirm] = useState(false)
@@ -90,8 +95,8 @@ const SideBar: FC<IExploreSideBarProps> = ({
   }, [controlUpdateInstalledApps])
 
   return (
-    <div className='w-fit sm:w-[216px] shrink-0 pt-6 px-4 border-gray-200 cursor-pointer'>
-      <div>
+    <div className='w-fit sm:w-[290px] shrink-0 pt-[40px] px-[30px] border-gray-200 cursor-pointer bg-white rounded-tl-[20px]'>
+      {/* <div>
         <Link
           href='/explore/apps'
           className={cn(isDiscoverySelected ? 'text-primary-600  bg-white font-semibold' : 'text-gray-700 font-medium hover:bg-gray-200', 'flex items-center pc:justify-start pc:w-full mobile:justify-center mobile:w-fit h-9 px-3 mobile:px-2 gap-2 rounded-lg')}
@@ -100,13 +105,14 @@ const SideBar: FC<IExploreSideBarProps> = ({
           {isDiscoverySelected ? <SelectedDiscoveryIcon /> : <DiscoveryIcon />}
           {!isMobile && <div className='text-sm'>{t('explore.sidebar.discovery')}</div>}
         </Link>
-      </div>
+      </div> */}
       {installedApps.length > 0 && (
-        <div className='mt-10'>
-          <p className='pl-2 mobile:px-0 text-xs text-gray-500 break-all font-medium uppercase'>{t('explore.sidebar.workspace')}</p>
-          <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'
+        // <div className='mt-10'>
+        <div className='mt-0'>
+          <p className='pl-2 mobile:px-0 text-[18px] text-[#000] break-all font-medium uppercase'>{t('explore.sidebar.workspace')}</p>
+          <div className={classNames('mt-3 space-y-1 overflow-y-auto overflow-x-hidden', s.hideScroll)}
             style={{
-              height: 'calc(100vh - 250px)',
+              height: 'calc(100vh - 100px)',
             }}
           >
             {installedApps.map(({ id, is_pinned, uninstallable, app: { name, icon, icon_background } }) => {

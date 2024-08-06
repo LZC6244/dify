@@ -17,6 +17,11 @@ from fields.app_fields import (
 from libs.login import login_required
 from services.app_dsl_service import AppDslService
 from services.app_service import AppService
+<<<<<<< HEAD
+=======
+from services.tag_service import TagService
+# from .site import AppSite
+>>>>>>> origin/feature/v2.0.0
 
 ALLOW_CREATE_APP_MODES = ['chat', 'agent-chat', 'advanced-chat', 'workflow', 'completion']
 
@@ -174,6 +179,12 @@ class AppApi(Resource):
 
         app_service = AppService()
         app_model = app_service.update_app(app_model, args)
+
+        # 同时更新site数据，避免发版后分享出去的名字和描述不一致
+        # appSite = AppSite()
+        # app_id = app_model.id
+        # app_model['title'] = args['name']
+        # appSite.post(app_id, app_model)
 
         return app_model
 

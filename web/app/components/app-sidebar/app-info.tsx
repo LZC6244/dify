@@ -18,7 +18,7 @@ import { useStore as useAppStore } from '@/app/components/app/store'
 import { ToastContext } from '@/app/components/base/toast'
 import AppsContext, { useAppContext } from '@/context/app-context'
 import { useProviderContext } from '@/context/provider-context'
-import { copyApp, deleteApp, exportAppConfig, updateAppInfo } from '@/service/apps'
+import { copyApp, deleteApp, exportAppConfig, updateAppInfo, updateAppSiteConfig } from '@/service/apps'
 import DuplicateAppModal from '@/app/components/app/duplicate-modal'
 import type { DuplicateAppModalProps } from '@/app/components/app/duplicate-modal'
 import CreateAppModal from '@/app/components/explore/create-app-modal'
@@ -27,10 +27,14 @@ import { Route } from '@/app/components/base/icons/src/vender/solid/mapsAndTrave
 import type { CreateAppModalProps } from '@/app/components/explore/create-app-modal'
 import { NEED_REFRESH_APP_LIST_KEY } from '@/config'
 import { getRedirection } from '@/utils/app-redirection'
+<<<<<<< HEAD
 import UpdateDSLModal from '@/app/components/workflow/update-dsl-modal'
 import type { EnvironmentVariable } from '@/app/components/workflow/types'
 import DSLExportConfirmModal from '@/app/components/workflow/dsl-export-confirm-modal'
 import { fetchWorkflowDraft } from '@/service/workflow'
+=======
+import { asyncRunSafe } from '@/utils'
+>>>>>>> origin/feature/v2.0.0
 
 export type IAppInfoProps = {
   expand: boolean
@@ -73,6 +77,17 @@ const AppInfo = ({ expand }: IAppInfoProps) => {
         icon_background,
         description,
       })
+      await asyncRunSafe(
+        updateAppSiteConfig({
+          url: `/apps/${appDetail.id}/site`,
+          body: {
+            title: name,
+            icon,
+            icon_background,
+            description,
+          },
+        }),
+      )
       setShowEditModal(false)
       notify({
         type: 'success',

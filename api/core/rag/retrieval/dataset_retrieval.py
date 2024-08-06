@@ -219,6 +219,7 @@ class DatasetRetrieval:
             model_config: ModelConfigWithCredentialsEntity,
             planning_strategy: PlanningStrategy,
             message_id: Optional[str] = None,
+            dataset_retrieval_configs_map: Optional[dict] = None
     ):
         tools = []
         for dataset in available_datasets:
@@ -256,6 +257,9 @@ class DatasetRetrieval:
                 retrieval_model_config = dataset.retrieval_model \
                     if dataset.retrieval_model else default_retrieval_model
 
+                if dataset_retrieval_configs_map:
+                    retrieval_model_config = dataset_retrieval_configs_map[dataset.id].__dict__
+          
                 # get top k
                 top_k = retrieval_model_config['top_k']
                 # get retrieval method

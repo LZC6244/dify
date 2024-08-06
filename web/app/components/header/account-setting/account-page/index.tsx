@@ -153,6 +153,7 @@ export default function AccountPage() {
           <Button onClick={() => setEditPasswordModalVisible(true)}>{userProfile.is_password_set ? t('common.account.resetPassword') : t('common.account.setPassword')}</Button>
         </div>
       )}
+<<<<<<< HEAD
       <div className='mb-6 border-[0.5px] border-gray-100' />
       <div className='mb-8'>
         <div className={titleClassName}>{t('common.account.langGeniusAccount')}</div>
@@ -167,6 +168,29 @@ export default function AccountPage() {
         )}
         {!IS_CE_EDITION && <Button className='mt-2 text-[#D92D20]' onClick={() => setShowDeleteAccountModal(true)}>{t('common.account.delete')}</Button>}
       </div>
+=======
+      {!!apps.length && (
+        <>
+          <div className='mb-6 border-[0.5px] border-gray-100' />
+          <div className='mb-8'>
+            <div className={titleClassName}>
+              {/* {t('common.account.langGeniusAccount')} */}
+              Agent 账号
+            </div>
+            <div className={descriptionClassName}>
+              {/* {t('common.account.langGeniusAccountTip')} */}
+              您的 Agent 账号和相关的用户数据。
+            </div>
+            <Collapse
+              title={`${t('common.account.showAppLength', { length: apps.length })}`}
+              items={apps.map(app => ({ key: app.id, name: app.name }))}
+              renderItem={renderAppItem}
+              wrapperClassName='mt-2'
+            />
+          </div>
+        </>
+      )}
+>>>>>>> origin/feature/v2.0.0
       {editNameModalVisible && (
         <Modal
           isShow

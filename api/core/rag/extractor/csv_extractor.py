@@ -24,6 +24,7 @@ class CSVExtractor(BaseExtractor):
             autodetect_encoding: bool = False,
             source_column: Optional[str] = None,
             csv_args: Optional[dict] = None,
+            qa_mode: Optional[bool] = None,
     ):
         """Initialize with file path."""
         self._file_path = file_path
@@ -31,6 +32,7 @@ class CSVExtractor(BaseExtractor):
         self._autodetect_encoding = autodetect_encoding
         self.source_column = source_column
         self.csv_args = csv_args or {}
+        self.qa_mode = qa_mode or False
 
     def extract(self) -> list[Document]:
         """Load data into document objects."""
@@ -64,13 +66,21 @@ class CSVExtractor(BaseExtractor):
                 raise ValueError(f"Source column '{self.source_column}' not found in CSV file.")
 
             # create document objects
-
-            for i, row in df.iterrows():
-                content = ";".join(f"{col.strip()}: {str(row[col]).strip()}" for col in df.columns)
-                source = row[self.source_column] if self.source_column else ''
-                metadata = {"source": source, "row": i}
-                doc = Document(page_content=content, metadata=metadata)
-                docs.append(doc)
+            if self.qa_mode:
+                for i, row in df.iterrows():
+                    content = f"question:\n{row[df.columns[0]]}\n"
+                    content += f"answer:\n{row[df.columns[1]]}"
+                    source = row[self.source_column] if self.source_column else ''
+                    metadata = {"source": source, "row": i}
+                    doc = Document(page_content=content, metadata=metadata)
+                    docs.append(doc)
+            else:
+                for i, row in df.iterrows():
+                    content = ";".join(f"{col.strip()}: {str(row[col]).strip()}" for col in df.columns)
+                    source = row[self.source_column] if self.source_column else ''
+                    metadata = {"source": source, "row": i}
+                    doc = Document(page_content=content, metadata=metadata)
+                    docs.append(doc)
         except csv.Error as e:
             raise e
 

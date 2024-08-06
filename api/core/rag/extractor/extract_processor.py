@@ -25,6 +25,8 @@ from core.rag.extractor.unstructured.unstructured_pptx_extractor import Unstruct
 from core.rag.extractor.unstructured.unstructured_text_extractor import UnstructuredTextExtractor
 from core.rag.extractor.unstructured.unstructured_xml_extractor import UnstructuredXmlExtractor
 from core.rag.extractor.word_extractor import WordExtractor
+from core.rag.extractor.ragflow.naive_extractor import NaiveExtractor
+from core.rag.extractor.ragflow.paper_extractor import PaperExtractor
 from core.rag.models.document import Document
 from extensions.ext_storage import storage
 from models.model import UploadFile
@@ -96,6 +98,27 @@ class ExtractProcessor:
                 etl_type = dify_config.ETL_TYPE
                 unstructured_api_url = dify_config.UNSTRUCTURED_API_URL
                 unstructured_api_key = dify_config.UNSTRUCTURED_API_KEY
+
+                if extract_setting.beta_parser_config:
+                    parser_type = extract_setting.beta_parser_config['parser_type']
+                else:
+                    parser_type = 'general'
+                print("+++++++++++++++++")
+                print("parser_type:",parser_type)
+                # beta parser
+                if parser_type != 'general':
+                    etl_type = 'ragflow'
+                    if file_extension == '.csv' and parser_type == "qa":
+                        extractor = CSVExtractor(file_path, autodetect_encoding=True, qa_mode=True)
+                    elif file_extension == '.pdf' and parser_type == "naive":
+                        url = dify_config.DEEPDOC_API_URL + '/parse_pdf'
+                        extractor = NaiveExtractor(file_path, url)
+                    elif file_extension == '.pdf' and parser_type == "paper":
+                        url = dify_config.DEEPDOC_API_URL + '/parse_paper'
+                        extractor = PaperExtractor(file_path, url)
+                    else:
+                        etl_type = 'dify'
+
                 if etl_type == 'Unstructured':
                     if file_extension == '.xlsx' or file_extension == '.xls':
                         extractor = ExcelExtractor(file_path)
@@ -126,7 +149,7 @@ class ExtractProcessor:
                         # txt
                         extractor = UnstructuredTextExtractor(file_path, unstructured_api_url) if is_automatic \
                             else TextExtractor(file_path, autodetect_encoding=True)
-                else:
+                elif etl_type == 'dify':
                     if file_extension == '.xlsx' or file_extension == '.xls':
                         extractor = ExcelExtractor(file_path)
                     elif file_extension == '.pdf':

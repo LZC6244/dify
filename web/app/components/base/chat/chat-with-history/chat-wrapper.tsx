@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react'
+import Image from 'next/image'
 import Chat from '../chat'
 import type {
   ChatConfig,
@@ -8,6 +9,7 @@ import { useChat } from '../chat/hooks'
 import { useChatWithHistoryContext } from './context'
 import Header from './header'
 import ConfigPanel from './config-panel'
+import avatarIcon from './user.svg'
 import {
   fetchSuggestedQuestions,
   getUrl,
@@ -139,12 +141,16 @@ const ChatWrapper = () => {
       chatFooterInnerClassName={`mx-auto w-full max-w-[720px] ${isMobile && 'px-4'}`}
       onSend={doSend}
       onStopResponding={handleStop}
-      chatNode={chatNode}
+      // chatNode={chatNode}
       allToolIcons={appMeta?.tool_icons || {}}
       onFeedback={handleFeedback}
       suggestedQuestions={suggestedQuestions}
       hideProcessDetail
+<<<<<<< HEAD
       themeBuilder={themeBuilder}
+=======
+      questionIcon={<Image src={avatarIcon} className='w-[36px] h-[36px] mt-[10px]' alt='' />}
+>>>>>>> origin/feature/v2.0.0
     />
   )
 }
