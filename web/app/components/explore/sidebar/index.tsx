@@ -7,15 +7,8 @@ import { useSelectedLayoutSegments } from 'next/navigation'
 import classNames from 'classnames'
 import Toast from '../../base/toast'
 import Item from './app-nav-item'
-<<<<<<< HEAD
 import cn from '@/utils/classnames'
-=======
 import s from './style.module.css'
-<<<<<<< HEAD
->>>>>>> feature/v2.0.0
-=======
->>>>>>> origin/feature/v2.0.0
->>>>>>> origin/zd/dev/0.6.16
 import { fetchInstalledAppList as doFetchInstalledAppList, uninstallApp, updatePinStatus } from '@/service/explore'
 import ExploreContext from '@/context/explore-context'
 import Confirm from '@/app/components/base/confirm'

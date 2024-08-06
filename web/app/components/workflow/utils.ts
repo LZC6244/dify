@@ -24,17 +24,8 @@ import {
   START_INITIAL_POSITION,
 } from './constants'
 import type { QuestionClassifierNodeType } from './nodes/question-classifier/types'
-<<<<<<< HEAD
 import type { IfElseNodeType } from './nodes/if-else/types'
 import { branchNameCorrect } from './nodes/if-else/utils'
-=======
-import type { QuestionTransformationNodeType } from './nodes/question-transformation/types'
-import type { KnowledgeFilterNodeType } from './nodes/knowledge-filter/types'
-<<<<<<< HEAD
->>>>>>> feature/v2.0.0
-=======
->>>>>>> origin/feature/v2.0.0
->>>>>>> origin/zd/dev/0.6.16
 import type { ToolNodeType } from './nodes/tool/types'
 import { CollectionType } from '@/app/components/tools/types'
 import { toolParametersToFormSchemas } from '@/app/components/tools/utils/to-form-schema'

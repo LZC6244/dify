@@ -199,30 +199,6 @@ const translation = {
       },
     },
   },
-<<<<<<< HEAD
-=======
-  automatic: {
-    title: 'Automatisierte Anwendungsorchestrierung',
-    description: 'Beschreiben Sie Ihr Szenario, Agent wird eine Anwendung für Sie orchestrieren.',
-    intendedAudience: 'Wer ist die Zielgruppe?',
-    intendedAudiencePlaceHolder: 'z.B. Student',
-    solveProblem: 'Welche Probleme hoffen sie, dass KI für sie lösen kann?',
-    solveProblemPlaceHolder: 'z.B. Erkenntnisse extrahieren und Informationen aus langen Berichten und Artikeln zusammenfassen',
-    generate: 'Generieren',
-    audiencesRequired: 'Zielgruppe erforderlich',
-    problemRequired: 'Problem erforderlich',
-    resTitle: 'Wir haben die folgende Anwendung für Sie orchestriert.',
-    apply: 'Diese Orchestrierung anwenden',
-    noData: 'Beschreiben Sie Ihren Anwendungsfall links, die Orchestrierungsvorschau wird hier angezeigt.',
-    loading: 'Orchestrieren der Anwendung für Sie...',
-    overwriteTitle: 'Bestehende Konfiguration überschreiben?',
-    overwriteMessage: 'Das Anwenden dieser Orchestrierung wird die bestehende Konfiguration überschreiben.',
-  },
-<<<<<<< HEAD
->>>>>>> feature/v2.0.0
-=======
->>>>>>> origin/feature/v2.0.0
->>>>>>> origin/zd/dev/0.6.16
   resetConfig: {
     title: 'Zurücksetzen bestätigen?',
     message:

@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 import style from '../list.module.css'
-=======
-<<<<<<< HEAD
->>>>>>> feature/v2.0.0
-=======
->>>>>>> origin/feature/v2.0.0
->>>>>>> origin/zd/dev/0.6.16
 import Apps from './Apps'
 import classNames from '@/utils/classnames'
 import { getLocaleOnServer, useTranslation as translate } from '@/i18n/server'

@@ -39,17 +39,8 @@ export default function AccountAbout({
           <LogoSite className='mx-auto mb-2' />
           <div className='mb-3 text-center text-xs font-normal text-gray-500'>Version {langeniusVersionInfo?.current_version}</div>
           <div className='mb-4 text-center text-xs font-normal text-gray-700'>
-<<<<<<< HEAD
             <div>© {dayjs().year()} LangGenius, Inc., Contributors.</div>
-            <div className='text-[#1C64F2]'>
-=======
-            <div>© 2023 LangGenius, Inc., Contributors.</div>
-            {/* <div className='text-[#1C64F2]'>
-<<<<<<< HEAD
->>>>>>> feature/v2.0.0
-=======
->>>>>>> origin/feature/v2.0.0
->>>>>>> origin/zd/dev/0.6.16
+            {/*<div className='text-[#1C64F2]'>
               {
                 IS_CE_EDITION
                   ? <Link href={'https://github.com/langgenius/dify/blob/main/LICENSE'} target='_blank' rel='noopener noreferrer'>Open Source License</Link>

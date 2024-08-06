@@ -1,18 +1,8 @@
 import type { CommonNodeType, ModelConfig, ValueSelector } from '@/app/components/workflow/types'
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/zd/dev/0.6.16
-import type { RETRIEVE_TYPE } from '@/types/app'
+import type { RETRIEVE_TYPE,  RetrievalConfig } from '@/types/app'
 import type {
   RerankingModeEnum,
 } from '@/models/datasets'
-<<<<<<< HEAD
-=======
-import type { RETRIEVE_TYPE, RetrievalConfig } from '@/types/app'
->>>>>>> feature/v2.0.0
-=======
->>>>>>> origin/zd/dev/0.6.16
 
 export type MultipleRetrievalConfig = {
   top_k: number

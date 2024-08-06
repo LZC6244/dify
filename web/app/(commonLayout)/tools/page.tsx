@@ -12,9 +12,8 @@ const Layout: FC = () => {
   const { isCurrentWorkspaceDatasetOperator } = useAppContext()
 
   useEffect(() => {
-<<<<<<< HEAD
     if (typeof window !== 'undefined')
-      document.title = `${t('tools.title')} - Dify`
+      document.title = `${t('tools.title')} - 卓世科技`
     if (isCurrentWorkspaceDatasetOperator)
       return router.replace('/datasets')
   }, [isCurrentWorkspaceDatasetOperator, router, t])
@@ -23,14 +22,6 @@ const Layout: FC = () => {
     if (isCurrentWorkspaceDatasetOperator)
       return router.replace('/datasets')
   }, [isCurrentWorkspaceDatasetOperator, router])
-=======
-    document.title = `${t('tools.title')} - 卓世科技`
-  }, [])
-<<<<<<< HEAD
->>>>>>> feature/v2.0.0
-=======
->>>>>>> origin/feature/v2.0.0
->>>>>>> origin/zd/dev/0.6.16
 
   return <ToolProviderList />
 }

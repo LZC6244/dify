@@ -27,18 +27,11 @@ import { Route } from '@/app/components/base/icons/src/vender/solid/mapsAndTrave
 import type { CreateAppModalProps } from '@/app/components/explore/create-app-modal'
 import { NEED_REFRESH_APP_LIST_KEY } from '@/config'
 import { getRedirection } from '@/utils/app-redirection'
-<<<<<<< HEAD
 import UpdateDSLModal from '@/app/components/workflow/update-dsl-modal'
 import type { EnvironmentVariable } from '@/app/components/workflow/types'
 import DSLExportConfirmModal from '@/app/components/workflow/dsl-export-confirm-modal'
 import { fetchWorkflowDraft } from '@/service/workflow'
-=======
 import { asyncRunSafe } from '@/utils'
-<<<<<<< HEAD
->>>>>>> feature/v2.0.0
-=======
->>>>>>> origin/feature/v2.0.0
->>>>>>> origin/zd/dev/0.6.16
 
 export type IAppInfoProps = {
   expand: boolean

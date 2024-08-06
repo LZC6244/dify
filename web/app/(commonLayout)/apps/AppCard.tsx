@@ -28,17 +28,10 @@ import EditAppModal from '@/app/components/explore/create-app-modal'
 import SwitchAppModal from '@/app/components/app/switch-app-modal'
 import type { Tag } from '@/app/components/base/tag-management/constant'
 import TagSelector from '@/app/components/base/tag-management/selector'
-<<<<<<< HEAD
 import type { EnvironmentVariable } from '@/app/components/workflow/types'
 import DSLExportConfirmModal from '@/app/components/workflow/dsl-export-confirm-modal'
 import { fetchWorkflowDraft } from '@/service/workflow'
-=======
 import { asyncRunSafe } from '@/utils'
-<<<<<<< HEAD
->>>>>>> feature/v2.0.0
-=======
->>>>>>> origin/feature/v2.0.0
->>>>>>> origin/zd/dev/0.6.16
 
 export type AppCardProps = {
   app: App

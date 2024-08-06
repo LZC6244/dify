@@ -4,17 +4,8 @@ import Sidebar from '../components/siderbar'
 import SwrInitor from '@/app/components/swr-initor'
 import { AppContextProvider } from '@/context/app-context'
 import GA, { GaType } from '@/app/components/base/ga'
-<<<<<<< HEAD
-import HeaderWrapper from '@/app/components/header/header-wrapper'
-import Header from '@/app/components/header'
-=======
 // import HeaderWrapper from '@/app/components/header/HeaderWrapper'
 // import Header from '@/app/components/header'
-<<<<<<< HEAD
->>>>>>> feature/v2.0.0
-=======
->>>>>>> origin/feature/v2.0.0
->>>>>>> origin/zd/dev/0.6.16
 import { EventEmitterContextProvider } from '@/context/event-emitter'
 import { ProviderContextProvider } from '@/context/provider-context'
 import { ModalContextProvider } from '@/context/modal-context'
