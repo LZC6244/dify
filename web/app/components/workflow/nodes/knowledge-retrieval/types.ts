@@ -1,8 +1,12 @@
 import type { CommonNodeType, ModelConfig, ValueSelector } from '@/app/components/workflow/types'
+<<<<<<< HEAD
 import type { RETRIEVE_TYPE } from '@/types/app'
 import type {
   RerankingModeEnum,
 } from '@/models/datasets'
+=======
+import type { RETRIEVE_TYPE, RetrievalConfig } from '@/types/app'
+>>>>>>> feature/v2.0.0
 
 export type MultipleRetrievalConfig = {
   top_k: number
@@ -35,4 +39,5 @@ export type KnowledgeRetrievalNodeType = CommonNodeType & {
   retrieval_mode: RETRIEVE_TYPE
   multiple_retrieval_config?: MultipleRetrievalConfig
   single_retrieval_config?: SingleRetrievalConfig
+  dataset_retrieval_configs?: RetrievalConfig[]
 }

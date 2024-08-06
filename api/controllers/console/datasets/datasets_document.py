@@ -221,7 +221,7 @@ class DatasetDocumentListApi(Resource):
     @cloud_edition_billing_resource_check('vector_space')
     def post(self, dataset_id):
         dataset_id = str(dataset_id)
-
+        print("dataset_id:", dataset_id)
         dataset = DatasetService.get_dataset(dataset_id)
 
         if not dataset:
@@ -248,6 +248,8 @@ class DatasetDocumentListApi(Resource):
                             location='json')
         parser.add_argument('retrieval_model', type=dict, required=False, nullable=False,
                             location='json')
+        parser.add_argument('parser_type', type=str, default='', required=False, nullable=False, location='json')
+        parser.add_argument('embedding_q_only', type=bool, default=False, required=False, nullable=False, location='json')
         args = parser.parse_args()
 
         if not dataset.indexing_technique and not args['indexing_technique']:
@@ -257,6 +259,8 @@ class DatasetDocumentListApi(Resource):
         DocumentService.document_create_args_validate(args)
 
         try:
+            print("args:", args)
+            print("*"*10)
             documents, batch = DocumentService.save_document_with_dataset_id(dataset, args, current_user)
         except ProviderTokenNotInitError as ex:
             raise ProviderNotInitializeError(ex.description)
@@ -293,6 +297,8 @@ class DatasetInitApi(Resource):
                             location='json')
         parser.add_argument('retrieval_model', type=dict, required=False, nullable=False,
                             location='json')
+        parser.add_argument('parser_type', type=str, default='', required=False, nullable=False, location='json')
+        parser.add_argument('embedding_q_only', type=bool, default=False, required=False, nullable=False, location='json')
         args = parser.parse_args()
 
         # The role of the current user in the ta table must be admin, owner, or editor, or dataset_operator
@@ -799,9 +805,9 @@ class DocumentStatusApi(DocumentResource):
 
         elif action == "disable":
             if not document.completed_at or document.indexing_status != 'completed':
-                raise InvalidActionError('Document is not completed.')
+                raise InvalidActionError('文档解析未完成，请删除后重试')
             if not document.enabled:
-                raise InvalidActionError('Document already disabled.')
+                raise InvalidActionError('文档已不可用，请删除后重试')
 
             document.enabled = False
             document.disabled_at = datetime.now(timezone.utc).replace(tzinfo=None)
@@ -818,7 +824,7 @@ class DocumentStatusApi(DocumentResource):
 
         elif action == "archive":
             if document.archived:
-                raise InvalidActionError('Document already archived.')
+                raise InvalidActionError('文档已到达')
 
             document.archived = True
             document.archived_at = datetime.now(timezone.utc).replace(tzinfo=None)
@@ -835,7 +841,7 @@ class DocumentStatusApi(DocumentResource):
             return {'result': 'success'}, 200
         elif action == "un_archive":
             if not document.archived:
-                raise InvalidActionError('Document is not archived.')
+                raise InvalidActionError('文档未到达')
 
             document.archived = False
             document.archived_at = None

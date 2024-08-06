@@ -33,6 +33,7 @@ const Header = () => {
   const isMobile = media === MediaType.mobile
   const [isShowNavMenu, { toggle, setFalse: hideNavMenu }] = useBoolean(false)
   const { enableBilling, plan } = useProviderContext()
+
   const { setShowPricingModal, setShowAccountSettingModal } = useModalContext()
   const isFreePlan = plan.type === 'sandbox'
   const handlePlanClick = useCallback(() => {

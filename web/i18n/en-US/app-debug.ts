@@ -199,12 +199,22 @@ const translation = {
       },
     },
   },
+<<<<<<< HEAD
   generate: {
     title: 'Prompt Generator',
     description: 'The Prompt Generator uses the configured model to optimize prompts for higher quality and better structure. Please write clear and detailed instructions.',
     tryIt: 'Try it',
     instruction: 'Instructions',
     instructionPlaceHolder: 'Write clear and specific instructions.',
+=======
+  automatic: {
+    title: 'Automated application orchestration',
+    description: 'Describe your scenario, Agent will orchestrate an application for you.',
+    intendedAudience: 'Who is the intended audience?',
+    intendedAudiencePlaceHolder: 'e.g. Student',
+    solveProblem: 'What problems do they hope AI can solve for them?',
+    solveProblemPlaceHolder: 'e.g. Extract insights and summarize information from long reports and articles',
+>>>>>>> feature/v2.0.0
     generate: 'Generate',
     resTitle: 'Generated Prompt',
     noDataLine1: 'Describe your use case on the left,',

@@ -12,6 +12,7 @@ const Layout: FC = () => {
   const { isCurrentWorkspaceDatasetOperator } = useAppContext()
 
   useEffect(() => {
+<<<<<<< HEAD
     if (typeof window !== 'undefined')
       document.title = `${t('tools.title')} - Dify`
     if (isCurrentWorkspaceDatasetOperator)
@@ -22,6 +23,10 @@ const Layout: FC = () => {
     if (isCurrentWorkspaceDatasetOperator)
       return router.replace('/datasets')
   }, [isCurrentWorkspaceDatasetOperator, router])
+=======
+    document.title = `${t('tools.title')} - 卓世科技`
+  }, [])
+>>>>>>> feature/v2.0.0
 
   return <ToolProviderList />
 }

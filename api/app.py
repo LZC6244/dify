@@ -72,6 +72,7 @@ class DifyApp(Flask):
 
 config_type = os.getenv('EDITION', default='SELF_HOSTED')  # ce edition first
 
+logger = logging.getLogger(__name__)
 
 # ----------------------------
 # Application Factory Function
@@ -259,7 +260,9 @@ def after_request(response):
 
 
 @app.route('/health')
+@app.route('/api/health')
 def health():
+    logger.info('服务健康状态检测：ok')
     return Response(json.dumps({
         'pid': os.getpid(),
         'status': 'ok',

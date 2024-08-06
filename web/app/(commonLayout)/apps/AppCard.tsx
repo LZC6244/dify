@@ -10,7 +10,7 @@ import cn from '@/utils/classnames'
 import type { App } from '@/types/app'
 import Confirm from '@/app/components/base/confirm'
 import { ToastContext } from '@/app/components/base/toast'
-import { copyApp, deleteApp, exportAppConfig, updateAppInfo } from '@/service/apps'
+import { copyApp, deleteApp, exportAppConfig, updateAppInfo, updateAppSiteConfig } from '@/service/apps'
 import DuplicateAppModal from '@/app/components/app/duplicate-modal'
 import type { DuplicateAppModalProps } from '@/app/components/app/duplicate-modal'
 import AppIcon from '@/app/components/base/app-icon'
@@ -28,9 +28,13 @@ import EditAppModal from '@/app/components/explore/create-app-modal'
 import SwitchAppModal from '@/app/components/app/switch-app-modal'
 import type { Tag } from '@/app/components/base/tag-management/constant'
 import TagSelector from '@/app/components/base/tag-management/selector'
+<<<<<<< HEAD
 import type { EnvironmentVariable } from '@/app/components/workflow/types'
 import DSLExportConfirmModal from '@/app/components/workflow/dsl-export-confirm-modal'
 import { fetchWorkflowDraft } from '@/service/workflow'
+=======
+import { asyncRunSafe } from '@/utils'
+>>>>>>> feature/v2.0.0
 
 export type AppCardProps = {
   app: App
@@ -87,6 +91,19 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
         icon_background,
         description,
       })
+      console.log(1)
+
+      const [err] = await asyncRunSafe<App>(
+        updateAppSiteConfig({
+          url: `/apps/${app.id}/site`,
+          body: {
+            title: name,
+            icon,
+            icon_background,
+            description,
+          },
+        }) as Promise<App>,
+      )
       setShowEditModal(false)
       notify({
         type: 'success',

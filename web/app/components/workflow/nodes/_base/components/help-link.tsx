@@ -17,7 +17,7 @@ const HelpLink = ({
   return (
     <TooltipPlus popupContent={t('common.userProfile.helpCenter')}>
       <a
-        href={link}
+        href={'/'}
         target='_blank'
         className='flex items-center justify-center mr-1 w-6 h-6'
       >

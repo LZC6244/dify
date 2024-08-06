@@ -24,8 +24,13 @@ import {
   START_INITIAL_POSITION,
 } from './constants'
 import type { QuestionClassifierNodeType } from './nodes/question-classifier/types'
+<<<<<<< HEAD
 import type { IfElseNodeType } from './nodes/if-else/types'
 import { branchNameCorrect } from './nodes/if-else/utils'
+=======
+import type { QuestionTransformationNodeType } from './nodes/question-transformation/types'
+import type { KnowledgeFilterNodeType } from './nodes/knowledge-filter/types'
+>>>>>>> feature/v2.0.0
 import type { ToolNodeType } from './nodes/tool/types'
 import { CollectionType } from '@/app/components/tools/types'
 import { toolParametersToFormSchemas } from '@/app/components/tools/utils/to-form-schema'
@@ -140,6 +145,23 @@ export const initialNodes = (originNodes: Node[], originEdges: Edge[]) => {
       })
     }
 
+    if (node.data.type === BlockEnum.KnowledgeFilter) {
+      node.data._targetBranches = [
+        {
+          id: '1',
+          name: 'high_score_results',
+        },
+        {
+          id: '2',
+          name: 'mid_score_results',
+        },
+        {
+          id: '3',
+          name: 'low_score_results',
+        },
+      ]
+    }
+
     if (node.data.type === BlockEnum.Iteration)
       node.data._children = iterationNodeMap[node.id] || []
 
@@ -233,6 +255,8 @@ export const canRunBySingle = (nodeType: BlockEnum) => {
     || nodeType === BlockEnum.Code
     || nodeType === BlockEnum.TemplateTransform
     || nodeType === BlockEnum.QuestionClassifier
+    || nodeType === BlockEnum.QuestionTransformation
+    || nodeType === BlockEnum.KnowledgeFilter
     || nodeType === BlockEnum.HttpRequest
     || nodeType === BlockEnum.Tool
     || nodeType === BlockEnum.ParameterExtractor

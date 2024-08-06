@@ -175,6 +175,12 @@ class AppApi(Resource):
         app_service = AppService()
         app_model = app_service.update_app(app_model, args)
 
+        # 同时更新site数据，避免发版后分享出去的名字和描述不一致
+        # appSite = AppSite()
+        # app_id = app_model.id
+        # app_model['title'] = args['name']
+        # appSite.post(app_id, app_model)
+
         return app_model
 
     @setup_required

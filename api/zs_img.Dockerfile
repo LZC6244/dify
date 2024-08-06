@@ -1,0 +1,17 @@
+# base image
+FROM langgenius/dify-api:0.6.11
+
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+WORKDIR /app/api
+
+COPY . /app/api/
+RUN cp /app/api/zs.env /app/api/.env
+
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+RUN pip install --upgrade pip
+RUN pip install debugpy scikit-learn==1.5.1
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]

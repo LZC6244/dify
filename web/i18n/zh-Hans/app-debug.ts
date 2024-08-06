@@ -199,12 +199,22 @@ const translation = {
       },
     },
   },
+<<<<<<< HEAD
   generate: {
     title: '提示词生成器',
     description: '提示词生成器使用配置的模型来优化提示词，以获得更高的质量和更好的结构。请写出清晰详细的说明。',
     tryIt: '试一试',
     instruction: '指令',
     instructionPlaceHolder: '写下清晰、具体的说明。',
+=======
+  automatic: {
+    title: '自动编排',
+    description: '描述您的场景，Agent平台将为您编排一个应用。',
+    intendedAudience: '目标用户是谁？',
+    intendedAudiencePlaceHolder: '例如：学生',
+    solveProblem: '希望 AI 为他们解决什么问题？',
+    solveProblemPlaceHolder: '例如：评估学业水平',
+>>>>>>> feature/v2.0.0
     generate: '生成',
     resTitle: '生成的提示词',
     noDataLine1: '在左侧描述您的用例，',

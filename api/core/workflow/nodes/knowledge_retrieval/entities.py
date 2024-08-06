@@ -12,6 +12,12 @@ class RerankingModelConfig(BaseModel):
     provider: str
     model: str
 
+class RerankingModelConfig2(BaseModel):
+    """
+    Reranking Model Config.
+    """
+    reranking_provider_name: Optional[str] = None
+    reranking_model_name: Optional[str] = None
 
 class VectorSetting(BaseModel):
     """
@@ -64,6 +70,17 @@ class SingleRetrievalConfig(BaseModel):
     """
     model: ModelConfig
 
+class RetrievalConfig(BaseModel):
+    """
+    Retrieval Config
+    """
+    search_method: str
+    reranking_enable: bool
+    reranking_model: RerankingModelConfig2
+    top_k: int
+    score_threshold_enabled: bool
+    score_threshold: float
+
 
 class KnowledgeRetrievalNodeData(BaseNodeData):
     """
@@ -75,3 +92,4 @@ class KnowledgeRetrievalNodeData(BaseNodeData):
     retrieval_mode: Literal['single', 'multiple']
     multiple_retrieval_config: Optional[MultipleRetrievalConfig] = None
     single_retrieval_config: Optional[SingleRetrievalConfig] = None
+    dataset_retrieval_configs: Optional[list[RetrievalConfig]] = None

@@ -196,7 +196,7 @@ services:
       # Mount the storage directory to the container, for storing user files.
       - ./volumes/app/storage:/app/api/storage
     networks:
-      - ssrf_proxy_network
+      - ssrf_proxy_network-0_6_11
       - default
 
   # worker service
@@ -215,8 +215,9 @@ services:
     volumes:
       # Mount the storage directory to the container, for storing user files.
       - ./volumes/app/storage:/app/api/storage
+      - ../api:/app/api
     networks:
-      - ssrf_proxy_network
+      - ssrf_proxy_network-0_6_11
       - default
 
   # Frontend web application.
@@ -275,13 +276,15 @@ services:
     volumes:
       - ./volumes/sandbox/dependencies:/dependencies
     networks:
-      - ssrf_proxy_network
+      - ssrf_proxy_network-0_6_11
 
   # ssrf_proxy server
   # for more information, please refer to
   # https://docs.dify.ai/learn-more/faq/self-host-faq#id-18.-why-is-ssrf_proxy-needed
   ssrf_proxy:
-    image: ubuntu/squid:latest
+    # container_name: dify-official-ssrf_proxy
+    # image: ubuntu/squid:latest
+    image: 111.19.168.169:8389/zskj/dify/ubuntu/squid:v1.0
     restart: always
     volumes:
       - ./ssrf_proxy/squid.conf.template:/etc/squid/squid.conf.template
@@ -295,7 +298,7 @@ services:
       SANDBOX_HOST: ${SSRF_SANDBOX_HOST:-sandbox}
       SANDBOX_PORT: ${SANDBOX_PORT:-8194}
     networks:
-      - ssrf_proxy_network
+      - ssrf_proxy_network-0_6_11
       - default
 
   # Certbot service
@@ -321,7 +324,9 @@ services:
   # The nginx reverse proxy.
   # used for reverse proxying the API service and Web service.
   nginx:
-    image: nginx:latest
+    # container_name: dify-official-nginx
+    # image: nginx:latest
+    image: 111.19.168.169:8389/zskj/dify/nginx:v1.0
     restart: always
     volumes:
       - ./nginx/nginx.conf.template:/etc/nginx/nginx.conf.template
@@ -594,8 +599,15 @@ services:
       - ./volumes/unstructured:/app/data
 
 networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.70.2.0/28
   # create a network between sandbox, api and ssrf_proxy, and can not access outside.
-  ssrf_proxy_network:
+  ssrf_proxy_network-0_6_11:
+    ipam:
+      config:
+        - subnet: 172.70.2.16/28
     driver: bridge
     internal: true
   milvus:

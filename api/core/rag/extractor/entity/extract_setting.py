@@ -49,6 +49,7 @@ class ExtractSetting(BaseModel):
     website_info: Optional[WebsiteInfo] = None
     document_model: Optional[str] = None
     model_config = ConfigDict(arbitrary_types_allowed=True)
+    beta_parser_config: Optional[dict] = None
 
     def __init__(self, **data) -> None:
         super().__init__(**data)
