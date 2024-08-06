@@ -167,7 +167,7 @@ const PanelOperatorPopup = ({
           <>
             <div className='p-1'>
               <a
-                href={link}
+                href='/'
                 target='_blank'
                 className='flex items-center px-3 h-8 text-sm text-gray-700 rounded-lg cursor-pointer hover:bg-gray-50'
               >
@@ -185,7 +185,7 @@ const PanelOperatorPopup = ({
           </div>
           <div className='mb-1 text-gray-700 leading-[18px]'>{about}</div>
           <div className='leading-[18px]'>
-            {t('workflow.panel.createdBy')} {author}
+            {t('workflow.panel.createdBy')} Agent
           </div>
         </div>
       </div>

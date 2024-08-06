@@ -163,7 +163,7 @@ const ExtraInfo = ({ isMobile, relatedApps }: IExtraInfoProps) => {
           </div>
           <div className='text-xs text-gray-500 mt-2'>{t('common.datasetMenus.emptyTip')}</div>
           <a
-            className='inline-flex items-center text-xs text-primary-600 mt-2 cursor-pointer'
+            className='inline-flex hidden items-center text-xs text-primary-600 mt-2 cursor-pointer'
             href={
               locale === LanguagesSupported[1]
                 ? 'https://docs.dify.ai/v/zh-hans/guides/application-design/prompt-engineering'
@@ -212,7 +212,7 @@ const DatasetDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
 
   useEffect(() => {
     if (datasetRes)
-      document.title = `${datasetRes.name || 'Dataset'} - Dify`
+      document.title = `${datasetRes.name || 'Dataset'} - 卓世科技`
   }, [datasetRes])
 
   const setAppSiderbarExpand = useStore(state => state.setAppSiderbarExpand)
@@ -227,7 +227,7 @@ const DatasetDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
     return <Loading />
 
   return (
-    <div className='grow flex overflow-hidden'>
+    <div className='grow flex overflow-hidden h-full'>
       {!hideSideBar && <AppSideBar
         title={datasetRes?.name || '--'}
         icon={datasetRes?.icon || 'https://static.dify.ai/images/dataset-default-icon.png'}

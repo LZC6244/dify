@@ -140,6 +140,23 @@ export const initialNodes = (originNodes: Node[], originEdges: Edge[]) => {
       })
     }
 
+    if (node.data.type === BlockEnum.KnowledgeFilter) {
+      node.data._targetBranches = [
+        {
+          id: '1',
+          name: 'high_score_results',
+        },
+        {
+          id: '2',
+          name: 'mid_score_results',
+        },
+        {
+          id: '3',
+          name: 'low_score_results',
+        },
+      ]
+    }
+
     if (node.data.type === BlockEnum.Iteration)
       node.data._children = iterationNodeMap[node.id] || []
 
@@ -233,6 +250,8 @@ export const canRunBySingle = (nodeType: BlockEnum) => {
     || nodeType === BlockEnum.Code
     || nodeType === BlockEnum.TemplateTransform
     || nodeType === BlockEnum.QuestionClassifier
+    || nodeType === BlockEnum.QuestionTransformation
+    || nodeType === BlockEnum.KnowledgeFilter
     || nodeType === BlockEnum.HttpRequest
     || nodeType === BlockEnum.Tool
     || nodeType === BlockEnum.ParameterExtractor

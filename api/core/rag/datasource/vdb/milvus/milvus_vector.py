@@ -262,7 +262,9 @@ class MilvusVector(BaseVector):
             uri = "https://" + str(config.host) + ":" + str(config.port)
         else:
             uri = "http://" + str(config.host) + ":" + str(config.port)
+        logger.info(f"Milvus uri: {uri}")
         client = MilvusClient(uri=uri, user=config.user, password=config.password, db_name=config.database)
+        logger.info("Milvus client initialized")
         return client
 
 

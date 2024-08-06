@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useContext } from 'use-context-selector'
 import { useBoolean } from 'ahooks'
@@ -74,6 +74,13 @@ enum SegmentType {
   AUTO = 'automatic',
   CUSTOM = 'custom',
 }
+enum ParserType {
+  GENERAL = 'general',
+  NAIVE = 'naive',
+  PAPER = 'paper',
+  QA = 'qa',
+  NULL = '',
+}
 enum IndexingType {
   QUALIFIED = 'high_quality',
   ECONOMICAL = 'economy',
@@ -98,6 +105,8 @@ const StepTwo = ({
   onSave,
   onCancel,
 }: StepTwoProps) => {
+  console.log('files', files)
+
   const { t } = useTranslation()
   const { locale } = useContext(I18n)
   const media = useBreakpoints()
@@ -111,6 +120,8 @@ const StepTwo = ({
   const previewScrollRef = useRef<HTMLDivElement>(null)
   const [previewScrolled, setPreviewScrolled] = useState(false)
   const [segmentationType, setSegmentationType] = useState<SegmentType>(SegmentType.AUTO)
+  const [parserType, setParserType] = useState<ParserType>(ParserType.GENERAL)
+  const [embeddingQOnly, setEmbeddingQOnly] = useState(true)
   const [segmentIdentifier, setSegmentIdentifier] = useState('\\n')
   const [max, setMax] = useState(500)
   const [overlap, setOverlap] = useState(50)
@@ -277,6 +288,7 @@ const StepTwo = ({
         doc_form: docForm,
         doc_language: docLanguage,
         dataset_id: datasetId as string,
+        parser_type: parserType,
       }
     }
     if (dataSourceType === DataSourceType.NOTION) {
@@ -290,6 +302,7 @@ const StepTwo = ({
         doc_form: docForm,
         doc_language: docLanguage,
         dataset_id: datasetId as string,
+        parser_type: parserType,
       }
     }
     if (dataSourceType === DataSourceType.WEB) {
@@ -303,6 +316,7 @@ const StepTwo = ({
         doc_form: docForm,
         doc_language: docLanguage,
         dataset_id: datasetId as string,
+        parser_type: parserType,
       }
     }
   }
@@ -325,6 +339,8 @@ const StepTwo = ({
         process_rule: getProcessRule(),
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         retrieval_model: retrievalConfig, // Readonly. If want to changed, just go to settings page.
+        parser_type: parserType,
+        embedding_q_only: embeddingQOnly,
       } as CreateDocumentReq
     }
     else { // create
@@ -361,6 +377,8 @@ const StepTwo = ({
         doc_language: docLanguage,
 
         retrieval_model: postRetrievalConfig,
+        parser_type: parserType,
+        embedding_q_only: embeddingQOnly,
       } as CreateDocumentReq
       if (dataSourceType === DataSourceType.FILE) {
         params.data_source.info_list.file_info_list = {
@@ -520,31 +538,47 @@ const StepTwo = ({
       setIndexType(isAPIKeySet ? IndexingType.QUALIFIED : IndexingType.ECONOMICAL)
   }, [isAPIKeySet, indexingType, datasetId])
 
-  useEffect(() => {
-    if (segmentationType === SegmentType.AUTO) {
-      setAutomaticFileIndexingEstimate(null)
-      !isMobile && setShowPreview()
-      fetchFileIndexingEstimate()
-      setPreviewSwitched(false)
-    }
-    else {
-      hidePreview()
-      setCustomFileIndexingEstimate(null)
-      setPreviewSwitched(false)
-    }
-  }, [segmentationType, indexType])
+  // TODO
+  // useEffect(() => {
+  //   if (segmentationType === SegmentType.CUSTOM || parserType === ParserType.QA) {
+  //     setAutomaticFileIndexingEstimate(null)
+  //     !isMobile && setShowPreview()
+  //     fetchFileIndexingEstimate()
+  //     setPreviewSwitched(false)
+  //   }
+  //   else {
+  //     hidePreview()
+  //     setCustomFileIndexingEstimate(null)
+  //     setPreviewSwitched(false)
+  //   }
+  // }, [segmentationType, indexType, parserType])
 
   const [retrievalConfig, setRetrievalConfig] = useState(currentDataset?.retrieval_model_dict || {
     search_method: RETRIEVE_METHOD.semantic,
     reranking_enable: false,
     reranking_model: {
-      reranking_provider_name: rerankDefaultModel?.provider.provider,
-      reranking_model_name: rerankDefaultModel?.model,
+      reranking_provider_name: rerankDefaultModel?.provider.provider || '',
+      reranking_model_name: rerankDefaultModel?.model || '',
     },
     top_k: 3,
     score_threshold_enabled: false,
     score_threshold: 0.5,
   } as RetrievalConfig)
+
+  // 是否有PDF文件
+  const isPDF = useMemo(() => {
+    if (files && files.find(v => v.extension === 'pdf'))
+      return true
+
+    return false
+  }, [files])
+  // 是否有PDF文件
+  const isCSV = useMemo(() => {
+    if (files && files.find(v => v.extension === 'csv'))
+      return true
+
+    return false
+  }, [files])
 
   return (
     <div className='flex w-full h-full'>
@@ -566,6 +600,101 @@ const StepTwo = ({
           )}
         </div>
         <div className={cn(s.form, isMobile && '!px-4')}>
+          <div className={s.label}>{t('datasetCreation.stepTwo.parser')}</div>
+          <div className='max-w-[640px]'>
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                parserType === ParserType.GENERAL && s.active,
+              )}
+              onClick={() => setParserType(ParserType.GENERAL)}
+            >
+              <span className={cn(s.typeIcon, s.auto)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.general')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.generalDescription')}</div>
+              </div>
+            </div>
+
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                !isPDF && s.radioDisabled,
+                parserType === ParserType.NAIVE && s.active,
+              )}
+              onClick={() => {
+                if (isPDF)
+                  setParserType(ParserType.NAIVE)
+              }}
+            >
+              <span className={cn(s.typeIcon, s.customize)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.naive')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.naiveDescription')}</div>
+              </div>
+            </div>
+
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                !isPDF && s.radioDisabled,
+                parserType === ParserType.PAPER && s.active,
+              )}
+              onClick={() => {
+                if (isPDF)
+                  setParserType(ParserType.PAPER)
+              }}
+            >
+              <span className={cn(s.typeIcon, s.customize)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.paper')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.paperDescription')}</div>
+              </div>
+            </div>
+
+            <div
+              className={cn(
+                s.radioItem,
+                s.segmentationItem,
+                !isCSV && s.radioDisabled,
+                parserType === ParserType.QA && s.active,
+              )}
+              onClick={() => {
+                if (isCSV)
+                  setParserType(ParserType.QA)
+              }}
+            >
+              <span className={cn(s.typeIcon, s.customize)} />
+              <span className={cn(s.radio)} />
+              <div className={s.typeHeader}>
+                <div className={s.title}>{t('datasetCreation.stepTwo.qa')}</div>
+                <div className={s.tip}>{t('datasetCreation.stepTwo.qaDescription')}</div>
+              </div>
+              {parserType === ParserType.QA && (
+                <div className={s.typeFormBody}>
+                  <div className="py-4">
+                    <div className='w-full flex flex-row items-center justify-between'>
+                      <div className="text-[#344054] text-[16px]">{t('datasetCreation.stepTwo.qaEmbedding')}</div>
+                      <Switch
+                        defaultValue={false}
+                        size='md'
+                        onChange={(enabled) => {
+                          setEmbeddingQOnly(enabled)
+                        }} />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+          </div>
+
           <div className={s.label}>{t('datasetCreation.stepTwo.segmentation')}</div>
           <div className='max-w-[640px]'>
             <div
@@ -775,7 +904,7 @@ const StepTwo = ({
                   <div className={s.label}>
                     {t('datasetSettings.form.retrievalSetting.title')}
                     <div className='leading-[18px] text-xs font-normal text-gray-500'>
-                      <a target='_blank' rel='noopener noreferrer' href='https://docs.dify.ai/guides/knowledge-base/create-knowledge-and-upload-documents#id-6-retrieval-settings' className='text-[#155eef]'>{t('datasetSettings.form.retrievalSetting.learnMore')}</a>
+                      <a target='_blank' rel='noopener noreferrer' href='/' className='text-[#155eef]'>{t('datasetSettings.form.retrievalSetting.learnMore')}</a>
                       {t('datasetSettings.form.retrievalSetting.longDescription')}
                     </div>
                   </div>

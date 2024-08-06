@@ -508,6 +508,7 @@ class AdvancedChatAppGenerateTaskPipeline(BasedGenerateTaskPipeline, WorkflowCyc
                 NodeType.ANSWER.value,
                 NodeType.IF_ELSE.value,
                 NodeType.QUESTION_CLASSIFIER.value,
+                NodeType.KNOWLEDGE_FILTER.value,
                 NodeType.ITERATION.value,
                 NodeType.LOOP.value
             ]:

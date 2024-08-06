@@ -15,12 +15,25 @@ ENV POETRY_VIRTUALENVS_CREATE=true
 
 FROM base AS packages
 
+# 更换apt源
+RUN sed -i "s@http://\(deb\|security\).debian.org@https://mirrors.cloud.tencent.com@g" /etc/apt/sources.list.d/debian.sources
+
+# 更新包列表
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc g++ libc-dev libffi-dev libgmp-dev libmpfr-dev libmpc-dev
 
+<<<<<<< HEAD
 # Install Python dependencies
 COPY pyproject.toml poetry.lock ./
 RUN poetry install --sync --no-cache --no-root
+=======
+COPY requirements.txt /requirements.txt
+
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --prefix=/pkg -r requirements.txt
+>>>>>>> feature/v2.0.0
 
 # production stage
 FROM base AS production

@@ -404,7 +404,7 @@ const TextGeneration: FC<IMainProps> = ({
       if (canReplaceLogo)
         document.title = `${siteInfo.title}`
       else
-        document.title = `${siteInfo.title} - Powered by Dify`
+        document.title = `${siteInfo.title} - Powered by 卓世科技`
     }
   }, [siteInfo?.title, canReplaceLogo])
 
@@ -533,7 +533,7 @@ const TextGeneration: FC<IMainProps> = ({
       )}>
         {/* Left */}
         <div className={cn(
-          isPC ? 'w-[600px] max-w-[50%] p-8' : 'p-4',
+          isPC ? 'w-[600px] max-w-[50%] p-8 relative' : 'p-4',
           isInstalledApp && 'rounded-l-2xl',
           'shrink-0 relative flex flex-col pb-10 h-full border-r border-gray-100 bg-white',
         )}>
@@ -614,7 +614,7 @@ const TextGeneration: FC<IMainProps> = ({
 
           {/* copyright */}
           <div className={cn(
-            isInstalledApp ? 'left-[248px]' : 'left-8',
+            isInstalledApp ? 'left-[488px]' : 'left-8',
             'fixed  bottom-4  flex space-x-2 text-gray-400 font-normal text-xs',
           )}>
             <div className="">© {siteInfo.copyright || siteInfo.title} {(new Date()).getFullYear()}</div>

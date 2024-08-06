@@ -1,7 +1,7 @@
 ![cover-v5-optimized](https://github.com/langgenius/dify/assets/13230914/f9e19af5-61ba-4119-b926-d10c4c06ebab)
 
 <p align="center">
-  <a href="https://cloud.dify.ai">Dify 클라우드</a> ·
+  <a href="http://127.0.0.1">Dify 클라우드</a> ·
   <a href="https://docs.dify.ai/getting-started/install-self-hosted">셀프-호스팅</a> ·
   <a href="https://docs.dify.ai">문서</a> ·
   <a href="https://cal.com/guchenhe/60-min-meeting">기업 문의</a>

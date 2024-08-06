@@ -207,6 +207,7 @@ class DatasetRetrieval:
             return str("\n".join(document_context_list))
         return ''
 
+<<<<<<< HEAD
     def single_retrieve(
             self, app_id: str,
             tenant_id: str,
@@ -219,6 +220,19 @@ class DatasetRetrieval:
             planning_strategy: PlanningStrategy,
             message_id: Optional[str] = None,
     ):
+=======
+    def single_retrieve(self, app_id: str,
+                        tenant_id: str,
+                        user_id: str,
+                        user_from: str,
+                        available_datasets: list,
+                        query: str,
+                        model_instance: ModelInstance,
+                        model_config: ModelConfigWithCredentialsEntity,
+                        planning_strategy: PlanningStrategy,
+                        dataset_retrieval_configs_map: Optional[dict] = None
+                        ):
+>>>>>>> feature/v2.0.0
         tools = []
         for dataset in available_datasets:
             description = dataset.description
@@ -255,6 +269,9 @@ class DatasetRetrieval:
                 retrieval_model_config = dataset.retrieval_model \
                     if dataset.retrieval_model else default_retrieval_model
 
+                if dataset_retrieval_configs_map:
+                    retrieval_model_config = dataset_retrieval_configs_map[dataset.id].__dict__
+          
                 # get top k
                 top_k = retrieval_model_config['top_k']
                 # get retrieval method

@@ -11,7 +11,7 @@ import { ArrowUpRight } from '@/app/components/base/icons/src/vender/line/arrows
 
 const Contribute: FC = () => {
   const { t } = useTranslation()
-
+  return <></>
   return (
     <a
       href='https://github.com/langgenius/dify/blob/main/api/core/tools/README.md'

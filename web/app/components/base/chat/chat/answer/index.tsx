@@ -15,7 +15,6 @@ import BasicContent from './basic-content'
 import SuggestedQuestions from './suggested-questions'
 import More from './more'
 import WorkflowProcess from './workflow-process'
-import { AnswerTriangle } from '@/app/components/base/icons/src/vender/solid/general'
 import { MessageFast } from '@/app/components/base/icons/src/vender/solid/communication'
 import LoadingAnim from '@/app/components/base/chat/chat/loading-anim'
 import Citation from '@/app/components/base/chat/chat/citation'
@@ -87,11 +86,11 @@ const Answer: FC<AnswerProps> = ({
 
   return (
     <div className='flex mb-2 last:mb-0'>
-      <div className='shrink-0 relative w-10 h-10'>
+      <div className='shrink-0 relative w-10 h-10 mt-2'>
         {
           answerIcon || (
             <div className='flex items-center justify-center w-full h-full rounded-full bg-[#d5f5f6] border-[0.5px] border-black/5 text-xl'>
-              🤖
+              🧭
             </div>
           )
         }
@@ -105,11 +104,11 @@ const Answer: FC<AnswerProps> = ({
       </div>
       <div className='chat-answer-container group grow w-0 ml-4' ref={containerRef}>
         <div className={`group relative pr-10 ${chatAnswerContainerInner}`}>
-          <AnswerTriangle className='absolute -left-2 top-0 w-2 h-3 text-gray-100' />
+          {/* <AnswerTriangle className='absolute -left-2 top-0 w-2 h-3 text-gray-100' /> */}
           <div
             ref={contentRef}
             className={`
-              relative inline-block px-4 py-3 max-w-full bg-gray-100 rounded-b-2xl rounded-tr-2xl text-sm text-gray-900
+              relative inline-block px-4 py-3 max-w-full bg-white rounded-2xl text-base leading-[30px] text-[#212B36]
               ${workflowProcess && 'w-full'}
             `}
           >

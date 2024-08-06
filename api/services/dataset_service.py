@@ -663,6 +663,7 @@ class DocumentService:
 
                 DocumentService.check_documents_upload_quota(count, features)
 
+ 
         # if dataset is empty, update dataset data_source_type
         if not dataset.data_source_type:
             dataset.data_source_type = document_data["data_source"]["type"]
@@ -704,6 +705,7 @@ class DocumentService:
 
         documents = []
         batch = time.strftime('%Y%m%d%H%M%S') + str(random.randint(100000, 999999))
+ 
         if document_data.get("original_document_id"):
             document = DocumentService.update_document_with_dataset_id(dataset, document_data, account)
             documents.append(document)
@@ -755,6 +757,7 @@ class DocumentService:
                             enabled=True,
                             name=file_name
                         ).first()
+            
                         if document:
                             document.dataset_process_rule_id = dataset_process_rule.id
                             document.updated_at = datetime.datetime.utcnow()
@@ -864,11 +867,17 @@ class DocumentService:
                     position += 1
             db.session.commit()
 
+            print("document_data:",document_data)
+            beta_parser_config = {
+                'parser_type': document_data.get('parser_type', "qa"),
+                'embedding_q_only': document_data.get('embedding_q_only', False)
+            }
+            
             # trigger async task
             if document_ids:
-                document_indexing_task.delay(dataset.id, document_ids)
+                document_indexing_task.delay(dataset.id, document_ids, beta_parser_config)
             if duplicate_document_ids:
-                duplicate_document_indexing_task.delay(dataset.id, duplicate_document_ids)
+                duplicate_document_indexing_task.delay(dataset.id, duplicate_document_ids, beta_parser_config)
 
         return documents, batch
 

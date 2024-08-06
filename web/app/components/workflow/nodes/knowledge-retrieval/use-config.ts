@@ -181,6 +181,12 @@ const useConfig = (id: string, payload: KnowledgeRetrievalNodeType) => {
       const datasetIds = inputs.dataset_ids
       if (datasetIds?.length > 0) {
         const { data: dataSetsWithDetail } = await fetchDatasets({ url: '/datasets', params: { page: 1, ids: datasetIds } })
+        if (inputs.dataset_retrieval_configs) {
+          let dataset_retrieval_configs = inputs.dataset_retrieval_configs
+          dataSetsWithDetail.forEach((item, index) => {
+            item.retrieval_model_dict = dataset_retrieval_configs[index]
+          });
+        } 
         setSelectedDatasets(dataSetsWithDetail)
       }
       const newInputs = produce(inputs, (draft) => {
@@ -216,6 +222,7 @@ const useConfig = (id: string, payload: KnowledgeRetrievalNodeType) => {
         const multipleRetrievalConfig = draft.multiple_retrieval_config
         draft.multiple_retrieval_config = getMultipleRetrievalConfig(multipleRetrievalConfig!, newDatasets)
       }
+      draft.dataset_retrieval_configs = newDatasets.map(d => d.retrieval_model_dict)
     })
     setInputs(newInputs)
     setSelectedDatasets(newDatasets)

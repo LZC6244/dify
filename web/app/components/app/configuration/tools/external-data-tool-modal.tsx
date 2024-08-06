@@ -242,7 +242,7 @@ const ExternalDataToolModal: FC<ExternalDataToolModalProps> = ({
             <div className='flex justify-between items-center h-9 text-sm font-medium text-gray-900'>
               {t('common.apiBasedExtension.selector.title')}
               <a
-                href={t('common.apiBasedExtension.linkUrl') || '/'}
+                href={'/'}
                 target='_blank' rel='noopener noreferrer'
                 className='group flex items-center text-xs font-normal text-gray-500 hover:text-primary-600'
               >
