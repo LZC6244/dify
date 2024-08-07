@@ -11,6 +11,7 @@ from libs.login import login_required
 from models.model import App, InstalledApp
 from services.account_service import TenantService
 
+from sqlalchemy import or_, and_
 
 class ZsPublishedAppsListApi(Resource):
     """
@@ -24,7 +25,13 @@ class ZsPublishedAppsListApi(Resource):
         current_tenant_id = current_user.current_tenant_id
         published_apps = db.session.query(InstalledApp).filter(
             InstalledApp.tenant_id == current_tenant_id
-        ).join(App, InstalledApp.app_id == App.id).filter(App.workflow_id.isnot(None)).all()
+        ).join(App, InstalledApp.app_id == App.id).filter(
+            or_(
+                App.mode != 'workflow',
+                and_(App.mode == 'workflow', App.workflow_id.isnot(None))
+            )
+            # App.workflow_id.isnot(None)
+        ).all()
 
         current_user.role = TenantService.get_user_role(current_user, current_user.current_tenant)
         published_apps = [
