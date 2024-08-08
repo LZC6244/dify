@@ -111,10 +111,10 @@ class ExtractProcessor:
                     if file_extension == '.csv' and parser_type == "qa":
                         extractor = CSVExtractor(file_path, autodetect_encoding=True, qa_mode=True)
                     elif file_extension == '.pdf' and parser_type == "naive":
-                        url = dify_config.DEEPDOC_API_URL + '/parse_pdf'
+                        url = dify_config.OCR_API_URL + '/parse_pdf'
                         extractor = NaiveExtractor(file_path, url)
                     elif file_extension == '.pdf' and parser_type == "paper":
-                        url = dify_config.DEEPDOC_API_URL + '/parse_paper'
+                        url = dify_config.OCR_API_URL + '/parse_paper'
                         extractor = PaperExtractor(file_path, url)
                     else:
                         etl_type = 'dify'

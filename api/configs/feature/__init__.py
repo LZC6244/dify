@@ -390,6 +390,11 @@ class RagEtlConfig(BaseSettings):
         default=None,
     )
 
+    OCR_API_URL: Optional[str] = Field(
+        description='API URL for OCR',
+        default=None,
+    )
+
 
 class DataSetConfig(BaseSettings):
     """
