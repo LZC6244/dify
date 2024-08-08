@@ -33,8 +33,7 @@ class KnowledgeFilterNode(BaseNode):
         node_data = cast(KnowledgeFilterNodeData, node_data)
 
         # extract variables
-        variable = variable_pool.get(node_data.query_variable_selector)
-        query = variable.value if variable else None
+        query = variable_pool.get_any(node_data.query_variable_selector)
 
         variables = {
             'query': query
