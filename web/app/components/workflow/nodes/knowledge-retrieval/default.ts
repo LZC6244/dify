@@ -4,7 +4,7 @@ import type { KnowledgeRetrievalNodeType } from './types'
 import { RerankingModeEnum } from '@/models/datasets'
 import { ALL_CHAT_AVAILABLE_BLOCKS, ALL_COMPLETION_AVAILABLE_BLOCKS } from '@/app/components/workflow/constants'
 import { DATASET_DEFAULT } from '@/config'
-import { RETRIEVE_TYPE, RETRIEVE_METHOD } from '@/types/app'
+import { RETRIEVE_TYPE } from '@/types/app'
 const i18nPrefix = 'workflow'
 
 const nodeDefault: NodeDefault<KnowledgeRetrievalNodeType> = {
@@ -17,17 +17,6 @@ const nodeDefault: NodeDefault<KnowledgeRetrievalNodeType> = {
       score_threshold: undefined,
       reranking_enable: false,
     },
-    dataset_retrieval_configs: [{
-      search_method: RETRIEVE_METHOD.hybrid,
-      reranking_enable: false,
-      reranking_model: {
-        reranking_provider_name: '',
-        reranking_model_name: '',
-      },
-      top_k: 6,
-      score_threshold_enabled: true,
-      score_threshold: 0.3
-    }]
   },
   getAvailablePrevNodes(isChatMode: boolean) {
     const nodes = isChatMode
