@@ -190,9 +190,6 @@ services:
   # API service
   api:
     container_name: dify-dev-api
-    # 不进入 debug 模式时，注释掉 entrypoint 和 command 即可
-    entrypoint: [ "/bin/bash" ]
-    command: [ "-x", "-c", "/app/api/docker/debug_api.sh" ]
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
@@ -250,9 +247,6 @@ services:
   # The Celery worker for processing the queue.
   worker:
     container_name: dify-dev-worker
-    # 不进入 debug 模式时，注释掉 entrypoint 和 command 即可
-    entrypoint: [ "/bin/bash" ]
-    command: [ "-x", "-c", "/app/api/docker/debug_worker.sh" ]
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:{VERSION}
     restart: always
     environment:
