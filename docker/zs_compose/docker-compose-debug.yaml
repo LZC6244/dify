@@ -10,10 +10,10 @@ x-shared-env:
   FLASK_DEBUG: ${FLASK_DEBUG:-false}
   SECRET_KEY: ${SECRET_KEY:-1vk81UK+Mdq86J9xd4VAx6V1nXSOKh1fX/jUL+jCgiJeTZXN5BolPQ4p}
   INIT_PASSWORD: ${INIT_PASSWORD:-}
-  CONSOLE_WEB_URL: ${CONSOLE_WEB_URL:-http://192.168.124.78:5281}
-  CONSOLE_API_URL: ${CONSOLE_API_URL:-http://192.168.124.78:5281}
-  SERVICE_API_URL: ${SERVICE_API_URL:-http://192.168.124.78:5281}
-  APP_WEB_URL: ${APP_WEB_URL:-http://192.168.124.78:5281}
+  CONSOLE_WEB_URL: ${CONSOLE_WEB_URL:-http://61.241.103.72:5281}
+  CONSOLE_API_URL: ${CONSOLE_API_URL:-http://61.241.103.72:5281}
+  SERVICE_API_URL: ${SERVICE_API_URL:-http://61.241.103.72:5281}
+  APP_WEB_URL: ${APP_WEB_URL:-http://61.241.103.72:5281}
   CHECK_UPDATE_URL: ${CHECK_UPDATE_URL:-https://updates.dify.ai}
   OPENAI_API_BASE: ${OPENAI_API_BASE:-https://api.openai.com/v1}
   FILES_URL: ${FILES_URL:-}
@@ -35,19 +35,19 @@ x-shared-env:
   API_TOOL_DEFAULT_READ_TIMEOUT: ${API_TOOL_DEFAULT_READ_TIMEOUT:-60}
   DB_USERNAME: ${DB_USERNAME:-postgres}
   DB_PASSWORD: ${DB_PASSWORD:-vuqvu7-kikjes-hehtYq}
-  DB_HOST: ${DB_HOST:-61.241.103.72}
+  DB_HOST: ${DB_HOST:-172.26.0.1}
   DB_PORT: ${DB_PORT:-6632}
   DB_DATABASE: ${DB_DATABASE:-dify_dev}
   SQLALCHEMY_POOL_SIZE: ${SQLALCHEMY_POOL_SIZE:-30}
   SQLALCHEMY_POOL_RECYCLE: ${SQLALCHEMY_POOL_RECYCLE:-3600}
   SQLALCHEMY_ECHO: ${SQLALCHEMY_ECHO:-false}
-  REDIS_HOST: ${REDIS_HOST:-61.241.103.72}
+  REDIS_HOST: ${REDIS_HOST:-172.26.0.1}
   REDIS_PORT: ${REDIS_PORT:-6379}
   REDIS_USERNAME: ${REDIS_USERNAME:-}
   REDIS_PASSWORD: ${REDIS_PASSWORD:-MhxzKhl123}
   REDIS_USE_SSL: ${REDIS_USE_SSL:-false}
   REDIS_DB: 0
-  CELERY_BROKER_URL: ${CELERY_BROKER_URL:-redis://:MhxzKhl123@61.241.103.72:6379/10}
+  CELERY_BROKER_URL: ${CELERY_BROKER_URL:-redis://:MhxzKhl123@172.26.0.1:6379/10}
   BROKER_USE_SSL: ${BROKER_USE_SSL:-false}
   WEB_API_CORS_ALLOW_ORIGINS: ${WEB_API_CORS_ALLOW_ORIGINS:-*}
   CONSOLE_CORS_ALLOW_ORIGINS: ${CONSOLE_CORS_ALLOW_ORIGINS:-*}
@@ -90,7 +90,7 @@ x-shared-env:
   QDRANT_CLIENT_TIMEOUT: ${QDRANT_CLIENT_TIMEOUT:-20}
   QDRANT_GRPC_ENABLED: ${QDRANT_GRPC_ENABLED:-false}
   QDRANT_GRPC_PORT: ${QDRANT_GRPC_PORT:-6334}
-  MILVUS_HOST: ${MILVUS_HOST:-61.241.103.72}
+  MILVUS_HOST: ${MILVUS_HOST:-172.26.0.1}
   MILVUS_PORT: ${MILVUS_PORT:-19566}
   MILVUS_USER: ${MILVUS_USER:-root}
   MILVUS_PASSWORD: ${MILVUS_PASSWORD:-wogtew-zehruT-1qosmo}
@@ -101,7 +101,7 @@ x-shared-env:
   MYSCALE_PASSWORD: ${MYSCALE_PASSWORD:-}
   MYSCALE_DATABASE: ${MYSCALE_DATABASE:-dify}
   MYSCALE_FTS_PARAMS: ${MYSCALE_FTS_PARAMS:-}
-  RELYT_HOST: ${RELYT_HOST:-61.241.103.72}
+  RELYT_HOST: ${RELYT_HOST:-172.26.0.1}
   RELYT_PORT: ${RELYT_PORT:-6632}
   RELYT_USER: ${RELYT_USER:-postgres}
   RELYT_PASSWORD: ${RELYT_PASSWORD:-vuqvu7-kikjes-hehtYq}
@@ -185,8 +185,7 @@ x-shared-env:
   CODE_MAX_NUMBER_ARRAY_LENGTH: ${CODE_MAX_NUMBER_ARRAY_LENGTH:-1000}
   SSRF_PROXY_HTTP_URL: ${SSRF_PROXY_HTTP_URL:-http://ssrf_proxy:3128}
   SSRF_PROXY_HTTPS_URL: ${SSRF_PROXY_HTTPS_URL:-http://ssrf_proxy:3128}
-  OCR_API_URL: ${OCR_API_URL:-}
-  
+
 services:
   # API service
   api:
@@ -195,7 +194,7 @@ services:
     entrypoint: [ "/bin/bash" ]
     command: [ "-x", "-c", "/app/api/docker/debug_api.sh" ]
     # image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-55f1913519c7689c371ff9b2231ea8f7143b2941
-    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:liuzhaocheng-dev-0.6.16-bc175bd37f3eb151e4dfe2fdd08fb8daf06d09fd
+    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:0.6.16.1
     restart: always
     environment:
       # Use the shared environment variables.
@@ -255,7 +254,7 @@ services:
     # 不进入 debug 模式时，注释掉 entrypoint 和 command 即可
     entrypoint: [ "/bin/bash" ]
     command: [ "-x", "-c", "/app/api/docker/debug_worker.sh" ]
-    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:liuzhaocheng-dev-0.6.16-bc175bd37f3eb151e4dfe2fdd08fb8daf06d09fd
+    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:0.6.16.1
     # image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-55f1913519c7689c371ff9b2231ea8f7143b2941
     restart: always
     environment:
@@ -312,11 +311,11 @@ services:
   web:
     container_name: dify-debug-web
     # image: 111.19.168.169:8389/zskj/frontend/zs-dify-web:feature-v2.0.0-55f1913519c7689c371ff9b2231ea8f7143b2941
-    image: 111.19.168.169:8389/zskj/frontend/zs-dify-web:liuzhaocheng-dev-0.6.16-bc175bd37f3eb151e4dfe2fdd08fb8daf06d09fd
+    image: 111.19.168.169:8389/zskj/dify-web:0.6.16
     # image: langgenius/dify-web:0.6.11
     restart: always
     environment:
-      CONSOLE_API_URL: ${CONSOLE_API_URL:-http://192.168.124.78:5281}
+      CONSOLE_API_URL: ${CONSOLE_API_URL:-http://61.241.103.72:5281}
       APP_API_URL: ${APP_API_URL:-}
       SENTRY_DSN: ${WEB_SENTRY_DSN:-}
     # ports:
