@@ -366,13 +366,12 @@
         },
         "zh-Hans": {
             "categories": [
-                "\u7ed8\u753b",
                 "Writing",
                 "HR",
-                "Programming",
                 "Assistant",
-                "\u667a\u80fd\u52a9\u7406",
-                "Translate"
+                "Agent",
+                "Programming",
+                "工作流"
             ],
             "recommended_apps": [
                 {
@@ -381,33 +380,31 @@
                         "icon_background": null,
                         "id": "b82da4c0-2887-48cc-a7d6-7edc0bdd6002",
                         "mode": "chat",
-                        "name": "AI \u524d\u7aef\u9762\u8bd5\u5b98"
+                        "name": "AI 前端面试官"
                     },
                     "app_id": "b82da4c0-2887-48cc-a7d6-7edc0bdd6002",
                     "category": "HR",
                     "copyright": null,
-                    "description": "\u4e00\u4e2a\u6a21\u62df\u7684\u524d\u7aef\u9762\u8bd5\u5b98\uff0c\u901a\u8fc7\u63d0\u95ee\u7684\u65b9\u5f0f\u5bf9\u524d\u7aef\u5f00\u53d1\u7684\u6280\u80fd\u6c34\u5e73\u8fdb\u884c\u68c0\u9a8c\u3002",
+                    "description": "一个模拟的前端面试官，通过提问的方式对前端开发的技能水平进行检验。",
                     "is_listed": true,
                     "position": 20,
-                    "privacy_policy": null,
-                    "custom_disclaimer": null
+                    "privacy_policy": null
                 },
                 {
                     "app": {
-                        "icon": "\ud83d\uddbc\ufe0f",
-                        "icon_background": "#D5F5F6",
-                        "id": "1fa25f89-2883-41ac-877e-c372274020a4",
-                        "mode": "chat",
-                        "name": "\u6241\u5e73\u98ce\u63d2\u753b\u751f\u6210"
+                        "icon": "loudspeaker",
+                        "icon_background": "#E0F2FE",
+                        "id": "bc374da2-0a10-4567-8f43-619b9ce44c74",
+                        "mode": "completion",
+                        "name": "招聘广告撰写"
                     },
-                    "app_id": "1fa25f89-2883-41ac-877e-c372274020a4",
-                    "category": "\u7ed8\u753b",
+                    "app_id": "bc374da2-0a10-4567-8f43-619b9ce44c74",
+                    "category": "HR",
                     "copyright": null,
-                    "description": "\u8f93\u5165\u76f8\u5173\u5143\u7d20\uff0c\u4e3a\u4f60\u751f\u6210\u6241\u5e73\u63d2\u753b\u98ce\u683c\u7684\u5c01\u9762\u56fe\u7247",
+                    "description": "帮你撰写相对应职位的招聘广告。",
                     "is_listed": true,
                     "position": 10,
-                    "privacy_policy": null,
-                    "custom_disclaimer": null
+                    "privacy_policy": null
                 },
                 {
                     "app": {
@@ -415,16 +412,79 @@
                         "icon_background": null,
                         "id": "94b509ad-4225-4924-8b50-5c25c2bd7e3c",
                         "mode": "completion",
-                        "name": "\u6587\u7ae0\u7ffb\u8bd1\u52a9\u7406 "
+                        "name": "文章翻译助理 "
                     },
                     "app_id": "94b509ad-4225-4924-8b50-5c25c2bd7e3c",
                     "category": "Assistant",
                     "copyright": null,
-                    "description": "\u4e00\u4e2a\u591a\u8bed\u8a00\u7ffb\u8bd1\u5668\uff0c\u63d0\u4f9b\u591a\u79cd\u8bed\u8a00\u7ffb\u8bd1\u80fd\u529b\uff0c\u8f93\u5165\u4f60\u9700\u8981\u7ffb\u8bd1\u7684\u6587\u672c\uff0c\u9009\u62e9\u76ee\u6807\u8bed\u8a00\u5373\u53ef\u3002\u63d0\u793a\u8bcd\u6765\u81ea\u5b9d\u7389\u3002",
+                    "description": "一个多语言翻译器，提供多种语言翻译能力，输入你需要翻译的文本，选择目标语言即可。提示词来自宝玉。",
                     "is_listed": true,
                     "position": 10,
-                    "privacy_policy": null,
-                    "custom_disclaimer": null
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🖼️",
+                        "icon_background": "#D5F5F6",
+                        "id": "1fa25f89-2883-41ac-877e-c372274020a4",
+                        "mode": "agent-chat",
+                        "name": "扁平风插画生成"
+                    },
+                    "app_id": "1fa25f89-2883-41ac-877e-c372274020a4",
+                    "category": "Agent",
+                    "copyright": null,
+                    "description": "输入相关元素，为你生成扁平插画风格的封面图片",
+                    "is_listed": true,
+                    "position": 10,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "4d7fdeb2-eff2-4fd8-baa7-da7286de056f",
+                        "mode": "workflow",
+                        "name": "邮件助手工作流"
+                    },
+                    "app_id": "4d7fdeb2-eff2-4fd8-baa7-da7286de056f",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "可以总结、回复、代写、润色和检查语法的多功能邮件助手。",
+                    "is_listed": true,
+                    "position": 5,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "6e952aab-189d-4161-827a-7ec8c384544e",
+                        "mode": "workflow",
+                        "name": "全书翻译"
+                    },
+                    "app_id": "6e952aab-189d-4161-827a-7ec8c384544e",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "一个用于翻译整本书的工作流，每次运行最长持续1小时。使用代码节点将文本分成块，并使用迭代来翻译每个块。",
+                    "is_listed": true,
+                    "position": 5,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "d9ff1644-45e7-4d0c-90af-6e215773beeb",
+                        "mode": "workflow",
+                        "name": "互联网搜索与分析"
+                    },
+                    "app_id": "d9ff1644-45e7-4d0c-90af-6e215773beeb",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "通过这个工作流，用户可以从输入一个问题开始，使用 Tavily Search 搜索、Jina Reader 抓取网页内容，并生成总结，最终得到一个结构化的表格结果。",
+                    "is_listed": true,
+                    "position": 5,
+                    "privacy_policy": null
                 },
                 {
                     "app": {
@@ -432,16 +492,31 @@
                         "icon_background": null,
                         "id": "c8003ab3-9bb7-4693-9249-e603d48e58a6",
                         "mode": "completion",
-                        "name": "SQL \u751f\u6210\u5668"
+                        "name": "SQL 生成器"
                     },
                     "app_id": "c8003ab3-9bb7-4693-9249-e603d48e58a6",
                     "category": "Programming",
                     "copyright": null,
-                    "description": "\u6211\u5c06\u5e2e\u52a9\u4f60\u628a\u81ea\u7136\u8bed\u8a00\u8f6c\u5316\u6210\u6307\u5b9a\u7684\u6570\u636e\u5e93\u67e5\u8be2 SQL \u8bed\u53e5\uff0c\u8bf7\u5728\u4e0b\u65b9\u8f93\u5165\u4f60\u9700\u8981\u67e5\u8be2\u7684\u6761\u4ef6\uff0c\u5e76\u9009\u62e9\u76ee\u6807\u6570\u636e\u5e93\u7c7b\u578b\u3002",
+                    "description": "我将帮助你把自然语言转化成指定的数据库查询 SQL 语句，请在下方输入你需要查询的条件，并选择目标数据库类型。",
                     "is_listed": true,
                     "position": 12,
-                    "privacy_policy": null,
-                    "custom_disclaimer": null
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "876983f1-df34-41a4-95df-f4d447fb230f",
+                        "mode": "advanced-chat",
+                        "name": "自动回复邮件的AI客服"
+                    },
+                    "app_id": "876983f1-df34-41a4-95df-f4d447fb230f",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "使用 Gmail API 用 AI 回复邮件，可以自动调取收件箱中的邮件并在 Gmail 中创建一个草稿。 需要在 Google Cloud Console 中配置 Gmail API。",
+                    "is_listed": true,
+                    "position": 5,
+                    "privacy_policy": null
                 },
                 {
                     "app": {
@@ -449,33 +524,63 @@
                         "icon_background": "#FFEAD5",
                         "id": "dad6a1e0-0fe9-47e1-91a9-e16de48f1276",
                         "mode": "chat",
-                        "name": "\u4ee3\u7801\u89e3\u91ca\u5668"
+                        "name": "代码解释器"
                     },
                     "app_id": "dad6a1e0-0fe9-47e1-91a9-e16de48f1276",
                     "category": "Programming",
                     "copyright": "Copyright 2023 Dify",
-                    "description": "\u9610\u660e\u4ee3\u7801\u7684\u8bed\u6cd5\u548c\u8bed\u4e49\u3002",
+                    "description": "阐明代码的语法和语义。",
                     "is_listed": true,
-                    "position": 2,
-                    "privacy_policy": "https://dify.ai",
-                    "custom_disclaimer": null
+                    "position": 10,
+                    "privacy_policy": "https://dify.ai"
                 },
                 {
                     "app": {
-                        "icon": "\ud83d\uddbc\ufe0f",
+                        "icon": "🧭",
                         "icon_background": "#FFEAD5",
-                        "id": "fae3e7ac-8ccc-4d43-8986-7c61d2bdde4f",
-                        "mode": "chat",
-                        "name": "\u8d5b\u535a\u670b\u514b\u63d2\u753b\u751f\u6210"
+                        "id": "43041c49-7e1c-426d-bbc3-5a919cb19be7",
+                        "mode": "advanced-chat",
+                        "name": "知识库 + 聊天机器人"
                     },
-                    "app_id": "fae3e7ac-8ccc-4d43-8986-7c61d2bdde4f",
-                    "category": "\u7ed8\u753b",
+                    "app_id": "43041c49-7e1c-426d-bbc3-5a919cb19be7",
+                    "category": "工作流",
                     "copyright": null,
-                    "description": "\u8f93\u5165\u76f8\u5173\u5143\u7d20\uff0c\u4e3a\u4f60\u751f\u6210\u8d5b\u535a\u670b\u514b\u98ce\u683c\u7684\u63d2\u753b",
+                    "description": "工作流基础模板 ，一个可以使用知识库的聊天机器人。",
                     "is_listed": true,
-                    "position": 10,
-                    "privacy_policy": null,
-                    "custom_disclaimer": null
+                    "position": 4,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "63f7d2aa-640c-409a-96e0-4d3751314d9f",
+                        "mode": "workflow",
+                        "name": "Jina Reader 总结网站内容"
+                    },
+                    "app_id": "63f7d2aa-640c-409a-96e0-4d3751314d9f",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "使用 Jina Reader 总结爬取的网站内容。",
+                    "is_listed": true,
+                    "position": 5,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "e867220a-6724-47ae-88e1-04ab97647851",
+                        "mode": "advanced-chat",
+                        "name": "长篇故事生成（迭代）"
+                    },
+                    "app_id": "e867220a-6724-47ae-88e1-04ab97647851",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "一个用于说明如何使用迭代节点的模板。",
+                    "is_listed": true,
+                    "position": 5,
+                    "privacy_policy": null
                 },
                 {
                     "app": {
@@ -483,16 +588,15 @@
                         "icon_background": "#FFEAD5",
                         "id": "4e57bc83-ab95-4f8a-a955-70796b4804a0",
                         "mode": "completion",
-                        "name": "SEO \u6587\u7ae0\u751f\u6210\u4e13\u5bb6"
+                        "name": "SEO 文章生成专家"
                     },
                     "app_id": "4e57bc83-ab95-4f8a-a955-70796b4804a0",
                     "category": "Assistant",
                     "copyright": null,
-                    "description": "\u6211\u662f\u4e00\u540dSEO\u4e13\u5bb6\uff0c\u53ef\u4ee5\u6839\u636e\u60a8\u63d0\u4f9b\u7684\u6807\u9898\u3001\u5173\u952e\u8bcd\u3001\u76f8\u5173\u4fe1\u606f\u6765\u6279\u91cf\u751f\u6210SEO\u6587\u7ae0\u3002",
+                    "description": "我是一名SEO专家，可以根据您提供的标题、关键词、相关信息来批量生成SEO文章。",
                     "is_listed": true,
                     "position": 10,
-                    "privacy_policy": null,
-                    "custom_disclaimer": null
+                    "privacy_policy": null
                 },
                 {
                     "app": {
@@ -500,50 +604,127 @@
                         "icon_background": "#D1E0FF",
                         "id": "6786ce62-fa85-4ea7-a4d1-5dbe3e3ff59f",
                         "mode": "chat",
-                        "name": "\u4f1a\u8bae\u7eaa\u8981"
+                        "name": "会议纪要"
                     },
                     "app_id": "6786ce62-fa85-4ea7-a4d1-5dbe3e3ff59f",
                     "category": "Writing",
                     "copyright": "Copyright 2023 Dify",
-                    "description": "\u5e2e\u4f60\u91cd\u65b0\u7ec4\u7ec7\u548c\u8f93\u51fa\u6df7\u4e71\u590d\u6742\u7684\u4f1a\u8bae\u7eaa\u8981\u3002",
+                    "description": "帮你重新组织和输出混乱复杂的会议纪要。",
                     "is_listed": true,
                     "position": 6,
-                    "privacy_policy": "https://dify.ai",
-                    "custom_disclaimer": null
+                    "privacy_policy": "https://dify.ai"
                 },
                 {
                     "app": {
-                        "icon": "\ud83e\udd11",
+                        "icon": "🖼️",
+                        "icon_background": "#FFEAD5",
+                        "id": "fae3e7ac-8ccc-4d43-8986-7c61d2bdde4f",
+                        "mode": "agent-chat",
+                        "name": "赛博朋克插画生成"
+                    },
+                    "app_id": "fae3e7ac-8ccc-4d43-8986-7c61d2bdde4f",
+                    "category": "Agent",
+                    "copyright": null,
+                    "description": "输入相关元素，为你生成赛博朋克风格的插画",
+                    "is_listed": true,
+                    "position": 10,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "1c36c5e6-5287-4fe8-9237-1e8915936490",
+                        "mode": "workflow",
+                        "name": "文本情感分析工作流"
+                    },
+                    "app_id": "1c36c5e6-5287-4fe8-9237-1e8915936490",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "批量识别文本中蕴含的情感，然后以 JSON 输出情感分类并打分。",
+                    "is_listed": true,
+                    "position": 5,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "9119558c-282a-49e6-8221-a77701b0003c",
+                        "mode": "workflow",
+                        "name": "文本总结工作流"
+                    },
+                    "app_id": "9119558c-282a-49e6-8221-a77701b0003c",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "检索知识库，调用外部知识来更准确的总结文章。",
+                    "is_listed": true,
+                    "position": 5,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "aa916e90-4ace-46a4-a20e-383a1ba14dbe",
+                        "mode": "chat",
+                        "name": "文章打分"
+                    },
+                    "app_id": "aa916e90-4ace-46a4-a20e-383a1ba14dbe",
+                    "category": "Writing",
+                    "copyright": null,
+                    "description": null,
+                    "is_listed": true,
+                    "position": 10,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🤑",
                         "icon_background": "#E4FBCC",
                         "id": "73dd96bb-49b7-4791-acbd-9ef2ef506900",
-                        "mode": "chat",
-                        "name": "\u7f8e\u80a1\u6295\u8d44\u5206\u6790\u52a9\u624b"
+                        "mode": "agent-chat",
+                        "name": "美股投资分析助手"
                     },
                     "app_id": "73dd96bb-49b7-4791-acbd-9ef2ef506900",
-                    "category": "\u667a\u80fd\u52a9\u7406",
+                    "category": "Agent",
                     "copyright": "Dify.AI",
-                    "description": "\u6b22\u8fce\u4f7f\u7528\u60a8\u7684\u4e2a\u6027\u5316\u7f8e\u80a1\u6295\u8d44\u5206\u6790\u52a9\u624b\uff0c\u5728\u8fd9\u91cc\u6211\u4eec\u6df1\u5165\u7684\u8fdb\u884c\u80a1\u7968\u5206\u6790\uff0c\u4e3a\u60a8\u63d0\u4f9b\u5168\u9762\u7684\u6d1e\u5bdf\u3002",
+                    "description": "欢迎使用您的个性化美股投资分析助手，在这里我们深入的进行股票分析，为您提供全面的洞察。",
                     "is_listed": true,
-                    "position": 0,
-                    "privacy_policy": null,
-                    "custom_disclaimer": null
+                    "position": 6,
+                    "privacy_policy": null
                 },
                 {
                     "app": {
-                        "icon": "\ud83c\udfa8",
-                        "icon_background": "#E4FBCC",
-                        "id": "93ca3c2c-3a47-4658-b230-d5a6cc61ff01",
-                        "mode": "chat",
-                        "name": "SVG Logo \u8bbe\u8ba1"
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "f4cf9621-d346-4784-9593-560c463c4c93",
+                        "mode": "advanced-chat",
+                        "name": "工作流规划助手"
                     },
-                    "app_id": "93ca3c2c-3a47-4658-b230-d5a6cc61ff01",
-                    "category": "\u667a\u80fd\u52a9\u7406",
-                    "copyright": "Dify.AI",
-                    "description": "\u60a8\u597d\uff0c\u6211\u662f\u60a8\u7684\u521b\u610f\u4f19\u4f34\uff0c\u5c06\u5e2e\u52a9\u60a8\u5c06\u60f3\u6cd5\u751f\u52a8\u5730\u5b9e\u73b0\uff01\u6211\u53ef\u4ee5\u534f\u52a9\u60a8\u5229\u7528DALL\u00b7E 3\u7684\u80fd\u529b\u521b\u9020\u51fa\u4ee4\u4eba\u60ca\u53f9\u7684\u8bbe\u8ba1\u3002",
+                    "app_id": "f4cf9621-d346-4784-9593-560c463c4c93",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "帮你选择节点并规划一个工作流 (V0.6.0). ",
                     "is_listed": true,
                     "position": 4,
-                    "privacy_policy": null,
-                    "custom_disclaimer": null
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🎨",
+                        "icon_background": "#E4FBCC",
+                        "id": "93ca3c2c-3a47-4658-b230-d5a6cc61ff01",
+                        "mode": "agent-chat",
+                        "name": "SVG Logo 设计"
+                    },
+                    "app_id": "93ca3c2c-3a47-4658-b230-d5a6cc61ff01",
+                    "category": "Agent",
+                    "copyright": "Dify.AI",
+                    "description": "您好，我是您的创意伙伴，将帮助您将想法生动地实现！我可以协助您利用DALL·E 3的能力创造出令人惊叹的设计。",
+                    "is_listed": true,
+                    "position": 6,
+                    "privacy_policy": null
                 },
                 {
                     "app": {
@@ -551,16 +732,31 @@
                         "icon_background": "#FBE8FF",
                         "id": "59924f26-963f-4b4b-90cf-978bbfcddc49",
                         "mode": "chat",
-                        "name": "\u4e2d\u82f1\u6587\u4e92\u8bd1"
+                        "name": "中英文互译"
                     },
                     "app_id": "59924f26-963f-4b4b-90cf-978bbfcddc49",
-                    "category": "Translate",
+                    "category": "Assistant",
                     "copyright": "Copyright 2023 Dify",
-                    "description": "\u7ffb\u8bd1\u4e13\u5bb6\uff1a\u63d0\u4f9b\u4e2d\u82f1\u6587\u4e92\u8bd1",
+                    "description": "翻译专家：提供中英文互译",
                     "is_listed": true,
-                    "position": 4,
-                    "privacy_policy": "https://dify.ai",
-                    "custom_disclaimer": null
+                    "position": 10,
+                    "privacy_policy": "https://dify.ai"
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "c3c0c8eb-dde3-4ed6-a1c0-50cb8c2a389c",
+                        "mode": "workflow",
+                        "name": "客户评价处理工作流"
+                    },
+                    "app_id": "c3c0c8eb-dde3-4ed6-a1c0-50cb8c2a389c",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "使用 LLM 分类客户的评价，将评价转发到内部系统。",
+                    "is_listed": true,
+                    "position": 5,
+                    "privacy_policy": null
                 },
                 {
                     "app": {
@@ -568,16 +764,15 @@
                         "icon_background": "#FFEAD5",
                         "id": "89ad1e65-6711-4c80-b469-a71a434e2dbd",
                         "mode": "chat",
-                        "name": "\u4e2a\u4eba\u5b66\u4e60\u5bfc\u5e08"
+                        "name": "个人学习导师"
                     },
                     "app_id": "89ad1e65-6711-4c80-b469-a71a434e2dbd",
                     "category": "Assistant",
                     "copyright": "Copyright 2023 Dify",
-                    "description": "\u60a8\u7684\u79c1\u4eba\u5b66\u4e60\u5bfc\u5e08\uff0c\u5e2e\u60a8\u5236\u5b9a\u5b66\u4e60\u8ba1\u5212\u5e76\u8f85\u5bfc",
+                    "description": "您的私人学习导师，帮您制定学习计划并辅导",
                     "is_listed": true,
                     "position": 26,
-                    "privacy_policy": "https://dify.ai",
-                    "custom_disclaimer": null
+                    "privacy_policy": "https://dify.ai"
                 },
                 {
                     "app": {
@@ -585,50 +780,143 @@
                         "icon_background": "#FBE8FF",
                         "id": "ff551444-a3ff-4fd8-b297-f38581c98b4a",
                         "mode": "completion",
-                        "name": "\u6587\u732e\u7efc\u8ff0\u5199\u4f5c"
+                        "name": "文献综述写作"
                     },
                     "app_id": "ff551444-a3ff-4fd8-b297-f38581c98b4a",
                     "category": "Writing",
                     "copyright": "Copyright 2023 Dify",
-                    "description": "\u5e2e\u4f60\u64b0\u5199\u8bba\u6587\u6587\u732e\u7efc\u8ff0",
+                    "description": "帮你撰写论文文献综述",
                     "is_listed": true,
                     "position": 7,
-                    "privacy_policy": "https://dify.ai",
-                    "custom_disclaimer": null
+                    "privacy_policy": "https://dify.ai"
                 },
                 {
                     "app": {
-                        "icon": "\ud83d\udd22",
+                        "icon": "🧭",
+                        "icon_background": null,
+                        "id": "c753cd6e-8a0d-4af3-b845-827ee6e919a2",
+                        "mode": "completion",
+                        "name": "代码转换器"
+                    },
+                    "app_id": "c753cd6e-8a0d-4af3-b845-827ee6e919a2",
+                    "category": "Programming",
+                    "copyright": null,
+                    "description": "这是一个可以提供多种代码语言转换能力的应用，你可以输入你希望转换的代码片段，选择目标的代码语言，你将得到你想要的。",
+                    "is_listed": true,
+                    "position": 10,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🔢",
                         "icon_background": "#E4FBCC",
                         "id": "79227a52-11f1-4cf9-8c49-0bd86f9be813",
-                        "mode": "chat",
-                        "name": "Youtube \u9891\u9053\u6570\u636e\u5206\u6790"
+                        "mode": "agent-chat",
+                        "name": "YouTube 频道数据分析"
                     },
                     "app_id": "79227a52-11f1-4cf9-8c49-0bd86f9be813",
-                    "category": "\u667a\u80fd\u52a9\u7406",
+                    "category": "Agent",
                     "copyright": null,
-                    "description": "\u4f60\u597d\uff0c\u544a\u8bc9\u6211\u60a8\u60f3\u5206\u6790\u7684 YouTube \u9891\u9053\uff0c\u6211\u5c06\u4e3a\u60a8\u6574\u7406\u4e00\u4efd\u5b8c\u6574\u7684\u6570\u636e\u5206\u6790\u62a5\u544a\u3002",
+                    "description": "你好，告诉我您想分析的 YouTube 频道，我将为您整理一份完整的数据分析报告。",
                     "is_listed": true,
-                    "position": 0,
-                    "privacy_policy": null,
-                    "custom_disclaimer": null
+                    "position": 6,
+                    "privacy_policy": null
                 },
                 {
                     "app": {
-                        "icon": "\u2708\ufe0f",
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "231047a3-2803-40cc-b94c-f9f75d8ed2c0",
+                        "mode": "workflow",
+                        "name": "三步翻译工作流"
+                    },
+                    "app_id": "231047a3-2803-40cc-b94c-f9f75d8ed2c0",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "通过识别专有名词、直译、指出直译的问题和意译来提升翻译准确度的工作流。",
+                    "is_listed": true,
+                    "position": 5,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "pushpin",
+                        "icon_background": "#D5F5F6",
+                        "id": "3a63a64f-20dd-4dae-9aac-0d7c0fbd2863",
+                        "mode": "completion",
+                        "name": "文章标题生成器"
+                    },
+                    "app_id": "3a63a64f-20dd-4dae-9aac-0d7c0fbd2863",
+                    "category": "Writing",
+                    "copyright": "Copyright 2023 Dify",
+                    "description": "帮你撰写文章标题",
+                    "is_listed": true,
+                    "position": 10,
+                    "privacy_policy": "https://dify.ai"
+                },
+                {
+                    "app": {
+                        "icon": "✈️",
                         "icon_background": "#E4FBCC",
                         "id": "609f4a7f-36f7-4791-96a7-4ccbe6f8dfbb",
-                        "mode": "chat",
-                        "name": "\u65c5\u884c\u89c4\u5212\u52a9\u624b"
+                        "mode": "agent-chat",
+                        "name": "旅行规划助手"
                     },
                     "app_id": "609f4a7f-36f7-4791-96a7-4ccbe6f8dfbb",
-                    "category": "\u667a\u80fd\u52a9\u7406",
+                    "category": "Agent",
                     "copyright": null,
-                    "description": "\u6b22\u8fce\u4f7f\u7528\u60a8\u7684\u4e2a\u6027\u5316\u65c5\u884c\u670d\u52a1\u987e\u95ee\uff01\ud83c\udf0d\u2708\ufe0f \u51c6\u5907\u597d\u8e0f\u4e0a\u4e00\u6bb5\u5145\u6ee1\u5192\u9669\u4e0e\u653e\u677e\u7684\u65c5\u7a0b\u4e86\u5417\uff1f\u8ba9\u6211\u4eec\u4e00\u8d77\u6df1\u5165\u6253\u9020\u60a8\u96be\u5fd8\u7684\u65c5\u884c\u4f53\u9a8c\u5427\u3002",
+                    "description": "欢迎使用您的个性化旅行服务顾问！🌍✈️ 准备好踏上一段充满冒险与放松的旅程了吗？让我们一起深入打造您难忘的旅行体验吧。",
                     "is_listed": true,
-                    "position": 0,
-                    "privacy_policy": null,
-                    "custom_disclaimer": null
+                    "position": 6,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "0f6ded26-b8e3-4cec-8508-ec1a4ece5e81",
+                        "mode": "advanced-chat",
+                        "name": "问题分类 + 知识库 + 聊天机器人"
+                    },
+                    "app_id": "0f6ded26-b8e3-4cec-8508-ec1a4ece5e81",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "工作流基础模板 ，一个可以对结合知识库识别问题意图的聊天机器人。",
+                    "is_listed": true,
+                    "position": 4,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "🧭",
+                        "icon_background": "#FFEAD5",
+                        "id": "c8abb2a3-4c8d-4c04-a403-5d4fdfdd9838",
+                        "mode": "workflow",
+                        "name": "SEO 博客生成工作流"
+                    },
+                    "app_id": "c8abb2a3-4c8d-4c04-a403-5d4fdfdd9838",
+                    "category": "工作流",
+                    "copyright": null,
+                    "description": "从互联网上检索信息，随后分段生成 SEO 博客的工作流。",
+                    "is_listed": true,
+                    "position": 5,
+                    "privacy_policy": null
+                },
+                {
+                    "app": {
+                        "icon": "red_haired_man",
+                        "icon_background": "#EFF1F5",
+                        "id": "e4ed46da-afb3-42d2-b0f2-890481329708",
+                        "mode": "completion",
+                        "name": "员工培训计划"
+                    },
+                    "app_id": "e4ed46da-afb3-42d2-b0f2-890481329708",
+                    "category": "HR",
+                    "copyright": "Copyright 2023 Dify",
+                    "description": "帮你制定员工培训计划。",
+                    "is_listed": true,
+                    "position": 10,
+                    "privacy_policy": "https://dify.ai"
                 }
             ]
         },
