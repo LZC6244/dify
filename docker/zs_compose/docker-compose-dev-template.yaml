@@ -293,8 +293,8 @@ services:
       # - ../../api/zs.env:/app/api/.env
       # Mount the storage directory to the container, for storing user files.
       - ../volumes/app/storage:/app/api/storage
-    ports:
-      - "5680:5680"
+    # ports:
+    #   - "5680:5680"
     networks:
       - ssrf_proxy_network
       - default
