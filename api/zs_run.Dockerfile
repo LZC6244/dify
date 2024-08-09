@@ -9,7 +9,7 @@ WORKDIR /app/api
 COPY . /app/api/
 RUN cp /app/api/zs.env /app/api/.env
 
-COPY docker/entrypoint.sh /entrypoint.sh
+COPY docker/zs_entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 
