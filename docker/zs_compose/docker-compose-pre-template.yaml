@@ -431,12 +431,12 @@ networks:
   default:
     ipam:
       config:
-        - subnet: 172.70.2.0/28
+        - subnet: 172.70.3.0/28
   # create a network between sandbox, api and ssrf_proxy, and can not access outside.
   ssrf_proxy_network:
     ipam:
       config:
-        - subnet: 172.70.2.16/28
+        - subnet: 172.70.3.16/28
     driver: bridge
     internal: true
     name: ssrf_proxy_network-pre
