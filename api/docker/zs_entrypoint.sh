@@ -14,7 +14,9 @@ cd /app/api
 DEFAULT_CELERY_QUEUES=${CELERY_QUEUES:-\
 ${CELERY_TASK_DEFAULT_QUEUE}:dataset,\
 ${CELERY_TASK_DEFAULT_QUEUE}:generation,\
-${CELERY_TASK_DEFAULT_QUEUE}:mail}
+${CELERY_TASK_DEFAULT_QUEUE}:mail,\
+${CELERY_TASK_DEFAULT_QUEUE}:ops_trace,\
+${CELERY_TASK_DEFAULT_QUEUE}:app_deletion
 
 if [[ "${MODE}" == "worker" ]]; then
   celery -A app.celery worker -P ${CELERY_WORKER_CLASS:-gevent} -c ${CELERY_WORKER_AMOUNT:-1} --loglevel INFO \
