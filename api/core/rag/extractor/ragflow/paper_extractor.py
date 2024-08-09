@@ -84,9 +84,8 @@ class PaperExtractor(BaseExtractor):
             # 检查响应状态码
             if response.status_code == 200:
                 result = response.json()
-                for item in result['res']:
-                    metadata = {"source": blob.source, "page": 0}
-                    yield Document(page_content=item, metadata=metadata)
+                metadata = {"source": blob.source, "page": 0}
+                yield Document(page_content=result['res'], metadata=metadata)
             else:
                 print(f'Request failed with status {response.status_code}')
-                return Document(page_content="错误", metadata= {"source": blob.source, "page": 0})
+                yield Document(page_content="错误", metadata= {"source": blob.source, "page": 0})
