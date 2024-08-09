@@ -19,9 +19,9 @@ from core.workflow.entities.variable_pool import VariablePool
 from core.workflow.nodes.llm.llm_node import LLMNode
 from core.workflow.nodes.question_transformation.entities import QuestionTransformationNodeData
 from core.workflow.nodes.question_transformation.template_prompts import (
-    QUESTION_CLASSIFIER_COMPLETION_PROMPT,
-    QUESTION_CLASSIFIER_SYSTEM_PROMPT,
-    QUESTION_CLASSIFIER_USER_PROMPT,
+    QUESTION_TRANSFORMATION_COMPLETION_PROMPT,
+    QUESTION_TRANSFORMATION_SYSTEM_PROMPT,
+    QUESTION_TRANSFORMATION_USER_PROMPT,
 )
 from core.workflow.utils.variable_template_parser import VariableTemplateParser
 from libs.json_in_md_parser import parse_and_check_json_markdown
@@ -214,33 +214,34 @@ class QuestionTransformationNode(LLMNode):
         if memory:
             memory_str = memory.get_history_prompt_text(max_token_limit=max_token_limit,
                                                         message_limit=node_data.memory.window.size)
-        memory_str = memory_str.replace("Human","Q")
-        memory_str = memory_str.replace("Assistant","A")
+        
 
         prompt_messages = []
         if model_mode == ModelMode.CHAT:
             if instruction != '':
                 system_prompt_messages = ChatModelMessage(
                     role=PromptMessageRole.SYSTEM,
-                    text=instruction
+                    text=instruction + f"\n####历史对话记录\n{memory_str}"
                 )
             else:
+                memory_str = memory_str.replace("Human","Q")
+                memory_str = memory_str.replace("Assistant","A")
                 system_prompt_messages = ChatModelMessage(
                     role=PromptMessageRole.SYSTEM,
-                    text=QUESTION_CLASSIFIER_SYSTEM_PROMPT.format(histories=memory_str)
+                    text=QUESTION_TRANSFORMATION_SYSTEM_PROMPT.format(histories=memory_str)
                 )
             prompt_messages.append(system_prompt_messages)
 
             user_prompt_message = ChatModelMessage(
                 role=PromptMessageRole.USER,
-                text=QUESTION_CLASSIFIER_USER_PROMPT.format(input_text=input_text)
+                text=QUESTION_TRANSFORMATION_USER_PROMPT.format(input_text=input_text)
             )
             prompt_messages.append(user_prompt_message)
 
             return prompt_messages
         elif model_mode == ModelMode.COMPLETION:
             return CompletionModelPromptTemplate(
-                text=QUESTION_CLASSIFIER_COMPLETION_PROMPT.format(histories=memory_str,
+                text=QUESTION_TRANSFORMATION_COMPLETION_PROMPT.format(histories=memory_str,
                                                                   input_text=input_text,
                                                                   categories=json.dumps(categories),
                                                                   classification_instructions=instruction,

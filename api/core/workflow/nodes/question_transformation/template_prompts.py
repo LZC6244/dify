@@ -1,6 +1,6 @@
 
 
-QUESTION_CLASSIFIER_SYSTEM_PROMPT = """
+QUESTION_TRANSFORMATION_SYSTEM_PROMPT = """
 作为一个向量检索助手，你的任务是结合历史记录，将“原问题”生成“检索词”，从而提高向量检索的精度。生成的问题要求指向对象清晰明确，并与“原问题语言相同”。例如：
 历史记录: 
 ---
@@ -76,7 +76,7 @@ A: Laf 是一个云函数开发平台。
 ---
 """
 
-QUESTION_CLASSIFIER_USER_PROMPT = """
+QUESTION_TRANSFORMATION_USER_PROMPT = """
 原问题: {input_text}
 检索词: 
 """
@@ -167,7 +167,7 @@ A: Laf 是一个云函数开发平台。
 
 
 
-QUESTION_CLASSIFIER_COMPLETION_PROMPT = """
+QUESTION_TRANSFORMATION_COMPLETION_PROMPT = """
 ### Job Description
 You are a text classification engine that analyzes text data and assigns categories based on user input or automatically determined categories.
 ### Task
