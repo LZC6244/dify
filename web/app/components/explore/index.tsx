@@ -1,11 +1,10 @@
 'use client'
 import type { FC } from 'react'
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-import { usePathname } from 'next/navigation'
 import ExploreContext from '@/context/explore-context'
-import Sidebar from '@/app/components/explore/sidebar'
+import Sidebar from '@/app/components/explore/sidebar/zs-index'
 import { useAppContext } from '@/context/app-context'
 import { fetchMembers } from '@/service/common'
 import type { InstalledApp } from '@/models/explore'
@@ -24,6 +23,7 @@ const Explore: FC<IExploreProps> = ({
   const [hasEditPermission, setHasEditPermission] = useState(false)
   const [installedApps, setInstalledApps] = useState<InstalledApp[]>([])
   const pathname = usePathname()
+
   // 是否是聊天页面
   const visibleBar = pathname.includes('/explore/chat') || pathname.includes('/explore/installed')
 

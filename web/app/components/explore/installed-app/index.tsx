@@ -18,6 +18,8 @@ const InstalledApp: FC<IInstalledAppProps> = ({
   const installedApp = installedApps.find(item => item.id === id)
 
   if (!installedApp) {
+    console.log('应用未安装')
+
     return (
       <div className='flex h-full items-center'>
         <Loading type='area' />
