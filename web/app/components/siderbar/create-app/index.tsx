@@ -19,9 +19,11 @@ import CreateAppTemplateDialog from '@/app/components/app/create-app-dialog'
 
 export type IProps = {
   className?: string
+  btnClassName?: string
+  modalClassName?: string
 }
 
-const CreateApp: FC<IProps> = ({ className }) => {
+const CreateApp: FC<IProps> = ({ className, btnClassName, modalClassName }) => {
   const [show, setShow] = useState(false)
   const createRef = useRef<HTMLDivElement>(null)
   const { onPlanInfoChanged } = useProviderContext()
@@ -43,9 +45,9 @@ const CreateApp: FC<IProps> = ({ className }) => {
   }, [])
 
   return (
-    <div className='relative mt-9 mb-8'>
+    <div className={classNames('relative', className ?? '')}>
       <div
-        className={classNames('flex flex-row items-center justify-center py-[10px] text-white text-[16px] font-semibold rounded-lg cursor-pointer', s.newApp, className ?? '')}
+        className={classNames('flex flex-row items-center justify-center py-[10px] text-white text-[16px] font-semibold rounded-lg cursor-pointer', s.newApp, btnClassName ?? '')}
         onClick={() => setShow(!show)}
         ref={createRef}
       >
@@ -56,10 +58,11 @@ const CreateApp: FC<IProps> = ({ className }) => {
         className={classNames(
           'absolute z-50 left-0 right-0 top-[100%] mt-[10px] px-[14px] py-[15px] bg-white rounded-lg shadow-[0px_2px_8px_4px_rgba(0,0,0,0.04)]',
           'transition-all duration-300 ease-linear',
+          modalClassName ?? '',
           show ? 'opacity-100' : 'opacity-0 pointer-events-none',
         )}>
         <div
-          className='group flex flex-row items-center mb-[15px] cursor-pointer text-[14px] text-[#212B36] hover:text-[#5E3EFB]'
+          className='group flex flex-row items-center mb-[15px] cursor-pointer text-[14px] leading-[14px] text-[#212B36] hover:text-[#5E3EFB]'
           onClick={() => {
             setShow(!show)
             setShowNewAppModal(true)
@@ -70,7 +73,7 @@ const CreateApp: FC<IProps> = ({ className }) => {
           创建空白应用
         </div>
         <div
-          className='group flex flex-row items-center cursor-pointer text-[14px] text-[#212B36] hover:text-[#5E3EFB]'
+          className='group flex flex-row items-center cursor-pointer text-[14px] leading-[14px] text-[#212B36] hover:text-[#5E3EFB]'
           onClick={() => {
             setShow(!show)
             setShowNewAppTemplateDialog(true)
@@ -82,7 +85,7 @@ const CreateApp: FC<IProps> = ({ className }) => {
         </div>
         <div className='w-full h-[1px] bg-[#EFEFEF] my-[15px]'></div>
         <div
-          className='group flex flex-row items-center cursor-pointer text-[14px] text-[#212B36] hover:text-[#5E3EFB]'
+          className='group flex flex-row items-center cursor-pointer text-[14px] leading-[14px] text-[#212B36] hover:text-[#5E3EFB]'
           onClick={() => {
             setShow(!show)
             setShowCreateFromDSLModal(true)

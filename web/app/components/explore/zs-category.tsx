@@ -32,8 +32,8 @@ const Category: FC<ICategoryProps> = ({
 
   // v2.1.1UI修改样式字体大小
   const itemClassName = (isSelected: boolean) => cn(
-    'flex items-center px-6 py-[9px] h-[32px] rounded-lg border-[0.5px] border-transparent text-[#120649] font-[14px] leading-[18px] cursor-pointer bg-white hover:bg-[#E4EAFF] hover:text-[#5E3EFB]',
-    isSelected && 'bg-white border-gray-200 shadow-xs text-[#5E3EFB] hover:bg-[#E4EAFF]',
+    'flex items-center px-6 py-[9px] h-[32px] min-w-[64px] rounded-lg border-[0.5px] border-transparent text-[#120649] font-[14px] leading-[18px] cursor-pointer bg-white hover:bg-[#E4EAFF] hover:text-[#5E3EFB]',
+    isSelected && 'bg-white shadow-xs text-[#5E3EFB] hover:bg-[#E4EAFF]',
   )
 
   return (

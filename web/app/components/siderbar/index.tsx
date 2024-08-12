@@ -26,7 +26,7 @@ const Sidebar = () => {
         {/* <LogoSite className='mt-6' /> */}
         <Image src={logo} className='w-[166px] h-[50px] mt-6' alt='' />
       </Link>
-      <CreateApp />
+      <CreateApp className='mt-9 mb-8' />
       <div className='flex flex-col items-center flex-1 px-[9px]'>
         <ExploreNavLeft className={navClassName} />
         <ExploreChatNavLeft className={navClassName} />
