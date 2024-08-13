@@ -21,9 +21,9 @@ import { fetchAppList } from '@/service/apps'
 import { useAppContext } from '@/context/app-context'
 import { NEED_REFRESH_APP_LIST_KEY } from '@/config'
 import { CheckModal } from '@/hooks/use-pay'
-import TabSliderNew from '@/app/components/base/tab-slider-new/zs-index'
+import TabSliderNew from '@/app/components/base/tab-slider-new-zs'
 import { useTabSearchParams } from '@/hooks/use-tab-searchparams'
-import SearchInput from '@/app/components/base/search-input/zs-index'
+import SearchInput from '@/app/components/base/search-input-zs'
 import { useStore as useTagStore } from '@/app/components/base/tag-management/store'
 import TagManagementModal from '@/app/components/base/tag-management'
 import TagFilter from '@/app/components/base/tag-management/zs-filter'
@@ -149,7 +149,7 @@ const Apps = () => {
       </div>
       <nav className={cn(
         s.appList,
-        'z-10 grid content-start grid-cols-1 gap-4 px-[60px] pb-[60px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grow shrink-0',
+        'z-10 grid content-start grid-cols-1 gap-[20px] px-[60px] pb-[60px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grow shrink-0',
       )}>
         {data?.map(({ data: apps }: any) => apps.map((app: any) => (
           <AppCard key={app.id} app={app} onRefresh={mutate} />
