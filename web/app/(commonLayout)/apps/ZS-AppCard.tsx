@@ -25,7 +25,7 @@ import type { CreateAppModalProps } from '@/app/components/explore/create-app-mo
 import EditAppModal from '@/app/components/explore/create-app-modal'
 import SwitchAppModal from '@/app/components/app/switch-app-modal'
 import type { Tag } from '@/app/components/base/tag-management/constant'
-import TagSelector from '@/app/components/base/tag-management/selector'
+import TagSelector from '@/app/components/base/tag-management/zs-selector'
 import type { EnvironmentVariable } from '@/app/components/workflow/types'
 import DSLExportConfirmModal from '@/app/components/workflow/dsl-export-confirm-modal'
 import { fetchWorkflowDraft } from '@/service/workflow'
@@ -218,24 +218,24 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
     }
     return (
       <div className="relative w-full py-1" onMouseLeave={onMouseLeave}>
-        <button className={s.actionItem} onClick={onClickSettings}>
-          <span className={s.actionName}>{t('app.editApp')}</span>
+        <button className={cn(s.actionItem, s.activeItem)} onClick={onClickSettings}>
+          <span className={cn(s.actionName, '')}>{t('app.editApp')}</span>
         </button>
         <Divider className="!my-1" />
-        <button className={s.actionItem} onClick={onClickDuplicate}>
-          <span className={s.actionName}>{t('app.duplicate')}</span>
+        <button className={cn(s.actionItem, s.activeItem)} onClick={onClickDuplicate}>
+          <span className={cn(s.actionName, '')}>{t('app.duplicate')}</span>
         </button>
-        <button className={s.actionItem} onClick={onClickExport}>
-          <span className={s.actionName}>{t('app.export')}</span>
+        <button className={cn(s.actionItem, s.activeItem)} onClick={onClickExport}>
+          <span className={cn(s.actionName, '')}>{t('app.export')}</span>
         </button>
         {(app.mode === 'completion' || app.mode === 'chat') && (
           <>
             <Divider className="!my-1" />
             <div
-              className='h-9 py-2 px-3 mx-1 flex items-center hover:bg-gray-50 rounded-lg cursor-pointer'
+              className='h-9 py-2 px-3 mx-1 flex items-center rounded-lg cursor-pointer'
               onClick={onClickSwitch}
             >
-              <span className='text-gray-700 text-sm leading-5'>{t('app.switch')}</span>
+              <span className='text-[#212B36] text-sm leading-5'>{t('app.switch')}</span>
             </div>
           </>
         )}
@@ -264,7 +264,7 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
           e.preventDefault()
           getRedirection(isCurrentWorkspaceEditor, app, push)
         }}
-        className='group col-span-1 bg-white rounded-lg min-h-[160px] flex flex-row p-[18px] transition-all duration-200 ease-in-out cursor-pointer hover:shadow-[0px_6px_10px_4px_rgba(0,0,0,0.06)]'
+        className='group col-span-1 bg-white rounded-lg min-h-[160px] flex flex-row p-[18px] pb-[10px] transition-all duration-200 ease-in-out cursor-pointer hover:shadow-[0px_6px_10px_4px_rgba(0,0,0,0.06)]'
       >
         <div className='relative shrink-0'>
           <AppIcon
@@ -274,7 +274,8 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
             background={app.icon_background}
           />
         </div>
-        <div className='grow w-0 pt-[12px] ml-3'>
+        <div className='grow w-0 pt-[12px] ml-3 relative'>
+          {/* 名称和类型 */}
           <div className='flex flex-row items-center'>
             <div className='truncate text-[18px] leading-[18px] font-semibold text-[#212B36]' title={app.name}>{app.name}</div>
             <div className='ml-2 flex items-center p-1 bg-[#F7F8FC] rounded text-[12px] leading-[12px] text-[#9EADB9]'>
@@ -285,17 +286,18 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
               {app.mode === 'completion' && <div className='truncate'>{t('app.types.completion').toUpperCase()}</div>}
             </div>
           </div>
+          {/* 描述 */}
           <div
             className={cn(
-              'mt-[8px] text-[14px] leading-[24px] text-[#637381] line-clamp-3',
-              // tags.length ? 'line-clamp-2' : 'line-clamp-4',
+              'mt-[8px] max-h-[72px] min-h-[48px] text-[14px] leading-[24px] text-[#637381] group-hover:line-clamp-2 group-hover:max-h-[48px]',
+              tags.length ? 'line-clamp-2' : 'line-clamp-3',
             )}
             title={app.description}
           >
             {app.description}
           </div>
           <div className={cn(
-            'items-center shrink-0 mt-1 pt-1 pl-[14px] pr-[6px] pb-[6px] h-[42px]',
+            'items-center h-[32px] mt-3',
             tags.length ? 'flex' : '!hidden group-hover:!flex',
           )}>
             {isCurrentWorkspaceEditor && (
@@ -319,8 +321,7 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
                     />
                   </div>
                 </div>
-                <div className='!hidden group-hover:!flex shrink-0 mx-1 w-[1px] h-[14px] bg-gray-200' />
-                <div className='!hidden group-hover:!flex shrink-0'>
+                <div className='ml-1 !hidden group-hover:!flex shrink-0'>
                   <CustomPopover
                     htmlContent={<Operations />}
                     position="br"
@@ -329,13 +330,13 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
                       <div
                         className='flex items-center justify-center w-8 h-8 cursor-pointer rounded-md'
                       >
-                        <RiMoreFill className='w-4 h-4 text-gray-700' />
+                        <RiMoreFill className='w-4 h-4 text-[#637381]' />
                       </div>
                     }
                     btnClassName={open =>
                       cn(
-                        open ? '!bg-black/5 !shadow-none' : '!bg-transparent',
-                        'h-8 w-8 !p-2 rounded-md border-none hover:!bg-black/5',
+                        open ? '!bg-[#F7F8FC] !shadow-none' : '!bg-transparent',
+                        'h-8 w-8 !p-2 rounded-[8px] border-none hover:!bg-[#F7F8FC]',
                       )
                     }
                     popupClassName={

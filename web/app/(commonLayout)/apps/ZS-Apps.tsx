@@ -11,9 +11,11 @@ import {
   RiMessage3Line,
   RiRobot3Line,
 } from '@remixicon/react'
+import cn from 'classnames'
 import AppCard from './ZS-AppCard'
 // import NewAppCard from './NewAppCard'
 import useAppsQueryState from './hooks/useAppsQueryState'
+import s from './style.module.css'
 import type { AppListResponse } from '@/models/app'
 import { fetchAppList } from '@/service/apps'
 import { useAppContext } from '@/context/app-context'
@@ -126,7 +128,7 @@ const Apps = () => {
 
   return (
     <>
-      <div className='sticky top-0 shrink-0 pt-[38px] px-[60px] rounded-tl-[20px]'>
+      <div className='sticky top-0 shrink-0 pt-[38px] pb-[18px] px-[60px] rounded-tl-[20px] bg-[#F7F8FC] z-20'>
         <div className='text-[#120649] font-semibold text-[22px] leading-[22px]'>发现</div>
         <div className='flex justify-between items-center pt-[29px] leading-[56px] bg-transparent z-10 flex-wrap gap-y-2'>
           <TabSliderNew
@@ -145,7 +147,10 @@ const Apps = () => {
           </div>
         </div>
       </div>
-      <nav className='grid content-start grid-cols-1 gap-4 px-[60px] pt-[18px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grow shrink-0'>
+      <nav className={cn(
+        s.appList,
+        'z-10 grid content-start grid-cols-1 gap-4 px-[60px] pb-[60px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grow shrink-0',
+      )}>
         {data?.map(({ data: apps }: any) => apps.map((app: any) => (
           <AppCard key={app.id} app={app} onRefresh={mutate} />
         )))}
