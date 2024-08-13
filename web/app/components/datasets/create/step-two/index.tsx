@@ -128,11 +128,15 @@ const StepTwo = ({
   const [rules, setRules] = useState<PreProcessingRule[]>([])
   const [defaultConfig, setDefaultConfig] = useState<Rules>()
   const hasSetIndexType = !!indexingType
+  // const [indexType, setIndexType] = useState<ValueOf<IndexingType>>(
+  //   (indexingType
+  //     || isAPIKeySet)
+  //     ? IndexingType.QUALIFIED
+  //     : IndexingType.ECONOMICAL,
+  // )
+  // 修改为默认使用高质量
   const [indexType, setIndexType] = useState<ValueOf<IndexingType>>(
-    (indexingType
-      || isAPIKeySet)
-      ? IndexingType.QUALIFIED
-      : IndexingType.ECONOMICAL,
+    IndexingType.QUALIFIED,
   )
   const [docForm, setDocForm] = useState<DocForm | string>(
     (datasetId && documentDetail) ? documentDetail.doc_form : DocForm.TEXT,
@@ -794,9 +798,9 @@ const StepTwo = ({
               )}
             </div>
           </div>
-          <div className={s.label}>{t('datasetCreation.stepTwo.indexMode')}</div>
+          <div className={cn(s.label, '!hidden')}>{t('datasetCreation.stepTwo.indexMode')}</div>
           <div className='max-w-[640px]'>
-            <div className='flex items-center gap-3 flex-wrap sm:flex-nowrap'>
+            <div className='flex hidden items-center gap-3 flex-wrap sm:flex-nowrap'>
               {(!hasSetIndexType || (hasSetIndexType && indexingType === IndexingType.QUALIFIED)) && (
                 <div
                   className={cn(
