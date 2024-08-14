@@ -70,7 +70,7 @@ const Container = () => {
   }, [currentWorkspace])
 
   return (
-    <div ref={containerRef} className='grow relative flex flex-col h-full overflow-y-auto' style={{ background: 'linear-gradient( 180deg, #EBF3FF 0%, #E8E9FF 100%);' }}>
+    <div ref={containerRef} className='grow relative flex flex-col h-full overflow-y-auto' style={{ background: 'linear-gradient( 180deg, #EBF3FF 0%, #E8E9FF 100%)' }}>
       <div className='h-full relative flex flex-col overflow-y-auto shrink-0 grow rounded-tl-[20px] bg-[#F7F8FC]'>
         <div className='sticky top-0 shrink-0 pt-[38px] pb-[18px] px-[60px] rounded-tl-[20px] bg-[#F7F8FC] z-20'>
           <div className='text-[#120649] font-semibold text-[22px] leading-[22px]'>知识库</div>

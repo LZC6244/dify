@@ -6,7 +6,7 @@ const AppList = async () => {
   const { t } = await translate(locale, 'app')
 
   return (
-    <div className='h-full relative flex flex-col overflow-y-auto shrink-0 grow' style={{ background: 'linear-gradient( 180deg, #EBF3FF 0%, #E8E9FF 100%);' }}>
+    <div className='h-full relative flex flex-col overflow-y-auto shrink-0 grow' style={{ background: 'linear-gradient( 180deg, #EBF3FF 0%, #E8E9FF 100%)' }}>
       <div className='h-full relative flex flex-col overflow-y-auto shrink-0 grow rounded-tl-[20px] bg-[#F7F8FC]'>
         <Apps />
       </div>

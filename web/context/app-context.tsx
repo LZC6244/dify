@@ -104,7 +104,11 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({ children }) =>
       const current_version = userProfileResponse.headers.get('x-version')
       const current_env = process.env.NODE_ENV === 'development' ? 'DEVELOPMENT' : userProfileResponse.headers.get('x-env')
       const versionData = await fetchLanggeniusVersion({ url: '/version', params: { current_version } })
-      setLangeniusVersionInfo({ ...versionData, current_version, latest_version: versionData.version, current_env })
+      // fixed bug:https://sentry.maas.com.cn/organizations/sentry/issues/6/?project=5&query=is%3Aunresolved&referrer=issue-stream&statsPeriod=14d&stream_index=0
+      if (versionData && Object.prototype.toString.call(versionData) === '[object Object]')
+        setLangeniusVersionInfo({ ...versionData, current_version, latest_version: versionData.version, current_env })
+      else
+        setLangeniusVersionInfo({ ...initialLangeniusVersionInfo, current_version, latest_version: current_version, current_env })
     }
   }, [userProfileResponse])
 

@@ -82,7 +82,7 @@ const ProviderList = () => {
   }
 
   return (
-    <div className='relative h-full flex overflow-hidden shrink-0 grow' style={{ background: 'linear-gradient( 180deg, #EBF3FF 0%, #E8E9FF 100%);' }}>
+    <div className='relative h-full flex overflow-hidden shrink-0 grow' style={{ background: 'linear-gradient( 180deg, #EBF3FF 0%, #E8E9FF 100%)' }}>
       <div className='relative h-full flex flex-col overflow-y-auto rounded-tl-[20px] bg-[#F7F8FC] grow'>
         <div className='sticky top-0 shrink-0 pt-[38px] pb-[18px] px-[60px] z-20 bg-[#F7F8FC]'>
           <div className='text-[#120649] font-semibold text-[22px] leading-[22px]'>发现</div>

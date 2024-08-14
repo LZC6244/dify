@@ -162,78 +162,80 @@ const Apps = ({
   }
 
   return (
-    <div className={cn(
-      'flex flex-col bg-[#F7F8FC]',
-      pageType === PageType.EXPLORE ? 'h-full border-l border-gray-200' : 'h-[calc(100%-56px)]',
-    )}>
-      {/* {pageType === PageType.EXPLORE && (
-        <div className='shrink-0 pt-6 px-12'>
-          <div className={`mb-1 ${s.textGradient} text-xl font-semibold`}>{t('explore.apps.title')}</div>
-          <div className='text-gray-500 text-sm'>{t('explore.apps.description')}</div>
-        </div>
-      )} */}
-      {pageType === PageType.EXPLORE && (
-        <div className='shrink-0 pt-[38px] px-[60px]'>
-          <div className='text-[#120649] font-semibold text-[22px] leading-[22px]'>发现</div>
-        </div>
-      )}
+    <div className='flex flex-col h-full'style={{ background: 'linear-gradient( 180deg, #EBF3FF 0%, #E8E9FF 100%)' }}>
       <div className={cn(
-        'flex items-center justify-between mt-[30px]',
-        pageType === PageType.EXPLORE ? 'px-[60px]' : 'px-8',
+        'flex flex-col bg-[#F7F8FC] rounded-tl-[20px]',
+        pageType === PageType.EXPLORE ? 'h-full border-l border-gray-200' : 'h-[calc(100%-56px)]',
       )}>
-        <>
-          {pageType !== PageType.EXPLORE && (
-            <>
-              <AppTypeSelector value={currentType} onChange={setCurrentType}/>
-              <div className='mx-2 w-[1px] h-3.5 bg-[#F7F8FC]'/>
-            </>
-          )}
-          <Category
-            list={categories}
-            value={currCategory}
-            onChange={setCurrCategory}
-            allCategoriesEn={allCategoriesEn}
-          />
-        </>
-        {/* v2.1.1UI修改隐藏输入框 */}
-        {/* <SearchInput value={keywords} onChange={handleKeywordsChange}/> */}
-
-      </div>
-
-      <div className={cn(
-        'relative flex flex-1 pb-6 flex-col overflow-auto bg-[#F7F8FC] shrink-0 grow',
-        pageType === PageType.EXPLORE ? 'mt-4' : 'mt-0 pt-2',
-      )}>
-        <nav
-          className={cn(
-            s.appList,
-            'grid content-start shrink-0 py-4',
-            pageType === PageType.EXPLORE ? 'gap-4 px-6 sm:px-[60px]' : 'gap-3 px-8  sm:!grid-cols-2 md:!grid-cols-3 lg:!grid-cols-4',
-          )}>
-          {searchFilteredList.map(app => (
-            <AppCard
-              key={app.app_id}
-              // isExplore={pageType === PageType.EXPLORE}
-              // canCreate={hasEditPermission}
-              app={app}
-              onClick={() => {
-                onHandleClickAppCard(app)
-              }}
+        {/* {pageType === PageType.EXPLORE && (
+          <div className='shrink-0 pt-6 px-12'>
+            <div className={`mb-1 ${s.textGradient} text-xl font-semibold`}>{t('explore.apps.title')}</div>
+            <div className='text-gray-500 text-sm'>{t('explore.apps.description')}</div>
+          </div>
+        )} */}
+        {pageType === PageType.EXPLORE && (
+          <div className='shrink-0 pt-[38px] px-[60px]'>
+            <div className='text-[#120649] font-semibold text-[22px] leading-[22px]'>发现</div>
+          </div>
+        )}
+        <div className={cn(
+          'flex items-center justify-between mt-[30px]',
+          pageType === PageType.EXPLORE ? 'px-[60px]' : 'px-8',
+        )}>
+          <>
+            {pageType !== PageType.EXPLORE && (
+              <>
+                <AppTypeSelector value={currentType} onChange={setCurrentType}/>
+                <div className='mx-2 w-[1px] h-3.5 bg-[#F7F8FC]'/>
+              </>
+            )}
+            <Category
+              list={categories}
+              value={currCategory}
+              onChange={setCurrCategory}
+              allCategoriesEn={allCategoriesEn}
             />
-          ))}
-        </nav>
+          </>
+          {/* v2.1.1UI修改隐藏输入框 */}
+          {/* <SearchInput value={keywords} onChange={handleKeywordsChange}/> */}
+
+        </div>
+
+        <div className={cn(
+          'relative flex flex-1 pb-6 flex-col overflow-auto bg-[#F7F8FC] shrink-0 grow',
+          pageType === PageType.EXPLORE ? 'mt-4' : 'mt-0 pt-2',
+        )}>
+          <nav
+            className={cn(
+              s.appList,
+              'grid content-start shrink-0 py-4',
+              pageType === PageType.EXPLORE ? 'gap-4 px-6 sm:px-[60px]' : 'gap-3 px-8  sm:!grid-cols-2 md:!grid-cols-3 lg:!grid-cols-4',
+            )}>
+            {searchFilteredList.map(app => (
+              <AppCard
+                key={app.app_id}
+                // isExplore={pageType === PageType.EXPLORE}
+                // canCreate={hasEditPermission}
+                app={app}
+                onClick={() => {
+                  onHandleClickAppCard(app)
+                }}
+              />
+            ))}
+          </nav>
+        </div>
+        {isShowCreateModal && (
+          <CreateAppModal
+            appIcon={currApp?.app.icon || ''}
+            appIconBackground={currApp?.app.icon_background || ''}
+            appName={currApp?.app.name || ''}
+            appDescription={currApp?.app.description || ''}
+            show={isShowCreateModal}
+            onConfirm={onCreate}
+            onHide={() => setIsShowCreateModal(false)}
+          />
+        )}
       </div>
-      {isShowCreateModal && (
-        <CreateAppModal
-          appIcon={currApp?.app.icon || ''}
-          appIconBackground={currApp?.app.icon_background || ''}
-          appName={currApp?.app.name || ''}
-          appDescription={currApp?.app.description || ''}
-          show={isShowCreateModal}
-          onConfirm={onCreate}
-          onHide={() => setIsShowCreateModal(false)}
-        />
-      )}
     </div>
   )
 }

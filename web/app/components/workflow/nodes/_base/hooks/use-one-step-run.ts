@@ -303,7 +303,8 @@ const useOneStepRun = <T>({
       }
     }
     finally {
-      if (!isIteration) {
+      // fixed: 解决报错https://sentry.maas.com.cn/organizations/sentry/issues/72/?project=5&query=is%3Aunresolved&referrer=issue-stream&statsPeriod=14d&stream_index=2
+      if (!isIteration && res) {
         setRunResult({
           ...res,
           total_tokens: res.execution_metadata?.total_tokens || 0,
