@@ -1,5 +1,4 @@
 name: dify-dev
-version: '3'
 x-shared-env:
   # celery 任务队列名称，请在['dify_dev','dify_pre', 'dify_prd'] 中选择一个
   # 可以任意名称，但是不便于管理，不传默认为: dify
