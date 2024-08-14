@@ -24,7 +24,7 @@ const SearchInput: FC<SearchInputProps> = ({
 
   return (
     <div className={cn(
-      'group flex items-center px-2 h-8 rounded-lg bg-[#EEEEF5] hover:bg-[#E4EAFF] border border-transparent overflow-hidden',
+      'group flex items-center px-2 h-8 rounded bg-[#EEEEF5] hover:bg-[#E4EAFF] border border-transparent overflow-hidden',
       focus && '!bg-white hover:bg-white shawdow-xs !border-gray-300',
       !focus && value && 'hover:!bg-[#E4EAFF] hover:!shawdow-xs hover:!border-black/5',
       white && '!bg-white hover:!bg-white shawdow-xs !border-gray-300 hover:!border-gray-300',
