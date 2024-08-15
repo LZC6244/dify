@@ -5,6 +5,7 @@ import {
 } from 'react'
 import { useAsyncEffect } from 'ahooks'
 import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
 import { useThemeContext } from '../embedded-chatbot/theme/theme-context'
 import {
   ChatWithHistoryContext,
@@ -15,6 +16,7 @@ import HeaderInMobile from './header-in-mobile'
 import ConfigPanel from './config-panel'
 import ChatWrapper from './chat-wrapper'
 import AddIcon from './add.svg'
+import BackIcon from './back.svg'
 import CreateNewConversationModal from './new-conversation-modal'
 import type { InstalledApp } from '@/models/explore'
 import Loading from '@/app/components/base/loading'
@@ -42,6 +44,9 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
     // handleStartChat,
     currentConversationId,
   } = useChatWithHistoryContext()
+  // const router = useRouter()
+  const searchParams = useSearchParams()
+  const from = searchParams.get('from') || undefined
 
   const chatReady = (!showConfigPanelBeforeChat || !!appPrevChatList.length)
   const customConfig = appData?.custom_config
@@ -55,7 +60,7 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
       if (customConfig)
         document.title = `${site.title}`
       else
-        document.title = `${site.title} - Powered by 卓世科技`
+        document.title = `${site.title} - 卓世科技`
     }
   }, [site, customConfig, themeBuilder])
 
@@ -89,8 +94,14 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
       } */}
       {
         !isMobile && (
-          <div className='shrink-0 px-[40px] py-[29px] flex flex-row items-center'>
-            <div className='text-[18px] text-[#000] font-medium mr-[22px]'>{site?.title}</div>
+          <div className='shrink-0 p-[28px] flex flex-row items-center'>
+            <div className='text-[18px] text-[#000] font-medium mr-[22px] flex flex-row items-center '>
+              {
+                from
+                && <Image src={BackIcon} className='w-4.5 h-4.5 mr-[8px] cursor-pointer' onClick={() => {}} alt='' />
+              }
+              {site?.title}
+            </div>
             <div
               className='flex flex-row items-center cursor-pointer rounded p-3 text-sm font-medium text-[#5E3EFB] bg-[#F3F2FF] hover:bg-[#EAE9F7]'
               onClick={onHandleNewConversation}

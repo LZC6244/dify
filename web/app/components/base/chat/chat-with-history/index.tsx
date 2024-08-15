@@ -5,6 +5,7 @@ import {
 } from 'react'
 import { useAsyncEffect } from 'ahooks'
 import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
 import { useThemeContext } from '../embedded-chatbot/theme/theme-context'
 import {
   ChatWithHistoryContext,
@@ -42,6 +43,8 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
     // handleStartChat,
     currentConversationId,
   } = useChatWithHistoryContext()
+  const searchParams = useSearchParams()
+  const from = searchParams.get('from') || undefined
 
   const chatReady = (!showConfigPanelBeforeChat || !!appPrevChatList.length)
   const customConfig = appData?.custom_config
@@ -55,7 +58,7 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
       if (customConfig)
         document.title = `${site.title}`
       else
-        document.title = `${site.title} - Powered by 卓世科技`
+        document.title = `${site.title} - 卓世科技`
     }
   }, [site, customConfig, themeBuilder])
 
