@@ -104,7 +104,7 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
               {site?.title}
             </div>
             {
-              !showConfigPanelBeforeChat
+              chatReady && !appChatListDataLoading
               && <div
                 className='flex flex-row items-center cursor-pointer rounded p-3 text-sm font-medium text-[#5E3EFB] bg-[#F3F2FF] hover:bg-[#EAE9F7]'
                 onClick={onHandleNewConversation}
