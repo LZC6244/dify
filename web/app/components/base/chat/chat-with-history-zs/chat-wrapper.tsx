@@ -147,7 +147,7 @@ const ChatWrapper = () => {
       suggestedQuestions={suggestedQuestions}
       hideProcessDetail
       themeBuilder={themeBuilder}
-      questionIcon={<Image src={avatarIcon} className='w-[36px] h-[36px] mt-[10px]' alt='' />}
+      questionIcon={<Image src={avatarIcon} className='w-[40px] h-[40px] mt-[0px]' alt='' />}
     />
   )
 }

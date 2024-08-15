@@ -19,9 +19,9 @@ import type {
   OnSend,
 } from '../types'
 import type { ThemeBuilder } from '../embedded-chatbot/theme/theme-context'
-import Question from './question'
-import Answer from './answer'
-import ChatInput from './chat-input'
+import Question from './question-zs'
+import Answer from './answer-zs'
+import ChatInput from './chat-input-zs'
 import TryToAsk from './try-to-ask'
 import { ChatContextProvider } from './context'
 import classNames from '@/utils/classnames'
