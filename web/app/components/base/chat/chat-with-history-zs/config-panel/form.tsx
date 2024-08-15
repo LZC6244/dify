@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useChatWithHistoryContext } from '../context'
 import Input from './form-input'
-import { PortalSelect } from '@/app/components/base/select'
+import { PortalSelect } from '@/app/components/base/select-zs'
 
 const Form = () => {
   const { t } = useTranslation()
@@ -40,7 +40,7 @@ const Form = () => {
     if (form.type === 'number') {
       return (
         <input
-          className="grow h-9 rounded-lg bg-gray-100 px-2.5 outline-none appearance-none"
+          className="grow h-[42px] rounded-lg bg-[#F3F4F7] px-[18px] outline-none appearance-none"
           type="number"
           value={newConversationInputs[variable] || ''}
           onChange={e => handleFormChange(variable, e.target.value)}
@@ -64,14 +64,14 @@ const Form = () => {
     return null
 
   return (
-    <div className='mb-4 py-2'>
+    <div className='mb-5 py-0'>
       {
         inputsForms.map(form => (
           <div
             key={form.variable}
             className={`flex mb-3 last-of-type:mb-0 text-sm text-gray-900 ${isMobile && '!flex-wrap'}`}
           >
-            <div className={`shrink-0 mr-2 py-2 w-[128px] ${isMobile && '!w-full'}`}>{form.label}</div>
+            {/* <div className={`shrink-0 mr-2 py-2 w-[128px] ${isMobile && '!w-full'}`}>{form.label}</div> */}
             {renderField(form)}
           </div>
         ))

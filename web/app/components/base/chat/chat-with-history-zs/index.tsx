@@ -103,13 +103,16 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
               }
               {site?.title}
             </div>
-            <div
-              className='flex flex-row items-center cursor-pointer rounded p-3 text-sm font-medium text-[#5E3EFB] bg-[#F3F2FF] hover:bg-[#EAE9F7]'
-              onClick={onHandleNewConversation}
-            >
-              <Image src={AddIcon} className='w-4 h-4 mr-[6px]' alt='' />
-              新建对话
-            </div>
+            {
+              !showConfigPanelBeforeChat
+              && <div
+                className='flex flex-row items-center cursor-pointer rounded p-3 text-sm font-medium text-[#5E3EFB] bg-[#F3F2FF] hover:bg-[#EAE9F7]'
+                onClick={onHandleNewConversation}
+              >
+                <Image src={AddIcon} className='w-4 h-4 mr-[6px]' alt='' />
+                新建对话
+              </div>
+            }
           </div>
         )
       }

@@ -1,0 +1,20 @@
+.half {
+  position: relative;
+  width: 112px; /* 直径 */
+  height: 112px; /* 半径 */
+}
+.half::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 112px; /* 直径 */
+  height: 56px; /* 半径 */
+  border-top: 0.5px;
+  border-color: rgb(242 244 247 / var(--tw-border-opacity)) /* #f2f4f7 */;
+  border-radius: 56px 56px 0 0; /* 上半部分为圆弧 */
+  background-color: transparent; /* 背景颜色 */
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 添加阴影效果 */
+  box-shadow: 0px -0.4px 1px 0px rgba(0,0,0,0.1);
+}

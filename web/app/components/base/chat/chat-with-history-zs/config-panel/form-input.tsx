@@ -25,7 +25,7 @@ const FormInput: FC<InputProps> = ({
     return (
       <textarea
         value={value}
-        className='grow h-[104px] rounded-lg bg-gray-100 px-2.5 py-2 outline-none appearance-none resize-none'
+        className='grow h-[104px] rounded-lg bg-[#F3F4F7] px-[18px] py-2 outline-none appearance-none resize-none'
         onChange={e => onChange(variable, e.target.value)}
         placeholder={`${label}${!required ? `(${t('appDebug.variableTable.optional')})` : ''}`}
       />
@@ -34,7 +34,7 @@ const FormInput: FC<InputProps> = ({
 
   return (
     <input
-      className='grow h-9 rounded-lg bg-gray-100 px-2.5 outline-none appearance-none'
+      className='grow h-[42px] rounded-lg bg-[#F3F4F7] px-[18px] outline-none appearance-none'
       value={value || ''}
       maxLength={max_length}
       onChange={e => onChange(variable, e.target.value)}

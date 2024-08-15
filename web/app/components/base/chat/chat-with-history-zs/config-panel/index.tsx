@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import Image from 'next/image'
+import classNames from 'classnames'
 import { useChatWithHistoryContext } from '../context'
 import Form from './form'
-import Button from '@/app/components/base/button'
+import ArrowRight from './images/arrow-right.svg'
+import s from './style.module.css'
+import Button from '@/app/components/base/button-zs'
 import AppIcon from '@/app/components/base/app-icon'
-import { MessageDotsCircle } from '@/app/components/base/icons/src/vender/solid/communication'
 import { Edit02 } from '@/app/components/base/icons/src/vender/line/general'
 import { Star06 } from '@/app/components/base/icons/src/vender/solid/shapes'
-import LogoSite from '@/app/components/base/logo/logo-site'
 
 const ConfigPanel = () => {
   const { t } = useTranslation()
@@ -26,28 +28,37 @@ const ConfigPanel = () => {
     <div className='flex flex-col max-h-[80%] w-full max-w-[720px]'>
       <div
         className={`
-          grow rounded-xl overflow-y-auto
-          ${showConfigPanelBeforeChat && 'border-[0.5px] border-gray-100 shadow-lg'}
+          grow rounded-xl overflow-y-auto overflow-y-visible
+          ${showConfigPanelBeforeChat && 'border-[0.5px] border-gray-100 shadow-[0px_6px_12px_0px_rgba(0,0,0,0.1)]'}
           ${!showConfigPanelBeforeChat && collapsed && 'border border-indigo-100'}
-          ${!showConfigPanelBeforeChat && !collapsed && 'border-[0.5px] border-gray-100 shadow-lg'}
+          ${!showConfigPanelBeforeChat && !collapsed && 'border-[0.5px] border-gray-100 shadow-[0px_6px_12px_0px_rgba(0,0,0,0.1)]'}
         `}
       >
         <div
           className={`
-            flex flex-wrap px-6 py-4 rounded-t-xl bg-indigo-25
+            flex flex-wrap justify-center px-[30px] py-5 pt-0 rounded-t-xl bg-white
             ${isMobile && '!px-4 !py-3'}
           `}
         >
           {
             showConfigPanelBeforeChat && (
               <>
-                <div className='flex items-center h-8 text-2xl font-semibold text-gray-800'>
-                  <AppIcon
-                    icon={appData?.site.icon}
-                    background='transparent'
-                    size='small'
-                  />
-                  {appData?.site.title}
+                <div className='-mt-[50px] flex flex-col justify-center items-center'>
+                  <div className={classNames(
+                    'w-[112px] h-[112px] rounded-[56px] bg-[#FFF] flex items-center justify-center',
+                    s.half,
+                  )}>
+                    {/* TODO 有可能是Base64 */}
+                    <AppIcon
+                      icon={appData?.site.icon}
+                      background='transparent'
+                      size='small'
+                      className='!w-[100px] !h-[100px] !rounded-[50px]'
+                    />
+                  </div>
+                  <span className='text-[#1D2939] text-[22px] font-semibold'>
+                    {appData?.site.title}
+                  </span>
                 </div>
                 {
                   appData?.site.description && (
@@ -91,7 +102,7 @@ const ConfigPanel = () => {
         </div>
         {
           !collapsed && !showConfigPanelBeforeChat && (
-            <div className='p-6 rounded-b-xl'>
+            <div className='p-6 rounded-b-xl bg-white'>
               <Form />
               <div className={`pl-[136px] flex items-center ${isMobile && '!pl-0'}`}>
                 <Button
@@ -115,53 +126,24 @@ const ConfigPanel = () => {
         }
         {
           showConfigPanelBeforeChat && (
-            <div className='p-6 rounded-b-xl'>
+            <div className='p-6 pt-[0px] rounded-b-xl bg-white'>
               <Form />
-              <Button
-                className={`${inputsForms.length && !isMobile && 'ml-[136px]'}`}
-                variant='primary'
-                size='large'
-                onClick={handleStartChat}
-              >
-                <MessageDotsCircle className='mr-2 w-4 h-4 text-white' />
-                {t('share.chat.startChat')}
-              </Button>
+              <div className='flex justify-end'>
+                <Button
+                  // className={`${inputsForms.length && !isMobile && 'ml-[136px]'}`}
+                  className='px-[21px] py-3 text-[16px] leading-4 rounded-[20px]'
+                  variant='primary'
+                  size='large'
+                  onClick={handleStartChat}
+                >
+                  {t('share.chat.startChat')}
+                  <Image src={ArrowRight} alt='' className='ml-[10px] w-[14px] h-[14px]' />
+                </Button>
+              </div>
             </div>
           )
         }
       </div>
-      {
-        showConfigPanelBeforeChat && (site || customConfig) && (
-          <div className='mt-4 flex flex-wrap justify-between items-center py-2 text-xs text-gray-400'>
-            {site?.privacy_policy
-              ? <div className={`flex items-center ${isMobile && 'w-full justify-end'}`}>{t('share.chat.privacyPolicyLeft')}
-                <a
-                  className='text-gray-500 px-1'
-                  href={site?.privacy_policy}
-                  target='_blank' rel='noopener noreferrer'>{t('share.chat.privacyPolicyMiddle')}</a>
-                {t('share.chat.privacyPolicyRight')}
-              </div>
-              : <div>
-              </div>}
-            {
-              customConfig?.remove_webapp_brand
-                ? null
-                : (
-                  <div className={`flex items-center justify-end ${isMobile && 'w-full'}`}>
-                    <div className='flex items-center pr-3 space-x-3'>
-                      <span className='uppercase'>{t('share.chat.powerBy')}</span>
-                      {
-                        customConfig?.replace_webapp_logo
-                          ? <img src={customConfig?.replace_webapp_logo} alt='logo' className='block w-auto h-5' />
-                          : <LogoSite className='!h-5' />
-                      }
-                    </div>
-                  </div>
-                )
-            }
-          </div>
-        )
-      }
     </div>
   )
 }
