@@ -1,5 +1,5 @@
 import React from 'react'
-import AppList from '@/app/components/explore/app-list/zs-index'
+import AppList from '@/app/components/explore/app-list-zs'
 
 const Apps = () => {
   return <AppList />

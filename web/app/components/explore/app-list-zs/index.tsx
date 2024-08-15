@@ -8,11 +8,12 @@ import useSWR from 'swr'
 import { useDebounceFn } from 'ahooks'
 import Toast from '../../base/toast'
 import s from './style.module.css'
+import ChatModal from './chat-modal'
 import cn from '@/utils/classnames'
 import ExploreContext from '@/context/explore-context'
 import type { App } from '@/models/explore'
 import Category from '@/app/components/explore/zs-category'
-import AppCard from '@/app/components/explore/app-card/zs-index'
+import AppCard from '@/app/components/explore/app-card-zs'
 import { fetchAppDetail, fetchAppList } from '@/service/explore'
 import { importApp } from '@/service/apps'
 import { useTabSearchParams } from '@/hooks/use-tab-searchparams'
@@ -117,6 +118,7 @@ const Apps = ({
 
   const [currApp, setCurrApp] = React.useState<App | null>(null)
   const [isShowCreateModal, setIsShowCreateModal] = React.useState(false)
+  const [isShowChatModal, setIsShowChatModal] = React.useState(false)
   const onCreate: CreateAppModalProps['onConfirm'] = async ({
     name,
     icon,
@@ -148,9 +150,11 @@ const Apps = ({
       Toast.notify({ type: 'error', message: t('app.newApp.appCreateFailed') })
     }
   }
-
+  // 点击应用卡片
   const onHandleClickAppCard = (app: App) => {
-    push(`/explore/installed/${app.app_id}?from=explore-apps`)
+    // push(`/explore/installed/${app.app_id}?from=explore-apps`)
+    setCurrApp(app)
+    setIsShowChatModal(true)
   }
 
   if (!categories || categories.length === 0) {
@@ -164,7 +168,7 @@ const Apps = ({
   return (
     <div className='flex flex-col h-full'style={{ background: 'linear-gradient( 180deg, #EBF3FF 0%, #E8E9FF 100%)' }}>
       <div className={cn(
-        'flex flex-col bg-[#F7F8FC] rounded-tl-[20px]',
+        'flex flex-col bg-[#F7F8FC] rounded-tl-[20px] relative',
         pageType === PageType.EXPLORE ? 'h-full border-l border-gray-200' : 'h-[calc(100%-56px)]',
       )}>
         {/* {pageType === PageType.EXPLORE && (
@@ -214,8 +218,8 @@ const Apps = ({
             {searchFilteredList.map(app => (
               <AppCard
                 key={app.app_id}
-                // isExplore={pageType === PageType.EXPLORE}
-                // canCreate={hasEditPermission}
+                isExplore={pageType === PageType.EXPLORE}
+                canCreate={hasEditPermission}
                 app={app}
                 onClick={() => {
                   onHandleClickAppCard(app)
@@ -235,6 +239,20 @@ const Apps = ({
             onHide={() => setIsShowCreateModal(false)}
           />
         )}
+        {
+          isShowChatModal && (
+            <ChatModal
+              app={{
+                app: currApp!.app,
+                is_pinned: false,
+                uninstallable: false,
+                id: '9b9d7353-a1ee-4ff0-9c16-3107dd330059',
+              }}
+              // show={isShowChatModal}
+              onHide={() => setIsShowChatModal(false)}
+            />
+          )
+        }
       </div>
     </div>
   )

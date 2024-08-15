@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import ExploreContext from '@/context/explore-context'
 import TextGenerationApp from '@/app/components/share/text-generation'
 import Loading from '@/app/components/base/loading'
-import ChatWithHistory from '@/app/components/base/chat/chat-with-history/index-zs'
+import ChatWithHistory from '@/app/components/base/chat/chat-with-history-zs'
 
 export type IInstalledAppProps = {
   id: string
