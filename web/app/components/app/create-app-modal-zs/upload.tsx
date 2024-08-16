@@ -5,10 +5,11 @@ import { useState } from 'react'
 import upload from './upload.svg'
 
 type FileUploadProps = {
+  value: string
   onImageChange?: (base64String: string) => void
 }
-export default function Upload({ onImageChange }: FileUploadProps) {
-  const [imageBase64, setImageBase64] = useState<string | null>(null)
+export default function Upload({ value, onImageChange }: FileUploadProps) {
+  const [imageBase64, setImageBase64] = useState<string | null>(value.indexOf('base64') ? value : null)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]

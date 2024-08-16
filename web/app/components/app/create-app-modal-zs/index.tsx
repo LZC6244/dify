@@ -36,8 +36,8 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
 
   const [appMode, setAppMode] = useState<AppMode>('chat')
   const [showChatBotType, setShowChatBotType] = useState<boolean>(true)
-  const [emoji, setEmoji] = useState({ icon: '🧭', icon_background: '#FFEAD5' })
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+  const [emoji, setEmoji] = useState({ icon: '', icon_background: '#FFF' })
+  // const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
 
@@ -208,7 +208,7 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
       {/* icon */}
       <div className='pt-2 px-8'>
         <div className='py-2 pb-3 text-base font-medium leading-[16px] text-[#212B36]'>应用图标</div>
-        <Upload onImageChange={v => setEmoji({ icon: v, icon_background: v })} />
+        <Upload value={emoji.icon} onImageChange={v => setEmoji({ icon: v, icon_background: '#FFF' })} />
       </div>
       {isAppsFull && (
         <div className='px-8 py-2'>
