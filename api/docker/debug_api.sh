@@ -2,10 +2,18 @@
 
 set -e -x
 
-echo "[api-debug] 启动调试模式"
-
 cd /app/api
 
+if [[ "${ZSKJ_DEBUG}" == "true" ]];then
 
-# python app.py
-python -m debugpy --wait-for-client --listen 0.0.0.0:5678 app.py
+  echo "[api-debug] 启动调试模式"
+
+  python -m debugpy --wait-for-client --listen 0.0.0.0:5678 app.py
+
+else
+
+  echo "[api-debug] 启动本地运行模式"
+
+  python app.py
+  
+fi

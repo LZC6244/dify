@@ -196,6 +196,7 @@ services:
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:0.6.16.1
     restart: always
     environment:
+      ZSKJ_DEBUG: true
       # Use the shared environment variables.
       <<: *shared-api-worker-env
       # Startup mode, 'api' starts the API server.
@@ -257,6 +258,7 @@ services:
     # image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-55f1913519c7689c371ff9b2231ea8f7143b2941
     restart: always
     environment:
+      ZSKJ_DEBUG: true
       # Use the shared environment variables.
       <<: *shared-api-worker-env
       # Startup mode, 'worker' starts the Celery worker for processing the queue.

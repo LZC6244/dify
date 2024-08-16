@@ -74,7 +74,7 @@ def gen_debug_compose_volumes_path(
     return debug_compose_volumes
 
 
-def gen_debug_compose_volumes_template(template_str: str):
+def gen_debug_compose_volumes_template(template_str: str, exculde_path_list=['.venv', '__pycache__']):
     """
 
 
@@ -87,7 +87,7 @@ def gen_debug_compose_volumes_template(template_str: str):
     logger.info(f'api_dir: {api_dir}')
     volumes = gen_debug_compose_volumes_path(
         root_dir=api_dir,
-        exculde_path_list=['.venv', '__pycache__']
+        exculde_path_list=exculde_path_list
     )
     volumes.sort()
 
