@@ -278,7 +278,7 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
           {/* 名称和类型 */}
           <div className='flex flex-row items-center'>
             <div className='truncate text-[18px] leading-[18px] font-semibold text-[#212B36]' title={app.name}>{app.name}</div>
-            <div className='ml-2 flex items-center p-1 bg-[#F7F8FC] rounded text-[12px] leading-[12px] text-[#9EADB9]'>
+            <div className='ml-2 flex items-center p-1 bg-[#EEEDFD] rounded text-[12px] leading-[12px] text-[#5E3EFB]'>
               {app.mode === 'advanced-chat' && <div className='truncate'>{t('app.types.chatbot').toUpperCase()}</div>}
               {app.mode === 'chat' && <div className='truncate'>{t('app.types.chatbot').toUpperCase()}</div>}
               {app.mode === 'agent-chat' && <div className='truncate'>{t('app.types.agent').toUpperCase()}</div>}

@@ -4,11 +4,10 @@ import { useCallback, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   RiCloseLine,
-  RiQuestionLine,
 } from '@remixicon/react'
 import { useRouter } from 'next/navigation'
 import { useContext, useContextSelector } from 'use-context-selector'
-import s from './style.module.css'
+import classNames from 'classnames'
 import Upload from './upload'
 import cn from '@/utils/classnames'
 import AppsContext, { useAppContext } from '@/context/app-context'
@@ -17,12 +16,9 @@ import { ToastContext } from '@/app/components/base/toast'
 import type { AppMode } from '@/types/app'
 import { createApp } from '@/service/apps'
 import Modal from '@/app/components/base/modal'
-import Button from '@/app/components/base/button'
-import EmojiPicker from '@/app/components/base/emoji-picker'
+import Button from '@/app/components/base/button-zs'
+import ButtonNormal from '@/app/components/base/button'
 import AppsFull from '@/app/components/billing/apps-full-in-dialog'
-import { AiText, ChatBot, CuteRobote } from '@/app/components/base/icons/src/vender/solid/communication'
-import { Route } from '@/app/components/base/icons/src/vender/solid/mapsAndTravel'
-import TooltipPlus from '@/app/components/base/tooltip-plus'
 import { NEED_REFRESH_APP_LIST_KEY } from '@/config'
 import { getRedirection } from '@/utils/app-redirection'
 
@@ -92,174 +88,94 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
     >
       {/* Heading */}
       <div className='shrink-0 flex flex-col h-full bg-white rounded-t-xl'>
-        <div className='shrink-0 pl-8 pr-6 pt-6 pb-3 bg-white text-xl rounded-t-xl leading-[30px] font-semibold text-gray-900 z-10'>{t('app.newApp.startFromBlank')}</div>
+        <div className='shrink-0 pl-8 pr-6 pt-6 pb-3 bg-white text-[22px] rounded-t-xl leading-[22px] font-semibold text-[#212B36] z-10'>{t('app.newApp.startFromBlank')}</div>
       </div>
       {/* app type */}
       <div className='py-2 px-8'>
-        <div className='py-2 text-sm leading-[20px] font-medium text-gray-900'>{t('app.newApp.captionAppType')}</div>
-        <div className='flex'>
-          <TooltipPlus
-            hideArrow
-            popupContent={
-              <div className='max-w-[280px] leading-[18px] text-xs text-gray-700'>{t('app.newApp.chatbotDescription')}</div>
-            }
+        <div className='py-2 text-sm leading-[20px] font-medium text-[#212B36]'>应用类型</div>
+        <div className='flex mt-1'>
+          <div
+            className={cn(
+              'relative grow box-border w-[150px] mr-[10px] p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
+            )}
+            onClick={() => {
+              setAppMode('chat')
+              setShowChatBotType(true)
+            }}
           >
-            <div
-              className={cn(
-                'relative grow box-border w-[158px] mr-2 px-0.5 pt-3 pb-2 flex flex-col items-center justify-center gap-1 rounded-lg border border-gray-100 bg-white text-gray-700 cursor-pointer shadow-xs hover:border-gray-300',
-                showChatBotType && 'border-[1.5px] border-primary-400 hover:border-[1.5px] hover:border-primary-400',
-                s['grid-bg-chat'],
-              )}
-              onClick={() => {
-                setAppMode('chat')
-                setShowChatBotType(true)
-              }}
-            >
-              <ChatBot className='w-6 h-6 text-[#1570EF]' />
-              <div className='h-5 text-[13px] font-medium leading-[18px]'>{t('app.types.chatbot')}</div>
-            </div>
-          </TooltipPlus>
-          <TooltipPlus
-            hideArrow
-            popupContent={
-              <div className='flex flex-col max-w-[320px] leading-[18px] text-xs'>
-                <div className='text-gray-700'>{t('app.newApp.completionDescription')}</div>
-              </div>
-            }
+            <div className={classNames('w-4 h-4 mr-[10px] rounded-lg box-border border-[#5E3EFB]', (appMode === 'chat' || appMode === 'advanced-chat') ? 'border-[5px]' : ' border-[1px]')}></div>
+            <div className='text-[14px] font-medium leading-[14px]'>{t('app.types.chatbot')}</div>
+          </div>
+          <div
+            className={cn(
+              'relative grow box-border w-[150px] mr-[10px] p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
+            )}
+            onClick={() => {
+              setAppMode('completion')
+              setShowChatBotType(false)
+            }}
           >
-            <div
-              className={cn(
-                'relative grow box-border w-[158px] mr-2 px-0.5 pt-3 pb-2 flex flex-col items-center justify-center gap-1 rounded-lg border border-gray-100 text-gray-700 cursor-pointer bg-white shadow-xs hover:border-gray-300',
-                s['grid-bg-completion'],
-                appMode === 'completion' && 'border-[1.5px] border-primary-400 hover:border-[1.5px] hover:border-primary-400',
-              )}
-              onClick={() => {
-                setAppMode('completion')
-                setShowChatBotType(false)
-              }}
-            >
-              <AiText className='w-6 h-6 text-[#0E9384]' />
-              <div className='h-5 text-[13px] font-medium leading-[18px]'>{t('app.newApp.completeApp')}</div>
-            </div>
-          </TooltipPlus>
-          <TooltipPlus
-            hideArrow
-            popupContent={
-              <div className='max-w-[280px] leading-[18px] text-xs text-gray-700'>{t('app.newApp.agentDescription')}</div>
-            }
+            <div className={classNames('w-4 h-4 mr-[10px] rounded-lg box-border border-[#5E3EFB]', appMode === 'completion' ? 'border-[5px]' : ' border-[1px]')}></div>
+            <div className='text-[14px] font-medium leading-[14px]'>{t('app.newApp.completeApp')}</div>
+          </div>
+          <div
+            className={cn(
+              'relative grow box-border w-[150px] mr-[10px] p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
+            )}
+            onClick={() => {
+              setAppMode('agent-chat')
+              setShowChatBotType(false)
+            }}
           >
-            <div
-              className={cn(
-                'relative grow box-border w-[158px] mr-2 px-0.5 pt-3 pb-2 flex flex-col items-center justify-center gap-1 rounded-lg border border-gray-100 text-gray-700 cursor-pointer bg-white shadow-xs hover:border-gray-300',
-                s['grid-bg-agent-chat'],
-                appMode === 'agent-chat' && 'border-[1.5px] border-primary-400 hover:border-[1.5px] hover:border-primary-400',
-              )}
-              onClick={() => {
-                setAppMode('agent-chat')
-                setShowChatBotType(false)
-              }}
-            >
-              <CuteRobote className='w-6 h-6 text-indigo-600' />
-              <div className='h-5 text-[13px] font-medium leading-[18px]'>{t('app.types.agent')}</div>
-            </div>
-          </TooltipPlus>
-          <TooltipPlus
-            hideArrow
-            popupContent={
-              <div className='flex flex-col max-w-[320px] leading-[18px] text-xs'>
-                <div className='text-gray-700'>{t('app.newApp.workflowDescription')}</div>
-              </div>
-            }
+            <div className={classNames('w-4 h-4 mr-[10px] rounded-lg box-border border-[#5E3EFB]', appMode === 'agent-chat' ? 'border-[5px]' : ' border-[1px]')}></div>
+            <div className='text-[14px] font-medium leading-[14px]'>{t('app.types.agent')}</div>
+          </div>
+          <div
+            className={cn(
+              'relative grow box-border w-[150px] mr-[10px] p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
+            )}
+            onClick={() => {
+              setAppMode('workflow')
+              setShowChatBotType(false)
+            }}
           >
-            <div
-              className={cn(
-                'relative grow box-border w-[158px] px-0.5 pt-3 pb-2 flex flex-col items-center justify-center gap-1 rounded-lg border border-gray-100 text-gray-700 cursor-pointer bg-white shadow-xs hover:border-gray-300',
-                s['grid-bg-workflow'],
-                appMode === 'workflow' && 'border-[1.5px] border-primary-400 hover:border-[1.5px] hover:border-primary-400',
-              )}
-              onClick={() => {
-                setAppMode('workflow')
-                setShowChatBotType(false)
-              }}
-            >
-              <Route className='w-6 h-6 text-[#f79009]' />
-              <div className='h-5 text-[13px] font-medium leading-[18px]'>{t('app.types.workflow')}</div>
-              <span className='absolute top-[-3px] right-[-3px] px-1 rounded-[5px] bg-white border border-black/8 text-gray-500 text-[10px] leading-[18px] font-medium'>BETA</span>
-            </div>
-          </TooltipPlus>
+            <div className={classNames('w-4 h-4 mr-[10px] rounded-lg box-border border-[#5E3EFB]', appMode === 'workflow' ? 'border-[5px]' : ' border-[1px]')}></div>
+            <div className='text-[14px] font-medium leading-[14px]'>{t('app.types.workflow')}</div>
+          </div>
         </div>
       </div>
       {showChatBotType && (
         <div className='py-2 px-8'>
-          <div className='py-2 text-sm leading-[20px] font-medium text-gray-900'>{t('app.newApp.chatbotType')}</div>
-          <div className='flex gap-2'>
+          <div className='py-2 text-[16px] leading-[16px] font-medium text-[#212B36]'>编排方法</div>
+          <div className='flex gap-[10px] mt-1'>
             <div
               className={cn(
-                'relative grow flex-[50%] pl-4 py-[10px] pr-[10px] rounded-lg border border-gray-100 bg-gray-25 text-gray-700 cursor-pointer hover:bg-white hover:shadow-xs hover:border-gray-300',
-                appMode === 'chat' && 'bg-white shadow-xs border-[1.5px] border-primary-400 hover:border-[1.5px] hover:border-primary-400',
+                'relative grow flex-[50%] flex flex-row items-center justify-between px-[14px] py-[15px] rounded-lg bg-[#F3F4F7] cursor-pointer hover:bg-[#EAEBF2]',
               )}
               onClick={() => {
                 setAppMode('chat')
               }}
             >
-              <div className='flex items-center justify-between'>
-                <div className='h-5 text-sm font-medium leading-5'>{t('app.newApp.basic')}</div>
-                <div className='group'>
-                  <RiQuestionLine className='w-[14px] h-[14px] text-gray-400 hover:text-gray-500' />
-                  <div
-                    className={cn(
-                      'hidden z-20 absolute left-[327px] top-[-158px] w-[376px] rounded-xl bg-white border-[0.5px] border-[rgba(0,0,0,0.05)] shadow-lg group-hover:block',
-                    )}
-                  >
-                    <div className={cn('w-full h-[256px] bg-center bg-no-repeat bg-contain rounded-xl', s.basicPic)} />
-                    <div className='px-4 pb-2'>
-                      <div className='flex items-center justify-between'>
-                        <div className='text-gray-700 text-md leading-6 font-semibold'>{t('app.newApp.basic')}</div>
-                        <div className='text-orange-500 text-xs leading-[18px] font-medium'>{t('app.newApp.basicFor')}</div>
-                      </div>
-                      <div className='mt-1 text-gray-500 text-sm leading-5'>{t('app.newApp.basicDescription')}</div>
-                    </div>
-                  </div>
-                </div>
+              <div className='relative'>
+                <div className='text-sm font-medium leading-[14px] text-[#212B36]'>{t('app.newApp.basic')}</div>
+                <div className='mt-[10px] text-[#9EADB9] text-xs leading-[12px]'>{t('app.newApp.basicTip')}</div>
               </div>
-              <div className='mt-[2px] text-gray-500 text-xs leading-[18px]'>{t('app.newApp.basicTip')}</div>
+              <div className={classNames('w-4 h-4 mr-[10px] rounded-lg box-border border-[#5E3EFB]', appMode === 'chat' ? 'border-[5px]' : ' border-[1px]')}></div>
             </div>
+
             <div
               className={cn(
-                'relative grow flex-[50%] pl-3 py-2 pr-2 rounded-lg border border-gray-100 bg-gray-25 text-gray-700 cursor-pointer hover:bg-white hover:shadow-xs hover:border-gray-300',
-                appMode === 'advanced-chat' && 'bg-white shadow-xs border-[1.5px] border-primary-400 hover:border-[1.5px] hover:border-primary-400',
+                'relative grow flex-[50%] flex flex-row items-center justify-between px-[14px] py-[15px] rounded-lg bg-[#F3F4F7] cursor-pointer hover:bg-[#EAEBF2]',
               )}
               onClick={() => {
                 setAppMode('advanced-chat')
               }}
             >
-              <div className='flex items-center justify-between'>
-                <div className='flex items-center'>
-                  <div className='mr-1 h-5 text-sm font-medium leading-5'>{t('app.newApp.advanced')}</div>
-                  <span className='px-1 rounded-[5px] bg-white border border-black/8 text-gray-500 text-[10px] leading-[18px] font-medium'>BETA</span>
-                </div>
-                <div className='group'>
-                  <RiQuestionLine className='w-[14px] h-[14px] text-gray-400 hover:text-gray-500' />
-                  <div
-                    className={cn(
-                      'hidden z-20 absolute right-[26px] top-[-158px] w-[376px] rounded-xl bg-white border-[0.5px] border-[rgba(0,0,0,0.05)] shadow-lg group-hover:block',
-                    )}
-                  >
-                    <div className={cn('w-full h-[256px] bg-center bg-no-repeat bg-contain rounded-xl', s.advancedPic)} />
-                    <div className='px-4 pb-2'>
-                      <div className='flex items-center justify-between'>
-                        <div className='flex items-center'>
-                          <div className='mr-1 text-gray-700 text-md leading-6 font-semibold'>{t('app.newApp.advanced')}</div>
-                          <span className='px-1 rounded-[5px] bg-white border border-black/8 text-gray-500 text-[10px] leading-[18px] font-medium'>BETA</span>
-                        </div>
-                        <div className='text-orange-500 text-xs leading-[18px] font-medium'>{t('app.newApp.advancedFor').toLocaleUpperCase()}</div>
-                      </div>
-                      <div className='mt-1 text-gray-500 text-sm leading-5'>{t('app.newApp.advancedDescription')}</div>
-                    </div>
-                  </div>
-                </div>
+              <div className='relative'>
+                <div className='text-sm font-medium leading-[14px] text-[#212B36]'>{t('app.newApp.advanced')}</div>
+                <div className='mt-[10px] text-[#9EADB9] text-xs leading-[12px]'>{t('app.newApp.advancedFor')}</div>
               </div>
-              <div className='mt-[2px] text-gray-500 text-xs leading-[18px]'>{t('app.newApp.advancedFor')}</div>
+              <div className={classNames('w-4 h-4 mr-[10px] rounded-lg box-border border-[#5E3EFB]', appMode === 'advanced-chat' ? 'border-[5px]' : ' border-[1px]')}></div>
             </div>
           </div>
         </div>
@@ -267,42 +183,31 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
 
       {/* icon & name */}
       <div className='pt-2 px-8'>
-        <div className='py-2 text-sm font-medium leading-[20px] text-gray-900'>名称</div>
+        <div className='py-2 pb-3 text-base font-medium leading-[16px] text-[#212B36]'>应用名称</div>
         <div className='flex items-center justify-between space-x-2 relative'>
-          {/* <AppIcon size='large' onClick={() => { setShowEmojiPicker(true) }} className='cursor-pointer' icon={emoji.icon} background={emoji.icon_background} /> */}
           <input
             value={name}
             maxLength={10}
             onChange={e => setName(e.target.value)}
-            placeholder="请输入应用名称"
-            className='grow h-10 px-3 text-sm font-normal bg-gray-100 rounded-lg border border-transparent outline-none appearance-none caret-primary-600 placeholder:text-gray-400 hover:bg-gray-50 hover:border hover:border-gray-300 focus:bg-gray-50 focus:border focus:border-gray-300 focus:shadow-xs'
+            placeholder="请输入名称"
+            className='grow h-[42px] p-3 text-sm font-normal bg-[#F3F4F7] rounded-lg  outline-none appearance-none caret-primary-600 placeholder:text-[#9EADB9] hover:bg-[#EAEBF2] focus:bg-[#EAEBF2] focus:shadow-xs'
           />
-          <span className='text-gray-400 text-[12px] absolute top-[50%] right-2 -translate-y-[50%]'>{name.length}/10</span>
+          <span className='text-[#9EADB9] text-[16px] absolute top-[50%] right-3 -translate-y-[50%]'>{name.length}/10</span>
         </div>
-        {showEmojiPicker && <EmojiPicker
-          onSelect={(icon, icon_background) => {
-            setEmoji({ icon, icon_background })
-            setShowEmojiPicker(false)
-          }}
-          onClose={() => {
-            setEmoji({ icon: '🧭', icon_background: '#FFEAD5' })
-            setShowEmojiPicker(false)
-          }}
-        />}
       </div>
       {/* description */}
-      <div className='pt-2 px-8'>
-        <div className='py-2 text-sm font-medium leading-[20px] text-gray-900'>{t('app.newApp.captionDescription')}</div>
+      <div className='pt-4 px-8'>
+        <div className='py-2 pb-3 text-base font-medium leading-[16px] text-[#212B36]'>应用描述</div>
         <textarea
-          className='w-full px-3 py-2 text-sm font-normal bg-gray-100 rounded-lg border border-transparent outline-none appearance-none caret-primary-600 placeholder:text-gray-400 hover:bg-gray-50 hover:border hover:border-gray-300 focus:bg-gray-50 focus:border focus:border-gray-300 focus:shadow-xs h-[80px] resize-none'
-          placeholder="请输入应用描述"
+          className='w-full px-3 py-2 text-sm font-normal bg-[#F3F4F7] rounded-lg outline-none appearance-none caret-primary-600 placeholder:text-text-[#9EADB9 hover:bg-[#EAEBF2] focus:bg-[#EAEBF2] focus:shadow-xs h-[80px] resize-none'
+          placeholder="请输入描述"
           value={description}
           onChange={e => setDescription(e.target.value)}
         />
       </div>
       {/* icon */}
       <div className='pt-2 px-8'>
-        <div className='py-2 text-sm font-medium leading-[20px] text-gray-900'>图标</div>
+        <div className='py-2 pb-3 text-base font-medium leading-[16px] text-[#212B36]'>应用图标</div>
         <Upload onImageChange={v => setEmoji({ icon: v, icon_background: v })} />
       </div>
       {isAppsFull && (
@@ -311,10 +216,10 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
         </div>
       )}
       <div className='px-8 py-6 flex justify-end'>
-        <Button className='mr-2' onClick={onClose}>{t('app.newApp.Cancel')}</Button>
-        <Button disabled={isAppsFull || !name} variant="primary" onClick={onCreate}>{t('app.newApp.Create')}</Button>
+        <Button disabled={isAppsFull || !name} className='rounded-2xl h-[32px] w-[80px] text-[#FFF] text-[16px] !font-normal' variant="primary" onClick={onCreate}>{t('app.newApp.Create')}</Button>
+        <ButtonNormal className='ml-[20px] !bg-[#EEEEFF] rounded-2xl h-[32px] w-[80px] text-[#637381] text-[16px] !shadow-none !border-none' onClick={onClose}>{t('app.newApp.Cancel')}</ButtonNormal>
       </div>
-      <div className='absolute right-6 top-6 p-2 cursor-pointer z-20' onClick={onClose}>
+      <div className='absolute right-6 top-6 p-2 cursor-pointer z-20 hidden border-none' onClick={onClose}>
         <RiCloseLine className='w-4 h-4 text-gray-500' />
       </div>
     </Modal>

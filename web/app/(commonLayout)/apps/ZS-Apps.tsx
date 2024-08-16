@@ -141,7 +141,7 @@ const Apps = () => {
             <SearchInput className='w-[200px]' value={keywords} onChange={handleKeywordsChange} />
             <CreateApp
               className=''
-              btnClassName='py-[10px] px-[17px] h-[34px] text-[14px] font-[600]'
+              btnClassName='py-[10px] px-[17px] h-[34px] !text-[14px] font-[600]'
               modalClassName='w-[161px] left-auto'
             />
           </div>
