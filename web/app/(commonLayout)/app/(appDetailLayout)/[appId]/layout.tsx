@@ -3,22 +3,22 @@ import type { FC } from 'react'
 import { useUnmount } from 'ahooks'
 import React, { useCallback, useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import {
-  RiDashboard2Fill,
-  RiDashboard2Line,
-  RiFileList3Fill,
-  RiFileList3Line,
-  RiTerminalBoxFill,
-  RiTerminalBoxLine,
-  RiTerminalWindowFill,
-  RiTerminalWindowLine,
-} from '@remixicon/react'
+
 import { useTranslation } from 'react-i18next'
 import { useShallow } from 'zustand/react/shallow'
 import s from './style.module.css'
+import arrangeIcon from './images/arrange.svg'
+import arrangeIconH from './images/arrange_h.svg'
+import visitIcon from './images/visit.svg'
+import visitIconH from './images/visit_h.svg'
+import logIcon from './images/log.svg'
+import logIconH from './images/log_h.svg'
+
+import overviewIcon from './images/overview.svg'
+import overviewIconH from './images/overview_h.svg'
 import cn from '@/utils/classnames'
 import { useStore } from '@/app/components/app/store'
-import AppSideBar from '@/app/components/app-sidebar'
+import AppSideBar from '@/app/components/app-sidebar-zs'
 import type { NavIcon } from '@/app/components/app-sidebar/navLink'
 import { fetchAppDetail } from '@/service/apps'
 import { useAppContext } from '@/context/app-context'
@@ -59,16 +59,16 @@ const AppDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
         ? [{
           name: t('common.appMenus.promptEng'),
           href: `/app/${appId}/${(mode === 'workflow' || mode === 'advanced-chat') ? 'workflow' : 'configuration'}`,
-          icon: RiTerminalWindowLine,
-          selectedIcon: RiTerminalWindowFill,
+          icon: arrangeIcon,
+          selectedIcon: arrangeIconH,
         }]
         : []
       ),
       {
         name: t('common.appMenus.apiAccess'),
         href: `/app/${appId}/develop`,
-        icon: RiTerminalBoxLine,
-        selectedIcon: RiTerminalBoxFill,
+        icon: visitIcon,
+        selectedIcon: visitIconH,
       },
       ...(isCurrentWorkspaceEditor
         ? [{
@@ -76,16 +76,16 @@ const AppDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
             ? t('common.appMenus.logAndAnn')
             : t('common.appMenus.logs'),
           href: `/app/${appId}/logs`,
-          icon: RiFileList3Line,
-          selectedIcon: RiFileList3Fill,
+          icon: logIcon,
+          selectedIcon: logIconH,
         }]
         : []
       ),
       {
         name: t('common.appMenus.overview'),
         href: `/app/${appId}/overview`,
-        icon: RiDashboard2Line,
-        selectedIcon: RiDashboard2Fill,
+        icon: overviewIcon,
+        selectedIcon: overviewIconH,
       },
     ]
     return navs

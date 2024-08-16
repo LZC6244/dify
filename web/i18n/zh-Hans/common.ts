@@ -440,7 +440,8 @@ const translation = {
     latestAvailable: 'Agent {{version}} 已是最新版本。',
   },
   appMenus: {
-    overview: '监测',
+    // overview: '监测',
+    overview: '概览',
     promptEng: '编排',
     apiAccess: '访问 API',
     logAndAnn: '日志与标注',

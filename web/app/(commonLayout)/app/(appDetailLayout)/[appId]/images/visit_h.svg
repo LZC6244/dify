@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>visit_h</title>
+    <g id="V2.1.1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="应用-创建应用-编排" transform="translate(-238.000000, -156.000000)" stroke="#5E3EFB" stroke-width="1.5">
+            <g id="编组-7备份" transform="translate(238.000000, 156.000000)">
+                <g id="点击_click" transform="translate(1.000000, 1.000000)">
+                    <line x1="7.36842105" y1="0" x2="7.36842105" y2="2.94736842" id="路径"></line>
+                    <polygon id="路径" points="6.63157895 6.63157895 14 8.10526316 11.7894737 9.57894737 14 11.7894737 11.7894737 14 9.57894737 11.7894737 8.10526316 14"></polygon>
+                    <line x1="12.5786684" y1="2.15817" x2="10.4945842" y2="4.24225789" id="路径"></line>
+                    <line x1="2.15816263" y1="12.5786684" x2="4.24225789" y2="10.4945842" id="路径"></line>
+                    <line x1="0" y1="7.36842105" x2="2.94736842" y2="7.36842105" id="路径"></line>
+                    <line x1="2.15819211" y1="2.15816263" x2="4.24229474" y2="4.24225789" id="路径"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
