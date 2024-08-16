@@ -235,6 +235,7 @@ services:
       # - ../../api/zs.env:/app/api/.env
       # Mount the storage directory to the container, for storing user files.
       - ../volumes/app/storage:/app/api/storage
+      - /mnt/data/clouduser/work/zhudong/minerU/dify_ocr_server/ocr_image_files:/app/api/storage/ocr_image_files
     # ports:
       # - "5022:5001"
       # - "5678:5678"
@@ -292,6 +293,7 @@ services:
       # - ../../api/zs.env:/app/api/.env
       # Mount the storage directory to the container, for storing user files.
       - ../volumes/app/storage:/app/api/storage
+      - /mnt/data/clouduser/work/zhudong/minerU/dify_ocr_server/ocr_image_files:/app/api/storage/ocr_image_files
     # ports:
     #   - "5680:5680"
     networks:
