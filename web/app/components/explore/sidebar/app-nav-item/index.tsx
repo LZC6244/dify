@@ -54,7 +54,7 @@ export default function AppNavItem({
       {!isMobile && (
         <>
           <div className='flex items-center space-x-2 w-0 grow'>
-            <AppIcon size='tiny' icon={icon} background={icon_background} />
+            <AppIcon size='tiny' className='!w-9 !h-9 !rounded-[18px] !overflow-hidden' icon={icon} background={icon_background} />
             <div className={cn('overflow-hidden text-ellipsis whitespace-nowrap text-[16px]', isSelected ? 'text-[#5E3EFB]' : 'text-[#000]')} title={name}>{name}</div>
           </div>
           {/* <div className='shrink-0 h-6' onClick={e => e.stopPropagation()}>

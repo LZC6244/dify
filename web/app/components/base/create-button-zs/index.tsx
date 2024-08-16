@@ -20,7 +20,7 @@ const CreateButton: FC<CreateButtonProps> = ({
   return (
     <div
       className={classNames(
-        'flex flex-row items-center justify-center py-[10px] text-white text-[16px] font-semibold rounded-lg cursor-pointer',
+        'flex flex-row items-center justify-center py-[10px] text-white font-semibold rounded-lg cursor-pointer',
         s.newApp,
         className ?? '',
       )}

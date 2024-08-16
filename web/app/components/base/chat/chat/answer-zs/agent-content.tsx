@@ -5,7 +5,7 @@ import type {
   VisionFile,
 } from '../../types'
 import { Markdown } from '@/app/components/base/markdown'
-import Thought from '@/app/components/base/chat/chat/thought'
+import Thought from '@/app/components/base/chat/chat/thought-zs'
 import ImageGallery from '@/app/components/base/image-gallery'
 import type { Emoji } from '@/app/components/tools/types'
 
@@ -34,9 +34,9 @@ const AgentContent: FC<AgentContentProps> = ({
     return <Markdown content={annotation?.logAnnotation.content || ''} />
 
   return (
-    <div>
+    <div className='!bg-white px-[17px] py-[12px] rounded-xl rounded-tl-none'>
       {agent_thoughts?.map((thought, index) => (
-        <div key={index} className='!bg-white px-[17px] py-[12px] rounded-xl rounded-tl-none !text-[16px]'>
+        <div key={index}>
           {thought.thought && (
             <Markdown content={thought.thought} className='!text-[16px]' />
           )}
