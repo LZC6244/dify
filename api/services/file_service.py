@@ -1,3 +1,4 @@
+import logging
 import datetime
 import hashlib
 import uuid
@@ -16,6 +17,9 @@ from extensions.ext_storage import storage
 from models.account import Account
 from models.model import EndUser, UploadFile
 from services.errors.file import FileTooLargeError, UnsupportedFileTypeError
+
+
+logger = logging.getLogger(__name__)
 
 IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg']
 IMAGE_EXTENSIONS.extend([ext.upper() for ext in IMAGE_EXTENSIONS])
@@ -43,8 +47,10 @@ class FileService:
         elif only_image and extension.lower() not in IMAGE_EXTENSIONS:
             raise UnsupportedFileTypeError()
 
+        logger.info(f'[start] read file content: "{filename}"')
         # read file content
         file_content = file.read()
+        logger.info(f'[end] read file content: "{filename}"')
 
         # get file size
         file_size = len(file_content)
@@ -69,9 +75,12 @@ class FileService:
 
         file_key = 'upload_files/' + current_tenant_id + '/' + file_uuid + '.' + extension
 
+        logger.info(f'[start] save file to storage: "{filename}"')
         # save file to storage
         storage.save(file_key, file_content)
+        logger.info(f'[end] save file to storage: "{filename}"')
 
+        logger.info(f'[start] save file to db: "{filename}"')
         # save file to db
         upload_file = UploadFile(
             tenant_id=current_tenant_id,
@@ -90,6 +99,7 @@ class FileService:
 
         db.session.add(upload_file)
         db.session.commit()
+        logger.info(f'[end] save file to db: "{filename}"')
 
         return upload_file
 
