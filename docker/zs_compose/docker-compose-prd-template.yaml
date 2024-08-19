@@ -13,7 +13,7 @@ x-shared-env:
   CONSOLE_API_URL: ${CONSOLE_API_URL:-https://agent-x.maas.com.cn}
   SERVICE_API_URL: ${SERVICE_API_URL:-https://agent-x.maas.com.cn}
   APP_WEB_URL: ${APP_WEB_URL:-https://agent-x.maas.com.cn}
-  CHECK_UPDATE_URL: ${CHECK_UPDATE_URL:-https://updates.dify.ai}
+  CHECK_UPDATE_URL: ${CHECK_UPDATE_URL:-}
   OPENAI_API_BASE: ${OPENAI_API_BASE:-https://api.openai.com/v1}
   FILES_URL: ${FILES_URL:-}
   FILES_ACCESS_TIMEOUT: ${FILES_ACCESS_TIMEOUT:-300}
