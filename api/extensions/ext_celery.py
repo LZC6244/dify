@@ -25,11 +25,9 @@ def init_app(app: Flask) -> Celery:
 
     # 更改任务队列名称，避免队列混乱，默认队列名称为：celery
     task_default_queue = os.environ.get('CELERY_TASK_DEFAULT_QUEUE', 'dify')
-    task_queues = {
-        Queue(name=f'{task_default_queue}:dataset'),
-        Queue(name=f'{task_default_queue}:generation'),
-        Queue(name=f'{task_default_queue}:mail'),
-    }
+    task_queues = {Queue(name=i.strip())
+                   for i in os.environ['DEFAULT_CELERY_QUEUES'].split(',')}
+
     celery_app.conf.update(
         task_default_queue=task_default_queue,
         task_queues=task_queues,
