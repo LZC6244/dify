@@ -9,12 +9,13 @@ import {
   AlignRight01,
 } from '@/app/components/base/icons/src/vender/line/layout'
 import { useStore as useAppStore } from '@/app/components/app/store'
+import type { RelatedAppResponse } from '@/models/datasets'
 
 export type IAppDetailNavProps = {
   iconType?: 'app' | 'dataset' | 'notion'
   title: string
   desc: string
-  icon: string
+  icon: any
   icon_background: string
   navigation: Array<{
     name: string
@@ -23,9 +24,10 @@ export type IAppDetailNavProps = {
     selectedIcon: any
   }>
   extraInfo?: (modeState: string) => React.ReactNode
+  relatedApps?: RelatedAppResponse
 }
 
-const AppDetailNav = ({ title, desc, icon, icon_background, navigation, extraInfo, iconType = 'app' }: IAppDetailNavProps) => {
+const AppDetailNav = ({ relatedApps, title, desc, icon, icon_background, navigation, extraInfo, iconType = 'app' }: IAppDetailNavProps) => {
   const { appSidebarExpand, setAppSiderbarExpand } = useAppStore(useShallow(state => ({
     appSidebarExpand: state.appSidebarExpand,
     setAppSiderbarExpand: state.setAppSiderbarExpand,
@@ -48,14 +50,14 @@ const AppDetailNav = ({ title, desc, icon, icon_background, navigation, extraInf
   return (
     <div
       className={`
-        shrink-0 flex flex-col bg-[#FFF] border-r border-divider-burn transition-all
-        ${expand ? 'w-[216px]' : 'w-14'}
+        shrink-0 flex flex-col bg-[#FFF] transition-all
+        ${expand ? 'w-[300px]' : 'w-14'}
       `}
     >
       <div
         className={`
           shrink-0
-          ${expand ? 'p-3' : 'p-2'}
+          ${expand ? 'p-[29px] pb-[24px]' : 'p-2'}
         `}
       >
         {iconType === 'app' && (
@@ -69,6 +71,7 @@ const AppDetailNav = ({ title, desc, icon, icon_background, navigation, extraInf
             icon_background={icon_background}
             name={title}
             type={desc}
+            relative={(relatedApps?.total || 0) > 0}
           />
         )}
       </div>
@@ -78,7 +81,7 @@ const AppDetailNav = ({ title, desc, icon, icon_background, navigation, extraInf
       <nav
         className={`
           grow space-y-1
-          ${expand ? 'p-4' : 'px-2.5 py-4'}
+          ${expand ? 'p-[29px] pt-0' : 'px-2.5 py-4'}
         `}
       >
         {navigation.map((item, index) => {

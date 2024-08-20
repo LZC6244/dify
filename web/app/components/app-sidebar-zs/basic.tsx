@@ -1,20 +1,17 @@
 import React from 'react'
-import {
-  InformationCircleIcon,
-} from '@heroicons/react/24/outline'
-import Tooltip from '../base/tooltip'
+import Image from 'next/image'
 import AppIcon from '../base/app-icon'
-import { randomString } from '@/utils'
 
 export type IAppBasicProps = {
   iconType?: 'app' | 'api' | 'dataset' | 'webapp' | 'notion'
-  icon?: string
+  icon?: any
   icon_background?: string
   name: string
   type: string | React.ReactNode
   hoverTip?: string
   textStyle?: { main?: string; extra?: string }
   isExtraInLine?: boolean
+  relative?: boolean
   mode?: string
 }
 
@@ -56,29 +53,37 @@ const ICON_MAP = {
   notion: <AppIcon innerIcon={NotionSvg} className='!border-[0.5px] !border-indigo-100 !bg-white' />,
 }
 
-export default function AppBasic({ icon, icon_background, name, type, hoverTip, textStyle, mode = 'expand', iconType = 'app' }: IAppBasicProps) {
+export default function AppBasic({ relative, icon, icon_background, name, type, hoverTip, textStyle, mode = 'expand', iconType = 'app' }: IAppBasicProps) {
   return (
-    <div className="flex items-start p-1">
+    <div className="flex items-start p-0">
       {icon && icon_background && iconType === 'app' && (
         <div className='flex-shrink-0 mr-3'>
-          <AppIcon icon={icon} background={icon_background} />
+          {
+            !icon.includes('base64')
+              ? <AppIcon icon={icon} background={icon_background} />
+              : <Image src={icon} width={40} height={40} alt='' />
+          }
         </div>
       )}
       {iconType !== 'app'
-        && <div className='flex-shrink-0 mr-3'>
-          {ICON_MAP[iconType]}
+        && <div className='flex-shrink-0 mr-2'>
+          {/* {ICON_MAP[iconType]} */}
+          <Image src={icon} width={40} height={40} alt='' />
         </div>
 
       }
       {mode === 'expand' && <div className="group">
-        <div className={`flex flex-row items-center text-sm font-semibold text-gray-700 group-hover:text-gray-900 break-all ${textStyle?.main ?? ''}`}>
+        <div className={`flex flex-row items-center text-[16px] leading-4 font-medium text-[#000000] group-hover:text-[#000000] break-all ${textStyle?.main ?? ''}`}>
           {name}
-          {hoverTip
+          {/* {hoverTip
             && <Tooltip content={hoverTip} selector={`a${randomString(16)}`}>
               <InformationCircleIcon className='w-4 h-4 ml-1 text-gray-400' />
-            </Tooltip>}
+            </Tooltip>} */}
         </div>
-        <div className={`text-xs font-normal text-gray-500 group-hover:text-gray-700 break-all line-clamp-[7] ${textStyle?.extra ?? ''}`}>{type}</div>
+        <div className='text-[12px] leading-3 text-[#9EADB9] mt-2'>
+          {relative ? '已关联' : '未关联'}
+        </div>
+        {/* <div className={`text-xs font-normal text-gray-500 group-hover:text-gray-700 break-all line-clamp-[7] ${textStyle?.extra ?? ''}`}>{type}</div> */}
       </div>}
     </div>
   )

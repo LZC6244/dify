@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>test</title>
+    <g id="V2.1.1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="知识库-创建知识库-处理并完成" transform="translate(-275.000000, -155.000000)" stroke="#484667" stroke-width="1.5">
+            <g id="编组-4" transform="translate(275.000000, 155.000000)">
+                <g id="搜查_find-one-(1)" transform="translate(1.000000, 1.000000)">
+                    <path d="M6.93,3.5 C8.901655,3.5 10.5,5.06702 10.5,7 C10.5,8.93298 8.901655,10.5 6.93,10.5 C6.01566,10.5 5.18161,10.16302 4.55,9.608795" id="路径"></path>
+                    <path d="M7,0 C10.865995,0 14,3.134005 14,7 C14,10.865995 10.865995,14 7,14 C5.10496,14 3.385795,13.246975 2.12541,12.023795 C0.8145655,10.75165 0,8.970955 0,7 C0,5.12141 0.7400155,3.41565 1.944446,2.158345" id="路径"></path>
+                    <polyline id="路径" points="1.944481 2.15845 7.000035 7.000105 2.125445 12.023865"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

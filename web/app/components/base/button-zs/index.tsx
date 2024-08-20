@@ -37,7 +37,7 @@ export type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, loading, styleCss, children, ...props }, ref) => {
+  ({ className, loading, styleCss, children, disabled, ...props }, ref) => {
     return (
       <button
         type='button'
@@ -45,9 +45,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           'flex flex-row items-center justify-center py-[10px] text-white text-[16px] font-semibold rounded-lg cursor-pointer',
           s.newApp,
           className || '',
+          disabled && s.newAppDisabled,
         )}
         ref={ref}
         style={styleCss}
+        disabled={disabled}
         {...props}
       >
         {children}

@@ -5,3 +5,6 @@
 .newApp:hover {
   background: linear-gradient( 270deg, #907AFD 0%, #6749FB 100%);
 }
+.newAppDisabled {
+  opacity: 0.3;
+}
