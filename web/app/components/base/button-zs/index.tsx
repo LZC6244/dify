@@ -44,7 +44,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={classNames(
           'flex flex-row items-center justify-center py-[10px] text-white text-[16px] font-semibold rounded-lg cursor-pointer',
           s.newApp,
-          className ?? '',
+          className || '',
         )}
         ref={ref}
         style={styleCss}

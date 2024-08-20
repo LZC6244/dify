@@ -1,0 +1,109 @@
+.stepsHeader {
+  @apply flex items-center px-6 py-6;
+  color: #344054;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 18px;
+}
+.navBack {
+  @apply box-border flex justify-center items-center mr-2 w-[18px] h-[14px] bg-center bg-no-repeat cursor-pointer;
+  /* border: 0.5px solid #F2F4F7;
+  box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+  border-radius: 32px; */
+  background-image: url(../assets/back.svg);
+  /* background-size: 16px; */
+}
+.stepList {
+  @apply p-4 relative pt-2;
+  line-height: 18px;
+}
+
+.stepItem {
+  @apply relative flex justify-items-start pt-3 pr-0 pb-3 box-content;
+  padding-left: 45px;
+  font-size: 13px;
+  height: 18px;
+}
+
+.stepItem.step1::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 23px;
+  width: 2px;
+  height: 7px;
+  background-color: #f2f4f7;
+}
+
+.stepItem.step2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 23px;
+  width: 2px;
+  height: 100%;
+  background-color: #f2f4f7;
+}
+.stepItem.step2::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 23px;
+  width: 2px;
+  height: 28px;
+  background-color: #fff;
+}
+
+.stepItem.step3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 23px;
+  width: 2px;
+  height: 7px;
+  background-color: #f2f4f7;
+}
+
+.stepNum {
+  @apply box-border absolute top-2 left-3 flex justify-center items-center  w-6 h-6;
+  color: #FFF;
+  font-size: 16px;
+  /* border: 1px solid #F2F4F7; */
+  border-radius: 24px;
+  z-index: 1;
+  background: #9EADB9;
+}
+
+.stepName {
+  color: #212B36;
+  font-size: 16px;
+}
+
+.stepItem.active .stepNum {
+  color: #FFFFFF;
+  background: linear-gradient( 270deg, #7B60FF 0%, #5E3EFB 100%);
+  border: none;
+}
+
+.stepItem.active .stepName {
+  color: #5E3EFB;
+}
+
+.stepItem.done .stepNum {
+  color: #FFFFFF;
+  background: linear-gradient( 270deg, #7B60FF 0%, #5E3EFB 100%);
+  border: none;
+}
+
+.stepItem.done .stepNum::after {
+  content: '';
+  display: none;
+  width: 12px;
+  height: 12px;
+  background: center no-repeat url(../assets/done.svg);
+  background-size: 12px;
+}
+
+.stepItem.done .stepName {
+  color: #5E3EFB;
+}

@@ -47,8 +47,8 @@ const Switch = ({ onChange, size = 'lg', defaultValue = false, disabled = false,
       }}
       className={classNames(
         wrapStyle[size],
-        enabled ? 'bg-components-toggle-bg' : 'bg-components-toggle-bg-unchecked',
-        'relative inline-flex  flex-shrink-0 cursor-pointer rounded-[5px] border-2 border-transparent transition-colors duration-200 ease-in-out',
+        enabled ? 'bg-[#5E3EFB]' : 'bg-[#CDCFDE]',
+        'relative inline-flex  flex-shrink-0 cursor-pointer rounded-[10px] border-2 border-transparent transition-colors duration-200 ease-in-out',
         disabled ? '!opacity-50 !cursor-not-allowed' : '',
         className,
       )}
@@ -58,7 +58,7 @@ const Switch = ({ onChange, size = 'lg', defaultValue = false, disabled = false,
         className={classNames(
           circleStyle[size],
           enabled ? translateLeft[size] : 'translate-x-0',
-          'pointer-events-none inline-block transform rounded-[3px] bg-components-toggle-knob shadow ring-0 transition duration-200 ease-in-out',
+          'pointer-events-none inline-block transform rounded-[50%] bg-components-toggle-knob shadow ring-0 transition duration-200 ease-in-out',
         )}
       />
     </OriginalSwitch>
