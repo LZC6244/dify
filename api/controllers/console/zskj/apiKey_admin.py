@@ -48,18 +48,10 @@ class BaseApiKeyListResource(Resource):
     resource_id_field = None
     token_prefix = None
     max_keys = 10
-    admin_channel='zskj_nest_admin'
 
     @marshal_with(api_key_list)
     @zs_admin_required
     def get(self, resource_id):
-        channel = request.args.get('channel', type=str)
-        if channel != self.admin_channel:
-            flask_restful.abort(
-                400,
-                message=f"Cannot load data, Please Check.",
-                code='Unauthorized'
-            )
         resource_id = str(resource_id)
         _get_resource(resource_id, self.resource_model)
         keys = db.session.query(ApiToken). \
