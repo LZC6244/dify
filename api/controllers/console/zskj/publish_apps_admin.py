@@ -8,9 +8,9 @@ from fields.zskj.published_app_fields import published_app_list_fields
 from models.model import App, InstalledApp
 
 
-class ZsPublishedAppsListApi(Resource):
+class ZsPublishedAppsAdminListApi(Resource):
     """
-    获取已发布 app 列表【不鉴权，给node使用】
+    获取已发布 app 列表【不鉴权，给admin使用】
     参考自 api/controllers/console/explore/installed_app.py InstalledAppsListApi
     """
     # @login_required
@@ -46,4 +46,4 @@ class ZsPublishedAppsListApi(Resource):
         return {'published_apps': published_apps}
 
 
-api.add_resource(ZsPublishedAppsListApi, '/zskj/published-apps-ignore-login')
+api.add_resource(ZsPublishedAppsAdminListApi, '/zskj/publish_apps_admin')
