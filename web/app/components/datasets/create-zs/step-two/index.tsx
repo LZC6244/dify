@@ -576,9 +576,9 @@ const StepTwo = ({
 
     return false
   }, [files])
-  // 是否有PDF文件
+  // 是否有csv和excel文件
   const isCSV = useMemo(() => {
-    if (files && files.find(v => v.extension === 'csv'))
+    if (files && files.find(v => v.extension && ['csv', 'xls', 'xlsx'].includes(v.extension)))
       return true
 
     return false
@@ -678,13 +678,13 @@ const StepTwo = ({
               <span className={cn(s.radio)} />
               <div className={s.typeHeader}>
                 <div className={s.title}>{t('datasetCreation.stepTwo.qa')}</div>
-                <div className={s.tip}>提取录入好的Q&A问答对，仅支持CSV文</div>
+                <div className={s.tip}>提取录入好的Q&A问答对，支持CSV和Excel文件</div>
               </div>
               {parserType === ParserType.QA && (
-                <div className={s.typeFormBody}>
-                  <div className="py-4">
+                <div className={cn(s.typeFormBody2)}>
+                  <div className="py-2">
                     <div className='w-full flex flex-row items-center justify-between'>
-                      <div className="text-[#344054] text-[16px]">{t('datasetCreation.stepTwo.qaEmbedding')}</div>
+                      <div className="text-[#344054] text-[12px]">{t('datasetCreation.stepTwo.qaEmbedding')}</div>
                       <Switch
                         defaultValue={false}
                         size='md'
@@ -799,8 +799,12 @@ const StepTwo = ({
                       {t('datasetCreation.stepTwo.preview')}
                     </Button>
                     <Button
-                      className={cn(s.button, 'ml-5')}
-                      onClick={resetRules}>
+                      className={cn(s.button, 'ml-5 !bg-[#FFF] py-[8px] text-[16px] text-[#637381] !w-[108px] !rounded-[20px] hover:!bg-[#EEEEFF]')}
+                      onClick={resetRules}
+                      styleCss={{
+                        background: '#fff',
+                        boxShadow: 'none',
+                      }}>
                       {t('datasetCreation.stepTwo.reset')}
                     </Button>
                   </div>
@@ -877,7 +881,7 @@ const StepTwo = ({
               )}
             </div>
             {hasSetIndexType && (
-              <div className='mt-2 text-xs text-gray-500 font-medium'>
+              <div className='mt-2 text-xs text-gray-500 font-medium hidden'>
                 {t('datasetCreation.stepTwo.indexSettedTip')}
                 <Link className='text-[#155EEF]' href={`/datasets/${datasetId}/settings`}>{t('datasetCreation.stepTwo.datasetSettingLink')}</Link>
               </div>
@@ -951,7 +955,7 @@ const StepTwo = ({
                       <RetrievalMethodInfo
                         value={retrievalConfig}
                       />
-                      <div className='mt-2 text-xs text-gray-500 font-medium'>
+                      <div className='mt-2 text-xs text-gray-500 font-medium hidden'>
                         {t('datasetCreation.stepTwo.retrivalSettedTip')}
                         <Link className='text-[#155EEF]' href={`/datasets/${datasetId}/settings`}>{t('datasetCreation.stepTwo.datasetSettingLink')}</Link>
                       </div>

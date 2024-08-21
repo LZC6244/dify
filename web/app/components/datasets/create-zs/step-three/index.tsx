@@ -38,8 +38,8 @@ const StepThree = ({ datasetId, datasetName, indexingType, creationCache }: Step
           )}
           {datasetId && (
             <div className={s.creationInfo}>
-              <div className={s.title}>{t('datasetCreation.stepThree.additionTitle')}</div>
-              <div className={s.content}>{`${t('datasetCreation.stepThree.additionP1')} ${datasetName || creationCache?.dataset?.name} ${t('datasetCreation.stepThree.additionP2')}`}</div>
+              <div className={s.title}>文档已上传</div>
+              <div className={s.content}>{`文档已上传至知识库：${datasetName || creationCache?.dataset?.name}，你可以在知识库的文档列表中找到它`}</div>
             </div>
           )}
           <EmbeddingProcess

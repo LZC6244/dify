@@ -18,7 +18,7 @@
 }
 
 .form .label {
-  @apply pt-[18px] pb-2 flex items-center;
+  @apply pt-[18px] pb-3 flex items-center;
   font-weight: 500;
   font-size: 16px;
   line-height: 16px;
@@ -249,6 +249,10 @@
   @apply pl-[14px] pr-5;
   border-top: 1px solid #F2F4F7;
 }
+.typeFormBody2 {
+  @apply p-0 pr-5;
+  border-top: 1px solid #F2F4F7;
+}
 
 .formRow {
   @apply flex justify-between mt-6;
@@ -268,6 +272,9 @@
 
 .formFooter {
   padding: 16px 0 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .formFooter .button {
@@ -278,6 +285,7 @@
 }
 .formFooter .primaryButton {
   background: linear-gradient( 270deg, #7B60FF 0%, #5E3EFB 100%);
+  padding: 9px 14px;
 }
 .formFooter .primaryButton:hover {
   background: linear-gradient( 270deg, #907AFD 0%, #6749FB 100%);

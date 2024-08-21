@@ -1,5 +1,5 @@
 import React from 'react'
-import DatasetUpdateForm from '@/app/components/datasets/create'
+import DatasetUpdateForm from '@/app/components/datasets/create-zs'
 
 export type IProps = {
   params: { datasetId: string }
