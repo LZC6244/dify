@@ -1,23 +1,18 @@
 """Abstract interface for document loader implementations."""
-import json
-from collections.abc import Iterator
-from typing import Optional
-
-import requests
 import datetime
+import json
 import mimetypes
 import os
-import tempfile
 import re
-import uuid
+from collections.abc import Iterator
 
+import requests
+
+from configs import dify_config
 from core.rag.extractor.blod.blod import Blob
 from core.rag.extractor.extractor_base import BaseExtractor
 from core.rag.models.document import Document
-from extensions.ext_storage import storage
-
 from extensions.ext_database import db
-from configs import dify_config
 from models.model import UploadFile
 
 

@@ -1,9 +1,8 @@
 import logging
 
-from flask import abort
-
 import httpx
 import yaml  # type: ignore
+from flask import abort
 
 from core.app.segments import factory
 from events.app_event import app_model_config_was_updated, app_was_created

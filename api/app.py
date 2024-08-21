@@ -49,9 +49,7 @@ from models import account, dataset, model, source, task, tool, tools, web
 from services.account_service import AccountService
 
 # DO NOT REMOVE ABOVE
-
-from zskj.middleware.access_log import access_start_log, access_end_log
-
+from zskj.middleware.access_log import access_end_log, access_start_log
 
 warnings.simplefilter("ignore", ResourceWarning)
 
