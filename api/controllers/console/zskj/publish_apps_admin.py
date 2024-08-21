@@ -46,4 +46,4 @@ class ZsPublishedAppsAdminListApi(Resource):
         return {'published_apps': published_apps}
 
 
-api.add_resource(ZsPublishedAppsAdminListApi, '/zskj/publish_apps_admin')
+api.add_resource(ZsPublishedAppsAdminListApi, '/zskj/publish-apps-admin')

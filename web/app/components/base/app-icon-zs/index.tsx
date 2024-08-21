@@ -31,6 +31,7 @@ const AppIcon: FC<AppIconProps> = ({
   width = 40,
   height = 40,
 }) => {
+  const isNotDefault = (icon && icon !== '') && (icon.includes('base64') || icon.startsWith('http'))
   return (
     <span
       className={classNames(
@@ -40,12 +41,12 @@ const AppIcon: FC<AppIconProps> = ({
         className ?? '',
       )}
       style={{
-        background: 'transparent',
+        background: isNotDefault ? 'transparent' : background,
       }}
       onClick={onClick}
     >
       {
-        ((icon && icon !== '') && (icon.includes('base64') || icon.startsWith('http')))
+        isNotDefault
           ? <Image className='w-full h-full rounded-full' width={width} height={height} src={icon} alt='' />
           : (innerIcon || ((icon && icon !== '') ? <em-emoji id={icon} /> : <em-emoji id='🧭' />))
       }
