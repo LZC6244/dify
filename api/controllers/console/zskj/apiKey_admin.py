@@ -1,6 +1,11 @@
 import flask_restful
 from flask_restful import Resource, fields, marshal_with
 
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../../'))
+
 from controllers.console import api
 from extensions.ext_database import db
 from libs.helper import TimestampField
