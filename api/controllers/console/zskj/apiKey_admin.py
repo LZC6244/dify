@@ -1,10 +1,6 @@
 import flask_restful
 from flask_restful import Resource, fields, marshal_with
 
-import os
-import sys
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '../../../'))
 
 from controllers.console import api
 from extensions.ext_database import db
@@ -13,7 +9,7 @@ from libs.helper import TimestampField
 # from libs.login import login_required
 from models.model import ApiToken, App
 
-from setup import setup_required
+from controllers.console.setup import setup_required
 
 # from .wraps import account_initialization_required
 
@@ -89,7 +85,7 @@ class BaseApiKeyListResource(Resource):
         return api_token, 201
 
 
-class AppApiKeyListResource(BaseApiKeyListResource):
+class ZskjAppApiKeyListResource(BaseApiKeyListResource):
 
     def after_request(self, resp):
         resp.headers['Access-Control-Allow-Origin'] = '*'
@@ -101,4 +97,6 @@ class AppApiKeyListResource(BaseApiKeyListResource):
     resource_id_field = 'app_id'
     token_prefix = 'app-'
 
-api.add_resource(AppApiKeyListResource, '/zskj/apps/<uuid:resource_id>/api-keys')
+
+api.add_resource(ZskjAppApiKeyListResource,
+                 '/zskj/apps/<uuid:resource_id>/api-keys')
