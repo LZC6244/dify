@@ -8,7 +8,7 @@ from libs.helper import TimestampField
 # from libs.login import login_required
 from models.model import ApiToken, App
 
-from .setup import setup_required
+from setup import setup_required
 
 # from .wraps import account_initialization_required
 
