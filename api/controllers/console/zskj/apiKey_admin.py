@@ -1,4 +1,5 @@
 import flask_restful
+from flask import request
 from flask_restful import Resource, fields, marshal_with
 
 
@@ -10,6 +11,7 @@ from libs.helper import TimestampField
 from models.model import ApiToken, App
 
 from controllers.console.setup import setup_required
+from .zs_nest_admin import zs_admin_required
 
 # from .wraps import account_initialization_required
 
@@ -46,9 +48,18 @@ class BaseApiKeyListResource(Resource):
     resource_id_field = None
     token_prefix = None
     max_keys = 10
+    admin_channel='zskj_nest_admin'
 
     @marshal_with(api_key_list)
+    @zs_admin_required
     def get(self, resource_id):
+        channel = request.args.get('channel', type=str)
+        if channel != self.admin_channel:
+            flask_restful.abort(
+                400,
+                message=f"Cannot load data, Please Check.",
+                code='Unauthorized'
+            )
         resource_id = str(resource_id)
         _get_resource(resource_id, self.resource_model)
         keys = db.session.query(ApiToken). \
@@ -57,6 +68,7 @@ class BaseApiKeyListResource(Resource):
         return {"items": keys}
 
     @marshal_with(api_key_fields)
+    @zs_admin_required
     def post(self, resource_id):
         resource_id = str(resource_id)
         _get_resource(resource_id, self.resource_model)
