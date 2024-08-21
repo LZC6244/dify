@@ -115,7 +115,7 @@ class ExtractProcessor:
                         extractor = NaiveExtractor(file_path, url)
                     elif file_extension == '.pdf' and parser_type == "paper":
                         url = dify_config.OCR_API_URL + '/parse_paper'
-                        extractor = PaperExtractor(file_path, url)
+                        extractor = PaperExtractor(file_path, url, upload_file.tenant_id, upload_file.created_by)
                     else:
                         etl_type = 'dify'
 

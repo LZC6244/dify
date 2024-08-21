@@ -50,6 +50,8 @@ from services.account_service import AccountService
 
 # DO NOT REMOVE ABOVE
 
+from zskj.middleware.access_log import access_start_log, access_end_log
+
 
 warnings.simplefilter("ignore", ResourceWarning)
 
@@ -77,6 +79,7 @@ logger = logging.getLogger(__name__)
 # ----------------------------
 # Application Factory Function
 # ----------------------------
+
 
 def create_flask_app_with_configs() -> Flask:
     """
@@ -173,16 +176,19 @@ def load_user_from_request(request_from_flask_login):
             raise Unauthorized('Invalid Authorization token.')
     else:
         if ' ' not in auth_header:
-            raise Unauthorized('Invalid Authorization header format. Expected \'Bearer <api-key>\' format.')
+            raise Unauthorized(
+                'Invalid Authorization header format. Expected \'Bearer <api-key>\' format.')
         auth_scheme, auth_token = auth_header.split(None, 1)
         auth_scheme = auth_scheme.lower()
         if auth_scheme != 'bearer':
-            raise Unauthorized('Invalid Authorization header format. Expected \'Bearer <api-key>\' format.')
+            raise Unauthorized(
+                'Invalid Authorization header format. Expected \'Bearer <api-key>\' format.')
 
     decoded = PassportService().verify(auth_token)
     user_id = decoded.get('user_id')
 
-    account = AccountService.load_logged_in_account(account_id=user_id, token=auth_token)
+    account = AccountService.load_logged_in_account(
+        account_id=user_id, token=auth_token)
     if account:
         contexts.tenant_id.set(account.current_tenant_id)
     return account
@@ -248,6 +254,10 @@ celery = app.extensions["celery"]
 
 if app.config.get('TESTING'):
     print("App is running in TESTING mode")
+
+# 添加请求记录中间件计算请求耗时，None 为蓝图名称，表示全局，请勿修改
+app.before_request_funcs[None].append(access_start_log)
+app.after_request_funcs[None].append(access_end_log)
 
 
 @app.after_request

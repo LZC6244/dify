@@ -4,6 +4,14 @@ set -e -x
 
 echo "[api-debug] 启动部署模式"
 
+export DEFAULT_CELERY_QUEUES=${CELERY_QUEUES:-\
+${CELERY_TASK_DEFAULT_QUEUE}:dataset,\
+${CELERY_TASK_DEFAULT_QUEUE}:generation,\
+${CELERY_TASK_DEFAULT_QUEUE}:mail,\
+${CELERY_TASK_DEFAULT_QUEUE}:ops_trace,\
+${CELERY_TASK_DEFAULT_QUEUE}:app_deletion\
+}
+
 if [[ "${MIGRATION_ENABLED}" == "true" ]]; then
   echo "Running migrations"
   flask db upgrade
@@ -11,13 +19,6 @@ fi
 
 cd /app/api
 
-DEFAULT_CELERY_QUEUES=${CELERY_QUEUES:-\
-${CELERY_TASK_DEFAULT_QUEUE}:dataset,\
-${CELERY_TASK_DEFAULT_QUEUE}:generation,\
-${CELERY_TASK_DEFAULT_QUEUE}:mail,\
-${CELERY_TASK_DEFAULT_QUEUE}:ops_trace,\
-${CELERY_TASK_DEFAULT_QUEUE}:app_deletion\
-}
 
 if [[ "${MODE}" == "worker" ]]; then
   celery -A app.celery worker -P ${CELERY_WORKER_CLASS:-prefork} -c ${CELERY_WORKER_AMOUNT:-1} --loglevel INFO \
