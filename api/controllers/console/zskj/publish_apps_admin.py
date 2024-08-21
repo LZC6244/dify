@@ -6,7 +6,9 @@ from controllers.console import api
 from extensions.ext_database import db
 from fields.zskj.published_app_fields import published_app_list_fields
 from models.model import App, InstalledApp
+
 from .zs_nest_admin import zs_admin_required
+
 
 class ZsPublishedAppsAdminListApi(Resource):
     """

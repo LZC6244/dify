@@ -1,16 +1,14 @@
 import flask_restful
-from flask import request
 from flask_restful import Resource, fields, marshal_with
 
-
 from controllers.console import api
+from controllers.console.setup import setup_required
 from extensions.ext_database import db
 from libs.helper import TimestampField
 
 # from libs.login import login_required
 from models.model import ApiToken, App
 
-from controllers.console.setup import setup_required
 from .zs_nest_admin import zs_admin_required
 
 # from .wraps import account_initialization_required
