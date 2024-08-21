@@ -2,7 +2,7 @@
 import { useTranslation } from 'react-i18next'
 import cn from '@/utils/classnames'
 import type { App } from '@/models/explore'
-import AppIcon from '@/app/components/base/app-icon/zs-index'
+import AppIcon from '@/app/components/base/app-icon-zs'
 export type AppCardProps = {
   app: App
   onClick: () => void

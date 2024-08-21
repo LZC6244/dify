@@ -26,7 +26,7 @@ import {
 import { BracketsX } from '@/app/components/base/icons/src/vender/line/development'
 import { UserEdit02 } from '@/app/components/base/icons/src/vender/solid/users'
 import { ArrowUpRight } from '@/app/components/base/icons/src/vender/line/arrows'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 
 export const usePromptOptions = (
   contextBlock?: ContextBlockType,

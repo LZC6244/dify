@@ -7,7 +7,7 @@ import Form from './form'
 import ArrowRight from './images/arrow-right.svg'
 import s from './style.module.css'
 import Button from '@/app/components/base/button-zs'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 import { Edit02 } from '@/app/components/base/icons/src/vender/line/general'
 import { Star06 } from '@/app/components/base/icons/src/vender/solid/shapes'
 

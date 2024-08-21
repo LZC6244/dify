@@ -60,4 +60,5 @@ from .workspace import account, load_balancing_config, members, model_providers,
 
 from .zskj import (
     published_app,
+    published_app_ignore_login,
 )

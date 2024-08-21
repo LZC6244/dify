@@ -15,7 +15,7 @@ import Button from '@/app/components/base/button'
 import { updateUserProfile } from '@/service/common'
 import { useAppContext } from '@/context/app-context'
 import { ToastContext } from '@/app/components/base/toast'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 import Avatar from '@/app/components/base/avatar'
 import { IS_CE_EDITION } from '@/config'
 

@@ -18,7 +18,7 @@ import {
   TemplatingTransform,
   VariableX,
 } from '@/app/components/base/icons/src/vender/workflow'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 
 type BlockIconProps = {
   type: BlockEnum

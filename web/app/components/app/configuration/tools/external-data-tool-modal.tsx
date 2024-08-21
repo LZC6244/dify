@@ -18,7 +18,7 @@ import type {
   ExternalDataTool,
 } from '@/models/common'
 import { useToastContext } from '@/app/components/base/toast'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 
 const systemTypes = ['api']
 type ExternalDataToolModalProps = {

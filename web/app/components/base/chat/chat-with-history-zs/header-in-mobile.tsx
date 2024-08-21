@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useChatWithHistoryContext } from './context'
 import Sidebar from './sidebar'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 import {
   Edit05,
   Menu01,

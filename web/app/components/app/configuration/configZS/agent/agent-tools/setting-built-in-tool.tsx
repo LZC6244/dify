@@ -15,7 +15,7 @@ import Button from '@/app/components/base/button'
 import Loading from '@/app/components/base/loading'
 import { DiagonalDividingLine } from '@/app/components/base/icons/src/public/common'
 import { getLanguage } from '@/i18n/language'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 
 type Props = {
   collection: Collection

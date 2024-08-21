@@ -18,7 +18,7 @@ import {
 } from '@/app/components/base/icons/src/vender/line/general'
 import { useModalContext } from '@/context/modal-context'
 import type { ExternalDataTool } from '@/models/common'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 import { useToastContext } from '@/app/components/base/toast'
 
 const Tools = () => {

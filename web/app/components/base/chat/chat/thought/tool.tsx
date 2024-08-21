@@ -13,7 +13,7 @@ import cn from '@/utils/classnames'
 import { CheckCircle } from '@/app/components/base/icons/src/vender/solid/general'
 import { DataSet as DataSetIcon } from '@/app/components/base/icons/src/public/thought'
 import type { Emoji } from '@/app/components/tools/types'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 
 type Props = {
   payload: ToolInfoInThought

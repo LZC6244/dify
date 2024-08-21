@@ -21,6 +21,7 @@ import Citation from '@/app/components/base/chat/chat/citation'
 import { EditTitle } from '@/app/components/app/annotation/edit-annotation-modal/edit-item'
 import type { Emoji } from '@/app/components/tools/types'
 import type { AppData } from '@/models/share'
+import AppIcon from '@/app/components/base/app-icon-zs'
 
 type AnswerProps = {
   item: ChatItem
@@ -88,7 +89,7 @@ const Answer: FC<AnswerProps> = ({
     <div className='flex mb-2 last:mb-0'>
       <div className='shrink-0 relative w-10 h-10 mt-0'>
         {
-          answerIcon || (
+          answerIcon || <AppIcon icon={appData?.site.icon} background={appData?.site.icon_background} /> || (
             <div className='flex items-center justify-center w-full h-full rounded-full bg-[#d5f5f6] border-[0.5px] border-black/5 text-xl'>
               🧭
             </div>

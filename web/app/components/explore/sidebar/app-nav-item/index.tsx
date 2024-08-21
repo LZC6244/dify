@@ -6,7 +6,7 @@ import { useHover } from 'ahooks'
 import s from './style.module.css'
 import cn from '@/utils/classnames'
 // import ItemOperation from '@/app/components/explore/item-operation'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 
 export type IAppNavItemProps = {
   isMobile: boolean

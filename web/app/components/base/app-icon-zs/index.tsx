@@ -2,6 +2,7 @@ import type { FC } from 'react'
 
 import data from '@emoji-mart/data'
 import { init } from 'emoji-mart'
+import Image from 'next/image'
 import style from './style.module.css'
 import classNames from '@/utils/classnames'
 
@@ -15,6 +16,8 @@ export type AppIconProps = {
   className?: string
   innerIcon?: React.ReactNode
   onClick?: () => void
+  width?: number
+  height?: number
 }
 
 const AppIcon: FC<AppIconProps> = ({
@@ -25,6 +28,8 @@ const AppIcon: FC<AppIconProps> = ({
   className,
   innerIcon,
   onClick,
+  width = 40,
+  height = 40,
 }) => {
   return (
     <span
@@ -35,11 +40,15 @@ const AppIcon: FC<AppIconProps> = ({
         className ?? '',
       )}
       style={{
-        background,
+        background: 'transparent',
       }}
       onClick={onClick}
     >
-      {innerIcon || ((icon && icon !== '') ? <em-emoji id={icon} /> : <em-emoji id='🧭' />)}
+      {
+        ((icon && icon !== '') && (icon.includes('base64') || icon.startsWith('http')))
+          ? <Image className='w-full h-full rounded-full' width={width} height={height} src={icon} alt='' />
+          : (innerIcon || ((icon && icon !== '') ? <em-emoji id={icon} /> : <em-emoji id='🧭' />))
+      }
     </span>
   )
 }
