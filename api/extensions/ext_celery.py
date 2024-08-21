@@ -1,10 +1,10 @@
-import os
 import logging
+import os
 from datetime import timedelta
 
-from kombu import Queue
 from celery import Celery, Task
 from flask import Flask
+from kombu import Queue
 
 logger = logging.getLogger(__name__)
 

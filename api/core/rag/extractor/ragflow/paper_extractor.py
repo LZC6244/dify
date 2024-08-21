@@ -1,7 +1,9 @@
 """Abstract interface for document loader implementations."""
-import requests, json
+import json
 from collections.abc import Iterator
 from typing import Optional
+
+import requests
 
 from core.rag.extractor.blod.blod import Blob
 from core.rag.extractor.extractor_base import BaseExtractor

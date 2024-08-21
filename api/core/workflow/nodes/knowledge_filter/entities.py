@@ -1,10 +1,7 @@
-from typing import Any, Optional
 
 from pydantic import BaseModel
 
-from core.prompt.entities.advanced_prompt_entities import MemoryConfig
 from core.workflow.entities.base_node_data_entities import BaseNodeData
-
 
 # class ModelConfig(BaseModel):
 #     """

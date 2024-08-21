@@ -1,5 +1,4 @@
 import json
-import logging
 from typing import Optional, Union, cast
 
 from core.app.entities.app_invoke_entities import ModelConfigWithCredentialsEntity
@@ -14,7 +13,7 @@ from core.prompt.simple_prompt_transform import ModelMode
 from core.prompt.utils.prompt_message_util import PromptMessageUtil
 from core.prompt.utils.prompt_template_parser import PromptTemplateParser
 from core.workflow.entities.base_node_data_entities import BaseNodeData
-from core.workflow.entities.node_entities import NodeRunMetadataKey, NodeRunResult, NodeType
+from core.workflow.entities.node_entities import NodeRunResult, NodeType
 from core.workflow.entities.variable_pool import VariablePool
 from core.workflow.nodes.llm.llm_node import LLMNode
 from core.workflow.nodes.question_transformation.entities import QuestionTransformationNodeData
@@ -24,7 +23,6 @@ from core.workflow.nodes.question_transformation.template_prompts import (
     QUESTION_TRANSFORMATION_USER_PROMPT,
 )
 from core.workflow.utils.variable_template_parser import VariableTemplateParser
-from libs.json_in_md_parser import parse_and_check_json_markdown
 from models.workflow import WorkflowNodeExecutionStatus
 
 

@@ -15,6 +15,8 @@ from core.rag.extractor.html_extractor import HtmlExtractor
 from core.rag.extractor.markdown_extractor import MarkdownExtractor
 from core.rag.extractor.notion_extractor import NotionExtractor
 from core.rag.extractor.pdf_extractor import PdfExtractor
+from core.rag.extractor.ragflow.naive_extractor import NaiveExtractor
+from core.rag.extractor.ragflow.paper_extractor import PaperExtractor
 from core.rag.extractor.text_extractor import TextExtractor
 from core.rag.extractor.unstructured.unstructured_eml_extractor import UnstructuredEmailExtractor
 from core.rag.extractor.unstructured.unstructured_epub_extractor import UnstructuredEpubExtractor
@@ -25,8 +27,6 @@ from core.rag.extractor.unstructured.unstructured_pptx_extractor import Unstruct
 from core.rag.extractor.unstructured.unstructured_text_extractor import UnstructuredTextExtractor
 from core.rag.extractor.unstructured.unstructured_xml_extractor import UnstructuredXmlExtractor
 from core.rag.extractor.word_extractor import WordExtractor
-from core.rag.extractor.ragflow.naive_extractor import NaiveExtractor
-from core.rag.extractor.ragflow.paper_extractor import PaperExtractor
 from core.rag.models.document import Document
 from extensions.ext_storage import storage
 from models.model import UploadFile

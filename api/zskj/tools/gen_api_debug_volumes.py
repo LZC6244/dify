@@ -1,7 +1,5 @@
-import os
-import debugpy
 import logging
-from typing import List
+import os
 
 logging.basicConfig(format='%(asctime)s [%(module)s] %(levelname)s: %(message)s',
                     level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
@@ -10,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def gen_debug_compose_volumes_path(
-    root_dir, exculde_path_list: List[str],
+    root_dir, exculde_path_list: list[str],
         relative_root_dir: str = None, path_level: int = 0
 ):
     """

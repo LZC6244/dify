@@ -1,8 +1,9 @@
-import os
 import json
-import httpx
 import logging
+import os
 from time import sleep
+
+import httpx
 
 logging.basicConfig(format='%(asctime)s [%(module)s] %(levelname)s: %(message)s',
                     level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
@@ -11,11 +12,11 @@ logger = logging.getLogger(__name__)
 
 def get_recommend_app_detail(recommended_apps_json_path: str, launge: str = 'zh-Hans'):
     logger.info(f'开始读取推荐应用列表: {recommended_apps_json_path}')
-    with open(recommended_apps_json_path, 'r', encoding='utf-8') as f:
+    with open(recommended_apps_json_path, encoding='utf-8') as f:
         recommended_apps = json.load(f).get('recommended_apps', {}).get(launge)
     logger.info(f'推荐应用列表读取完成：{launge}')
     if not isinstance(recommended_apps, dict):
-        logger.error(f'推荐应用列表格式错误')
+        logger.error('推荐应用列表格式错误')
         return
 
     recommended_apps = recommended_apps['recommended_apps']
