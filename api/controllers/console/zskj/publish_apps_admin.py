@@ -7,6 +7,8 @@ from extensions.ext_database import db
 from fields.zskj.published_app_fields import published_app_list_fields
 from models.model import App, InstalledApp
 
+from .zs_nest_admin import zs_admin_required
+
 
 class ZsPublishedAppsAdminListApi(Resource):
     """
@@ -16,6 +18,7 @@ class ZsPublishedAppsAdminListApi(Resource):
     # @login_required
     # @account_initialization_required
     @marshal_with(published_app_list_fields)
+    @zs_admin_required
     def get(self):
         # current_tenant_id = current_user.current_tenant_id
         published_apps = db.session.query(InstalledApp).join(App, InstalledApp.app_id == App.id).filter(
