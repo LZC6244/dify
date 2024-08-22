@@ -6,7 +6,7 @@ const Layout: FC<{
   children: React.ReactNode
 }> = ({ children }) => {
   return (
-    <div className="min-w-[300px] h-full pb-[env(safe-area-inset-bottom)]">
+    <div className="min-w-[300px] h-full pb-[env(safe-area-inset-bottom)] bg-[#F7F8FC]">
       <GA gaType={GaType.webapp} />
       {children}
     </div>
