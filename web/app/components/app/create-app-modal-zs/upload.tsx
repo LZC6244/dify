@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import upload from './upload.svg'
 
 type FileUploadProps = {
@@ -9,7 +9,12 @@ type FileUploadProps = {
   onImageChange?: (base64String: string) => void
 }
 export default function Upload({ value, onImageChange }: FileUploadProps) {
-  const [imageBase64, setImageBase64] = useState<string | null>(value.indexOf('base64') ? value : null)
+  const [imageBase64, setImageBase64] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (value.includes('base64') || value.startsWith('http'))
+      setImageBase64(value)
+  }, [value])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]

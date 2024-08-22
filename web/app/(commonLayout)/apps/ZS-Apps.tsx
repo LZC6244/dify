@@ -129,7 +129,7 @@ const Apps = () => {
   return (
     <>
       <div className='sticky top-0 shrink-0 pt-[38px] pb-[18px] px-[60px] rounded-tl-[20px] bg-[#F7F8FC] z-20'>
-        <div className='text-[#120649] font-semibold text-[22px] leading-[22px]'>发现</div>
+        <div className='text-[#120649] font-semibold text-[22px] leading-[22px]'>应用</div>
         <div className='flex justify-between items-center pt-[29px] leading-[56px] bg-transparent z-10 flex-wrap gap-y-2'>
           <TabSliderNew
             value={activeTab}

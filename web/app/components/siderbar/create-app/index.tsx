@@ -13,7 +13,7 @@ import templateActiveIcon from './template_h.svg'
 import buildIcon from './build.svg'
 import buildActiveIcon from './build_h.svg'
 import { useProviderContext } from '@/context/provider-context'
-import CreateFromDSLModal from '@/app/components/app/create-from-dsl-modal'
+import CreateFromDSLModal from '@/app/components/app/create-from-dsl-modal-zs'
 import CreateAppModal from '@/app/components/app/create-app-modal-zs'
 import CreateAppTemplateDialog from '@/app/components/app/create-app-dialog'
 

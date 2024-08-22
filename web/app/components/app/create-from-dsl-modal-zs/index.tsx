@@ -192,6 +192,7 @@ const CreateFromDSLModal = ({ show, onSuccess, onClose, activeTab = CreateFromDS
         <Button
           disabled={buttonDisabled}
           variant="primary"
+          className='px-3 py-1 text-[13px] font-normal'
           onClick={onCreate}>
           {t('app.newApp.Create')}
         </Button>
