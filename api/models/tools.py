@@ -91,7 +91,7 @@ class ApiToolProvider(db.Model):
     # name of the api provider
     name = db.Column(db.String(40), nullable=False)
     # icon
-    icon = db.Column(db.String(255), nullable=False)
+    icon = db.Column(db.Text, nullable=False)
     # original schema
     schema = db.Column(db.Text, nullable=False)
     schema_type_str = db.Column(db.String(40), nullable=False)
@@ -168,7 +168,7 @@ class WorkflowToolProvider(db.Model):
     # label of the workflow provider
     label = db.Column(db.String(255), nullable=False, server_default='')
     # icon
-    icon = db.Column(db.String(255), nullable=False)
+    icon = db.Column(db.Text, nullable=False)
     # app id of the workflow provider
     app_id = db.Column(StringUUID, nullable=False)
     # version of the workflow provider
