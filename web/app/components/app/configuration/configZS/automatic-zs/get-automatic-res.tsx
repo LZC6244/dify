@@ -25,7 +25,7 @@ import type { Model } from '@/types/app'
 import { AppType } from '@/types/app'
 import ConfigVar from '@/app/components/app/configuration/config-var'
 import OpeningStatement from '@/app/components/app/configuration/features/chat-group/opening-statement'
-import GroupName from '@/app/components/app/configuration/base/group-name'
+import GroupName from '@/app/components/app/configuration/base/group-name-zs'
 import Loading from '@/app/components/base/loading'
 import Confirm from '@/app/components/base/confirm'
 

@@ -2,7 +2,7 @@
 import type { FC } from 'react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import GroupName from '../../base/group-name'
+import GroupName from '../../base/group-name-zs'
 import type { IOpeningStatementProps } from './opening-statement'
 import OpeningStatement from './opening-statement'
 import SuggestedQuestionsAfterAnswer from './suggested-questions-after-answer'

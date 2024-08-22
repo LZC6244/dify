@@ -6,16 +6,16 @@ import { useContext } from 'use-context-selector'
 import produce from 'immer'
 import {
   RiDeleteBinLine,
-  RiHammerFill,
-  RiQuestionLine,
+  // RiHammerFill,
+  // RiQuestionLine,
 } from '@remixicon/react'
 import { useFormattingChangedDispatcher } from '../../../debug/hooks'
 import SettingBuiltInTool from './setting-built-in-tool'
 import cn from '@/utils/classnames'
-import Panel from '@/app/components/app/configuration/base/feature-panel'
-import Tooltip from '@/app/components/base/tooltip'
+import Panel from '@/app/components/app/configuration/base/feature-panel-zs'
+// import Tooltip from '@/app/components/base/tooltip'
 import { InfoCircle } from '@/app/components/base/icons/src/vender/line/general'
-import OperationBtn from '@/app/components/app/configuration/base/operation-btn'
+import OperationBtn from '@/app/components/app/configuration/base/operation-btn-zs'
 import AppIcon from '@/app/components/base/app-icon-zs'
 import Switch from '@/app/components/base/switch'
 import ConfigContext from '@/context/debug-configuration'
@@ -62,17 +62,17 @@ const AgentTools: FC = () => {
       <Panel
         className="mt-4"
         noBodySpacing={tools.length === 0}
-        headerIcon={
-          <RiHammerFill className='w-4 h-4 text-primary-500' />
-        }
+        // headerIcon={
+        //   <RiHammerFill className='w-4 h-4 text-primary-500' />
+        // }
         title={
           <div className='flex items-center'>
             <div className='mr-1'>{t('appDebug.agent.tools.name')}</div>
-            <Tooltip htmlContent={<div className='w-[180px]'>
+            {/* <Tooltip htmlContent={<div className='w-[180px]'>
               {t('appDebug.agent.tools.description')}
             </div>} selector='config-tools-tooltip'>
               <RiQuestionLine className='w-[14px] h-[14px] text-gray-400' />
-            </Tooltip>
+            </Tooltip> */}
           </div>
         }
         headerRight={
