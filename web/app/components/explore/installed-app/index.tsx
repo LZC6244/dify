@@ -5,7 +5,7 @@ import { useContext } from 'use-context-selector'
 import classNames from 'classnames'
 import { useSearchParams } from 'next/navigation'
 import ExploreContext from '@/context/explore-context'
-import TextGenerationApp from '@/app/components/share/text-generation'
+import TextGenerationApp from '@/app/components/share/text-generation-zs'
 import Loading from '@/app/components/base/loading'
 import ChatWithHistory from '@/app/components/base/chat/chat-with-history-zs'
 

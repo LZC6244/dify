@@ -4,7 +4,7 @@ import React from 'react'
 import classNames from 'classnames'
 import type { InstalledApp } from '@/models/explore'
 import ChatWithHistory from '@/app/components/base/chat/chat-with-history-zs'
-import TextGenerationApp from '@/app/components/share/text-generation'
+import TextGenerationApp from '@/app/components/share/text-generation-zs'
 
 export type ChatModalProps = {
   app: InstalledApp

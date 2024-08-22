@@ -43,6 +43,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         type='button'
         className={classNames(
           'flex flex-row items-center justify-center py-[10px] text-white text-[16px] font-semibold rounded-lg cursor-pointer',
+          'shadow-[0px_0px_6px_0px_rgba(0,0,0,0.09)]',
           s.newApp,
           className || '',
           disabled && s.newAppDisabled,
