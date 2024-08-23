@@ -22,32 +22,40 @@ class ZsPublishedAppsListApi(Resource):
     @marshal_with(published_app_list_fields)
     def get(self):
         current_tenant_id = current_user.current_tenant_id
-        published_apps = db.session.query(InstalledApp).filter(
+        published_apps = db.session.query(
+            InstalledApp,
+            App.created_at.label('app_created_at'),
+            App.updated_at.label('app_updated_at'),
+            ).filter(
             InstalledApp.tenant_id == current_tenant_id
         ).join(App, InstalledApp.app_id == App.id).filter(
             or_(
                 App.mode != 'workflow',
                 and_(App.mode == 'workflow', App.workflow_id.isnot(None))
             )
-            # App.workflow_id.isnot(None)
         ).all()
 
         current_user.role = TenantService.get_user_role(current_user, current_user.current_tenant)
         published_apps = [
             {
-                'id': published_app.id,
-                'app': published_app.app,
-                'app_owner_tenant_id': published_app.app_owner_tenant_id,
-                'is_pinned': published_app.is_pinned,
-                'last_used_at': published_app.last_used_at,
+                'id': published_app.InstalledApp.id,
+                'app': published_app.InstalledApp.app,
+                'app_owner_tenant_id': published_app.InstalledApp.app_owner_tenant_id,
+                'is_pinned': published_app.InstalledApp.is_pinned,
+                'last_used_at': published_app.InstalledApp.last_used_at,
                 'editable': current_user.role in ["owner", "admin"],
-                'uninstallable': current_tenant_id == published_app.app_owner_tenant_id
+                'uninstallable': current_tenant_id == published_app.InstalledApp.app_owner_tenant_id,
+                'app_created_at': published_app.app_created_at,
+                'app_updated_at': published_app.app_updated_at
             }
             for published_app in published_apps
         ]
         published_apps.sort(key=lambda app: (-app['is_pinned'],
-                                             app['last_used_at'] is None,
-                                             -app['last_used_at'].timestamp() if app['last_used_at'] is not None else 0))
+                                             app['app_updated_at'] is None,
+                                             -app['app_updated_at'].timestamp() if app['app_updated_at'] is not None else 0,
+                                             app['app_updated_at'] is None,
+                                             -app['app_updated_at'].timestamp() if app['app_updated_at'] is not None else 0,
+                                             ))
 
         return {'published_apps': published_apps}
 

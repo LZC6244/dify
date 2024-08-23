@@ -12,6 +12,12 @@ from extensions.ext_database import db
 from models.model import App, RecommendedApp
 from services.app_dsl_service import AppDslService
 
+from flask import abort
+from sqlalchemy import and_, func
+
+from libs.login import current_user
+from models.model import InstalledApp
+
 logger = logging.getLogger(__name__)
 
 
@@ -43,6 +49,32 @@ class RecommendedAppService:
 
         if not result.get('recommended_apps') and language != 'en-US':
             result = cls._fetch_recommended_apps_from_builtin('en-US')
+
+        # 获取模板应用在对应租户工作空间的实际应用 id
+        recommended_app_names = [app['app']['name']
+                                 for app in result.get('recommended_apps')]
+
+        installed_recommended_apps = db.session.query().\
+            with_entities(
+                App.name,
+                func.array_agg(InstalledApp.id).label('installed_app_ids')
+        ).\
+            filter(
+                and_(
+                    InstalledApp.tenant_id == current_user.current_tenant_id,
+                    InstalledApp.app_id == App.id,
+                    App.name.in_(recommended_app_names)
+                )
+        ).group_by(App.name).all()
+        if len(recommended_app_names) != len(installed_recommended_apps):
+            abort(403, '模板应用未正确初始化，请检查')
+        
+        installed_recommended_apps_info={
+            app.name:app.installed_app_ids[0] for app in installed_recommended_apps
+        }
+        for app in result.get('recommended_apps'):
+            app.setdefault('zskj', {})
+            app['zskj']['installed_app_id'] = installed_recommended_apps_info[app['app']['name']]
 
         return result
 
