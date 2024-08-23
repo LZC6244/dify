@@ -53,13 +53,13 @@ export default function NavLink({
       title={mode === 'collapse' ? name : ''}
     >
       <Image src={NavIcon} className={classNames(
-        'h-4 w-4 flex-shrink-0 block group-hover:hidden',
+        'h-4 w-4 flex-shrink-0 block group-hover:text-[#5E3EFB]',
         mode === 'expand' ? 'mr-2' : 'mr-0',
       )} alt='' />
-      <Image src={iconMap.selected} className={classNames(
+      {/* <Image src={iconMap.selected} className={classNames(
         'h-4 w-4 flex-shrink-0 hidden group-hover:block',
         mode === 'expand' ? 'mr-2' : 'mr-0',
-      )} alt='' />
+      )} alt='' /> */}
       {mode === 'expand' && name}
     </Link>
   )

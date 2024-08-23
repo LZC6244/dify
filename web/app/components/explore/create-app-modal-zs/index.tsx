@@ -85,12 +85,12 @@ const CreateAppModal = ({
               {/* <AppIcon size='large' onClick={() => { setShowEmojiPicker(true) }} className='cursor-pointer' icon={emoji.icon} background={emoji.icon_background} /> */}
               <input
                 value={name}
-                maxLength={10}
+                // maxLength={10}
                 onChange={e => setName(e.target.value)}
                 placeholder={t('app.newApp.appNamePlaceholder') || ''}
                 className='grow h-[42px] p-3 text-sm font-normal bg-[#F3F4F7] rounded-lg  outline-none appearance-none caret-primary-600 placeholder:text-[#9EADB9] hover:bg-[#EAEBF2] focus:bg-[#EAEBF2] focus:shadow-xs'
               />
-              <span className='text-[#9EADB9] text-[16px] absolute top-[50%] right-3 -translate-y-[50%]'>{name.length}/10</span>
+              {/* <span className='text-[#9EADB9] text-[16px] absolute top-[50%] right-3 -translate-y-[50%]'>{name.length}/10</span> */}
             </div>
           </div>
           {/* description */}
