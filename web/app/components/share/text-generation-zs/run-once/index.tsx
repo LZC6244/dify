@@ -129,7 +129,7 @@ const RunOnce: FC<IRunOnceProps> = ({
                 variant="primary"
                 onClick={onSend}
                 disabled={false}
-                className='py-2 px-4'
+                className='py-1 px-4 h-8'
               >
                 <PlayIcon className="shrink-0 w-4 h-4 mr-1" aria-hidden="true" />
                 <span className='text-[13px]'>{t('share.generation.run')}</span>
