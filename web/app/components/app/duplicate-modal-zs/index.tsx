@@ -87,14 +87,14 @@ const DuplicateAppModal = ({
           <Button
             disabled={isAppsFull}
             // className='w-24 ml-2'
-            className='rounded-2xl h-[32px] w-[80px] text-[#FFF] text-[16px] !font-normal'
+            className='h-[32px] w-[80px] text-[#FFF] text-[13px] !font-normal'
             variant='primary'
             onClick={submit}>
             {t('app.duplicate')}
           </Button>
           <ButtonNormal
             // className='w-24'
-            className='mr-[20px] !bg-[#EEEEFF] rounded-2xl h-[32px] w-[80px] text-[#637381] text-[16px] !shadow-none !border-none'
+            className='mr-[20px] !bg-[#EEEEFF] h-[32px] w-[80px] text-[#637381] text-[13px] !shadow-none !border-none'
             onClick={onHide}
           >
             {t('common.operation.cancel')}

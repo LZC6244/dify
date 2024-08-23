@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { RiCloseLine } from '@remixicon/react'
 import Upload from '../../app/create-app-modal-zs/upload'
 import Modal from '@/app/components/base/modal'
-import Button from '@/app/components/base/button'
+import ButtonNormal from '@/app/components/base/button'
+import Button from '@/app/components/base/button-zs'
 import Toast from '@/app/components/base/toast'
 import EmojiPicker from '@/app/components/base/emoji-picker'
 import { useProviderContext } from '@/context/provider-context'
@@ -116,8 +117,8 @@ const CreateAppModal = ({
           {!isEditModal && isAppsFull && <AppsFull loc='app-explore-create' />}
         </div>
         <div className='flex flex-row-reverse'>
-          <Button disabled={!isEditModal && isAppsFull} className='w-24 ml-2' variant='primary' onClick={submit}>{!isEditModal ? t('common.operation.create') : t('common.operation.save')}</Button>
-          <Button className='w-24' onClick={onHide}>{t('common.operation.cancel')}</Button>
+          <Button disabled={!isEditModal && isAppsFull} className='w-24 ml-2 h-8 font-normal text-[13px] text-white' variant='primary' onClick={submit}>{!isEditModal ? t('common.operation.create') : t('common.operation.save')}</Button>
+          <ButtonNormal className='w-24' onClick={onHide}>{t('common.operation.cancel')}</ButtonNormal>
         </div>
       </Modal>
       {showEmojiPicker && <EmojiPicker

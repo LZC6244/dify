@@ -9,7 +9,8 @@ import { RiArrowDownSLine } from '@remixicon/react'
 import type { ModelAndParameter } from '../configuration/debug/types'
 import SuggestedAction from './suggested-action'
 import PublishWithMultipleModel from './publish-with-multiple-model'
-import Button from '@/app/components/base/button'
+import Button from '@/app/components/base/button-zs'
+import ButtonNormal from '@/app/components/base/button'
 import {
   PortalToFollowElem,
   PortalToFollowElemContent,
@@ -119,7 +120,7 @@ const AppPublisher = ({
       <PortalToFollowElemTrigger onClick={handleTrigger}>
         <Button
           variant='primary'
-          className='pl-3 pr-2'
+          className='pl-3 pr-2 h-8 text-[13px] font-normal text-white'
           disabled={disabled}
         >
           {t('workflow.common.publish')}
@@ -138,17 +139,17 @@ const AppPublisher = ({
                   <div className='flex items-center mt-[3px] mb-[3px] leading-[18px] text-[13px] font-medium text-gray-700'>
                     {t('workflow.common.publishedAt')} {formatTimeFromNow(publishedAt)}
                   </div>
-                  <Button
+                  <ButtonNormal
                     className={`
-                      ml-2 px-2 text-primary-600
-                      ${published && 'text-primary-300 border-gray-100'}
+                      ml-2 px-2 
+                      ${published && 'text-white border-gray-100'}
                     `}
                     size='small'
                     onClick={handleRestore}
                     disabled={published}
                   >
                     {t('workflow.common.restore')}
-                  </Button>
+                  </ButtonNormal>
                 </div>
               )
               : (
@@ -167,7 +168,7 @@ const AppPublisher = ({
               : (
                 <Button
                   variant='primary'
-                  className='w-full mt-3'
+                  className='w-full mt-3 h-8 text-[13px] font-medium text-white'
                   onClick={() => handlePublish()}
                   disabled={publishDisabled || published}
                 >
