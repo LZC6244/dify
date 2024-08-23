@@ -15,7 +15,12 @@ app_fields = {
     'icon_background': fields.String
 }
 
+zskj_recommended_app_fields = {
+    'installed_app_id': fields.String,
+}
+
 recommended_app_fields = {
+    'zskj': fields.Nested(zskj_recommended_app_fields, default={}),
     'app': fields.Nested(app_fields, attribute='app'),
     'app_id': fields.String,
     'description': fields.String(attribute='description'),
