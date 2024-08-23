@@ -246,7 +246,8 @@ const Apps = ({
                 app: currApp!.app,
                 is_pinned: false,
                 uninstallable: false,
-                id: '61828587-52e7-435a-9ec7-875d109a71eb',
+                // id: '61828587-52e7-435a-9ec7-875d109a71eb',
+                id: currApp!.app_id,
               }}
               // show={isShowChatModal}
               onHide={() => setIsShowChatModal(false)}
