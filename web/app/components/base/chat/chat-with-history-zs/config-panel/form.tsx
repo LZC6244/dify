@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useChatWithHistoryContext } from '../context'
 import Input from './form-input'
-import { PortalSelect } from '@/app/components/base/select-zs'
+import Select from '@/app/components/base/select-zs'
 
 const Form = () => {
   const { t } = useTranslation()
@@ -50,13 +50,21 @@ const Form = () => {
     }
 
     return (
-      <PortalSelect
-        popupClassName='w-[200px]'
-        value={newConversationInputs[variable]}
-        items={options.map((option: string) => ({ value: option, name: option }))}
+      <Select
+        className="w-full"
+        defaultValue={newConversationInputs[variable] || ''}
+        items={options.map((option: string) => ({ value: option, name: option })) || []}
         onSelect={item => handleFormChange(variable, item.value as string)}
+        allowSearch={false}
         placeholder={`${label}${!required ? `(${t('appDebug.variableTable.optional')})` : ''}`}
       />
+      // <PortalSelect
+      //   popupClassName='w-[200px]'
+      //   value={newConversationInputs[variable]}
+      //   items={options.map((option: string) => ({ value: option, name: option }))}
+      //   onSelect={item => handleFormChange(variable, item.value as string)}
+      //   placeholder={`${label}${!required ? `(${t('appDebug.variableTable.optional')})` : ''}`}
+      // />
     )
   }
 
