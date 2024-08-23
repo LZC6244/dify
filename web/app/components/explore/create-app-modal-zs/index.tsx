@@ -109,7 +109,7 @@ const CreateAppModal = ({
             /> */}
           </div>
           {/* icon */}
-          <div className='pt-2 px-8'>
+          <div className='pt-2'>
             <div className='py-2 pb-3 text-base font-medium leading-[16px] text-[#212B36]'>应用图标</div>
             <Upload value={emoji.icon} onImageChange={v => setEmoji({ icon: v, icon_background: '#FFF' })} />
           </div>
