@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useMount } from 'ahooks'
 import { useContext } from 'use-context-selector'
-import { BookOpenIcon } from '@heroicons/react/24/outline'
+// import { BookOpenIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next'
 import { useSWRConfig } from 'swr'
 import { unstable_serialize } from 'swr/infinite'
@@ -12,7 +12,7 @@ import cn from '@/utils/classnames'
 import RetrievalMethodConfig from '@/app/components/datasets/common/retrieval-method-config-zs'
 import EconomicalRetrievalMethodConfig from '@/app/components/datasets/common/economical-retrieval-method-config'
 import { ToastContext } from '@/app/components/base/toast'
-import Button from '@/app/components/base/button'
+import Button from '@/app/components/base/button-zs'
 import { updateDatasetSetting } from '@/service/datasets'
 import type { DataSetListResponse } from '@/models/datasets'
 import DatasetDetailContext from '@/context/dataset-detail'
@@ -182,10 +182,10 @@ const Form = () => {
             value={description}
             onChange={e => setDescription(e.target.value)}
           />
-          <a className='flex items-center h-[18px] px-3 text-xs text-gray-500' href="/" target='_blank' rel='noopener noreferrer'>
+          {/* <a className='flex items-center h-[18px] px-3 text-xs text-gray-500' href="/" target='_blank' rel='noopener noreferrer'>
             <BookOpenIcon className='w-3 h-[18px] mr-1' />
             {t('datasetSettings.form.descWrite')}
-          </a>
+          </a> */}
         </div>
       </div>
       <div className={rowClass}>
@@ -268,7 +268,7 @@ const Form = () => {
         <div className={labelClass} />
         <div className='w-[480px]'>
           <Button
-            className='min-w-24'
+            className='min-w-24 text-[13px] text-white py-1.5 px-5'
             variant='primary'
             onClick={handleSave}
           >

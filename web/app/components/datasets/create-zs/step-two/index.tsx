@@ -1062,9 +1062,26 @@ const StepTwo = ({
                 </div>
               )
               : (
-                <div className='flex items-center mt-8 py-2'>
-                  <Button loading={isCreating} variant='primary' onClick={createHandle}>{t('datasetCreation.stepTwo.save')}</Button>
-                  <Button className='ml-2' onClick={onCancel}>{t('datasetCreation.stepTwo.cancel')}</Button>
+                <div className='flex items-center mt-10 py-2 gap-[10px]'>
+                  {/* <Button loading={isCreating} variant='primary' onClick={createHandle}>{t('datasetCreation.stepTwo.save')}</Button>
+                  <Button className='ml-2' onClick={onCancel}>{t('datasetCreation.stepTwo.cancel')}</Button> */}
+                  <Button
+                    loading={isCreating}
+                    variant='primary'
+                    onClick={createHandle}
+                    className='py-[12px] px-[22px] !rounded-[20px] text-white text-[16px] leading-4 font-normal'>
+                    保存并处理
+                  </Button>
+                  <Button
+                    onClick={onCancel}
+                    className='!bg-[#F3F2FF] py-[8px] text-[16px] text-[#637381] !w-[108px] !rounded-[20px] hover:!bg-[#EEEEFF]'
+                    styleCss={{
+                      background: '#F3F2FF',
+                      boxShadow: 'none',
+                    }}
+                  >
+                    取消
+                  </Button>
                 </div>
               )}
           </div>
