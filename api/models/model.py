@@ -1086,7 +1086,7 @@ class Site(db.Model):
     id = db.Column(StringUUID, server_default=db.text('uuid_generate_v4()'))
     app_id = db.Column(StringUUID, nullable=False)
     title = db.Column(db.String(255), nullable=False)
-    icon = db.Column(db.String(255))
+    icon = db.Column(db.Text)
     icon_background = db.Column(db.String(255))
     description = db.Column(db.Text)
     default_language = db.Column(db.String(255), nullable=False)

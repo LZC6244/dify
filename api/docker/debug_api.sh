@@ -14,6 +14,13 @@ ${CELERY_TASK_DEFAULT_QUEUE}:app_deletion\
 }
 
 
+if [[ "${MIGRATION_ENABLED}" == "true" ]]; then
+  echo "Running migrations"
+  flask db migrate
+  flask db upgrade
+fi
+
+
 if [[ "${ZSKJ_DEBUG}" == "true" ]];then
 
   echo "[api-debug] 启动调试模式"

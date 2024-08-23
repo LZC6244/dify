@@ -192,8 +192,8 @@ services:
     # 不进入 debug 模式时，注释掉 entrypoint 和 command 即可
     entrypoint: [ "/bin/bash" ]
     command: [ "-x", "-c", "/app/api/docker/debug_api.sh" ]
-    # image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-55f1913519c7689c371ff9b2231ea8f7143b2941
-    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:0.6.16.1
+    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.1.1-61349113fc6f382ff9dcd9520fed82b1e534c7e6
+    # image: 111.19.168.169:8389/zskj/backend/zs-dify-api:0.6.16.1
     restart: always
     environment:
       ZSKJ_DEBUG: true
@@ -254,8 +254,8 @@ services:
     # 不进入 debug 模式时，注释掉 entrypoint 和 command 即可
     entrypoint: [ "/bin/bash" ]
     command: [ "-x", "-c", "/app/api/docker/debug_worker.sh" ]
-    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:0.6.16.1
-    # image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.0.0-55f1913519c7689c371ff9b2231ea8f7143b2941
+    image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.1.1-61349113fc6f382ff9dcd9520fed82b1e534c7e6
+    # image: 111.19.168.169:8389/zskj/backend/zs-dify-api:0.6.16.1
     restart: always
     environment:
       ZSKJ_DEBUG: true
@@ -311,8 +311,8 @@ services:
   # Frontend web application.
   web:
     container_name: dify-debug-web
-    # image: 111.19.168.169:8389/zskj/frontend/zs-dify-web:feature-v2.0.0-55f1913519c7689c371ff9b2231ea8f7143b2941
-    image: 111.19.168.169:8389/zskj/dify-web:0.6.16
+    image: 111.19.168.169:8389/zskj/frontend/zs-dify-web:feature-v2.1.1-61349113fc6f382ff9dcd9520fed82b1e534c7e6
+    # image: 111.19.168.169:8389/zskj/dify-web:0.6.16
     # image: langgenius/dify-web:0.6.11
     restart: always
     environment:
