@@ -8,8 +8,8 @@ import {
 import type { CustomCollectionBackend } from '../types'
 import I18n from '@/context/i18n'
 import { getLanguage } from '@/i18n/language'
-import { BookOpen01 } from '@/app/components/base/icons/src/vender/line/education'
-import { ArrowUpRight } from '@/app/components/base/icons/src/vender/line/arrows'
+// import { BookOpen01 } from '@/app/components/base/icons/src/vender/line/education'
+// import { ArrowUpRight } from '@/app/components/base/icons/src/vender/line/arrows'
 import EditCustomToolModal from '@/app/components/tools/edit-custom-collection-modal'
 import { createCustomCollection } from '@/service/tools'
 import Toast from '@/app/components/base/toast'
@@ -45,7 +45,7 @@ const Contribute = ({ onRefreshData }: Props) => {
   return (
     <>
       {isCurrentWorkspaceManager && (
-        <div className='flex flex-col col-span-1 bg-gray-200 border-[0.5px] border-black/5 rounded-xl min-h-[160px] transition-all duration-200 ease-in-out cursor-pointer hover:bg-gray-50 hover:shadow-lg'>
+        <div className='flex hidden flex-col col-span-1 bg-gray-200 border-[0.5px] border-black/5 rounded-xl min-h-[160px] transition-all duration-200 ease-in-out cursor-pointer hover:bg-gray-50 hover:shadow-lg'>
           <div className='group grow rounded-t-xl hover:bg-white' onClick={() => setIsShowEditCustomCollectionModal(true)}>
             <div className='shrink-0 flex items-center p-4 pb-3'>
               <div className='w-10 h-10 flex items-center justify-center border border-gray-200 bg-gray-100 rounded-lg group-hover:border-primary-100 group-hover:bg-primary-50'>

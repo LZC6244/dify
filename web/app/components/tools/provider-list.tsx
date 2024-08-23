@@ -18,7 +18,7 @@ import ProviderDetail from '@/app/components/tools/provider/detail'
 import Empty from '@/app/components/tools/add-tool-modal/empty'
 import { createCustomCollection, fetchCollectionList } from '@/service/tools'
 import CreateButton from '@/app/components/base/create-button-zs'
-import EditCustomToolModal from '@/app/components/tools/edit-custom-collection-modal'
+import EditCustomToolModal from '@/app/components/tools/edit-custom-collection-modal-zs'
 import Toast from '@/app/components/base/toast'
 
 const ProviderList = () => {

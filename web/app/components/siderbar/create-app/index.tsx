@@ -15,7 +15,7 @@ import buildActiveIcon from './build_h.svg'
 import { useProviderContext } from '@/context/provider-context'
 import CreateFromDSLModal from '@/app/components/app/create-from-dsl-modal-zs'
 import CreateAppModal from '@/app/components/app/create-app-modal-zs'
-import CreateAppTemplateDialog from '@/app/components/app/create-app-dialog'
+import CreateAppTemplateDialog from '@/app/components/app/create-app-dialog-zs'
 
 export type IProps = {
   className?: string
