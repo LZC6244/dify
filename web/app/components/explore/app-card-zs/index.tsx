@@ -23,10 +23,10 @@ const AppCard = ({
   const { t } = useTranslation()
   const { app: appBasicInfo } = app
   return (
-    <div className='group col-span-1 bg-white rounded-lg min-h-[160px] flex flex-col transition-all duration-200 ease-in-out cursor-pointer hover:shadow-[0px_6px_10px_4px_rgba(0,0,0,0.06)]'>
+    <div className='relative group col-span-1 bg-white rounded-lg min-h-[160px] flex flex-col transition-all duration-200 ease-in-out cursor-pointer hover:shadow-[0px_6px_10px_4px_rgba(0,0,0,0.06)]'>
       <div
         onClick={!isExplore ? undefined : onClick}
-        className={cn('flex flex-row p-[18px]')}>
+        className={cn('flex flex-row p-[18px] flex-1')}>
         <div className='relative shrink-0'>
           <AppIcon size='large' className='!w-[72px] !h-[72px] !rounded-[36px]' icon={app.app.icon} background={app.app.icon_background} />
         </div>
@@ -41,7 +41,12 @@ const AppCard = ({
               {appBasicInfo.mode === 'completion' && <div className='truncate'>{t('app.types.completion').toUpperCase()}</div>}
             </div>
           </div>
-          <div className='mt-[8px] text-[14px] leading-[24px] text-[#637381] line-clamp-3'>{app.description}</div>
+          <div className={cn(
+            'mt-[8px] text-[14px] leading-[24px] text-[#637381] line-clamp-3',
+            !isExplore && 'group-hover:line-clamp-2 group-hover:h-[46px]',
+          )}>
+            {app.description}
+          </div>
         </div>
       </div>
       {isExplore && canCreate && (
@@ -55,7 +60,7 @@ const AppCard = ({
         </div>
       )}
       {!isExplore && (
-        <div className={cn('hidden items-center flex-wrap min-h-[42px] px-[14px] pb-[10px] group-hover:flex')}>
+        <div className={cn('hidden items-center flex-wrap min-h-[30px] px-[14px] pb-[10px] group-hover:flex')}>
           <div className={cn('flex items-center w-full space-x-2')}>
             <Button variant='primary' className='grow h-7' onClick={() => onCreate()}>
               <PlusIcon className='w-4 h-4 mr-1' />
