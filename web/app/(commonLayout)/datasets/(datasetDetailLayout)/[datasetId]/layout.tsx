@@ -199,15 +199,17 @@ const DatasetDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
     const desc = description.toLowerCase()
     if (desc.includes('.pdf') || desc.includes('.png') || desc.includes('.jpg') || desc.includes('.jpeg') || desc.includes('.gif'))
       return imgIcon
-    if (desc.includes('.txt'))
-      return textIcon
-    if (desc.includes('.doc') || desc.includes('.docx'))
+    if (desc.includes('.db') || desc.includes('.sql'))
+      return databaseIcon
+    if (desc.includes('.txt') || desc.includes('.doc') || desc.includes('.docx'))
       return wordIcon
     if (desc.includes('.csv') || desc.includes('.xls'))
       return excelIcon
     if (desc.includes('.html') || desc.includes('.htm') || desc.includes('http'))
       return htmIcon
-    return databaseIcon || apiIcon
+    if (desc.includes('http'))
+      return apiIcon
+    return textIcon
   }
 
   const media = useBreakpoints()
@@ -243,7 +245,7 @@ const DatasetDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
     setAppSiderbarExpand(isMobile ? mode : localeMode)
   }, [isMobile, setAppSiderbarExpand])
 
-  console.log(getIcon(datasetRes?.description || ''), 'getIcon')
+  // console.log(getIcon(datasetRes?.description || ''), 'getIcon')
 
   if (!datasetRes && !error)
     return <Loading />

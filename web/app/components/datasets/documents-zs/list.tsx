@@ -14,9 +14,10 @@ import { useContext } from 'use-context-selector'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
+import Image from 'next/image'
 import { Edit03 } from '../../base/icons/src/vender/solid/general'
 import TooltipPlus from '../../base/tooltip-plus'
-import { Globe01 } from '../../base/icons/src/vender/line/mapsAndTravel'
+// import { Globe01 } from '../../base/icons/src/vender/line/mapsAndTravel'
 import s from './style.module.css'
 import RenameModal from './rename-modal'
 import cn from '@/utils/classnames'
@@ -32,11 +33,18 @@ import Indicator from '@/app/components/header/indicator'
 import { asyncRunSafe } from '@/utils'
 import { formatNumber } from '@/utils/format'
 import { archiveDocument, deleteDocument, disableDocument, enableDocument, syncDocument, syncWebsite, unArchiveDocument } from '@/service/datasets'
-import NotionIcon from '@/app/components/base/notion-icon'
+// import NotionIcon from '@/app/components/base/notion-icon'
 import ProgressBar from '@/app/components/base/progress-bar'
 import { DataSourceType, type DocumentDisplayStatus, type SimpleDocumentDetail } from '@/models/datasets'
 import type { CommonResponse } from '@/models/common'
 import useTimestamp from '@/hooks/use-timestamp'
+import apiIcon from '@/app/(commonLayout)/datasets/images/api.svg'
+import databaseIcon from '@/app/(commonLayout)/datasets/images/database.svg'
+import excelIcon from '@/app/(commonLayout)/datasets/images/excel.svg'
+import htmIcon from '@/app/(commonLayout)/datasets/images/htm.svg'
+import imgIcon from '@/app/(commonLayout)/datasets/images/img.svg'
+import textIcon from '@/app/(commonLayout)/datasets/images/text.svg'
+import wordIcon from '@/app/(commonLayout)/datasets/images/word.svg'
 
 export const SettingsIcon = ({ className }: SVGProps<SVGElement>) => {
   return <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className={className ?? ''}>
@@ -390,6 +398,23 @@ const DocumentList: FC<IDocumentListProps> = ({ embeddingAvailable, documents = 
     onUpdate()
   }, [onUpdate])
 
+  const getIcon = (description: string) => {
+    const desc = description.toLowerCase()
+    if (desc.includes('.pdf') || desc.includes('.png') || desc.includes('.jpg') || desc.includes('.jpeg') || desc.includes('.gif'))
+      return imgIcon
+    if (desc.includes('.db') || desc.includes('.sql'))
+      return databaseIcon
+    if (desc.includes('.txt') || desc.includes('.doc') || desc.includes('.docx'))
+      return wordIcon
+    if (desc.includes('.csv') || desc.includes('.xls'))
+      return excelIcon
+    if (desc.includes('.html') || desc.includes('.htm') || desc.includes('http'))
+      return htmIcon
+    if (desc.includes('http'))
+      return apiIcon
+    return textIcon
+  }
+
   return (
     <div className='w-full h-full overflow-x-auto'>
       <table className={`min-w-[700px] max-w-full w-full border-collapse border-0 text-sm mt-3 ${s.documentTable}`}>
@@ -427,11 +452,12 @@ const DocumentList: FC<IDocumentListProps> = ({ embeddingAvailable, documents = 
               <td>
                 <div className='group flex items-center justify-between'>
                   <span className={s.tdValue}>
-                    {doc?.data_source_type === DataSourceType.NOTION && <NotionIcon className='inline-flex -mt-[3px] mr-1.5 align-middle' type='page' src={doc.data_source_info.notion_page_icon} />
+                    <Image src={getIcon(doc.name)} width={16} height={16} className='mr-1.5 inline-flex -mt-[3px]' alt='' />
+                    {/* {doc?.data_source_type === DataSourceType.NOTION && <NotionIcon className='inline-flex -mt-[3px] mr-1.5 align-middle' type='page' src={doc.data_source_info.notion_page_icon} />
                     }
                     {doc?.data_source_type === DataSourceType.FILE && <div className={cn(s[`${doc?.data_source_info?.upload_file?.extension ?? fileType}Icon`], s.commonIcon, 'mr-1.5')}></div>}
                     {doc?.data_source_type === DataSourceType.WEB && <Globe01 className='inline-flex -mt-[3px] mr-1.5 align-middle' />
-                    }
+                    } */}
                     {
                       doc.name
                     }

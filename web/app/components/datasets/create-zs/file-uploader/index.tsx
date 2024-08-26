@@ -43,6 +43,7 @@ const FileUploader = ({
   const dropRef = useRef<HTMLDivElement>(null)
   const dragRef = useRef<HTMLDivElement>(null)
   const fileUploader = useRef<HTMLInputElement>(null)
+  const maxUploadPercent = useRef(Math.floor(Math.random() * (99 - 85 + 1)) + 85)
   const hideUpload = notSupportBatchUpload && fileList.length > 0
 
   const { data: fileUploadConfigResponse } = useSWR({ url: '/files/upload' }, fetchFileUploadConfig)
@@ -109,9 +110,8 @@ const FileUploader = ({
       if (e.lengthComputable) {
         const percent = Math.floor(e.loaded / e.total * 100)
         // 使用假的进度条，因为上传进度条在文件上传完成后会自动消失
-        const resultPercent = percent >= 85 ? Math.floor(Math.random() * (99 - 85 + 1)) + 85 : percent
-        if (percent < 85)
-          onFileUpdate(fileItem, Math.min(percent, resultPercent), fileListRef.current)
+        console.log('maxUploadPercent', maxUploadPercent)
+        onFileUpdate(fileItem, Math.min(percent, maxUploadPercent.current), fileListRef.current)
       }
     }
 
@@ -129,6 +129,8 @@ const FileUploader = ({
         const index = fileListRef.current.findIndex(item => item.fileID === fileItem.fileID)
         fileListRef.current[index] = completeFile
         onFileUpdate(completeFile, 100, fileListRef.current)
+        // 重置上传的最大进度，避免每次都一样
+        maxUploadPercent.current = Math.floor(Math.random() * (99 - 85 + 1)) + 85
         return Promise.resolve({ ...completeFile })
       })
       .catch((e) => {

@@ -17,7 +17,7 @@ import AppCard from '@/app/components/explore/app-card-zs'
 import { fetchAppDetail, fetchAppList } from '@/service/explore'
 import { importApp } from '@/service/apps'
 import { useTabSearchParams } from '@/hooks/use-tab-searchparams'
-import CreateAppModal from '@/app/components/explore/create-app-modal'
+import CreateAppModal from '@/app/components/explore/create-app-modal-zs'
 import AppTypeSelector from '@/app/components/app/type-selector'
 import type { CreateAppModalProps } from '@/app/components/explore/create-app-modal'
 import Loading from '@/app/components/base/loading'
@@ -224,6 +224,10 @@ const Apps = ({
                 onClick={() => {
                   onHandleClickAppCard(app)
                 }}
+                onCreate={() => {
+                  setCurrApp(app)
+                  setIsShowCreateModal(true)
+                }}
               />
             ))}
           </nav>
@@ -247,7 +251,7 @@ const Apps = ({
                 is_pinned: false,
                 uninstallable: false,
                 // id: '61828587-52e7-435a-9ec7-875d109a71eb',
-                id: currApp!.app_id,
+                id: currApp!.zskj!.installed_app_id,
               }}
               // show={isShowChatModal}
               onHide={() => setIsShowChatModal(false)}

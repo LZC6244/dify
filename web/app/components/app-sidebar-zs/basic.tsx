@@ -73,7 +73,7 @@ export default function AppBasic({ relative, icon, icon_background, name, type, 
 
       }
       {mode === 'expand' && <div className="group">
-        <div className={`flex flex-row items-center text-[16px] leading-4 font-medium text-[#000000] group-hover:text-[#000000] break-all ${textStyle?.main ?? ''}`}>
+        <div className={`text-[16px] leading-4 line-clamp-1 font-medium text-[#000000] group-hover:text-[#000000] break-all ${textStyle?.main ?? ''}`}>
           {name}
           {/* {hoverTip
             && <Tooltip content={hoverTip} selector={`a${randomString(16)}`}>
