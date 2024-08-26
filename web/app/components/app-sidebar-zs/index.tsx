@@ -95,7 +95,7 @@ const AppDetailNav = ({ relatedApps, title, desc, icon, icon_background, navigat
         !isMobile && (
           <div
             className={`
-              shrink-0 py-3 hidden
+              shrink-0 py-3
               ${expand ? 'px-6' : 'px-4'}
             `}
           >
