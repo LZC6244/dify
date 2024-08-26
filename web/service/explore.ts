@@ -5,7 +5,8 @@ export const fetchAppList = () => {
   return get<{
     categories: AppCategory[]
     recommended_apps: App[]
-  }>('/explore/apps')
+  // }>('/explore/apps')
+  }>('/zskj/recommended-apps')
 }
 
 export const fetchAppDetail = (id: string): Promise<any> => {

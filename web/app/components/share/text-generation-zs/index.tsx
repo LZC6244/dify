@@ -369,6 +369,8 @@ const TextGeneration: FC<IMainProps> = ({
             title: installedAppInfo?.app.name,
             prompt_public: false,
             copyright: '',
+            icon: installedAppInfo?.app.icon,
+            icon_background: installedAppInfo?.app.icon_background,
           },
           plan: 'basic',
         }
@@ -551,7 +553,7 @@ const TextGeneration: FC<IMainProps> = ({
                     <Image src={BackSvg} className='w-4.5 h-4.5 mr-[8px] cursor-pointer' onClick={() => { onClickBack && onClickBack() }} alt='' />
                   )
                 }
-                <AppIcon size="small" icon={siteInfo.icon} background={siteInfo.icon_background || appDefaultIconBackground} />
+                <AppIcon size="small" className='!w-10 !h-10' icon={siteInfo.icon} background={siteInfo.icon_background || appDefaultIconBackground} />
                 <div className='text-lg font-semibold text-gray-800'>{siteInfo.title}</div>
               </div>
               {!isPC && (

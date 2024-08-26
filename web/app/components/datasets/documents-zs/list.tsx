@@ -398,17 +398,20 @@ const DocumentList: FC<IDocumentListProps> = ({ embeddingAvailable, documents = 
     onUpdate()
   }, [onUpdate])
 
-  const getIcon = (description: string) => {
+  const getIcon = (description: string | undefined) => {
+    if (!description)
+      return textIcon
+
     const desc = description.toLowerCase()
-    if (desc.includes('.pdf') || desc.includes('.png') || desc.includes('.jpg') || desc.includes('.jpeg') || desc.includes('.gif'))
+    if (desc.includes('pdf') || desc.includes('png') || desc.includes('jpg') || desc.includes('jpeg') || desc.includes('gif'))
       return imgIcon
-    if (desc.includes('.db') || desc.includes('.sql'))
+    if (desc.includes('db') || desc.includes('sql'))
       return databaseIcon
-    if (desc.includes('.txt') || desc.includes('.doc') || desc.includes('.docx'))
+    if (desc.includes('txt') || desc.includes('doc') || desc.includes('docx'))
       return wordIcon
-    if (desc.includes('.csv') || desc.includes('.xls'))
+    if (desc.includes('csv') || desc.includes('xls'))
       return excelIcon
-    if (desc.includes('.html') || desc.includes('.htm') || desc.includes('http'))
+    if (desc.includes('html') || desc.includes('htm'))
       return htmIcon
     if (desc.includes('http'))
       return apiIcon
@@ -452,7 +455,7 @@ const DocumentList: FC<IDocumentListProps> = ({ embeddingAvailable, documents = 
               <td>
                 <div className='group flex items-center justify-between'>
                   <span className={s.tdValue}>
-                    <Image src={getIcon(doc.name)} width={16} height={16} className='mr-1.5 inline-flex -mt-[3px]' alt='' />
+                    <Image src={getIcon(fileType)} width={16} height={16} className='mr-1.5 inline-flex -mt-[3px]' alt='' />
                     {/* {doc?.data_source_type === DataSourceType.NOTION && <NotionIcon className='inline-flex -mt-[3px] mr-1.5 align-middle' type='page' src={doc.data_source_info.notion_page_icon} />
                     }
                     {doc?.data_source_type === DataSourceType.FILE && <div className={cn(s[`${doc?.data_source_info?.upload_file?.extension ?? fileType}Icon`], s.commonIcon, 'mr-1.5')}></div>}

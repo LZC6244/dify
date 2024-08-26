@@ -68,7 +68,8 @@ const Apps = ({
   const {
     data: { categories, allList },
   } = useSWR(
-    ['/explore/apps'],
+    // ['/explore/apps'],
+    ['/zskj/recommended-apps'],
     () =>
       fetchAppList().then(({ categories, recommended_apps }) => ({
         categories,
