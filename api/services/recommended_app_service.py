@@ -66,8 +66,8 @@ class RecommendedAppService:
                     App.name.in_(recommended_app_names)
                 )
         ).group_by(App.name).all()
-        if len(recommended_app_names) != len(installed_recommended_apps):
-            abort(403, '模板应用未正确初始化，请检查')
+        # if len(recommended_app_names) != len(installed_recommended_apps):
+        #     abort(403, '模板应用未正确初始化，请检查')
         
         installed_recommended_apps_info={
             app.name:app.installed_app_ids[0] for app in installed_recommended_apps
