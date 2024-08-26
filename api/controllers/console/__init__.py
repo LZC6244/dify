@@ -60,4 +60,5 @@ from .zskj import (
     apiKey_admin,
     publish_apps_admin,
     published_app,
+    recommended_app,
 )
