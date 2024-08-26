@@ -245,7 +245,7 @@ const DatasetDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
     setAppSiderbarExpand(isMobile ? mode : localeMode)
   }, [isMobile, setAppSiderbarExpand])
 
-  console.log(getIcon(datasetRes?.description || ''), 'getIcon')
+  // console.log(getIcon(datasetRes?.description || ''), 'getIcon')
 
   if (!datasetRes && !error)
     return <Loading />

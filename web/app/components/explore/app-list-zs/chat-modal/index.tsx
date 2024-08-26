@@ -15,7 +15,7 @@ const ChatModal = ({
   app: installedApp,
   onHide,
 }: ChatModalProps) => {
-  console.log(installedApp)
+  console.log(installedApp.app.mode)
 
   return (
     <div className=' absolute left-0 top-0 right-0 bottom-0 py-2 pl-0 pr-2 sm:p-2 !p-0'>
@@ -28,10 +28,19 @@ const ChatModal = ({
         />
       )}
       {installedApp.app.mode === 'completion' && (
-        <TextGenerationApp isInstalledApp installedAppInfo={installedApp} />
+        <TextGenerationApp
+          isInstalledApp
+          onClickBack={onHide}
+          from='explores-app'
+          installedAppInfo={installedApp} />
       )}
       {installedApp.app.mode === 'workflow' && (
-        <TextGenerationApp isWorkflow isInstalledApp installedAppInfo={installedApp} />
+        <TextGenerationApp
+          isWorkflow
+          isInstalledApp
+          onClickBack={onHide}
+          from='explores-app'
+          installedAppInfo={installedApp} />
       )}
     </div>
   )

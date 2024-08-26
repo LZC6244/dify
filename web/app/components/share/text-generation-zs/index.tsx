@@ -8,12 +8,14 @@ import {
 import { useBoolean, useClickAway } from 'ahooks'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import Image from 'next/image'
 import TabHeader from '../../base/tab-header'
 import Button from '../../base/button'
 import { checkOrSetAccessToken } from '../utils'
 import s from './style.module.css'
 import RunBatch from './run-batch'
 import ResDownload from './run-batch/res-download'
+import BackSvg from './icons/back.svg'
 import cn from '@/utils/classnames'
 import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
 import RunOnce from '@/app/components/share/text-generation-zs/run-once'
@@ -59,12 +61,16 @@ export type IMainProps = {
   isInstalledApp?: boolean
   installedAppInfo?: InstalledApp
   isWorkflow?: boolean
+  from?: string
+  onClickBack?: () => void
 }
 
 const TextGeneration: FC<IMainProps> = ({
   isInstalledApp = false,
   installedAppInfo,
   isWorkflow = false,
+  from,
+  onClickBack,
 }) => {
   const { notify } = Toast
 
@@ -540,6 +546,11 @@ const TextGeneration: FC<IMainProps> = ({
           <div className='mb-6'>
             <div className='flex items-center justify-between'>
               <div className='flex items-center space-x-3'>
+                {
+                  from && (
+                    <Image src={BackSvg} className='w-4.5 h-4.5 mr-[8px] cursor-pointer' onClick={() => { onClickBack && onClickBack() }} alt='' />
+                  )
+                }
                 <AppIcon size="small" icon={siteInfo.icon} background={siteInfo.icon_background || appDefaultIconBackground} />
                 <div className='text-lg font-semibold text-gray-800'>{siteInfo.title}</div>
               </div>
