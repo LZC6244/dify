@@ -54,10 +54,13 @@ const EmptyElement: FC<{ canAdd: boolean; onClick: () => void; type?: 'upload' |
   const { t } = useTranslation()
   return <div className={s.emptyWrapper}>
     <div className={s.emptyElement}>
-      <div className={s.emptySymbolIconWrapper}>
+      {/* <div className={s.emptySymbolIconWrapper}>
         {type === 'upload' ? <FolderPlusIcon /> : <NotionIcon />}
-      </div>
-      <span className={s.emptyTitle}>{t('datasetDocuments.list.empty.title')}<ThreeDotsIcon className='inline relative -top-3 -left-1.5' /></span>
+      </div> */}
+      <span className={s.emptyTitle}>
+        {t('datasetDocuments.list.empty.title')}
+        {/* <ThreeDotsIcon className='inline relative -top-3 -left-1.5' /> */}
+      </span>
       <div className={s.emptyTip}>
         {t(`datasetDocuments.list.empty.${type}.tip`)}
       </div>

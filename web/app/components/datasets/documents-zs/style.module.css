@@ -30,7 +30,7 @@
   @apply text-gray-700 text-sm;
 }
 .addFileBtn {
-  @apply mt-4 w-fit !text-[13px] text-primary-600 font-medium bg-white border-[0.5px];
+  @apply mt-4 w-fit !text-[13px] text-white py-2 px-4 font-medium;
 }
 .plusIcon {
   @apply w-4 h-4 mr-2 stroke-current stroke-[1.5px];
