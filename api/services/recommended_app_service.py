@@ -74,7 +74,9 @@ class RecommendedAppService:
         }
         for app in result.get('recommended_apps'):
             app.setdefault('zskj', {})
-            app['zskj']['installed_app_id'] = installed_recommended_apps_info[app['app']['name']]
+            # 模板应用可能会被删除，此时将 installed_app_id 置为 None
+            app['zskj']['installed_app_id'] = installed_recommended_apps_info.get(
+                app['app']['name'])
 
         return result
 
