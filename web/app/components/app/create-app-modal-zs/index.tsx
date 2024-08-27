@@ -8,6 +8,7 @@ import {
 import { useRouter } from 'next/navigation'
 import { useContext, useContextSelector } from 'use-context-selector'
 import classNames from 'classnames'
+import { DefaultIcon } from '../../base/app-icon-zs'
 import Upload from './upload'
 import cn from '@/utils/classnames'
 import AppsContext, { useAppContext } from '@/context/app-context'
@@ -62,7 +63,7 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
       const app = await createApp({
         name,
         description,
-        icon: emoji.icon,
+        icon: emoji.icon || DefaultIcon,
         icon_background: emoji.icon_background,
         mode: appMode,
       })
