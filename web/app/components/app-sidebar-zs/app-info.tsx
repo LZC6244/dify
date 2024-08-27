@@ -250,7 +250,7 @@ const AppInfo = ({ expand }: IAppInfoProps) => {
             <div className={cn('flex pl-4 pt-3 pr-3', !appDetail.description && 'pb-2')}>
               <div className='relative shrink-0 mr-2'>
                 <AppIcon size="large" icon={appDetail.icon} background={appDetail.icon_background} />
-                <span className='absolute bottom-[-3px] right-[-3px] w-4 h-4 p-0.5 bg-white rounded border-[0.5px] border-[rgba(0,0,0,0.02)] shadow-sm'>
+                <span className='hidden absolute bottom-[-3px] right-[-3px] w-4 h-4 p-0.5 bg-white rounded border-[0.5px] border-[rgba(0,0,0,0.02)] shadow-sm'>
                   {appDetail.mode === 'advanced-chat' && (
                     <ChatBot className='w-3 h-3 text-[#1570EF]' />
                   )}
