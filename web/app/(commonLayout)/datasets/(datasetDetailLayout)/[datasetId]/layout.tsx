@@ -196,6 +196,8 @@ const DatasetDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
   const { t } = useTranslation()
   // const { isCurrentWorkspaceDatasetOperator } = useAppContext()
   const getIcon = (description: string) => {
+    if (!description)
+      return textIcon
     const desc = description.toLowerCase()
     if (desc.includes('.pdf') || desc.includes('.png') || desc.includes('.jpg') || desc.includes('.jpeg') || desc.includes('.gif'))
       return imgIcon
