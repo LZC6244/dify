@@ -1,9 +1,9 @@
-import json
-import logging
 import os
+import json
+import httpx
+import logging
 from time import sleep
 
-import httpx
 
 logging.basicConfig(format='%(asctime)s [%(module)s] %(levelname)s: %(message)s',
                     level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
@@ -33,10 +33,11 @@ def get_recommend_app_detail(recommended_apps_json_path: str, launge: str = 'zh-
 
     result_file = 'recommended_apps_detail.json'
     with open(result_file, 'w', encoding='utf-8') as f:
-        json.dump(
+        result_str = json.dumps(
             recommended_apps_detail_dict,
             f,
             ensure_ascii=False, indent=4)
+        f.write(result_str)
     logger.info(f'推荐应用详情保存完成：{result_file}')
 
 

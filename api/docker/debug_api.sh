@@ -14,9 +14,13 @@ ${CELERY_TASK_DEFAULT_QUEUE}:app_deletion\
 }
 
 
-if [[ "${MIGRATION_ENABLED}" == "true" ]]; then
+if [[ "${ZSKJ_MIGRATION_ENABLED}" == "true" ]]; then
   echo "Running migrations"
   flask db migrate
+fi
+
+
+if [[ "${MIGRATION_ENABLED}" == "true" ]]; then
   flask db upgrade
 fi
 
