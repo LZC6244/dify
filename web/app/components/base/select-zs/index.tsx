@@ -88,7 +88,7 @@ const Select: FC<ISelectProps> = ({
         <div className='group text-gray-800'>
           {allowSearch
             ? <Combobox.Input
-              className={`w-full rounded-lg border-0 ${bgClassName} py-1.5 pl-3 pr-10 shadow-sm sm:text-sm sm:leading-6 focus-visible:outline-none focus-visible:bg-gray-200 group-hover:bg-gray-200 cursor-not-allowed`}
+              className={`w-full rounded-lg border-0 ${bgClassName} py-1.5 pl-3 pr-10 sm:text-sm sm:leading-6 focus-visible:outline-none focus-visible:bg-gray-200 group-hover:bg-gray-200 cursor-not-allowed`}
               placeholder={placeholder || ''}
               onChange={(event) => {
                 if (!disabled)
@@ -101,7 +101,7 @@ const Select: FC<ISelectProps> = ({
                 if (!disabled)
                   setOpen(!open)
               }
-            } className={classNames(optionClassName, `flex items-center h-9 w-full rounded-lg border-0 ${bgClassName} py-1.5 pl-3 pr-10 shadow-sm sm:text-sm sm:leading-6 focus-visible:outline-none focus-visible:bg-gray-200 group-hover:bg-gray-200`)}>
+            } className={classNames(optionClassName, `flex items-center h-9 w-full rounded-lg border-0 ${bgClassName} py-1.5 pl-3 pr-10 sm:text-sm sm:leading-6 focus-visible:outline-none focus-visible:bg-gray-200 group-hover:bg-gray-200`)}>
               {
                 selectedItem?.name
                   ? <div className='w-0 grow text-left truncate' title={selectedItem?.name}>{selectedItem?.name}</div>

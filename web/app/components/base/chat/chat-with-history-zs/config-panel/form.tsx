@@ -52,6 +52,7 @@ const Form = () => {
     return (
       <Select
         className="w-full"
+        bgClassName='h-[42px] bg-[#F3F4F7]'
         defaultValue={newConversationInputs[variable] || ''}
         items={options.map((option: string) => ({ value: option, name: option })) || []}
         onSelect={item => handleFormChange(variable, item.value as string)}

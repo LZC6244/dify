@@ -143,11 +143,11 @@ const ChatInput: FC<ChatInputProps> = ({
 
   return (
     <>
-      <div className='relative'>
+      <div className='relative mx-[50px]'>
         <div
           className={`
             px-[18px] py-[10px] max-h-[150px] relative border-[#7365FF] border-[2px] rounded-[16px] overflow-y-auto bg-white
-            ${isDragActive && 'border-primary-600'} mb-2
+            ${isDragActive && 'border-[#7365FF]'} mb-2
           `}
         >
           {

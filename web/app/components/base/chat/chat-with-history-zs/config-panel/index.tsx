@@ -25,7 +25,7 @@ const ConfigPanel = () => {
   const site = appData?.site
 
   return (
-    <div className='flex flex-col max-h-[80%] w-full max-w-[720px]'>
+    <div className='flex flex-col max-h-[80%] w-full max-w-[620px]'>
       <div
         className={`
           grow rounded-xl overflow-y-auto overflow-y-visible
@@ -36,7 +36,7 @@ const ConfigPanel = () => {
       >
         <div
           className={`
-            flex flex-wrap justify-center px-[30px] py-5 pt-0 rounded-t-xl bg-white
+            flex flex-wrap justify-center px-[30px] py-[30px] pt-0 rounded-t-2xl bg-white
             ${isMobile && '!px-4 !py-3'}
           `}
         >
@@ -56,7 +56,7 @@ const ConfigPanel = () => {
                       className='!w-[100px] !h-[100px] !rounded-[50px]'
                     />
                   </div>
-                  <span className='text-[#1D2939] text-[22px] font-semibold'>
+                  <span className='text-[#1D2939] mt-[10px] text-[22px] leading-[22px] font-semibold'>
                     {appData?.site.title}
                   </span>
                 </div>
@@ -102,7 +102,7 @@ const ConfigPanel = () => {
         </div>
         {
           !collapsed && !showConfigPanelBeforeChat && (
-            <div className='p-6 rounded-b-xl bg-white'>
+            <div className='p-[30px] rounded-b-2xl bg-white'>
               <Form />
               <div className={`pl-[136px] flex items-center ${isMobile && '!pl-0'}`}>
                 <Button
@@ -126,12 +126,12 @@ const ConfigPanel = () => {
         }
         {
           showConfigPanelBeforeChat && (
-            <div className='p-6 pt-[0px] rounded-b-xl bg-white'>
+            <div className='p-[30px] pt-[0px] pb-5 rounded-b-xl bg-white'>
               <Form />
               <div className='flex justify-end'>
                 <Button
                   // className={`${inputsForms.length && !isMobile && 'ml-[136px]'}`}
-                  className='px-[21px] py-3 text-[16px] leading-4 rounded-[20px]'
+                  className='px-[21px] py-3 text-[16px] font-normal leading-4 rounded-[20px]'
                   variant='primary'
                   size='large'
                   onClick={handleStartChat}

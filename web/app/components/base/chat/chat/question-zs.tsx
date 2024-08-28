@@ -28,13 +28,13 @@ const Question: FC<QuestionProps> = ({
 
   const imgSrcs = message_files?.length ? message_files.map(item => item.url) : []
   return (
-    <div className='flex justify-end mb-2 last:mb-0 pl-10'>
+    <div className='flex justify-end mb-2 last:mb-0 pl-[50px]'>
       <div className='group relative mr-[10px]'>
         {/* <QuestionTriangle
           className='absolute -right-2 top-0 w-2 h-3 text-[#D1E9FF]/50'
           style={theme ? { color: theme.chatBubbleColor } : {}}
         /> */}
-        <div className='px-4 py-3 bg-[#5E3EFB] rounded-xl rounded-tr-none '>
+        <div className='px-4 py-3 bg-[#7365FF] rounded-xl rounded-tr-none '>
           {
             !!imgSrcs.length && (
               <ImageGallery srcs={imgSrcs} />

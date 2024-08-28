@@ -47,7 +47,7 @@ const CreateApp: FC<IProps> = ({ className, btnClassName, modalClassName }) => {
   return (
     <div className={classNames('relative', className ?? '')}>
       <div
-        className={classNames('flex flex-row items-center justify-center py-[10px] text-white text-[16px] font-semibold rounded-lg cursor-pointer', s.newApp, btnClassName ?? '')}
+        className={classNames('h-9 flex flex-row items-center justify-center py-[10px] text-white text-[16px] font-semibold rounded-lg cursor-pointer', s.newApp, btnClassName ?? '')}
         onClick={() => setShow(!show)}
         ref={createRef}
       >
