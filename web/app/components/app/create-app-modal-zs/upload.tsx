@@ -36,7 +36,15 @@ export default function Upload({ value, onImageChange }: FileUploadProps) {
       <div className='group w-[72px] h-[72px] relative flex items-center justify-center overflow-hidden cursor-pointer rounded-lg border-[1px] border-[#9EADB9] border-dashed hover:border-[#5E3EFB]'>
         <input type="file" className='opacity-0 z-30 w-[72px] h-[72px] absolute top-0 left-0 right-0 bottom-0 cursor-pointer' accept="image/*" onChange={handleFileChange} />
         {imageBase64
-          ? <Image width={72} height={72} src={imageBase64} className='w-[72px] cursor-pointer' alt="Selected Image" />
+          ? <div
+            style={{
+              backgroundImage: `url(${imageBase64})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+            className='w-[72px] h-[72px] cursor-pointer' />
+          // <Image width={72} height={72} src={imageBase64} className='w-[72px] cursor-pointer' alt="Selected Image" />
           : <Image src={upload} className='w-[18px] h-[18px] cursor-pointer' alt='' />
         }
         {

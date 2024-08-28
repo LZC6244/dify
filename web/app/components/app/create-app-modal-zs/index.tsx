@@ -83,7 +83,7 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
   return (
     <Modal
       overflowVisible
-      className='!p-0 !max-w-[720px] !w-[720px] rounded-xl'
+      className='!p-0 !max-w-[690px] !w-[690px] rounded-xl'
       isShow={show}
       onClose={() => { }}
     >
@@ -94,10 +94,10 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
       {/* app type */}
       <div className='py-2 px-8'>
         <div className='py-2 text-sm leading-[20px] font-medium text-[#212B36]'>应用类型</div>
-        <div className='flex mt-1'>
+        <div className='grid grid-cols-4 gap-[10px] mt-1'>
           <div
             className={cn(
-              'relative grow box-border w-[150px] mr-[10px] p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
+              'relative grow box-border w-[150px] flex-1 p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
             )}
             onClick={() => {
               setAppMode('chat')
@@ -109,7 +109,7 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
           </div>
           <div
             className={cn(
-              'relative grow box-border w-[150px] mr-[10px] p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
+              'relative grow box-border w-[150px] flex-1 p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
             )}
             onClick={() => {
               setAppMode('completion')
@@ -121,7 +121,7 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
           </div>
           <div
             className={cn(
-              'relative grow box-border w-[150px] mr-[10px] p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
+              'relative grow box-border w-[150px] flex-1 p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
             )}
             onClick={() => {
               setAppMode('agent-chat')
@@ -133,7 +133,7 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
           </div>
           <div
             className={cn(
-              'relative grow box-border w-[150px] mr-[10px] p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
+              'relative grow box-border w-[150px] flex-1 p-[14px] flex flex-row items-center justify-start gap-1 rounded-lg bg-[#F3F4F7] text-[#212B36] cursor-pointer hover:bg-[#EAEBF2]',
             )}
             onClick={() => {
               setAppMode('workflow')
@@ -217,7 +217,7 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
       )}
       <div className='px-8 py-6 flex justify-end'>
         <Button disabled={isAppsFull || !name} className='rounded-2xl h-[32px] w-[80px] text-[#FFF] text-[16px] !font-normal' variant="primary" onClick={onCreate}>{t('app.newApp.Create')}</Button>
-        <ButtonNormal className='ml-[20px] !bg-[#EEEEFF] rounded-2xl h-[32px] w-[80px] text-[#637381] text-[16px] !shadow-none !border-none' onClick={onClose}>{t('app.newApp.Cancel')}</ButtonNormal>
+        <ButtonNormal className='ml-[20px] !bg-[#EEEEFF] rounded-2xl h-[32px] w-[80px] text-[#637381] text-[16px] !shadow-none !border-none font-normal' onClick={onClose}>{t('app.newApp.Cancel')}</ButtonNormal>
       </div>
       <div className='absolute right-6 top-6 p-2 cursor-pointer z-20 hidden border-none' onClick={onClose}>
         <RiCloseLine className='w-4 h-4 text-gray-500' />

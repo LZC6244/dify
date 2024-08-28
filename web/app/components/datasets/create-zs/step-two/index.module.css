@@ -88,8 +88,8 @@
 }
 
 .radioItem {
-  @apply relative rounded-lg border pl-[14px] border-[#EFEFEF] cursor-pointer;
-  background-color: #F6F6F9;
+  @apply relative rounded-lg border pl-[14px] border-[#EFEFEF] cursor-pointer bg-[#F6F6F9] hover:bg-[#EAEBF2];
+  /* background-color: #F6F6F9; */
 }
 
 .radioItem.segmentationItem.custom {
@@ -286,6 +286,7 @@
 .formFooter .primaryButton {
   background: linear-gradient( 270deg, #7B60FF 0%, #5E3EFB 100%);
   padding: 9px 14px;
+  font-weight: 400;
 }
 .formFooter .primaryButton:hover {
   background: linear-gradient( 270deg, #907AFD 0%, #6749FB 100%);

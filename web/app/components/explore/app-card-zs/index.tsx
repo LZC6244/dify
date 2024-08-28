@@ -28,7 +28,11 @@ const AppCard = ({
         onClick={!isExplore ? undefined : onClick}
         className={cn('flex flex-row p-[18px] flex-1')}>
         <div className='relative shrink-0'>
-          <AppIcon size='large' className='!w-[72px] !h-[72px] !rounded-[36px]' icon={app.app.icon} background={app.app.icon_background} />
+          <AppIcon
+            size='large'
+            className='!w-[72px] !h-[72px] !rounded-[36px] border border-[#EDEEF3]'
+            icon={app.app.icon}
+            background={app.app.icon_background} />
         </div>
         <div className='grow w-0 pt-[12px] ml-3'>
           <div className='flex flex-row items-center'>

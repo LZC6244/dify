@@ -14,12 +14,12 @@
   /* background-size: 16px; */
 }
 .stepList {
-  @apply p-4 relative pt-2;
+  @apply p-4 relative pt-2 px-11;
   line-height: 18px;
 }
 
 .stepItem {
-  @apply relative flex justify-items-start pt-3 pr-0 pb-3 box-content;
+  @apply relative flex justify-items-start pt-3 pr-0 pb-3 box-content mb-[9px];
   padding-left: 45px;
   font-size: 13px;
   height: 18px;
@@ -28,10 +28,10 @@
 .stepItem.step1::before {
   content: '';
   position: absolute;
-  bottom: 0;
+  top: 15px;
   left: 23px;
   width: 2px;
-  height: 7px;
+  height: 37px;
   background-color: #f2f4f7;
 }
 
@@ -50,8 +50,8 @@
   top: 6px;
   left: 23px;
   width: 2px;
-  height: 28px;
-  background-color: #fff;
+  height: 46px;
+  background-color: #f2f4f7;
 }
 
 .stepItem.step3::before {

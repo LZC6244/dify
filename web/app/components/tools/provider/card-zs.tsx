@@ -2,15 +2,14 @@
 import { useMemo } from 'react'
 import { useContext } from 'use-context-selector'
 import { useTranslation } from 'react-i18next'
-import Image from 'next/image'
 import type { Collection } from '../types'
+import s from './zs-select-style.module.css'
 import cn from '@/utils/classnames'
 import AppIcon from '@/app/components/base/app-icon-zs'
 // import { Tag01 } from '@/app/components/base/icons/src/vender/line/financeAndECommerce'
 import I18n from '@/context/i18n'
 import { getLanguage } from '@/i18n/language'
 import { useStore as useLabelStore } from '@/app/components/tools/labels/store'
-import tagIcon from '@/app/components/base/tag-management/images/tag.png'
 
 type Props = {
   active: boolean
@@ -38,15 +37,21 @@ const ProviderCard = ({
   }, [collection.labels, labelList, language])
 
   return (
-    <div className={cn('group col-span-1 p-5 bg-white rounded-lg min-h-[179px] flex flex-col transition-all duration-200 ease-in-out cursor-pointer hover:shadow-[0px_6px_10px_4px_rgba(0,0,0,0.06)]', active && '!border-primary-400')} onClick={onSelect}>
+    <div
+      className={cn(
+        'group col-span-1 p-5 bg-white rounded-lg min-h-[179px] flex flex-col transition-all duration-200 ease-in-out cursor-pointer hover:shadow-[0px_6px_10px_4px_rgba(0,0,0,0.06)]',
+        active && '!border-primary-400',
+        s.trigger)}
+      onClick={onSelect}>
       <div className='flex pb-[10px] items-center gap-[10px] grow-0 shrink-0'>
         <div className='relative shrink-0'>
           {typeof collection.icon === 'string' && (
-            <div className='w-[48px] h-[48px] bg-center bg-cover bg-no-repeat rounded-md' style={{ backgroundImage: `url(${collection.icon})` }} />
+            <div className='w-[48px] h-[48px] bg-center bg-cover bg-no-repeat rounded-lg border border-[#EDEEF3]' style={{ backgroundImage: `url(${collection.icon})` }} />
           )}
           {typeof collection.icon !== 'string' && (
             <AppIcon
               size='large'
+              className='rounded-lg border border-[#EDEEF3]'
               icon={collection.icon.content}
               background={collection.icon.background}
             />
@@ -73,9 +78,10 @@ const ProviderCard = ({
       </div>
       {collection.labels?.length > 0 && (
         <div className='flex items-center shrink-0'>
-          <div className='relative w-full flex items-center gap-1 rounded-md text-gray-500' title={labelContent}>
+          <div className='trigger relative w-full flex items-center gap-1 rounded-md text-[#9EADB9] group-hover:text-[#637381] cursor-pointer' title={labelContent}>
             {/* <Tag01 className='shrink-0 w-3 h-3' /> */}
-            <Image src={tagIcon} className='w-3 h-3 shrink-0' alt={''} />
+            {/* <Image src={tagIcon} className='w-3 h-3 shrink-0' alt={''} /> */}
+            <div className={cn('w-3 h-3', s.tagIcon)}></div>
             <div className='grow text-xs text-start leading-[12px] font-normal truncate'>{labelContent}</div>
           </div>
         </div>

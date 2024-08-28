@@ -5,8 +5,8 @@ import FilePreview from '../file-preview'
 import FileUploader from '../file-uploader'
 import NotionPagePreview from '../notion-page-preview'
 import EmptyDatasetCreationModal from '../empty-dataset-creation-modal'
-import Website from '../website'
-import WebsitePreview from '../website/preview'
+import Website from '../website-zs'
+import WebsitePreview from '../website-zs/preview'
 import s from './index.module.css'
 import StepButtons from './button'
 import cn from '@/utils/classnames'
@@ -50,7 +50,7 @@ export const NotionConnector = ({ onSetting }: NotionConnectorProps) => {
       <span className={s.notionIcon} />
       <div className={s.title}>{t('datasetCreation.stepOne.notionSyncTitle')}</div>
       <div className={s.tip}>{t('datasetCreation.stepOne.notionSyncTip')}</div>
-      <Button className='h-8' variant='primary' onClick={onSetting}>{t('datasetCreation.stepOne.connect')}</Button>
+      <Button className='h-8 py-1 px-3 text-sm font-normal text-white' variant='primary' onClick={onSetting}>{t('datasetCreation.stepOne.connect')}</Button>
     </div>
   )
 }

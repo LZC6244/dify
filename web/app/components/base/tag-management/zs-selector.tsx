@@ -4,9 +4,8 @@ import { useContext } from 'use-context-selector'
 import { useTranslation } from 'react-i18next'
 import { useUnmount } from 'ahooks'
 import { RiAddLine } from '@remixicon/react'
-import Image from 'next/image'
 import { useStore as useTagStore } from './store'
-import tagIcon from './images/tag.png'
+import s from './zs-select-style.module.css'
 import cn from '@/utils/classnames'
 import type { HtmlContentProps } from '@/app/components/base/popover'
 import CustomPopover from '@/app/components/base/popover'
@@ -228,11 +227,13 @@ const TagSelector: FC<TagSelectorProps> = ({
   const Trigger = () => {
     return (
       <div className={cn(
-        'group/tip relative w-full flex items-center gap-1 px-2 py-[10px] rounded-[8px] cursor-pointer hover:bg-[#F7F8FC]',
+        'group/tip relative w-full flex items-center gap-1 px-2 py-[10px] rounded-[8px] text-[#9EADB9] hover:text-[#637381] cursor-pointer hover:bg-[#F7F8FC]',
+        s.trigger,
       )}>
         {/* <Tag01 className='shrink-0 w-3 h-3' /> */}
-        <Image src={tagIcon} className='w-3 h-3' alt={''} />
-        <div className='grow text-xs text-start leading-[12px] font-normal truncate'>
+        {/* <Image src={tagIcon} className='w-3 h-3' alt={''} /> */}
+        <div className={cn('w-3 h-3', s.tagIcon)}></div>
+        <div className='grow text-xs text-start leading-[12px] font-normal truncate '>
           {!triggerContent ? t('common.tag.addTag') : triggerContent}
         </div>
       </div>

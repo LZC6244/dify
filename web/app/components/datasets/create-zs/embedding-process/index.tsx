@@ -74,7 +74,7 @@ const RuleDetail: FC<{ sourceData?: ProcessRuleResponse }> = ({ sourceData }) =>
     return value
   }, [sourceData])
 
-  return <div className='flex flex-col px-4 py-[18px] w-[246px] bg-[#F3F4F7] rounded first:mt-0'>
+  return <div className='flex flex-col px-4 py-[18px] min-w-[246px] w-fit bg-[#F3F4F7] rounded first:mt-0'>
     {Object.keys(segmentationRuleMap).map((field) => {
       return <FieldInfo
         key={field}

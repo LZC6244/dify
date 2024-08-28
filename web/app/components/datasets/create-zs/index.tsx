@@ -117,7 +117,7 @@ const DatasetUpdateForm = ({ datasetId }: DatasetUpdateFormProps) => {
 
   return (
     <div className='flex bg-white' style={{ height: 'calc(100vh - 0px)' }}>
-      <div className="flex flex-col w-11 sm:w-56 overflow-y-auto bg-white shrink-0">
+      <div className="flex flex-col w-11 sm:w-[300px] overflow-y-auto bg-white shrink-0">
         <StepsNavBar step={step} datasetId={datasetId} />
       </div>
       <div className="grow bg-white shadow-[-1px_0px_0px_0px_#DFE0E8] rounded-tl-[20px]">

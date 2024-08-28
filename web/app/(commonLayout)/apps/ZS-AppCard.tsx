@@ -269,10 +269,12 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
         <div className='relative shrink-0'>
           <AppIcon
             size="large"
-            className='!w-[72px] !h-[72px] !rounded-[36px]'
+            className='!w-[72px] !h-[72px] !rounded-[36px] border border-[#EDEEF3]'
             icon={app.icon}
             background={app.icon_background}
           />
+          {/* <div className='rounded-lg border border-[#EDEEF3]'>
+          </div> */}
         </div>
         <div className='grow w-0 pt-[12px] ml-3 relative'>
           {/* 名称和类型 */}
