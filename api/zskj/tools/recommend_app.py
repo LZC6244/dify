@@ -12,10 +12,11 @@ from collections import defaultdict
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
 import contexts
-from app import app
+from app import app as dify_app
 from extensions.ext_database import db
 from models.model import App, Site
 from models.account import TenantAccountJoin
+from models.tools import ApiToolProvider, BuiltinToolProvider, WorkflowToolProvider
 from services.app_dsl_service import AppDslService
 from services.account_service import AccountService
 from services.recommended_app_service import RecommendedAppService
@@ -46,11 +47,11 @@ def create_all_recommend_app(language='zh-Hans'):
     为租户工作空间创建指定语言的所有推荐应用
     """
 
-    # app 是全局变量，在函数内使用需要 global 声明
-    global app
+    # dify_app 是全局变量，在函数内使用需要 global 声明
+    global dify_app
 
-    # 进入 app 上下文环境
-    ctx = app.app_context()
+    # 进入 dify_app 上下文环境
+    ctx = dify_app.app_context()
     ctx.push()
 
     recommend_app_info = dict()
@@ -187,11 +188,11 @@ def reset_recommend_app_model(tenant_id, authorization, max_tokens: int, languag
     reset_recommend_app_pattern_2 = re.compile('"max_tokens": (\d+|null)')
     reset_recommend_app_repl_2 = f'"max_tokens": {max_tokens}'
 
-    # app 是全局变量，在函数内使用需要 global 声明
-    global app
+    # dify_app 是全局变量，在函数内使用需要 global 声明
+    global dify_app
 
-    # 进入 app 上下文环境
-    ctx = app.app_context()
+    # 进入 dify_app 上下文环境
+    ctx = dify_app.app_context()
     ctx.push()
 
     # 获取全部推荐应用列表
@@ -329,10 +330,10 @@ def reset_recommend_app_icon(language='zh-Hans'):
     }
 
     # app 是全局变量，在函数内使用需要 global 声明
-    global app
+    global dify_app
 
-    # 进入 app 上下文环境
-    ctx = app.app_context()
+    # 进入 dify_app 上下文环境
+    ctx = dify_app.app_context()
     ctx.push()
 
     recommend_apps_query = db.session.query(App).filter(
@@ -368,10 +369,10 @@ def reset_app_default_icon(old_icon: str, new_icon: str):
     """
 
     # app 是全局变量，在函数内使用需要 global 声明
-    global app
+    global dify_app
 
-    # 进入 app 上下文环境
-    ctx = app.app_context()
+    # 进入 dify_app 上下文环境
+    ctx = dify_app.app_context()
     ctx.push()
 
     # TODO: 判断条件需要根据实际情况进行更新更新
@@ -382,12 +383,29 @@ def reset_app_default_icon(old_icon: str, new_icon: str):
         )
     ).update({App.icon: new_icon})
 
-    site_result=db.session.query(Site).filter(
+    site_result = db.session.query(Site).filter(
         or_(
             Site.icon.notlike(old_icon),
             Site.icon.is_(None),
         )
     ).update({Site.icon: new_icon})
+
+    # ApiToolProvider, BuiltinToolProvider, WorkflowToolProvider
+    api_tool_provider_result = db.session.query(ApiToolProvider).filter(
+        or_(
+            ApiToolProvider.icon.notlike(old_icon),
+            ApiToolProvider.icon.is_(None),
+        )
+    ).update({ApiToolProvider.icon: new_icon})
+
+    workflow_tool_provider_new_icon = json.dumps(
+        {"content": new_icon, "background": "#FFEAD5"}, ensure_ascii=False)
+    workflow_tool_provider_result = db.session.query(WorkflowToolProvider).filter(
+        or_(
+            WorkflowToolProvider.icon.notlike(old_icon),
+            WorkflowToolProvider.icon.is_(None),
+        )
+    ).update({WorkflowToolProvider.icon: workflow_tool_provider_new_icon})
 
     # 提交 icon 更新
     db.session.commit()
@@ -395,7 +413,12 @@ def reset_app_default_icon(old_icon: str, new_icon: str):
     # 退出 app 上下文环境
     ctx.pop()
     logger.info(
-        f'应用默认图标更新完毕：[app 更新条数{app_result.rowcount}] [site 更新条数：{site_result.rowcount}')
+        f'应用默认图标更新完毕：\n'
+        f'app 更新条数：{app_result}\n'
+        f'site 更新条数：{site_result}\n'
+        f'api_tool_provider 更新条数：{api_tool_provider_result}\n'
+        f'workflow_tool_provider 更新条数：{workflow_tool_provider_result}'
+    )
 
 
 if __name__ == '__main__':
@@ -418,17 +441,17 @@ if __name__ == '__main__':
     #     base_url='https://agent-x-pre.maas.com.cn',
     # )
 
-    # prd
-    reset_recommend_app_model(
-        tenant_id='a49606fb-0cf0-4f07-8fb8-29f5b7fc25b3',
-        authorization='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMmIyYzY3ZmEtZTVlZi00YTVhLWEwNDMtNjUxMmYwYmY2YWM0IiwiZXhwIjoxNzI2NjU1MDQ3LCJpc3MiOiJTRUxGX0hPU1RFRCIsInN1YiI6IkNvbnNvbGUgQVBJIFBhc3Nwb3J0In0.XPZBZ_kwJ4k2kZydMtpZ51U97UICKVi3yH3y0RWwyUU',
-        max_tokens=4096,
-        base_url='https://agent-x.maas.com.cn',
-    )
+    # # prd
+    # reset_recommend_app_model(
+    #     tenant_id='a49606fb-0cf0-4f07-8fb8-29f5b7fc25b3',
+    #     authorization='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMmIyYzY3ZmEtZTVlZi00YTVhLWEwNDMtNjUxMmYwYmY2YWM0IiwiZXhwIjoxNzI2NjU1MDQ3LCJpc3MiOiJTRUxGX0hPU1RFRCIsInN1YiI6IkNvbnNvbGUgQVBJIFBhc3Nwb3J0In0.XPZBZ_kwJ4k2kZydMtpZ51U97UICKVi3yH3y0RWwyUU',
+    #     max_tokens=4096,
+    #     base_url='https://agent-x.maas.com.cn',
+    # )
 
     # reset_recommend_app_icon()
 
     reset_app_default_icon(
-        old_icon='data:image%',
+        old_icon='%data:image%',
         new_icon='',
     )
