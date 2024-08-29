@@ -60,6 +60,10 @@ class BaseApiKeyListResource(Resource):
     @marshal_with(api_key_fields)
     @zs_admin_required
     def post(self, resource_id):
+        parser = reqparse.RequestParser()
+        parser.add_argument('tenant_id', type=str, required=True, location='json')
+        args = parser.parse_args()
+
         resource_id = str(resource_id)
         _get_resource(resource_id, self.resource_model)
         # if not current_user.is_admin_or_owner:
@@ -79,7 +83,7 @@ class BaseApiKeyListResource(Resource):
         key = ApiToken.generate_api_key(self.token_prefix, 24)
         api_token = ApiToken()
         setattr(api_token, self.resource_id_field, resource_id)
-        api_token.tenant_id = 'admin'
+        api_token.tenant_id = args['tenant_id']
         api_token.token = key
         api_token.type = self.resource_type
         db.session.add(api_token)
