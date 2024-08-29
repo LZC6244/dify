@@ -21,7 +21,7 @@ if GEVENT_SUPPORT:
     __builtins__['print'] = zskj_custom_print
 
 
-if os.environ.get("DEBUG", "false").lower() != 'true':
+if os.environ.get("DEBUG", "false").lower() != 'true' or GEVENT_SUPPORT:
     from gevent import monkey
 
     monkey.patch_all()

@@ -193,7 +193,7 @@ services:
     container_name: dify-debug-api
     # 不进入 debug 模式时，注释掉 entrypoint 和 command 即可
     entrypoint: [ "/bin/bash" ]
-    command: [ "-x", "-c", "/app/api/docker/debug_api.sh" ]
+    command: [ "-x", "-c", "/app/api/docker/zs_debug_entrypoint.sh" ]
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.1.1-96bbd8c800e022c490e44740e27a2f2300058ad7
     # image: 111.19.168.169:8389/zskj/backend/zs-dify-api:0.6.16.1
     restart: always
@@ -255,7 +255,7 @@ services:
     container_name: dify-debug-worker
     # 不进入 debug 模式时，注释掉 entrypoint 和 command 即可
     entrypoint: [ "/bin/bash" ]
-    command: [ "-x", "-c", "/app/api/docker/debug_worker.sh" ]
+    command: [ "-x", "-c", "/app/api/docker/zs_debug_entrypoint.sh" ]
     image: 111.19.168.169:8389/zskj/backend/zs-dify-api:feature-v2.1.1-96bbd8c800e022c490e44740e27a2f2300058ad7
     # image: 111.19.168.169:8389/zskj/backend/zs-dify-api:0.6.16.1
     restart: always
