@@ -3,24 +3,23 @@ import os
 
 GEVENT_SUPPORT = os.environ.get("GEVENT_SUPPORT", "false").lower() == 'true'
 
-# 获取原始的print函数
-original_print = __builtins__['print']
+# # 获取原始的print函数
+# original_print = __builtins__['print']
 
-# 重写print函数
-
-
-def zskj_custom_print(*args, **kwargs):
-    # 调用原始的print函数
-    original_print(*args, **kwargs)
-    # 刷新标准输出
-    sys.stdout.flush()
+# # 重写print函数
+# def zskj_custom_print(*args, **kwargs):
+#     # 调用原始的print函数
+#     original_print(*args, **kwargs)
+#     # 刷新标准输出
+#     sys.stdout.flush()
 
 
-if GEVENT_SUPPORT:
-    # 用自定义的 print 函数替换当前文件的 print 函数
-    __builtins__['print'] = zskj_custom_print
+# if GEVENT_SUPPORT:
+#     # 用自定义的 print 函数替换当前文件的 print 函数
+#     __builtins__['print'] = zskj_custom_print
 
 
+# 启用 patch_all 以刷新 gevent print 输出
 if os.environ.get("DEBUG", "false").lower() != 'true' or GEVENT_SUPPORT:
     from gevent import monkey
 

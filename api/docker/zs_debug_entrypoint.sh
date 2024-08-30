@@ -52,9 +52,15 @@ elif [[ "${MODE}" == "api" ]]; then
 
     echo "[api-debug] 启动调试模式"
 
-    gunicorn --bind 0.0.0.0:5001 --workers 3 --worker-class gevent --timeout 360 --preload app:app
+    # gunicorn \
+    #   --bind "${DIFY_BIND_ADDRESS:-0.0.0.0}:${DIFY_PORT:-5001}" \
+    #   --workers ${SERVER_WORKER_AMOUNT:-1} \
+    #   --worker-class ${SERVER_WORKER_CLASS:-sync} \
+    #   --timeout ${GUNICORN_TIMEOUT:-360} \
+    #   --preload \
+    #   app:app
 
-    # python -m debugpy --wait-for-client --listen 0.0.0.0:5678 app.py
+    python -m debugpy --wait-for-client --listen 0.0.0.0:5678 app.py
 
     # python -m debugpy --wait-for-client --listen 0.0.0.0:5678 zskj/tools/recommend_app.py
     # python zskj/tools/recommend_app.py
@@ -63,7 +69,13 @@ elif [[ "${MODE}" == "api" ]]; then
 
     echo "[api-debug] 启动本地运行模式"
 
-    python app.py
+    gunicorn \
+      --bind "${DIFY_BIND_ADDRESS:-0.0.0.0}:${DIFY_PORT:-5001}" \
+      --workers ${SERVER_WORKER_AMOUNT:-1} \
+      --worker-class ${SERVER_WORKER_CLASS:-sync} \
+      --timeout ${GUNICORN_TIMEOUT:-360} \
+      --preload \
+      app:app
     
   fi
 
