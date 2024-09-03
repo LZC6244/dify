@@ -422,7 +422,7 @@ def reset_app_default_icon(old_icon: str, new_icon: str):
 
 
 if __name__ == '__main__':
-    # create_all_recommend_app()
+    create_all_recommend_app()
     # reset_recommend_app_model_to_json()
 
     # # dev
@@ -449,7 +449,23 @@ if __name__ == '__main__':
     #     base_url='https://agent-x.maas.com.cn',
     # )
 
-    # reset_recommend_app_icon()
+    # 渡舟教育 dev
+    reset_recommend_app_model(
+        tenant_id='c4ae7a23-07c1-45e1-97e3-963d2217c752',
+        authorization='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNmM1MzIyNTQtYzVkYy00N2E4LWIyNmItODM4NDI1ZTI5NWI3IiwiZXhwIjoxNzI2MjI5ODMwLCJpc3MiOiJTRUxGX0hPU1RFRCIsInN1YiI6IkNvbnNvbGUgQVBJIFBhc3Nwb3J0In0.cHSOJbhLJJmdyDFVQ2ViM7TaqWEpXNUVxZlWQNNMCg8',
+        max_tokens=4096,
+        base_url='http://61.241.103.72:5381/',
+    )
+
+    # # 渡舟教育 prd
+    # reset_recommend_app_model(
+    #     tenant_id='c4ae7a23-07c1-45e1-97e3-963d2217c752',
+    #     authorization='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNmM1MzIyNTQtYzVkYy00N2E4LWIyNmItODM4NDI1ZTI5NWI3IiwiZXhwIjoxNzI3ODUyMzA1LCJpc3MiOiJTRUxGX0hPU1RFRCIsInN1YiI6IkNvbnNvbGUgQVBJIFBhc3Nwb3J0In0.DlZ-F9DpsZolQgzKDMm5Tq_gxG6710SxNTKLpYBnJhc',
+    #     max_tokens=4096,
+    #     base_url='https://duzhou.e-ai-edu.com/',
+    # )
+
+    reset_recommend_app_icon()
 
     reset_app_default_icon(
         old_icon='%data:image%',
