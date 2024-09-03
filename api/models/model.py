@@ -67,8 +67,12 @@ class App(db.Model):
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False, server_default=db.text("''::character varying"))
     mode = db.Column(db.String(255), nullable=False)
+<<<<<<< HEAD
     icon_type = db.Column(db.String(255), nullable=True)
     icon = db.Column(db.String(255))
+=======
+    icon = db.Column(db.Text)
+>>>>>>> feature/v2.1.1
     icon_background = db.Column(db.String(255))
     app_model_config_id = db.Column(StringUUID, nullable=True)
     workflow_id = db.Column(StringUUID, nullable=True)
@@ -1105,8 +1109,12 @@ class Site(db.Model):
     id = db.Column(StringUUID, server_default=db.text('uuid_generate_v4()'))
     app_id = db.Column(StringUUID, nullable=False)
     title = db.Column(db.String(255), nullable=False)
+<<<<<<< HEAD
     icon_type = db.Column(db.String(255), nullable=True)
     icon = db.Column(db.String(255))
+=======
+    icon = db.Column(db.Text)
+>>>>>>> feature/v2.1.1
     icon_background = db.Column(db.String(255))
     description = db.Column(db.Text)
     default_language = db.Column(db.String(255), nullable=False)

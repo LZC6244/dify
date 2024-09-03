@@ -44,7 +44,8 @@ const DatasetNav = () => {
     <Nav
       icon={<RiBook2Line className='w-4 h-4' />}
       activeIcon={<RiBook2Fill className='w-4 h-4' />}
-      text={t('common.menus.datasets')}
+      // text={t('common.menus.datasets')}
+      text="知识库"
       activeSegment='datasets'
       link='/datasets'
       curNav={currentDataset as Omit<NavItem, 'link'>}

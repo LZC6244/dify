@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>delete</title>
+    <g id="V2.1.1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g id="知识库-创建知识库-选择数据源" transform="translate(-1174.000000, -341.000000)" stroke="#212B36">
+            <g id="编组-5" transform="translate(1174.000000, 341.000000)">
+                <g id="delete" transform="translate(1.000000, 1.000000)">
+                    <polygon id="路径" points="1.5 1.8 1.5 12 10.5 12 10.5 1.8"></polygon>
+                    <line x1="4.8" y1="4.8" x2="4.8" y2="8.7" id="路径" stroke-linecap="round"></line>
+                    <line x1="7.2" y1="4.8" x2="7.2" y2="8.7" id="路径" stroke-linecap="round"></line>
+                    <line x1="0" y1="1.8" x2="12" y2="1.8" id="路径" stroke-linecap="round"></line>
+                    <polygon id="路径" points="3.6 1.8 4.5867 0 7.43313 0 8.4 1.8"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

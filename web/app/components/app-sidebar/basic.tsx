@@ -82,7 +82,7 @@ export default function AppBasic({ icon, icon_background, name, type, hoverTip, 
             />
           }
         </div>
-        <div className={`text-xs font-normal text-gray-500 group-hover:text-gray-700 break-all ${textStyle?.extra ?? ''}`}>{type}</div>
+        <div className={`text-xs font-normal text-gray-500 group-hover:text-gray-700 break-all line-clamp-[7] ${textStyle?.extra ?? ''}`}>{type}</div>
       </div>}
     </div>
   )

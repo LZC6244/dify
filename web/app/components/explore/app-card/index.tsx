@@ -4,7 +4,7 @@ import { PlusIcon } from '@heroicons/react/20/solid'
 import Button from '../../base/button'
 import cn from '@/utils/classnames'
 import type { App } from '@/models/explore'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 import { AiText, ChatBot, CuteRobote } from '@/app/components/base/icons/src/vender/solid/communication'
 import { Route } from '@/app/components/base/icons/src/vender/solid/mapsAndTravel'
 export type AppCardProps = {

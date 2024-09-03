@@ -14,6 +14,7 @@ export type AppBasicInfo = {
 export type AppCategory = 'Writing' | 'Translate' | 'HR' | 'Programming' | 'Assistant'
 
 export type App = {
+  zskj?: { installed_app_id: string }
   app: AppBasicInfo
   app_id: string
   description: string

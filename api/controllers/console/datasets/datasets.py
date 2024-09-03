@@ -316,6 +316,7 @@ class DatasetIndexingEstimateApi(Resource):
     @account_initialization_required
     def post(self):
         parser = reqparse.RequestParser()
+<<<<<<< HEAD
         parser.add_argument("info_list", type=dict, required=True, nullable=True, location="json")
         parser.add_argument("process_rule", type=dict, required=True, nullable=True, location="json")
         parser.add_argument(
@@ -331,6 +332,18 @@ class DatasetIndexingEstimateApi(Resource):
         parser.add_argument(
             "doc_language", type=str, default="English", required=False, nullable=False, location="json"
         )
+=======
+        parser.add_argument('info_list', type=dict, required=True, nullable=True, location='json')
+        parser.add_argument('process_rule', type=dict, required=True, nullable=True, location='json')
+        parser.add_argument('indexing_technique', type=str, required=True,
+                            choices=Dataset.INDEXING_TECHNIQUE_LIST,
+                            nullable=True, location='json')
+        parser.add_argument('doc_form', type=str, default='text_model', required=False, nullable=False, location='json')
+        parser.add_argument('dataset_id', type=str, required=False, nullable=False, location='json')
+        parser.add_argument('doc_language', type=str, default='English', required=False, nullable=False,
+                            location='json')
+        parser.add_argument('parser_type', type=str, default='', required=False, nullable=False, location='json')
+>>>>>>> feature/v2.1.1
         args = parser.parse_args()
         # validate args
         DocumentService.estimate_args_validate(args)
@@ -349,7 +362,17 @@ class DatasetIndexingEstimateApi(Resource):
             if file_details:
                 for file_detail in file_details:
                     extract_setting = ExtractSetting(
+<<<<<<< HEAD
                         datasource_type="upload_file", upload_file=file_detail, document_model=args["doc_form"]
+=======
+                        datasource_type="upload_file",
+                        upload_file=file_detail,
+                        document_model=args['doc_form'],
+                        beta_parser_config={
+                            'parser_type': args['parser_type'],
+                            'embedding_q_only': False
+                        }
+>>>>>>> feature/v2.1.1
                     )
                     extract_settings.append(extract_setting)
         elif args["info_list"]["data_source_type"] == "notion_import":

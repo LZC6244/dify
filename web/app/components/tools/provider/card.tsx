@@ -4,7 +4,7 @@ import { useContext } from 'use-context-selector'
 import { useTranslation } from 'react-i18next'
 import type { Collection } from '../types'
 import cn from '@/utils/classnames'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 import { Tag01 } from '@/app/components/base/icons/src/vender/line/financeAndECommerce'
 import I18n from '@/context/i18n'
 import { getLanguage } from '@/i18n/language'
@@ -55,7 +55,7 @@ const ProviderCard = ({
             <div className='truncate' title={collection.label[language]}>{collection.label[language]}</div>
           </div>
           <div className='flex items-center text-[10px] leading-[18px] text-gray-500 font-medium'>
-            <div className='truncate'>{t('tools.author')}&nbsp;{collection.author}</div>
+            <div className='truncate'>{t('tools.author')}&nbsp;{collection.author === 'Dify' ? '卓世科技' : collection.author}</div>
           </div>
         </div>
       </div>

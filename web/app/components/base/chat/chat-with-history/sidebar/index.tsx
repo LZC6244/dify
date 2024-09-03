@@ -5,7 +5,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { useChatWithHistoryContext } from '../context'
 import List from './list'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 import Button from '@/app/components/base/button'
 import { Edit05 } from '@/app/components/base/icons/src/vender/line/general'
 import type { ConversationItem } from '@/models/share'
