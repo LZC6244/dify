@@ -12,13 +12,8 @@ from models.dataset import Dataset, Document
 from services.feature_service import FeatureService
 
 
-<<<<<<< HEAD
 @shared_task(queue="dataset")
-def document_indexing_task(dataset_id: str, document_ids: list):
-=======
-@shared_task(queue='dataset')
 def document_indexing_task(dataset_id: str, document_ids: list, beta_parser_config: dict):
->>>>>>> feature/v2.1.1
     """
     Async process document
     :param dataset_id:

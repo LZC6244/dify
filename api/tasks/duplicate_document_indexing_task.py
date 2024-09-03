@@ -13,13 +13,8 @@ from models.dataset import Dataset, Document, DocumentSegment
 from services.feature_service import FeatureService
 
 
-<<<<<<< HEAD
 @shared_task(queue="dataset")
-def duplicate_document_indexing_task(dataset_id: str, document_ids: list):
-=======
-@shared_task(queue='dataset')
 def duplicate_document_indexing_task(dataset_id: str, document_ids: list, beta_parser_config: dict):
->>>>>>> feature/v2.1.1
     """
     Async process document
     :param dataset_id:
@@ -62,18 +57,10 @@ def duplicate_document_indexing_task(dataset_id: str, document_ids: list, beta_p
     for document_id in document_ids:
         logging.info(click.style("Start process document: {}".format(document_id), fg="green"))
 
-<<<<<<< HEAD
         document = (
             db.session.query(Document).filter(Document.id == document_id, Document.dataset_id == dataset_id).first()
         )
-
-=======
-        document = db.session.query(Document).filter(
-            Document.id == document_id,
-            Document.dataset_id == dataset_id
-        ).first()
         
->>>>>>> feature/v2.1.1
         if document:
             print("start clean old data")
             # clean old data

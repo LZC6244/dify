@@ -243,7 +243,6 @@ class DatasetDocumentListApi(Resource):
             raise Forbidden(str(e))
 
         parser = reqparse.RequestParser()
-<<<<<<< HEAD
         parser.add_argument(
             "indexing_technique", type=str, choices=Dataset.INDEXING_TECHNIQUE_LIST, nullable=False, location="json"
         )
@@ -256,21 +255,8 @@ class DatasetDocumentListApi(Resource):
             "doc_language", type=str, default="English", required=False, nullable=False, location="json"
         )
         parser.add_argument("retrieval_model", type=dict, required=False, nullable=False, location="json")
-=======
-        parser.add_argument('indexing_technique', type=str, choices=Dataset.INDEXING_TECHNIQUE_LIST, nullable=False,
-                            location='json')
-        parser.add_argument('data_source', type=dict, required=False, location='json')
-        parser.add_argument('process_rule', type=dict, required=False, location='json')
-        parser.add_argument('duplicate', type=bool, default=True, nullable=False, location='json')
-        parser.add_argument('original_document_id', type=str, required=False, location='json')
-        parser.add_argument('doc_form', type=str, default='text_model', required=False, nullable=False, location='json')
-        parser.add_argument('doc_language', type=str, default='English', required=False, nullable=False,
-                            location='json')
-        parser.add_argument('retrieval_model', type=dict, required=False, nullable=False,
-                            location='json')
         parser.add_argument('parser_type', type=str, default='', required=False, nullable=False, location='json')
         parser.add_argument('embedding_q_only', type=bool, default=False, required=False, nullable=False, location='json')
->>>>>>> feature/v2.1.1
         args = parser.parse_args()
 
         if not dataset.indexing_technique and not args["indexing_technique"]:
@@ -305,7 +291,6 @@ class DatasetInitApi(Resource):
             raise Forbidden()
 
         parser = reqparse.RequestParser()
-<<<<<<< HEAD
         parser.add_argument(
             "indexing_technique",
             type=str,
@@ -321,19 +306,8 @@ class DatasetInitApi(Resource):
             "doc_language", type=str, default="English", required=False, nullable=False, location="json"
         )
         parser.add_argument("retrieval_model", type=dict, required=False, nullable=False, location="json")
-=======
-        parser.add_argument('indexing_technique', type=str, choices=Dataset.INDEXING_TECHNIQUE_LIST, required=True,
-                            nullable=False, location='json')
-        parser.add_argument('data_source', type=dict, required=True, nullable=True, location='json')
-        parser.add_argument('process_rule', type=dict, required=True, nullable=True, location='json')
-        parser.add_argument('doc_form', type=str, default='text_model', required=False, nullable=False, location='json')
-        parser.add_argument('doc_language', type=str, default='English', required=False, nullable=False,
-                            location='json')
-        parser.add_argument('retrieval_model', type=dict, required=False, nullable=False,
-                            location='json')
         parser.add_argument('parser_type', type=str, default='', required=False, nullable=False, location='json')
         parser.add_argument('embedding_q_only', type=bool, default=False, required=False, nullable=False, location='json')
->>>>>>> feature/v2.1.1
         args = parser.parse_args()
 
         # The role of the current user in the ta table must be admin, owner, or editor, or dataset_operator
@@ -821,17 +795,10 @@ class DocumentStatusApi(DocumentResource):
             return {"result": "success"}, 200
 
         elif action == "disable":
-<<<<<<< HEAD
             if not document.completed_at or document.indexing_status != "completed":
-                raise InvalidActionError("Document is not completed.")
+                raise InvalidActionError("文档解析未完成，请删除后重试")
             if not document.enabled:
-                raise InvalidActionError("Document already disabled.")
-=======
-            if not document.completed_at or document.indexing_status != 'completed':
-                raise InvalidActionError('文档解析未完成，请删除后重试')
-            if not document.enabled:
-                raise InvalidActionError('文档已不可用，请删除后重试')
->>>>>>> feature/v2.1.1
+                raise InvalidActionError("文档已不可用，请删除后重试")
 
             document.enabled = False
             document.disabled_at = datetime.now(timezone.utc).replace(tzinfo=None)
@@ -848,11 +815,7 @@ class DocumentStatusApi(DocumentResource):
 
         elif action == "archive":
             if document.archived:
-<<<<<<< HEAD
-                raise InvalidActionError("Document already archived.")
-=======
-                raise InvalidActionError('文档已到达')
->>>>>>> feature/v2.1.1
+                raise InvalidActionError("文档已到达")
 
             document.archived = True
             document.archived_at = datetime.now(timezone.utc).replace(tzinfo=None)
@@ -869,11 +832,7 @@ class DocumentStatusApi(DocumentResource):
             return {"result": "success"}, 200
         elif action == "un_archive":
             if not document.archived:
-<<<<<<< HEAD
-                raise InvalidActionError("Document is not archived.")
-=======
-                raise InvalidActionError('文档未到达')
->>>>>>> feature/v2.1.1
+                raise InvalidActionError("文档未到达")
 
             document.archived = False
             document.archived_at = None
