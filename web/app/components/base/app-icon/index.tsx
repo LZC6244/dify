@@ -32,30 +32,12 @@ const AppIcon: FC<AppIconProps> = ({
   innerIcon,
   onClick,
 }) => {
-<<<<<<< HEAD
   const wrapperClassName = classNames(
     style.appIcon,
     size !== 'medium' && style[size],
     rounded && style.rounded,
     className ?? '',
     'overflow-hidden',
-=======
-  return (
-    <span
-      className={classNames(
-        style.appIcon,
-        size !== 'medium' && style[size],
-        rounded && style.rounded,
-        className ?? '',
-      )}
-      style={{
-        background,
-      }}
-      onClick={onClick}
-    >
-      {innerIcon || ((icon && icon !== '') ? <em-emoji id={icon} /> : <em-emoji id='🧭' />)}
-    </span>
->>>>>>> feature/v2.1.1
   )
 
   const isValidImageIcon = iconType === 'image' && imageUrl

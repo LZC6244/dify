@@ -77,6 +77,8 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
     icon,
     icon_background,
     description,
+    icon_type,
+    use_icon_as_answer_icon,
   }) => {
     try {
       await updateAppInfo({
@@ -85,6 +87,8 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
         icon,
         icon_background,
         description,
+        icon_type,
+        use_icon_as_answer_icon,
       })
       console.log(1)
 
@@ -113,7 +117,7 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
     }
   }, [app.id, mutateApps, notify, onRefresh, t])
 
-  const onCopy: DuplicateAppModalProps['onConfirm'] = async ({ name, icon, icon_background }) => {
+  const onCopy: DuplicateAppModalProps['onConfirm'] = async ({ name, icon, icon_background, icon_type }) => {
     try {
       const newApp = await copyApp({
         appID: app.id,
@@ -121,6 +125,7 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
         icon,
         icon_background,
         mode: app.mode,
+        icon_type,
       })
       setShowDuplicateModal(false)
       notify({
@@ -357,10 +362,14 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
       {showEditModal && (
         <EditAppModal
           isEditModal
+          appName={app.name}
+          appIconType={app.icon_type}
           appIcon={app.icon}
           appIconBackground={app.icon_background}
-          appName={app.name}
+          appIconUrl={app.icon_url}
           appDescription={app.description}
+          appMode={app.mode}
+          appUseIconAsAnswerIcon={app.use_icon_as_answer_icon}
           show={showEditModal}
           onConfirm={onEdit}
           onHide={() => setShowEditModal(false)}
@@ -369,8 +378,10 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
       {showDuplicateModal && (
         <DuplicateAppModal
           appName={app.name}
+          icon_type={app.icon_type}
           icon={app.icon}
           icon_background={app.icon_background}
+          icon_url={app.icon_url}
           show={showDuplicateModal}
           onConfirm={onCopy}
           onHide={() => setShowDuplicateModal(false)}

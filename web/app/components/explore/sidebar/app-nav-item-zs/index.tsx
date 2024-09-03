@@ -5,8 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useHover } from 'ahooks'
 import s from './style.module.css'
 import cn from '@/utils/classnames'
-import ItemOperation from '@/app/components/explore/item-operation'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 import type { AppIconType } from '@/types/app'
 
 export type IAppNavItemProps = {
@@ -59,8 +58,8 @@ export default function AppNavItem({
       {!isMobile && (
         <>
           <div className='flex items-center space-x-2 w-0 grow'>
-            <AppIcon size='tiny' iconType={icon_type} icon={icon} background={icon_background} imageUrl={icon_url} />
-            <div className='overflow-hidden text-ellipsis whitespace-nowrap' title={name}>{name}</div>
+            <AppIcon size='tiny' className='!w-9 !h-9 !rounded-[18px] !overflow-hidden' iconType={icon_type} icon={icon} background={icon_background} imageUrl={icon_url} />
+            <div className={cn('overflow-hidden text-ellipsis whitespace-nowrap text-[16px]', isSelected ? 'text-[#5E3EFB]' : 'text-[#000]')} title={name}>{name}</div>
           </div>
           {/* <div className='shrink-0 h-6' onClick={e => e.stopPropagation()}>
             <ItemOperation

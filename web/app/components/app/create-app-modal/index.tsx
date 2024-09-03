@@ -19,12 +19,7 @@ import type { AppMode } from '@/types/app'
 import { createApp } from '@/service/apps'
 import Modal from '@/app/components/base/modal'
 import Button from '@/app/components/base/button'
-<<<<<<< HEAD
 import AppIcon from '@/app/components/base/app-icon'
-=======
-import AppIcon from '@/app/components/base/app-icon-zs'
-import EmojiPicker from '@/app/components/base/emoji-picker'
->>>>>>> feature/v2.1.1
 import AppsFull from '@/app/components/billing/apps-full-in-dialog'
 import { AiText, ChatBot, CuteRobote } from '@/app/components/base/icons/src/vender/solid/communication'
 import { Route } from '@/app/components/base/icons/src/vender/solid/mapsAndTravel'
@@ -46,13 +41,8 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
 
   const [appMode, setAppMode] = useState<AppMode>('chat')
   const [showChatBotType, setShowChatBotType] = useState<boolean>(true)
-<<<<<<< HEAD
   const [appIcon, setAppIcon] = useState<AppIconSelection>({ type: 'emoji', icon: '🤖', background: '#FFEAD5' })
   const [showAppIconPicker, setShowAppIconPicker] = useState(false)
-=======
-  const [emoji, setEmoji] = useState({ icon: '🧭', icon_background: '#FFEAD5' })
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
->>>>>>> feature/v2.1.1
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
 
@@ -298,12 +288,7 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
             setShowAppIconPicker(false)
           }}
           onClose={() => {
-<<<<<<< HEAD
             setShowAppIconPicker(false)
-=======
-            setEmoji({ icon: '🧭', icon_background: '#FFEAD5' })
-            setShowEmojiPicker(false)
->>>>>>> feature/v2.1.1
           }}
         />}
       </div>

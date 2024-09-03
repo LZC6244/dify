@@ -22,7 +22,7 @@ const Header: FC<Props> = ({
         <div className='text-base font-medium text-gray-700'>{t(`${I18N_PREFIX}.firecrawlTitle`)}</div>
         <div className='ml-2 mr-1 w-px h-3.5 bg-gray-200'></div>
         <div
-          className='p-1 rounded-md hover:bg-black/5 cursor-pointer'
+          className='p-1 rounded-md hover:bg-black/5 cursor-pointer hidden'
           onClick={onSetting}
         >
           <Settings01 className='w-3.5 h-3.5 text-gray-500' />

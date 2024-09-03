@@ -21,7 +21,7 @@ import { checkKeys, getNewVar } from '@/utils/var'
 import Switch from '@/app/components/base/switch'
 import Toast from '@/app/components/base/toast'
 import { Settings01 } from '@/app/components/base/icons/src/vender/line/general'
-import ConfirmModal from '@/app/components/base/confirm/common'
+import Confirm from '@/app/components/base/confirm-zs'
 import ConfigContext from '@/context/debug-configuration'
 import { AppType } from '@/types/app'
 import type { ExternalDataTool } from '@/models/common'
@@ -379,16 +379,17 @@ const ConfigVar: FC<IConfigVarProps> = ({ promptVariables, readonly, onPromptVar
       )}
 
       {isShowDeleteContextVarModal && (
-        <ConfirmModal
+        <Confirm
           isShow={isShowDeleteContextVarModal}
           title={t('appDebug.feature.dataSet.queryVariable.deleteContextVarTitle', { varName: promptVariables[removeIndex as number]?.name })}
-          desc={t('appDebug.feature.dataSet.queryVariable.deleteContextVarTip') as string}
-          confirmBtnClassName='bg-[#B42318] hover:bg-[#B42318]'
+          content={t('appDebug.feature.dataSet.queryVariable.deleteContextVarTip') as string}
+          // confirmBtnClassName='bg-[#B42318] hover:bg-[#B42318]'
           onConfirm={() => {
             didRemoveVar(removeIndex as number)
             hideDeleteContextVarModal()
           }}
           onCancel={hideDeleteContextVarModal}
+          onClose={hideDeleteContextVarModal}
         />
       )}
 

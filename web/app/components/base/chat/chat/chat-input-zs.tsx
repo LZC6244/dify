@@ -21,7 +21,7 @@ import type { Theme } from '../embedded-chatbot/theme/theme-context'
 // import { CssTransform } from '../embedded-chatbot/theme/utils'
 import sendActiveImg from './send_h.svg'
 import sendImg from './send.svg'
-import TooltipPlus from '@/app/components/base/tooltip-plus'
+import Tooltip from '@/app/components/base/tooltip'
 import { ToastContext } from '@/app/components/base/toast'
 import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
 import VoiceInput from '@/app/components/base/voice-input'
@@ -52,6 +52,7 @@ const ChatInput: FC<ChatInputProps> = ({
   const { t } = useTranslation()
   const { notify } = useContext(ToastContext)
   const [voiceInputShow, setVoiceInputShow] = useState(false)
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const {
     files,
     onUpload,
@@ -174,6 +175,7 @@ const ChatInput: FC<ChatInputProps> = ({
             )
           }
           <Textarea
+            ref={textAreaRef}
             className={`
               block w-full px-2 pr-[118px] py-[7px] leading-5 max-h-none text-sm text-gray-700 outline-none appearance-none resize-none
               ${visionConfig?.enabled && 'pl-12'}
@@ -217,7 +219,7 @@ const ChatInput: FC<ChatInputProps> = ({
             {isMobile
               ? sendBtn
               : (
-                <TooltipPlus
+                <Tooltip
                   popupContent={
                     <div>
                       <div>{t('common.operation.send')} Enter</div>
@@ -226,14 +228,17 @@ const ChatInput: FC<ChatInputProps> = ({
                   }
                 >
                   {sendBtn}
-                </TooltipPlus>
+                </Tooltip>
               )}
           </div>
           {
             voiceInputShow && (
               <VoiceInput
                 onCancel={() => setVoiceInputShow(false)}
-                onConverted={text => setQuery(text)}
+                onConverted={(text) => {
+                  setQuery(text)
+                  textAreaRef.current?.focus()
+                }}
               />
             )
           }

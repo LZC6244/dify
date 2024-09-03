@@ -391,6 +391,8 @@ const Debug: FC<IDebug> = ({
     adjustModalWidth()
   }, [])
 
+  console.log('mode', mode)
+
   return (
     <>
       <div className="shrink-0 pt-4 px-6">

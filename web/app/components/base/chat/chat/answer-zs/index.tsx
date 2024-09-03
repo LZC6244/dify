@@ -89,6 +89,7 @@ const Answer: FC<AnswerProps> = ({
     <div className='flex mb-2 last:mb-0'>
       <div className='shrink-0 relative w-10 h-10 mt-0'>
         {
+          // answerIcon || <AnswerIcon />
           answerIcon || <AppIcon icon={appData?.site.icon} background={appData?.site.icon_background} />
         }
         {

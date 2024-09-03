@@ -3,26 +3,34 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RiCloseLine } from '@remixicon/react'
 import Upload from '../../app/create-app-modal-zs/upload'
+import AppIconPicker from '../../base/app-icon-picker'
 import Modal from '@/app/components/base/modal'
 import ButtonNormal from '@/app/components/base/button'
 import Button from '@/app/components/base/button-zs'
+import Switch from '@/app/components/base/switch'
 import Toast from '@/app/components/base/toast'
-import EmojiPicker from '@/app/components/base/emoji-picker'
 import { useProviderContext } from '@/context/provider-context'
 import AppsFull from '@/app/components/billing/apps-full-in-dialog'
+import type { AppIconType } from '@/types/app'
 
 export type CreateAppModalProps = {
   show: boolean
   isEditModal?: boolean
   appName: string
   appDescription: string
+  appIconType: AppIconType | null
   appIcon: string
-  appIconBackground: string
+  appIconBackground?: string | null
+  appIconUrl?: string | null
+  appMode?: string
+  appUseIconAsAnswerIcon?: boolean
   onConfirm: (info: {
     name: string
+    icon_type: AppIconType
     icon: string
-    icon_background: string
+    icon_background?: string
     description: string
+    use_icon_as_answer_icon?: boolean
   }) => Promise<void>
   onHide: () => void
 }
@@ -30,19 +38,30 @@ export type CreateAppModalProps = {
 const CreateAppModal = ({
   show = false,
   isEditModal = false,
-  appIcon,
+  appIconType,
+  appIcon: _appIcon,
   appIconBackground,
+  appIconUrl,
   appName,
   appDescription,
+  appMode,
+  appUseIconAsAnswerIcon,
   onConfirm,
   onHide,
 }: CreateAppModalProps) => {
   const { t } = useTranslation()
 
   const [name, setName] = React.useState(appName)
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-  const [emoji, setEmoji] = useState({ icon: appIcon, icon_background: appIconBackground })
+  const [appIcon, setAppIcon] = useState(
+    () => appIconType === 'image'
+      ? { type: 'image' as const, fileId: _appIcon, url: appIconUrl }
+      : { type: 'emoji' as const, icon: _appIcon, background: appIconBackground },
+  )
+  const [showAppIconPicker, setShowAppIconPicker] = useState(false)
   const [description, setDescription] = useState(appDescription || '')
+  const [useIconAsAnswerIcon, setUseIconAsAnswerIcon] = useState(appUseIconAsAnswerIcon || false)
+
+  // const [emoji, setEmoji] = useState({ icon: appIcon, icon_background: appIconBackground })
 
   const { plan, enableBilling } = useProviderContext()
   const isAppsFull = (enableBilling && plan.usage.buildApps >= plan.total.buildApps)
@@ -54,8 +73,12 @@ const CreateAppModal = ({
     }
     onConfirm({
       name,
-      ...emoji,
+      icon_type: appIcon.type,
+      icon: appIcon.type === 'emoji' ? appIcon.icon : appIcon.fileId,
+      icon_background: appIcon.type === 'emoji' ? appIcon.background! : undefined,
       description,
+      use_icon_as_answer_icon: useIconAsAnswerIcon,
+      // ...emoji,
     })
     onHide()
   }
@@ -113,8 +136,23 @@ const CreateAppModal = ({
           {/* icon */}
           <div className='pt-2'>
             <div className='py-2 pb-3 text-base font-medium leading-[16px] text-[#212B36]'>应用图标</div>
-            <Upload value={emoji.icon} onImageChange={v => setEmoji({ icon: v, icon_background: '#FFF' })} />
+            <Upload value={`${appIcon.icon || appIcon.url}`} onImageChange={(v) => {
+              setAppIcon({ type: 'image' as const, url: v, fileId: _appIcon })
+            }} />
           </div>
+          {/* answer icon */}
+          {isEditModal && (appMode === 'chat' || appMode === 'advanced-chat' || appMode === 'agent-chat') && (
+            <div className='pt-2'>
+              <div className='flex justify-between items-center'>
+                <div className='py-2 text-sm font-medium leading-[20px] text-gray-900'>{t('app.answerIcon.title')}</div>
+                <Switch
+                  defaultValue={useIconAsAnswerIcon}
+                  onChange={v => setUseIconAsAnswerIcon(v)}
+                />
+              </div>
+              <p className='body-xs-regular text-gray-500'>{t('app.answerIcon.descriptionInExplore')}</p>
+            </div>
+          )}
           {!isEditModal && isAppsFull && <AppsFull loc='app-explore-create' />}
         </div>
         <div className='flex flex-row-reverse'>
@@ -122,14 +160,16 @@ const CreateAppModal = ({
           <ButtonNormal className='w-24' onClick={onHide}>{t('common.operation.cancel')}</ButtonNormal>
         </div>
       </Modal>
-      {showEmojiPicker && <EmojiPicker
-        onSelect={(icon, icon_background) => {
-          setEmoji({ icon, icon_background })
-          setShowEmojiPicker(false)
+      {showAppIconPicker && <AppIconPicker
+        onSelect={(payload) => {
+          setAppIcon(payload)
+          setShowAppIconPicker(false)
         }}
         onClose={() => {
-          setEmoji({ icon: appIcon, icon_background: appIconBackground })
-          setShowEmojiPicker(false)
+          setAppIcon(appIconType === 'image'
+            ? { type: 'image' as const, url: appIconUrl, fileId: _appIcon }
+            : { type: 'emoji' as const, icon: _appIcon, background: appIconBackground })
+          setShowAppIconPicker(false)
         }}
       />}
     </>

@@ -3,14 +3,6 @@
 import { memo, useMemo } from 'react'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-<<<<<<< HEAD
-  RiAlertFill,
-=======
-  // RiAlertFill,
-  RiQuestionLine,
->>>>>>> feature/v2.1.1
-} from '@remixicon/react'
 import WeightedScore from './weighted-score'
 import TopKItem from '@/app/components/base/param-item/top-k-item'
 import ScoreThresholdItem from '@/app/components/base/param-item/score-threshold-item'
@@ -177,11 +169,7 @@ const ConfigContent: FC<Props> = ({
           title={(
             <div className='flex items-center'>
               {t('appDebug.datasetConfig.retrieveOneWay.title')}
-<<<<<<< HEAD
               <Tooltip
-=======
-              {/* <TooltipPlus
->>>>>>> feature/v2.1.1
                 popupContent={(
                   <div className='w-[320px]'>
                     {t('dataset.nTo1RetrievalLegacy')}
@@ -189,11 +177,7 @@ const ConfigContent: FC<Props> = ({
                 )}
               >
                 <div className='ml-1 flex items-center px-[5px] h-[18px] rounded-[5px] border border-text-accent-secondary system-2xs-medium-uppercase text-text-accent-secondary'>legacy</div>
-<<<<<<< HEAD
               </Tooltip>
-=======
-              </TooltipPlus> */}
->>>>>>> feature/v2.1.1
             </div>
           )}
           description={t('appDebug.datasetConfig.retrieveOneWay.description')}

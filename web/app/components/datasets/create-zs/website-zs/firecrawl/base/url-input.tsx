@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Input from './input'
-import Button from '@/app/components/base/button'
+import Button from '@/app/components/base/button-zs'
 
 const I18N_PREFIX = 'datasetCreation.stepOne.website'
 
@@ -32,12 +32,12 @@ const UrlInput: FC<Props> = ({
       <Input
         value={url}
         onChange={handleUrlChange}
-        placeholder='https://docs.dify.ai'
+        placeholder='https://agent-x.maas.com.cn'
       />
       <Button
         variant='primary'
         onClick={handleOnRun}
-        className='ml-2'
+        className='ml-2 px-6 py-1 text-[12px] leading-3 text-white font-normal'
         loading={isRunning}
       >
         {!isRunning ? t(`${I18N_PREFIX}.run`) : ''}

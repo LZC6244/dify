@@ -6,11 +6,11 @@ import { useContext } from 'use-context-selector'
 import { useSearchParams, useSelectedLayoutSegments } from 'next/navigation'
 import classNames from 'classnames'
 import Toast from '../../base/toast'
-import Item from './app-nav-item'
+import Item from './app-nav-item-zs'
 import s from './style.module.css'
 import { fetchInstalledAppList as doFetchInstalledAppList, uninstallApp, updatePinStatus } from '@/service/explore'
 import ExploreContext from '@/context/explore-context'
-import Confirm from '@/app/components/base/confirm'
+import Confirm from '@/app/components/base/confirm-zs'
 import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
 
 export type IExploreSideBarProps = {
@@ -81,14 +81,16 @@ const SideBar: FC<IExploreSideBarProps> = ({
               height: 'calc(100vh - 100px)',
             }}
           >
-            {installedApps.map(({ id, is_pinned, uninstallable, app: { name, icon, icon_background } }) => {
+            {installedApps.map(({ id, is_pinned, uninstallable, app: { name, icon_type, icon, icon_url, icon_background } }) => {
               return (
                 <Item
                   key={id}
                   isMobile={isMobile}
                   name={name}
+                  icon_type={icon_type}
                   icon={icon}
                   icon_background={icon_background}
+                  icon_url={icon_url}
                   id={id}
                   isSelected={lastSegment?.toLowerCase() === id}
                   isPinned={is_pinned}

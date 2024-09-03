@@ -9,6 +9,7 @@ import {
   useConfigFromDebugContext,
   useFormattingChangedSubscription,
 } from '../hooks'
+import avatarIcon from '@/app/components/base/chat/chat-with-history/user.svg'
 import Chat from '@/app/components/base/chat/chat'
 import { useChat } from '@/app/components/base/chat/chat/hooks'
 import { useDebugConfigurationContext } from '@/context/debug-configuration'
@@ -19,10 +20,9 @@ import {
   fetchSuggestedQuestions,
   stopChatMessageResponding,
 } from '@/service/debug'
-import Avatar from '@/app/components/base/avatar'
+import Avatar from '@/app/components/base/avatar-zs'
 import { useAppContext } from '@/context/app-context'
 import { ModelFeatureEnum } from '@/app/components/header/account-setting/model-provider-page/declarations'
-
 type DebugWithSingleModelProps = {
   checkCanSend?: () => boolean
 }
@@ -125,7 +125,7 @@ const DebugWithSingleModel = forwardRef<DebugWithSingleModelRefType, DebugWithSi
       onSend={doSend}
       onStopResponding={handleStop}
       showPromptLog
-      questionIcon={<Avatar name={userProfile.name} size={40} />}
+      questionIcon={<Avatar name={userProfile.name} avatar={avatarIcon} size={40} />}
       allToolIcons={allToolIcons}
       onAnnotationEdited={handleAnnotationEdited}
       onAnnotationAdded={handleAnnotationAdded}

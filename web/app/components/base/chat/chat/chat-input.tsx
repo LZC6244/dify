@@ -19,13 +19,7 @@ import { TransferMethod } from '../types'
 import { useChatWithHistoryContext } from '../chat-with-history/context'
 import type { Theme } from '../embedded-chatbot/theme/theme-context'
 import { CssTransform } from '../embedded-chatbot/theme/utils'
-<<<<<<< HEAD
 import Tooltip from '@/app/components/base/tooltip'
-=======
-import sendActiveImg from './send_h.svg'
-import sendImg from './send.svg'
-import TooltipPlus from '@/app/components/base/tooltip-plus'
->>>>>>> feature/v2.1.1
 import { ToastContext } from '@/app/components/base/toast'
 import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
 import VoiceInput from '@/app/components/base/voice-input'
