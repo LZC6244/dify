@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Loading from '../components/base/loading'
-import Button from '@/app/components/base/button'
+import Button from '@/app/components/base/button-zs'
 
 import {
   fetchInitValidateStatus,
@@ -108,7 +108,7 @@ const ForgotPasswordForm = () => {
                 </div>
               )}
               <div>
-                <Button variant='primary' className='w-full' onClick={handleSendResetPasswordClick}>
+                <Button variant='primary' className='w-full py-2 text-white text-sm font-normal' onClick={handleSendResetPasswordClick}>
                   {isEmailSent ? t('login.backToSignIn') : t('login.sendResetLink')}
                 </Button>
               </div>

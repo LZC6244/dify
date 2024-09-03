@@ -10,14 +10,17 @@
   mask-image: url(~@/assets/action.svg);
 }
 .actionItem {
-  @apply h-8 py-[6px] px-3 mx-1 flex items-center gap-2 hover:bg-gray-100 rounded-lg cursor-pointer;
+  @apply h-8 py-[6px] px-3 mx-1 flex items-center gap-2 rounded-lg cursor-pointer;
   width: calc(100% - 0.5rem);
 }
 .deleteActionItem {
   @apply hover:bg-red-50 !important;
 }
 .actionName {
-  @apply text-gray-700 text-sm;
+  @apply text-[#212B36] text-sm;
+}
+.activeItem:hover >span {
+  @apply text-[#5E3EFB];
 }
 
 /* .completionPic {
@@ -27,3 +30,20 @@
 .expertPic {
   background-image: url(~@/app/components/app-sidebar/expert.png)
 } */
+@media (min-width: 1624px) {
+  .appList {
+    grid-template-columns: repeat(4, minmax(0, 1fr))
+  }
+}
+
+@media (min-width: 1300px) and (max-width: 1624px) {
+  .appList {
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1300px) {
+  .appList {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+}

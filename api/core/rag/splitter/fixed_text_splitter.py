@@ -47,8 +47,8 @@ class EnhanceRecursiveCharacterTextSplitter(RecursiveCharacterTextSplitter):
                 "disallowed_special": disallowed_special,
             }
             kwargs = {**kwargs, **extra_kwargs}
-
-        return cls(length_function=_token_encoder, **kwargs)
+        # 长度计算换成python默认的，当前的_token_encoder计算方式不对
+        return cls(length_function=len, **kwargs)
 
 
 class FixedRecursiveCharacterTextSplitter(EnhanceRecursiveCharacterTextSplitter):

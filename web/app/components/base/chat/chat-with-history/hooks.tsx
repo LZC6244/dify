@@ -257,13 +257,13 @@ export const useChatWithHistory = (installedAppInfo?: InstalledApp) => {
     currentChatInstanceRef.current.handleStop()
     setNewConversationId('')
     handleConversationIdInfoChange(conversationId)
-
     if (conversationId === '' && !checkInputsRequired(true))
       setShowConfigPanelBeforeChat(true)
     else
       setShowConfigPanelBeforeChat(false)
   }, [handleConversationIdInfoChange, setShowConfigPanelBeforeChat, checkInputsRequired])
-  const handleNewConversation = useCallback(() => {
+  const handleNewConversation = useCallback((showConfigPanel?: boolean) => {
+    // debugger;
     currentChatInstanceRef.current.handleStop()
     setNewConversationId('')
 
@@ -273,7 +273,7 @@ export const useChatWithHistory = (installedAppInfo?: InstalledApp) => {
     else if (currentConversationId) {
       handleConversationIdInfoChange('')
       setShowConfigPanelBeforeChat(true)
-      setShowNewConversationItemInList(true)
+      setShowNewConversationItemInList(false)
       handleNewConversationInputsChange({})
     }
   }, [handleChangeConversation, currentConversationId, handleConversationIdInfoChange, setShowConfigPanelBeforeChat, setShowNewConversationItemInList, showNewConversationItemInList, handleNewConversationInputsChange])

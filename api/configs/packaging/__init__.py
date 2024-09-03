@@ -8,8 +8,10 @@ class PackagingInfo(BaseSettings):
     """
 
     CURRENT_VERSION: str = Field(
-        description="Dify version",
-        default="0.7.3",
+        # description="Dify version",
+        # default="0.7.3",
+        description="agent-x version",
+        default="feature/2.1.2",
     )
 
     COMMIT_SHA: str = Field(

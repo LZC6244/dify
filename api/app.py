@@ -1,6 +1,26 @@
 import os
 
-if os.environ.get("DEBUG", "false").lower() != "true":
+
+GEVENT_SUPPORT = os.environ.get("GEVENT_SUPPORT", "false").lower() == 'true'
+
+# # 获取原始的print函数
+# original_print = __builtins__['print']
+
+# # 重写print函数
+# def zskj_custom_print(*args, **kwargs):
+#     # 调用原始的print函数
+#     original_print(*args, **kwargs)
+#     # 刷新标准输出
+#     sys.stdout.flush()
+
+
+# if GEVENT_SUPPORT:
+#     # 用自定义的 print 函数替换当前文件的 print 函数
+#     __builtins__['print'] = zskj_custom_print
+
+
+# 启用 patch_all 以刷新 gevent print 输出
+if os.environ.get("DEBUG", "false").lower() != "true" or GEVENT_SUPPORT:
     from gevent import monkey
 
     monkey.patch_all()
@@ -49,7 +69,7 @@ from models import account, dataset, model, source, task, tool, tools, web
 from services.account_service import AccountService
 
 # DO NOT REMOVE ABOVE
-
+from zskj.middleware.access_log import access_end_log, access_start_log
 
 warnings.simplefilter("ignore", ResourceWarning)
 
@@ -72,6 +92,7 @@ class DifyApp(Flask):
 
 config_type = os.getenv("EDITION", default="SELF_HOSTED")  # ce edition first
 
+logger = logging.getLogger(__name__)
 
 # ----------------------------
 # Application Factory Function
@@ -183,7 +204,8 @@ def load_user_from_request(request_from_flask_login):
     decoded = PassportService().verify(auth_token)
     user_id = decoded.get("user_id")
 
-    account = AccountService.load_logged_in_account(account_id=user_id, token=auth_token)
+    account = AccountService.load_logged_in_account(
+        account_id=user_id, token=auth_token)
     if account:
         contexts.tenant_id.set(account.current_tenant_id)
     return account
@@ -249,6 +271,10 @@ celery = app.extensions["celery"]
 if app.config.get("TESTING"):
     print("App is running in TESTING mode")
 
+# 添加请求记录中间件计算请求耗时，None 为蓝图名称，表示全局，请勿修改
+app.before_request_funcs[None].append(access_start_log)
+app.after_request_funcs[None].append(access_end_log)
+
 
 @app.after_request
 def after_request(response):
@@ -260,7 +286,9 @@ def after_request(response):
 
 
 @app.route("/health")
+@app.route("/api/health")
 def health():
+    logger.info('服务健康状态检测：ok')
     return Response(
         json.dumps({"pid": os.getpid(), "status": "ok", "version": app.config["CURRENT_VERSION"]}),
         status=200,

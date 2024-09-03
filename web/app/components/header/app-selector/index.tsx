@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import Indicator from '../indicator'
 import type { AppDetailResponse } from '@/models/app'
 import CreateAppDialog from '@/app/components/app/create-app-dialog'
-import AppIcon from '@/app/components/base/app-icon'
+import AppIcon from '@/app/components/base/app-icon-zs'
 import { useAppContext } from '@/context/app-context'
 
 type IAppSelectorProps = {

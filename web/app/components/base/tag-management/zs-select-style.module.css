@@ -1,0 +1,9 @@
+.trigger {
+
+}
+.tagIcon {
+  background-image: url('./images/tag_normal.svg');
+}
+.trigger:hover .tagIcon {
+  background-image: url('./images/tag.svg');
+}

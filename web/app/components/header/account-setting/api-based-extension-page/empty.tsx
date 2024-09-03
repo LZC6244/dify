@@ -13,7 +13,7 @@ const Empty = () => {
       <div className='mb-2 text-sm text-gray-600'>{t('common.apiBasedExtension.title')}</div>
       <a
         className='flex items-center mb-2 h-[18px] text-xs text-primary-600'
-        href={t('common.apiBasedExtension.linkUrl') || '/'}
+        href={'/'}
         target='_blank' rel='noopener noreferrer'
       >
         <BookOpen01 className='mr-1 w-3 h-3' />

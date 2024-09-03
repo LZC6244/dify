@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Loading from '@/app/components/base/loading'
 
 const Home = async () => {
+
   return (
     <div className="flex flex-col justify-center min-h-screen py-12 sm:px-6 lg:px-8">
 

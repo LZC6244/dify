@@ -10,7 +10,7 @@ import type { MetadataType } from '@/service/datasets'
 import { fetchDocumentDetail } from '@/service/datasets'
 
 import Loading from '@/app/components/base/loading'
-import StepTwo from '@/app/components/datasets/create/step-two'
+import StepTwo from '@/app/components/datasets/create-zs/step-two'
 import AccountSetting from '@/app/components/header/account-setting'
 import AppUnavailable from '@/app/components/base/app-unavailable'
 import { useDefaultModel } from '@/app/components/header/account-setting/model-provider-page/hooks'

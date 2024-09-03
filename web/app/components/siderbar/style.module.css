@@ -1,0 +1,7 @@
+.newApp {
+  background: linear-gradient( 270deg, #7B60FF 0%, #5E3EFB 100%);
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.09);
+}
+.newApp:hover {
+  background: linear-gradient( 270deg, #907AFD 0%, #6749FB 100%);
+}

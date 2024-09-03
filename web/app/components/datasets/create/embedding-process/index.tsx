@@ -201,7 +201,7 @@ const EmbeddingProcess: FC<Props> = ({ datasetId, batchId, documents = [], index
               <div className={cn(s.commonIcon, s.highIcon)} />
               {t('datasetDocuments.embedding.highQuality')} · {t('datasetDocuments.embedding.estimate')}
               <span className={s.tokens}>{formatNumber(indexingEstimateDetail?.tokens || 0)}</span>tokens
-              (<span className={s.price}>${formatNumber(indexingEstimateDetail?.total_price || 0)}</span>)
+              {/* (<span className={s.price}>${formatNumber(indexingEstimateDetail?.total_price || 0)}</span>) */}
             </div>
           )}
           {indexingType === 'economy' && (

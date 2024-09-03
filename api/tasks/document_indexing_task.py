@@ -12,12 +12,18 @@ from models.dataset import Dataset, Document
 from services.feature_service import FeatureService
 
 
+<<<<<<< HEAD
 @shared_task(queue="dataset")
 def document_indexing_task(dataset_id: str, document_ids: list):
+=======
+@shared_task(queue='dataset')
+def document_indexing_task(dataset_id: str, document_ids: list, beta_parser_config: dict):
+>>>>>>> feature/v2.1.1
     """
     Async process document
     :param dataset_id:
     :param document_ids:
+    :param beta_parser_config:
 
     Usage: document_indexing_task.delay(dataset_id, document_id)
     """
@@ -69,7 +75,7 @@ def document_indexing_task(dataset_id: str, document_ids: list):
 
     try:
         indexing_runner = IndexingRunner()
-        indexing_runner.run(documents)
+        indexing_runner.run(documents, beta_parser_config)
         end_at = time.perf_counter()
         logging.info(click.style("Processed dataset: {} latency: {}".format(dataset_id, end_at - start_at), fg="green"))
     except DocumentIsPausedException as ex:
