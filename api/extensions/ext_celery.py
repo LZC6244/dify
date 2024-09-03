@@ -1,7 +1,12 @@
+import logging
+import os
 from datetime import timedelta
 
 from celery import Celery, Task
 from flask import Flask
+from kombu import Queue
+
+logger = logging.getLogger(__name__)
 
 
 def init_app(app: Flask) -> Celery:
@@ -18,6 +23,32 @@ def init_app(app: Flask) -> Celery:
         task_ignore_result=True,
     )
 
+<<<<<<< HEAD
+=======
+    # 更改任务队列名称，避免队列混乱，默认队列名称为：celery
+    task_default_queue = os.environ.get('CELERY_TASK_DEFAULT_QUEUE', 'dify')
+    task_queues = {Queue(name=i.strip())
+                   for i in os.environ['DEFAULT_CELERY_QUEUES'].split(',')}
+
+    celery_app.conf.update(
+        task_default_queue=task_default_queue,
+        task_queues=task_queues,
+    )
+    logger.info(f'celery task_default_queue: {task_default_queue}\n'
+                f'celery task_queues: {task_queues}'
+                )
+
+    celery_app._original_task_apply_async = celery_app.Task.apply_async
+
+    def zs_task_apply_async(self, *args, **kwargs):
+        # 更改 dify 默认任务队列名称，为其加上前缀
+        self.queue = f'{task_default_queue}:{self.queue}'
+        logger.info(f'celery task apply_async: {self.name}, {self.queue}')
+        return celery_app._original_task_apply_async(self, *args, **kwargs)
+
+    celery_app.Task.apply_async = zs_task_apply_async
+
+>>>>>>> feature/v2.1.1
     # Add SSL options to the Celery configuration
     ssl_options = {
         "ssl_cert_reqs": None,

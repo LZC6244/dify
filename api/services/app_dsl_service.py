@@ -2,6 +2,7 @@ import logging
 
 import httpx
 import yaml  # type: ignore
+from flask import abort
 
 from core.app.segments import factory
 from events.app_event import app_model_config_was_updated, app_was_created
@@ -67,6 +68,15 @@ class AppDslService:
         :param args: request args
         :param account: Account instance
         """
+
+        # 检查是否存在重名 app 应用
+        duplicate_name_app = db.session.query(App).filter(
+            App.name == args['name'],
+            App.tenant_id == tenant_id,
+        ).limit(1).one_or_none()
+        if duplicate_name_app:
+            abort(403, '应用名称重复，请选择其他名称')
+
         try:
             import_data = yaml.safe_load(data)
         except yaml.YAMLError:

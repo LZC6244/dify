@@ -331,6 +331,7 @@ class DatasetIndexingEstimateApi(Resource):
         parser.add_argument(
             "doc_language", type=str, default="English", required=False, nullable=False, location="json"
         )
+        parser.add_argument('parser_type', type=str, default='', required=False, nullable=False, location='json')
         args = parser.parse_args()
         # validate args
         DocumentService.estimate_args_validate(args)
@@ -349,7 +350,11 @@ class DatasetIndexingEstimateApi(Resource):
             if file_details:
                 for file_detail in file_details:
                     extract_setting = ExtractSetting(
-                        datasource_type="upload_file", upload_file=file_detail, document_model=args["doc_form"]
+                        datasource_type="upload_file", upload_file=file_detail, document_model=args["doc_form"],
+                        beta_parser_config={
+                            'parser_type': args['parser_type'],
+                            'embedding_q_only': False
+                        }
                     )
                     extract_settings.append(extract_setting)
         elif args["info_list"]["data_source_type"] == "notion_import":

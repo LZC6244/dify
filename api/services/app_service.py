@@ -3,6 +3,7 @@ import logging
 from datetime import datetime, timezone
 from typing import cast
 
+from flask import abort
 from flask_login import current_user
 from flask_sqlalchemy.pagination import Pagination
 
@@ -70,7 +71,20 @@ class AppService:
         :param args: request args
         :param account: Account instance
         """
+<<<<<<< HEAD
         app_mode = AppMode.value_of(args["mode"])
+=======
+
+        # 检查是否存在重名 app 应用
+        duplicate_name_app = db.session.query(App).filter(
+            App.name == args['name'],
+            App.tenant_id == tenant_id,
+        ).limit(1).one_or_none()
+        if duplicate_name_app:
+            abort(403, '应用名称重复，请选择其他名称')
+
+        app_mode = AppMode.value_of(args['mode'])
+>>>>>>> feature/v2.1.1
         app_template = default_app_templates[app_mode]
 
         # get model config

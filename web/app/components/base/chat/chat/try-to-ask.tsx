@@ -16,7 +16,7 @@ const TryToAsk: FC<TryToAskProps> = ({
   const { t } = useTranslation()
 
   return (
-    <div>
+    <div className='hidden'>
       <div className='flex items-center mb-2.5 py-2'>
         <div
           className='grow h-[1px]'

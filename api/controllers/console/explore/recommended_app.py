@@ -15,7 +15,12 @@ app_fields = {
     "icon_background": fields.String,
 }
 
+zskj_recommended_app_fields = {
+    'installed_app_id': fields.String,
+}
+
 recommended_app_fields = {
+<<<<<<< HEAD
     "app": fields.Nested(app_fields, attribute="app"),
     "app_id": fields.String,
     "description": fields.String(attribute="description"),
@@ -25,6 +30,18 @@ recommended_app_fields = {
     "category": fields.String,
     "position": fields.Integer,
     "is_listed": fields.Boolean,
+=======
+    'zskj': fields.Nested(zskj_recommended_app_fields, default={}),
+    'app': fields.Nested(app_fields, attribute='app'),
+    'app_id': fields.String,
+    'description': fields.String(attribute='description'),
+    'copyright': fields.String,
+    'privacy_policy': fields.String,
+    'custom_disclaimer': fields.String,
+    'category': fields.String,
+    'position': fields.Integer,
+    'is_listed': fields.Boolean
+>>>>>>> feature/v2.1.1
 }
 
 recommended_app_list_fields = {

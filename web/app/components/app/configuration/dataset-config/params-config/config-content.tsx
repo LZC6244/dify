@@ -4,7 +4,12 @@ import { memo, useMemo } from 'react'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
+<<<<<<< HEAD
   RiAlertFill,
+=======
+  // RiAlertFill,
+  RiQuestionLine,
+>>>>>>> feature/v2.1.1
 } from '@remixicon/react'
 import WeightedScore from './weighted-score'
 import TopKItem from '@/app/components/base/param-item/top-k-item'
@@ -172,7 +177,11 @@ const ConfigContent: FC<Props> = ({
           title={(
             <div className='flex items-center'>
               {t('appDebug.datasetConfig.retrieveOneWay.title')}
+<<<<<<< HEAD
               <Tooltip
+=======
+              {/* <TooltipPlus
+>>>>>>> feature/v2.1.1
                 popupContent={(
                   <div className='w-[320px]'>
                     {t('dataset.nTo1RetrievalLegacy')}
@@ -180,28 +189,32 @@ const ConfigContent: FC<Props> = ({
                 )}
               >
                 <div className='ml-1 flex items-center px-[5px] h-[18px] rounded-[5px] border border-text-accent-secondary system-2xs-medium-uppercase text-text-accent-secondary'>legacy</div>
+<<<<<<< HEAD
               </Tooltip>
+=======
+              </TooltipPlus> */}
+>>>>>>> feature/v2.1.1
             </div>
           )}
           description={t('appDebug.datasetConfig.retrieveOneWay.description')}
           isChosen={type === RETRIEVE_TYPE.oneWay}
           onChosen={() => { setType(RETRIEVE_TYPE.oneWay) }}
-          extra={(
-            <div className='flex pl-3 pr-1 py-3 border-t border-divider-subtle bg-state-warning-hover rounded-b-xl'>
-              <RiAlertFill className='shrink-0 mr-1.5 w-4 h-4 text-text-warning-secondary' />
-              <div className='system-xs-medium text-text-primary'>
-                {t('dataset.nTo1RetrievalLegacyLinkText')}
-                <a
-                  className='text-text-accent'
-                  href={LEGACY_LINK_MAP[language]}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  {t('dataset.nTo1RetrievalLegacyLink')}
-                </a>
-              </div>
-            </div>
-          )}
+          // extra={(
+          //   <div className='flex pl-3 pr-1 py-3 border-t border-divider-subtle bg-state-warning-hover rounded-b-xl'>
+          //     <RiAlertFill className='shrink-0 mr-1.5 w-4 h-4 text-text-warning-secondary' />
+          //     <div className='system-xs-medium text-text-primary'>
+          //       {t('dataset.nTo1RetrievalLegacyLinkText')}
+          //       <a
+          //         className='text-text-accent'
+          //         href={LEGACY_LINK_MAP[language]}
+          //         target='_blank'
+          //         rel='noopener noreferrer'
+          //       >
+          //         {t('dataset.nTo1RetrievalLegacyLink')}
+          //       </a>
+          //     </div>
+          //   </div>
+          // )}
         />
         <RadioCard
           icon={<MultiPathRetrieval className='shrink-0 mr-3 w-9 h-9 rounded-lg' />}

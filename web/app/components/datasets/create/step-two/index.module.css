@@ -170,6 +170,15 @@
   border-color: #155eef;
 }
 
+.radioDisabled:hover {
+  @apply relative mb-2 rounded-xl border border-gray-100 cursor-pointer;
+  background-color: #fcfcfd;
+  box-shadow: none;
+}
+.radioDisabled .radio {
+  display: none;
+}
+
 .radioItem.active {
   border-width: 1.5px;
   border-color: #528BFF;

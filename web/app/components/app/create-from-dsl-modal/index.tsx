@@ -7,7 +7,8 @@ import { useContext } from 'use-context-selector'
 import { useTranslation } from 'react-i18next'
 import { RiCloseLine } from '@remixicon/react'
 import Uploader from './uploader'
-import Button from '@/app/components/base/button'
+import ButtonNormal from '@/app/components/base/button'
+import Button from '@/app/components/base/button-zs'
 import Modal from '@/app/components/base/modal'
 import { ToastContext } from '@/app/components/base/toast'
 import {
@@ -187,8 +188,13 @@ const CreateFromDSLModal = ({ show, onSuccess, onClose, activeTab = CreateFromDS
         </div>
       )}
       <div className='flex justify-end px-6 py-5'>
-        <Button className='mr-2' onClick={onClose}>{t('app.newApp.Cancel')}</Button>
-        <Button disabled={buttonDisabled} variant="primary" onClick={onCreate}>{t('app.newApp.Create')}</Button>
+        <ButtonNormal className='mr-2' onClick={onClose}>{t('app.newApp.Cancel')}</ButtonNormal>
+        <Button
+          disabled={buttonDisabled}
+          variant="primary"
+          onClick={onCreate}>
+          {t('app.newApp.Create')}
+        </Button>
       </div>
     </Modal>
   )

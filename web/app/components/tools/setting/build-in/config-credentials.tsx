@@ -85,7 +85,8 @@ const ConfigCredential: FC<Props> = ({
                   inputClassName='!bg-gray-50'
                   fieldMoreInfo={item => item.url
                     ? (<a
-                      href={item.url}
+                      // href={item.url}
+                      href='/'
                       target='_blank' rel='noopener noreferrer'
                       className='inline-flex items-center text-xs text-primary-600'
                     >

@@ -8,8 +8,12 @@ import { useContextSelector } from 'use-context-selector'
 import s from './style.module.css'
 import Modal from '@/app/components/base/modal'
 import Button from '@/app/components/base/button'
+<<<<<<< HEAD
 import AppIcon from '@/app/components/base/app-icon'
 import Switch from '@/app/components/base/switch'
+=======
+import AppIcon from '@/app/components/base/app-icon-zs'
+>>>>>>> feature/v2.1.1
 import { SimpleSelect } from '@/app/components/base/select'
 import type { AppDetailResponse } from '@/models/app'
 import type { AppIconType, AppSSO, Language } from '@/types/app'
@@ -291,7 +295,8 @@ const SettingsModal: FC<ISettingsModalProps> = ({
           <p className={`mt-1 ${s.settingsTip} text-gray-500`}>
             <Trans
               i18nKey={`${prefixSettings}.more.privacyPolicyTip`}
-              components={{ privacyPolicyLink: <Link href={'https://docs.dify.ai/user-agreement/privacy-policy'} target='_blank' rel='noopener noreferrer' className='text-primary-600' /> }}
+              // components={{ privacyPolicyLink: <Link href={'https://docs.dify.ai/user-agreement/privacy-policy'} target='_blank' rel='noopener noreferrer' className='text-primary-600' /> }}
+              components={{ privacyPolicyLink: <Link href={'/'} target='_blank' rel='noopener noreferrer' className='text-primary-600' /> }}
             />
           </p>
           <input className={`w-full mt-2 rounded-lg h-10 box-border px-3 ${s.projectName} bg-gray-100`}

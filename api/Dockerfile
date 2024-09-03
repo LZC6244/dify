@@ -20,15 +20,24 @@ ENV POETRY_REQUESTS_TIMEOUT=15
 
 FROM base AS packages
 
+<<<<<<< HEAD
 # if you located in China, you can use aliyun mirror to speed up
 # RUN sed -i 's@deb.debian.org@mirrors.aliyun.com@g' /etc/apt/sources.list.d/debian.sources
 
+=======
+# 更换apt源
+RUN sed -i "s@http://\(deb\|security\).debian.org@https://mirrors.cloud.tencent.com@g" /etc/apt/sources.list.d/debian.sources
+
+# 更新包列表
+>>>>>>> feature/v2.1.1
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc g++ libc-dev libffi-dev libgmp-dev libmpfr-dev libmpc-dev
 
 # Install Python dependencies
 COPY pyproject.toml poetry.lock ./
 RUN poetry install --sync --no-cache --no-root
+
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 # production stage
 FROM base AS production

@@ -7,7 +7,12 @@ import Modal from '@/app/components/base/modal'
 import Button from '@/app/components/base/button'
 import Switch from '@/app/components/base/switch'
 import Toast from '@/app/components/base/toast'
+<<<<<<< HEAD
 import AppIcon from '@/app/components/base/app-icon'
+=======
+import AppIcon from '@/app/components/base/app-icon-zs'
+import EmojiPicker from '@/app/components/base/emoji-picker'
+>>>>>>> feature/v2.1.1
 import { useProviderContext } from '@/context/provider-context'
 import AppsFull from '@/app/components/billing/apps-full-in-dialog'
 import type { AppIconType } from '@/types/app'

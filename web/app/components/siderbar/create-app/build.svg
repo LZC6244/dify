@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>newlybuild</title>
+    <g id="V1.2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="弹窗" transform="translate(-11.000000, -171.000000)" stroke="#484667" stroke-width="1.5">
+            <g id="编组-8" transform="translate(11.000000, 171.000000)">
+                <g id="创建_newlybuild-(1)备份" transform="translate(0.941176, 0.941176)">
+                    <path d="M5.20123839,1.85758514 L5.20123839,0.743034056 C5.20123839,0.332667492 5.53389474,0 5.94427245,0 L13.374613,0 C13.7849907,0 14.1176471,0.332667492 14.1176471,0.743034056 L14.1176471,8.91640867 C14.1176471,9.32678638 13.7849907,9.65944272 13.374613,9.65944272 L11.8885449,9.65944272" id="路径"></path>
+                    <rect id="矩形" x="0" y="4.82972136" width="8.91640867" height="8.91640867" rx="1"></rect>
+                    <line x1="4.45820433" y1="7.43034056" x2="4.45820433" y2="11.1455108" id="路径"></line>
+                    <line x1="2.6006192" y1="9.2879257" x2="6.31578947" y2="9.2879257" id="路径"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
