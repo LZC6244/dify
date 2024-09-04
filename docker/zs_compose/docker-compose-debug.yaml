@@ -339,7 +339,7 @@ services:
     # The DifySandbox
   sandbox:
     container_name: dify-debug-sandbox
-    image: langgenius/dify-sandbox:0.2.6
+    image: 111.19.168.169:8389/zskj/backend/zs-dify-sandbox:0.2.6
     restart: always
     environment:
       # The DifySandbox configurations
