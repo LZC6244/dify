@@ -13,7 +13,7 @@ ${CELERY_TASK_DEFAULT_QUEUE}:app_deletion\
 
 if [[ "${ZSKJ_MIGRATION_ENABLED}" == "true" ]]; then
   echo "Running migrations"
-  flask db migrate
+  flask db migrate -m "[$(date +"%Y-%m-%d %H:%M:%S")] 卓世科技 migration"
 fi
 
 
