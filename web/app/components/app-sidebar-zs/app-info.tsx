@@ -74,6 +74,7 @@ const AppInfo = ({ expand }: IAppInfoProps) => {
         icon_background,
         description,
         icon_type: 'emoji',
+        use_icon_as_answer_icon: false,
       })
       await asyncRunSafe(
         updateAppSiteConfig({
