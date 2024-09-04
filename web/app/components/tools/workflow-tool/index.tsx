@@ -7,6 +7,7 @@ import type { Emoji, WorkflowToolProviderParameter, WorkflowToolProviderRequest 
 import cn from '@/utils/classnames'
 import Drawer from '@/app/components/base/drawer-plus'
 import Button from '@/app/components/base/button'
+import ButtonZs from '@/app/components/base/button-zs'
 import Toast from '@/app/components/base/toast'
 import EmojiPicker from '@/app/components/base/emoji-picker'
 import AppIcon from '@/app/components/base/app-icon-zs'
@@ -130,7 +131,9 @@ const WorkflowToolAsModal: FC<Props> = ({
               <div>
                 <div className='py-2 leading-5 text-sm font-medium text-gray-900'>{t('tools.createTool.name')} <span className='ml-1 text-red-500'>*</span></div>
                 <div className='flex items-center justify-between gap-3'>
-                  <AppIcon size='large' onClick={() => { setShowEmojiPicker(true) }} className='cursor-pointer' iconType='emoji' icon={emoji.content} background={emoji.background} />
+                  <AppIcon size='large'
+                    // onClick={() => { setShowEmojiPicker(true) }}
+                    className='cursor-pointer' iconType='emoji' icon={emoji.content} background={emoji.background} />
                   <input
                     type='text'
                     className='grow h-10 px-3 text-sm font-normal bg-gray-100 rounded-lg border border-transparent outline-none appearance-none caret-primary-600 placeholder:text-gray-400 hover:bg-gray-50 hover:border hover:border-gray-300 focus:bg-gray-50 focus:border focus:border-gray-300 focus:shadow-xs'
@@ -246,12 +249,12 @@ const WorkflowToolAsModal: FC<Props> = ({
               )}
               <div className='flex space-x-2 '>
                 <Button onClick={onHide}>{t('common.operation.cancel')}</Button>
-                <Button variant='primary' onClick={() => {
+                <ButtonZs variant='primary' className='h-8 py-1 px-4 text-[13px] text-white font-normal' onClick={() => {
                   if (isAdd)
                     onConfirm()
                   else
                     setShowModal(true)
-                }}>{t('common.operation.save')}</Button>
+                }}>{t('common.operation.save')}</ButtonZs>
               </div>
             </div>
           </div>

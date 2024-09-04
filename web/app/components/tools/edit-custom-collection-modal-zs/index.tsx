@@ -195,7 +195,9 @@ const EditCustomCollectionModal: FC<Props> = ({
               <div>
                 <div className={fieldNameClassNames}>{t('tools.createTool.name')} <span className='ml-1 text-red-500'>*</span></div>
                 <div className='flex items-center justify-between gap-3'>
-                  <AppIcon size='large' onClick={() => { setShowEmojiPicker(true) }} className='cursor-pointer' icon={emoji.content} background={emoji.background} />
+                  <AppIcon size='large'
+                    // onClick={() => { setShowEmojiPicker(true) }}
+                    className='cursor-pointer' icon={emoji.content} background={emoji.background} />
                   <input
                     className='h-10 px-3 text-sm font-normal bg-gray-100 rounded-lg grow' placeholder={t('tools.createTool.toolNamePlaceHolder')!}
                     value={customCollection.provider}
@@ -257,7 +259,7 @@ const EditCustomCollectionModal: FC<Props> = ({
                           <td className="p-2 pl-3">{item.method}</td>
                           <td className="p-2 pl-3">{getPath(item.server_url)}</td>
                           <td className="p-2 pl-3 w-[62px]">
-                            <Button
+                            <ButtonNormal
                               size='small'
                               onClick={() => {
                                 setCurrTool(item)
@@ -265,7 +267,7 @@ const EditCustomCollectionModal: FC<Props> = ({
                               }}
                             >
                               {t('tools.createTool.availableTools.test')}
-                            </Button>
+                            </ButtonNormal>
                           </td>
                         </tr>
                       ))}

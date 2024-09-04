@@ -142,7 +142,7 @@ const CreateAppModal = ({
           </div>
           {/* answer icon */}
           {isEditModal && (appMode === 'chat' || appMode === 'advanced-chat' || appMode === 'agent-chat') && (
-            <div className='pt-2'>
+            <div className='pt-2 hidden'>
               <div className='flex justify-between items-center'>
                 <div className='py-2 text-sm font-medium leading-[20px] text-gray-900'>{t('app.answerIcon.title')}</div>
                 <Switch

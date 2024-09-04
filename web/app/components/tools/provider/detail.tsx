@@ -14,7 +14,7 @@ import Button from '@/app/components/base/button'
 import Indicator from '@/app/components/header/indicator'
 import { LinkExternal02, Settings01 } from '@/app/components/base/icons/src/vender/line/general'
 import ConfigCredential from '@/app/components/tools/setting/build-in/config-credentials'
-import EditCustomToolModal from '@/app/components/tools/edit-custom-collection-modal'
+import EditCustomToolModal from '@/app/components/tools/edit-custom-collection-modal-zs'
 import WorkflowToolModal from '@/app/components/tools/workflow-tool'
 import Toast from '@/app/components/base/toast'
 import {
