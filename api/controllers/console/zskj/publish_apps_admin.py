@@ -23,8 +23,11 @@ class ZsPublishedAppsAdminListApi(Resource):
         # current_tenant_id = current_user.current_tenant_id
         published_apps = db.session.query(InstalledApp).join(App, InstalledApp.app_id == App.id).filter(
             or_(
-                App.mode != 'workflow',
-                and_(App.mode == 'workflow', App.workflow_id.isnot(None))
+                App.mode.not_in(['workflow', 'advanced-chat']),
+                and_(
+                    App.mode.in_(['workflow', 'advanced-chat']),
+                    App.workflow_id.isnot(None)
+                )
             )
             # App.workflow_id.isnot(None)
         ).all()

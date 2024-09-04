@@ -25,6 +25,34 @@ def upgrade():
         batch_op.create_index(batch_op.f('workflow_conversation_variables_app_id_idx'), ['app_id'], unique=False)
         batch_op.create_index(batch_op.f('workflow_conversation_variables_created_at_idx'), ['created_at'], unique=False)
 
+    with op.batch_alter_table('apps', schema=None) as batch_op:
+        batch_op.alter_column('icon',
+                              existing_type=sa.VARCHAR(length=255),
+                              type_=sa.Text(),
+                              existing_nullable=True)
+
+    with op.batch_alter_table('sites', schema=None) as batch_op:
+        batch_op.alter_column('title',
+                              existing_type=sa.TEXT(),
+                              type_=sa.String(length=255),
+                              existing_nullable=False)
+        batch_op.alter_column('icon',
+                              existing_type=sa.VARCHAR(length=255),
+                              type_=sa.Text(),
+                              existing_nullable=True)
+
+    with op.batch_alter_table('tool_api_providers', schema=None) as batch_op:
+        batch_op.alter_column('icon',
+                              existing_type=sa.VARCHAR(length=255),
+                              type_=sa.Text(),
+                              existing_nullable=False)
+
+    with op.batch_alter_table('tool_workflow_providers', schema=None) as batch_op:
+        batch_op.alter_column('icon',
+                              existing_type=sa.VARCHAR(length=255),
+                              type_=sa.Text(),
+                              existing_nullable=False)
+
     # ### end Alembic commands ###
 
 
@@ -35,5 +63,33 @@ def downgrade():
         batch_op.drop_index(batch_op.f('workflow_conversation_variables_app_id_idx'))
         batch_op.create_index('workflow__conversation_variables_created_at_idx', ['created_at'], unique=False)
         batch_op.create_index('workflow__conversation_variables_app_id_idx', ['app_id'], unique=False)
+
+    with op.batch_alter_table('tool_workflow_providers', schema=None) as batch_op:
+        batch_op.alter_column('icon',
+                              existing_type=sa.Text(),
+                              type_=sa.VARCHAR(length=255),
+                              existing_nullable=False)
+
+    with op.batch_alter_table('tool_api_providers', schema=None) as batch_op:
+        batch_op.alter_column('icon',
+                              existing_type=sa.Text(),
+                              type_=sa.VARCHAR(length=255),
+                              existing_nullable=False)
+
+    with op.batch_alter_table('sites', schema=None) as batch_op:
+        batch_op.alter_column('icon',
+                              existing_type=sa.Text(),
+                              type_=sa.VARCHAR(length=255),
+                              existing_nullable=True)
+        batch_op.alter_column('title',
+                              existing_type=sa.String(length=255),
+                              type_=sa.TEXT(),
+                              existing_nullable=False)
+
+    with op.batch_alter_table('apps', schema=None) as batch_op:
+        batch_op.alter_column('icon',
+                              existing_type=sa.Text(),
+                              type_=sa.VARCHAR(length=255),
+                              existing_nullable=True)
 
     # ### end Alembic commands ###
