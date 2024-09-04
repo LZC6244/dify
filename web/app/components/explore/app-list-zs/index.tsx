@@ -235,6 +235,7 @@ const Apps = ({
         </div>
         {isShowCreateModal && (
           <CreateAppModal
+            appIconType="emoji"
             appIcon={currApp?.app.icon || ''}
             appIconBackground={currApp?.app.icon_background || ''}
             appName={currApp?.app.name || ''}

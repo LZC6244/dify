@@ -223,7 +223,7 @@ export const useChatWithHistory = (installedAppInfo?: InstalledApp) => {
           if (!silent) {
             notify({
               type: 'error',
-              message: t('appDebug.errorMessage.valueOfVarRequired', { key: item.variable }),
+              message: t('appDebug.errorMessage.valueOfVarRequired', { key: item.label }),
             })
           }
           return
