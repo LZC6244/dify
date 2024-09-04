@@ -26,16 +26,20 @@ class ZsPublishedAppsListApi(Resource):
             InstalledApp,
             App.created_at.label('app_created_at'),
             App.updated_at.label('app_updated_at'),
-            ).filter(
+        ).filter(
             InstalledApp.tenant_id == current_tenant_id
         ).join(App, InstalledApp.app_id == App.id).filter(
             or_(
-                App.mode != 'workflow',
-                and_(App.mode == 'workflow', App.workflow_id.isnot(None))
+                App.mode.not_in(['workflow', 'advanced-chat']),
+                and_(
+                    App.mode.in_(['workflow', 'advanced-chat']),
+                    App.workflow_id.isnot(None)
+                )
             )
         ).all()
 
-        current_user.role = TenantService.get_user_role(current_user, current_user.current_tenant)
+        current_user.role = TenantService.get_user_role(
+            current_user, current_user.current_tenant)
         published_apps = [
             {
                 'id': published_app.InstalledApp.id,
