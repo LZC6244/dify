@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import { useContext, useContextSelector } from 'use-context-selector'
 import classNames from 'classnames'
 import { DefaultIcon } from '../../base/app-icon-zs'
+import type { AppIconSelection } from '../../base/app-icon-picker'
 import Upload from './upload'
 import cn from '@/utils/classnames'
 import AppsContext, { useAppContext } from '@/context/app-context'
@@ -37,8 +38,8 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
 
   const [appMode, setAppMode] = useState<AppMode>('chat')
   const [showChatBotType, setShowChatBotType] = useState<boolean>(true)
-  const [emoji, setEmoji] = useState({ icon: '', icon_background: '#FFF' })
-  // const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+  const [appIcon, setAppIcon] = useState<AppIconSelection>({ type: 'emoji', icon: DefaultIcon, background: '#FFF' })
+  // const [showAppIconPicker, setShowAppIconPicker] = useState(false)
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
 
@@ -63,8 +64,9 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
       const app = await createApp({
         name,
         description,
-        icon: emoji.icon || DefaultIcon,
-        icon_background: emoji.icon_background,
+        icon_type: appIcon.type,
+        icon: appIcon.type === 'emoji' ? DefaultIcon : appIcon.url,
+        icon_background: appIcon.type === 'emoji' ? appIcon.background : undefined,
         mode: appMode,
       })
       notify({ type: 'success', message: t('app.newApp.appCreated') })
@@ -78,7 +80,7 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
       notify({ type: 'error', message: t('app.newApp.appCreateFailed') })
     }
     isCreatingRef.current = false
-  }, [name, notify, t, appMode, emoji.icon, emoji.icon_background, description, onSuccess, onClose, mutateApps, push, isCurrentWorkspaceEditor])
+  }, [name, notify, t, appMode, appIcon, description, onSuccess, onClose, mutateApps, push, isCurrentWorkspaceEditor])
 
   return (
     <Modal
@@ -208,7 +210,9 @@ const CreateAppModal = ({ show, onSuccess, onClose }: CreateAppDialogProps) => {
       {/* icon */}
       <div className='pt-2 px-8'>
         <div className='py-2 pb-3 text-base font-medium leading-[16px] text-[#212B36]'>应用图标</div>
-        <Upload value={emoji.icon} onImageChange={v => setEmoji({ icon: v, icon_background: '#FFF' })} />
+        <Upload value={`${appIcon.type === 'image' ? appIcon.url : ''}`} onImageChange={(v) => {
+          setAppIcon({ type: 'image' as const, url: v, fileId: '' })
+        }} />
       </div>
       {isAppsFull && (
         <div className='px-8 py-2'>
