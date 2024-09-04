@@ -13,7 +13,7 @@ import {
   PortalToFollowElemTrigger,
 } from '@/app/components/base/portal-to-follow-elem'
 import Divider from '@/app/components/base/divider'
-import Confirm from '@/app/components/base/confirm'
+import Confirm from '@/app/components/base/confirm-zs'
 import { useStore as useAppStore } from '@/app/components/app/store'
 import { ToastContext } from '@/app/components/base/toast'
 import AppsContext, { useAppContext } from '@/context/app-context'
@@ -73,6 +73,7 @@ const AppInfo = ({ expand }: IAppInfoProps) => {
         icon,
         icon_background,
         description,
+        icon_type: 'emoji',
       })
       await asyncRunSafe(
         updateAppSiteConfig({
@@ -108,6 +109,7 @@ const AppInfo = ({ expand }: IAppInfoProps) => {
         icon,
         icon_background,
         mode: appDetail.mode,
+        icon_type: 'emoji',
       })
       setShowDuplicateModal(false)
       notify({
@@ -394,6 +396,7 @@ const AppInfo = ({ expand }: IAppInfoProps) => {
         {showEditModal && (
           <CreateAppModal
             isEditModal
+            appIconType="emoji"
             appIcon={appDetail.icon}
             appIconBackground={appDetail.icon_background}
             appName={appDetail.name}
@@ -405,6 +408,7 @@ const AppInfo = ({ expand }: IAppInfoProps) => {
         )}
         {showDuplicateModal && (
           <DuplicateAppModal
+            icon_type="emoji"
             appName={appDetail.name}
             icon={appDetail.icon}
             icon_background={appDetail.icon_background}

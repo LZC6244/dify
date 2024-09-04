@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { RiCloseLine } from '@remixicon/react'
 import Upload from '../../app/create-app-modal-zs/upload'
 import AppIconPicker from '../../base/app-icon-picker'
+import { DefaultIcon } from '../../base/app-icon-zs'
 import Modal from '@/app/components/base/modal'
 import ButtonNormal from '@/app/components/base/button'
 import Button from '@/app/components/base/button-zs'
@@ -74,7 +75,7 @@ const CreateAppModal = ({
     onConfirm({
       name,
       icon_type: appIcon.type,
-      icon: appIcon.type === 'emoji' ? appIcon.icon : appIcon.fileId,
+      icon: appIcon.type === 'emoji' ? appIcon.icon : DefaultIcon,
       icon_background: appIcon.type === 'emoji' ? appIcon.background! : undefined,
       description,
       use_icon_as_answer_icon: useIconAsAnswerIcon,
@@ -137,7 +138,7 @@ const CreateAppModal = ({
           <div className='pt-2'>
             <div className='py-2 pb-3 text-base font-medium leading-[16px] text-[#212B36]'>应用图标</div>
             <Upload value={`${appIcon.icon || appIcon.url}`} onImageChange={(v) => {
-              setAppIcon({ type: 'image' as const, url: v, fileId: _appIcon })
+              setAppIcon({ type: 'emoji' as const, icon: v, background: '#FFF' })
             }} />
           </div>
           {/* answer icon */}

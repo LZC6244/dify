@@ -46,7 +46,7 @@ const DuplicateAppModal = ({
   const [showAppIconPicker, setShowAppIconPicker] = useState(false)
   const [appIcon, setAppIcon] = useState(
     icon_type === 'image'
-      ? { type: 'image' as const, url: icon_url, fileId: icon }
+      ? { type: 'image' as const, url: icon_url || icon, fileId: icon }
       : { type: 'emoji' as const, icon, background: icon_background },
   )
   // const [emoji, setEmoji] = useState({ icon, icon_background })
@@ -94,7 +94,7 @@ const DuplicateAppModal = ({
           <div className='pt-2'>
             <div className='py-2 pb-3 text-base font-medium leading-[16px] text-[#212B36]'>应用图标</div>
             <Upload value={`${appIcon.icon || appIcon.url}`} onImageChange={(v) => {
-              setAppIcon({ type: 'image' as const, url: v, fileId: appIcon.fileId || '' })
+              setAppIcon({ type: 'emoji' as const, icon: v, background: '#FFF' })
             }} />
           </div>
           {isAppsFull && <AppsFull loc='app-duplicate-create' />}
