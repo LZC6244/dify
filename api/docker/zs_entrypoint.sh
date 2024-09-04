@@ -11,15 +11,15 @@ ${CELERY_TASK_DEFAULT_QUEUE}:ops_trace,\
 ${CELERY_TASK_DEFAULT_QUEUE}:app_deletion\
 }
 
-if [[ "${ZSKJ_MIGRATION_ENABLED}" == "true" ]]; then
-  echo "Running migrations"
-  flask db migrate -m "[$(date +"%Y-%m-%d %H:%M:%S")] 卓世科技 migration"
-fi
+# if [[ "${ZSKJ_MIGRATION_ENABLED}" == "true" ]]; then
+#   echo "Running migrations"
+#   flask db migrate -m "[$(date +"%Y-%m-%d %H:%M:%S")] 卓世科技 migration"
+# fi
 
 
-if [[ "${MIGRATION_ENABLED}" == "true" ]]; then
-  flask db upgrade
-fi
+# if [[ "${MIGRATION_ENABLED}" == "true" ]]; then
+#   flask db upgrade
+# fi
 
 cd /app/api
 
