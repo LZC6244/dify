@@ -1,5 +1,5 @@
 # base image
-# FROM 10.10.1.15:8388/zskj/backend/zs-dify-api:0.7.3.1
+# FROM 10.10.1.16:8388/zskj/backend/zs-dify-api:0.7.3.1
 FROM 111.19.168.169:8389/zskj/backend/zs-dify-api:0.7.3.1
 
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
