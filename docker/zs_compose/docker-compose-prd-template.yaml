@@ -214,6 +214,8 @@ services:
       # # 挂载路径
       # - ../../api/.dockerignore:/app/api/.dockerignore
       # - ../../api/.env.example:/app/api/.env.example
+      # - ../../api/.idea:/app/api/.idea
+      # - ../../api/.vscode:/app/api/.vscode
       # - ../../api/Dockerfile:/app/api/Dockerfile
       # - ../../api/README.md:/app/api/README.md
       # - ../../api/app.py:/app/api/app.py
@@ -272,6 +274,8 @@ services:
       # # 挂载路径
       # - ../../api/.dockerignore:/app/api/.dockerignore
       # - ../../api/.env.example:/app/api/.env.example
+      # - ../../api/.idea:/app/api/.idea
+      # - ../../api/.vscode:/app/api/.vscode
       # - ../../api/Dockerfile:/app/api/Dockerfile
       # - ../../api/README.md:/app/api/README.md
       # - ../../api/app.py:/app/api/app.py

@@ -19,7 +19,7 @@ echo "GEVENT_SUPPORT最终：${GEVENT_SUPPORT}"
 
 if [[ "${ZSKJ_MIGRATION_ENABLED}" == "true" ]]; then
   echo "Running migrations"
-  flask db migrate
+  flask db migrate -m "[$(date +"%Y-%m-%d %H:%M:%S")] 卓世科技 migration"
 fi
 
 
