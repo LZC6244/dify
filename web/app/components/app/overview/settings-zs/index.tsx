@@ -193,7 +193,7 @@ const SettingsModal: FC<ISettingsModalProps> = ({
         <div className={`mt-6 font-medium ${s.settingTitle} text-gray-900`}>{t(`${prefixSettings}.webName`)}</div>
         <div className='flex mt-2'>
           <AppIcon size='large'
-            onClick={() => { setShowAppIconPicker(true) }}
+            // onClick={() => { setShowAppIconPicker(true) }}
             className='cursor-pointer !mr-3 self-center'
             iconType={appIcon.type}
             icon={appIcon.type === 'image' ? appIcon.fileId : appIcon.icon}
@@ -216,7 +216,7 @@ const SettingsModal: FC<ISettingsModalProps> = ({
           placeholder={t(`${prefixSettings}.webDescPlaceholder`) as string}
         />
         {isChatBot && (
-          <div className='w-full mt-4'>
+          <div className='w-full mt-4 hidden'>
             <div className='flex justify-between items-center'>
               <div className={`font-medium ${s.settingTitle} text-gray-900 `}>{t('app.answerIcon.title')}</div>
               <Switch
