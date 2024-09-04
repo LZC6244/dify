@@ -69,14 +69,6 @@ class AppDslService:
         :param account: Account instance
         """
 
-        # 检查是否存在重名 app 应用
-        duplicate_name_app = db.session.query(App).filter(
-            App.name == args['name'],
-            App.tenant_id == tenant_id,
-        ).limit(1).one_or_none()
-        if duplicate_name_app:
-            abort(403, '应用名称重复，请选择其他名称')
-
         try:
             import_data = yaml.safe_load(data)
         except yaml.YAMLError:
@@ -98,6 +90,14 @@ class AppDslService:
             args.get("icon_background") if args.get("icon_background") else app_data.get("icon_background")
         )
         use_icon_as_answer_icon = app_data.get("use_icon_as_answer_icon", False)
+
+        # 检查是否存在重名 app 应用
+        duplicate_name_app = db.session.query(App).filter(
+            App.name == name,
+            App.tenant_id == tenant_id,
+        ).limit(1).one_or_none()
+        if duplicate_name_app:
+            abort(403, '应用名称重复，请选择其他名称')
 
         # import dsl and create app
         app_mode = AppMode.value_of(app_data.get("mode"))
